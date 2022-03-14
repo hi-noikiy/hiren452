@@ -1,0 +1,205 @@
+.mst-product-action__modal {
+    .modal-inner-wrap {
+        margin-top: 15rem;
+        max-width:  105rem;
+
+        .modal-header {
+            height: 8rem;
+
+            .modal-title {
+                position: absolute;
+            }
+
+            .action-close {
+                right: -3.5rem;
+                top:   -3.5rem;
+                color: #333333;
+                padding: 1rem;
+            }
+
+            .page-main-actions {
+                margin: -3rem -3rem 0 -3rem;
+            }
+        }
+
+        .modal-content {
+            padding-bottom: 3rem;
+            min-height:     10rem;
+            padding-top:    25px;
+
+            .mst-product-action-hide-label .admin__field-label {
+                display: none;
+            }
+
+            .mst-product-action__process-button {
+                position: absolute;
+                right:    2rem;
+                top:      2.3rem;
+            }
+
+            .admin__action-multiselect-crumb { //fix magento css issue
+                .action-close {
+                    padding: 0;
+                    top:     .2rem;
+
+                    &:before {
+                        font-size: 1rem;
+                    }
+                }
+            }
+
+            ._has-datepicker + .ui-datepicker-trigger {
+                position: relative;
+            }
+
+            input[type="checkbox"].admin__control-checkbox {
+                position: relative;
+            }
+        }
+    }
+}
+
+.mst-product-action__modal {
+    .admin__field, .admin__field-complex {
+        display:       flex;
+        margin-bottom: 3rem;
+
+        .admin__field-label {
+            width: 200px !important;
+            float: none;
+        }
+
+        .admin__field-control {
+            width:       50rem !important;
+            float:       none;
+            margin-left: 30px;
+        }
+
+        .admin__field-note {
+            min-width:  500px;
+            margin-top: 5px;
+        }
+
+        &.mst-product-action__element-toggle {
+            .admin__field-control {
+                width: 7.5rem !important;
+            }
+        }
+    }
+
+    .admin__field + .admin__field {
+        margin-top: 1.5rem;
+    }
+}
+
+.mst-product-action__element-group {
+    padding:    0;
+    display:    flex;
+    float:      none;
+    width:      100%;
+    max-width:  none;
+    min-height: 63px;
+
+    .admin__field, .admin__field-complex {
+        margin-top:    0 !important;
+        margin-bottom: 3rem;
+    }
+}
+
+.mst-product-action__element-product-selector {
+    padding:     0;
+    display:     flex;
+    align-items: baseline;
+
+    .admin__field, .admin__field-complex {
+        margin-top:    0 !important;
+        margin-bottom: 0 !important;
+    }
+
+    button {
+        margin-left: 1.5rem;
+    }
+}
+.mst-product-action__element-enqueue {
+    position:   absolute;
+    top:        7px;
+    right:      170px;
+    margin-top: 2rem;
+}
+
+//.mst-product-action__modal .admin__field + .admin__field.mst-product-action__element-enqueue {
+//    margin-top: 2rem;
+//}
+
+.mst-product-action__modal .admin__field.mst-product-action__element-enqueue .admin__field-label label {
+    font-size: 1.4rem;
+}
+
+.mst-product-action__modal .admin__field.mst-product-action__element-toggle.mst-product-action__element-enqueue .admin__field-control {
+    margin-left: 10px;
+}
+
+.mst-product-action__element-toggle-group {
+    margin-bottom: 3rem;
+    margin-top:    1.5rem;
+    margin-left:   -3rem;
+    margin-right:  -3rem;
+    padding-left:  3rem;
+    padding-right: 3rem;
+    border-bottom: 1px solid #cccccc;
+
+    &:last-child {
+        border-bottom: 0;
+        margin-bottom: 0;
+    }
+}
+
+.mst-product-action__modal.mst-product-action__mass_attributes_update,
+.mst-product-action__modal.mst_product_action_action_form_copy_attributes_mst_product_action_action_form_copy_attributes_modal {
+    fieldset.checkbox-set-container legend {
+        text-align: center;
+        font-weight: normal;
+        width: 100% !important;
+    }
+
+    fieldset {
+        border:        0;
+        max-height:    300px;
+        height:        300px;
+        overflow-y:    auto;
+        padding-right: 0;
+        padding-left:  0;
+        margin-left:   0;
+        margin-right:  0;
+
+        .admin__field-control {
+            width: auto !important;
+
+            .admin__field-label {
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+
+            .admin__field-option {
+                display: inline-block;
+                margin:  0;
+                width:   24%;
+            }
+        }
+    }
+
+    .mst-product-action-attribute-values {
+        max-height:    300px;
+        overflow-y:    auto;
+        padding-right: 0;
+        padding-left:  0;
+        margin-left:   0;
+        margin-right:  0;
+    }
+}
+
+// compatibility with m2.3.6
+.entry-edit[data-bind*="mst_product_action_action_"] {
+    border: 0
+}

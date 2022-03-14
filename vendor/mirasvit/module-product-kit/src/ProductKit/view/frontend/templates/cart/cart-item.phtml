@@ -1,0 +1,33 @@
+<?php
+/** @var \Mirasvit\ProductKit\Block\Cart\CartItem $block */
+?>
+
+<?php
+$product = $block->getProduct();
+?>
+
+<?php $baseId = 'cart_item_' . $product->getId(); ?>
+
+<div class="mst-product_kit__cart-item" id="<?= $baseId ?>">
+    <?php if ($block->getError()): ?>
+        <div class="messages">
+            <div class="message-notice"><?= $block->getError() ?></div>
+        </div>
+    <?php endif ?>
+
+    <div class="cart-item-wrapper">
+        <div class="cart-item-image">
+            <img src="<?= $block->getImageUrl($product, 'category_page_list') ?>"
+                 alt="<?= $block->escapeHtml($product->getName()) ?>"/>
+        </div>
+
+        <?php // don't remove class "product-item" ?>
+        <div class="cart-item-inner product-item product-info-main">
+            <a href="<?= $block->getProductUrl($product) ?>" class="cart-item-name"><?= $product->getName() ?></a>
+
+            <?= $block->getProductPriceHtml($product, 'final_price') ?>
+
+            <?= $block->getOptions() ?>
+        </div>
+    </div>
+</div>

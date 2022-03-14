@@ -1,0 +1,67 @@
+<div class="mst-product_kit__suggest-form-suggestions" data-bind="css: { _loading: isLoading() }">
+
+    <div class="suggest-loading-mask" data-role="loader" data-bind="visible:isLoading">
+        <div class="ajax-block-loader" style="text-align: center;">
+            <img alt="Loading..." data-bind="attr:{src:loaderImg}">
+        </div>
+    </div>
+
+    <div data-bind="foreach: suggestions">
+        <div class="suggestion">
+
+            <div class="items" data-bind="foreach: $data.kit">
+                <div class="item">
+                    <div class="image">
+                        <img src="" data-bind="attr:{src: image}"/>
+                    </div>
+                    <div class="product-details">
+                        <div class="name" data-bind="text: label"/>
+                        <div class="sku" data-bind="text: sku"/>
+                        <div class="price" data-bind="html: price"/>
+                    </div>
+                </div>
+            </div>
+            <div class="items">
+                <div class="item">
+                    <div class="suggestion-statistic">
+                        <div class="order">
+                            <div class="label" data-bind="i18n: 'Number of orders:'"/>
+                            <div class="value" data-bind="text: $data.statistic.order_amount"/>
+                        </div>
+                        <div class="customer">
+                            <div class="label" data-bind="i18n: 'Unique Customers:'"/>
+                            <div class="value" data-bind="text: $data.statistic.uniq_customer_amount"/>
+                        </div>
+                        <div class="qty">
+                            <div class="label" data-bind="i18n: 'Average quantity:'"/>
+                            <div class="value" data-bind="text: $data.statistic.avr_order_items"/>
+                        </div>
+                        <div class="total">
+                            <div class="label" data-bind="i18n: 'Average Grand Total:'"/>
+                            <div class="value" data-bind="text: $data.statistic.avr_order_total"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="items">
+                <div class="item button-block">
+                    <button type="button" class="create-suggestion scalable save primary ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only"
+                            data-bind="attr: {title: $t('Create Kit')}" data-form-role="save" data-ui-id="save-button" role="button" aria-disabled="false">
+                        <span class="ui-button-text">
+                            <span data-bind="i18n: 'Create Kit'"></span>
+                        </span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="mst-product_kit__suggest-form-suggestions" data-bind="visible: message">
+    <div>
+        <div class="messages">
+            <div class="" data-bind="css: { 'message message-warning warning': message }">
+                <div data-bind="text: message"></div>
+            </div>
+        </div>
+    </div>
+</div>

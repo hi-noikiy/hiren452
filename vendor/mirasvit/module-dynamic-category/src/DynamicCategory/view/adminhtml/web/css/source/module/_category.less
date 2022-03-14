@@ -1,0 +1,45 @@
+.x-tree-node-leaf.mst-dynamic-category-icon {
+    > a {
+        position: relative;
+
+        &:after {
+            display:       block;
+            width:         5px;
+            height:        5px;
+            background:    #00b306;
+            content:       "";
+            position:      absolute;
+            left:          -18px;
+            top:           0;
+            border-radius: 50%;
+        }
+    }
+}
+
+#rule_dynamic_category_conditions_fieldset {
+    .rule-tree-wrapper {
+        margin-top: -18px;
+
+        .rule-param {
+            .label {
+                outline:    1px solid rgba(81, 73, 67, 0.05);
+                background: rgba(81, 73, 67, 0.05);
+                padding:    0 8px;
+                margin:     0 2px;
+                color:      #42352f;
+
+                &:hover {
+                    outline-color: rgba(81, 73, 67, 0.5);
+                    outline-style: dotted;
+                }
+            }
+
+            &.rule-param-new-child {
+                .label {
+                    outline:    none;
+                    background: none;
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,52 @@
+<?php
+/** @var \Mirasvit\ProductKit\Block\Kit\Item $block */
+
+$item    = $block->getItem();
+$product = $block->getLinkedProduct($item);
+
+?>
+<div class="kit-item-outline <?= $item->getIsVisible() ? 'active' : '' ?>" data-element="product-block" data-product-id="<?= $product->getId() ?>">
+    <div class="itemsSet-pager up" data-element="itemsSet-pager-up">
+        <div class="arrow"></div>
+    </div>
+    <div class="itemsSet-pager down" data-element="itemsSet-pager-down">
+        <div class="arrow"></div>
+    </div>
+
+    <div class="kit-item-image">
+        <img src="<?= $block->getImageUrl($product, 'category_page_list') ?>"
+             alt="<?= $block->escapeHtml($product->getName()) ?>"/>
+    </div>
+
+    <div class="kit-item-inner">
+        <a href="<?= $block->getProductUrl($product) ?>" class="kit-item-name"><?= $product->getName() ?></a>
+
+        <?= $block->getReviewsSummaryHtml($product, \Magento\Catalog\Block\Product\ReviewRendererInterface::SHORT_VIEW) ?>
+
+        <div class="kit-item-prices">
+            <?php if ($item->getItemDiscount() > 0): ?>
+                <div class="kit-item-oldPrice">
+                    <?= $block->getItemOriginalPriceHtml($item) ?>
+                </div>
+            <?php endif ?>
+
+            <div class="kit-item-newPrice <?= $item->getItemDiscount() > 0 ? '_discounted' : '' ?>" data-element="kit-item-newPrice"></div>
+
+            <?php if ($item->getQty() > 1): ?>
+                <span class="kit-item-qty"><?= 'x' . $item->getQty(); ?></span>
+            <?php endif ?>
+        </div>
+    </div>
+
+    <?php if ($item->isOptional()): ?>
+        <div class="kit-item-checkbox">
+            <input type="checkbox" checked="checked" data-element="checkbox"/>
+        </div>
+    <?php endif ?>
+
+    <?php if ($item->getDiscountAmount() > 0): ?>
+        <div class="kit-item-discount" data-element="kit-item-discount"></div>
+    <?php endif ?>
+
+    <div class="kit-item-icon-plus"><i></i></div>
+</div>

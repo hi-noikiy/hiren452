@@ -1,0 +1,90 @@
+.mst-sales-rule__tree {
+    .mst-sales-rule__tree-rule-container {
+        ul {
+            padding: 0;
+            list-style: none;
+
+            li {
+                margin-left: -.1rem;
+
+                ul {
+                    margin-left: 1rem;
+                    border-left: 0.1rem dashed #d6d6d6;
+                }
+            }
+        }
+
+        .mst-sales-rule__tree-rule {
+            border-radius: .2rem;
+            border: 1px solid #ccc;
+            margin-bottom: 1rem;
+            opacity: 0.5;
+
+            &._active {
+                opacity: 1;
+            }
+
+            .toolbar {
+                background: #f8f8f8;
+                border: 2px solid #ccc;
+                padding: 1rem;
+                margin: -1px -1px 0 -1px;
+                display: flex;
+                border-radius: .2rem .2rem 0 0;
+
+                h3 {
+                    margin: 0;
+                }
+
+                i {
+                    margin-left: 2rem;
+                    background: #ffeca6;
+                    font-size: 1.2rem;
+                    font-style: normal;
+                    padding: 0 1rem;
+                    line-height: 2rem;
+                    border-radius: .2rem;
+                }
+
+                > a {
+                    margin-left: auto;
+                }
+            }
+
+            .info {
+                display: flex;
+                padding: 1rem;
+
+                .fields {
+                    max-width: 60rem;
+                    min-width: 60rem;
+
+                    > div {
+                        display: flex;
+                        margin-bottom: 1rem;
+                        font-size: 1.3rem;
+
+                        &:last-child {
+                            margin-bottom: 0;
+                        }
+
+                        label {
+                            width: 17rem;
+                            min-width: 17rem;
+                            display: block;
+                        }
+
+                        span {
+                            margin-left: 2rem;
+                            display: block;
+                        }
+                    }
+                }
+
+                .conditions {
+                    font-size: 1.3rem;
+                }
+            }
+        }
+    }
+}

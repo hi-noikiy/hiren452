@@ -1,0 +1,73 @@
+<li>
+    <div class="mst-sales-rule__tree-rule" data-bind="css: { _active: isActive }">
+
+        <div class="toolbar">
+            <h3 text="name"/>
+            <i text="typeLabel"/>
+            <a data-bind="attr: { href: edit}"><span data-bind="i18n: 'Edit'"/></a>
+        </div>
+
+        <div class="info">
+            <div class="fields">
+                <div>
+                    <label data-bind="i18n: 'Priority'"/>
+                    <span text="sortOrder"/>
+                </div>
+
+                <div data-bind="visible: fromDate">
+                    <label data-bind="i18n: 'From Date'"/>
+                    <span text="fromDate"/>
+                </div>
+
+                <div data-bind="visible: toDate">
+                    <label data-bind="i18n: 'To Date'"/>
+                    <span text="toDate"/>
+                </div>
+
+                <div>
+                    <label data-bind="i18n: 'Websites'"/>
+                    <span text="websiteLabels"/>
+                </div>
+
+                <div>
+                    <label data-bind="i18n: 'Customer Groups'"/>
+                    <span text="customerGroupLabels"/>
+                </div>
+
+                <div>
+                    <label data-bind="i18n: 'Coupon'"/>
+                    <span text="coupon"/>
+                </div>
+
+                <div>
+                    <label data-bind="i18n: 'Discard subsequent rules'"/>
+                    <span data-bind="visible: stopRuleProcessing, i18n: 'Yes'"/>
+                    <span data-bind="visible: !stopRuleProcessing, i18n: 'No'"/>
+                </div>
+
+                <div>
+                    <label>Discount Amount</label>
+                    <span text="discountAmount"/>
+                </div>
+            </div>
+
+            <div class="conditions">
+                <div>
+                    <label data-bind="i18n: 'Conditions'"/>
+                    <pre html="conditions"/>
+                </div>
+
+                <div>
+                    <label data-bind="i18n: 'Cart Items'"/>
+                    <pre html="actions"/>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <ul>
+        <!-- ko foreach: {data: children, as: 'rule'} -->
+        <!-- ko template: 'Mirasvit_SalesRule/rule/tree/rule' --><!-- /ko -->
+        <!-- /ko -->
+    </ul>
+</li>

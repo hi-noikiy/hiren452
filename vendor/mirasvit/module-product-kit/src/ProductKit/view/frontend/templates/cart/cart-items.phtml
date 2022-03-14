@@ -1,0 +1,13 @@
+<?php
+/** @var \Mirasvit\ProductKit\Block\Cart\CartItems $block */
+?>
+
+<?php
+$product = $block->getProduct();
+?>
+
+<div class="mst-product_kit__cart-list">
+    <?php foreach ($block->getProductBlocksHTml() as $html): ?>
+        <?= $html ?>
+    <?php endforeach ?>
+</div>

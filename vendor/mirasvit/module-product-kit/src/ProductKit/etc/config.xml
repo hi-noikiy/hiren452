@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <product_kit>
+            <display>
+                <display_on>catalog_product_view,checkout_cart_index</display_on>
+                <kits_limit>5</kits_limit>
+                <products_per_position>5</products_per_position>
+                <discount_text>Free Gift</discount_text>
+
+                <layout>
+                    <relative_container>product.info.description</relative_container>
+                    <relative_position>before</relative_position>
+                </layout>
+            </display>
+        </product_kit>
+    </default>
+</config>

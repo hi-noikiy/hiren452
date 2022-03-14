@@ -1,0 +1,17 @@
+<div data-bind="i18n: 'Possible Combinations:', style: { 'font-weight': 'bold' }"></div>
+<div class="mst-product_kit__kit-form-evaluator" data-bind="css: { _loading: isLoading() }">
+    <div data-bind="foreach: lines">
+        <div class="line">
+            <div class="index">
+                <div data-bind="text: ($index() + 1)"/>
+            </div>
+
+            <div class="items" data-bind="foreach: $data">
+                <div class="item" data-bind="css: letter">
+                    <div class="name" data-bind="text: name"/>
+                    <div class="amount" data-bind="text: amount"/>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

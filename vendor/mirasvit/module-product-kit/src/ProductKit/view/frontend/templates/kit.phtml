@@ -1,0 +1,72 @@
+<?php
+/** @var \Mirasvit\ProductKit\Block\Kit $block */
+$offerKit = $block->getOfferKit();
+$items    = $block->getItems();
+$baseId   = $block->getBaseId();
+
+use Mirasvit\Core\Service\SerializeService;
+
+?>
+
+<div class="mst-product_kit__kit" id="<?= $baseId ?>">
+    <?php if ($offerKit->getTitle()): ?>
+        <h3 class="kit-heading"><?= $offerKit->getTitle() ?></h3>
+        <input type="hidden" data-element="kit-id" value="<?= $block->getOfferKit()->getId(); ?>"/>
+    <?php endif ?>
+
+    <div class="kit-inner">
+        <ul class="kit-list">
+            <?php foreach ($items as $idx => $item): ?>
+                <?php
+                $product   = $block->getLinkedProduct($item);
+                $isCurrent = $block->isCurrentProduct($product);
+
+                $classes = implode(' ', [
+                    'kit-item',
+                    $idx == count($items) - 1 ? '_last' : '',
+                    $idx == 0 ? '_first' : '',
+                    $isCurrent ? '_highlight' : '',
+                    count($item->getItemVariations()) ? '_hasVariations' : '',
+                ]);
+
+                $item->setIsVisible(true);
+                ?>
+
+                <li class="<?= $classes ?>" data-element="kit-item" data-item="<?= $item->getId() ?>">
+                    <?= $block->getItemHtml($item); ?>
+
+                    <?php foreach ($item->getItemVariations() as $itemVariations): ?>
+                        <?php $item->setIsVisible(false); ?>
+                        <?= $block->getItemHtml($itemVariations); ?>
+                    <?php endforeach; ?>
+                </li>
+            <?php endforeach ?>
+        </ul>
+
+        <div class="kit-footer" data-element="footer">
+            <div class="kit-footer-price">
+                <div class="kit-footer-price-item _oldPrice" data-element="full-price"></div>
+                <div class="kit-footer-price-item" data-element="price"></div>
+            </div>
+
+            <button type="submit" title="<?= __('Add to Cart') ?>" class="action primary" data-element="cartButton">
+                <span><?= __('Add to Cart') ?></span>
+            </button>
+        </div>
+
+        <div class="kit-footer kit-footer-cart">
+            <div data-element="cartContent"></div>
+
+            <div class="kit-footer-cart-footer">
+                <button type="button" title="<?= __('Cancel') ?>" class="action primary" data-element="cancelButton">
+                    <span><?= __('Cancel') ?></span>
+                </button>
+                <button type="submit" title="<?= __('Add to Cart') ?>" class="action primary" data-element="cartButton">
+                    <span><?= __('Add to Cart') ?></span>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/x-magento-init"><?= SerializeService::encode($block->getJsonConfig()) ?></script>

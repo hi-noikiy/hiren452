@@ -1,0 +1,8 @@
+<div css="$data.additionalClasses" visible="visible">
+    <!-- ko if: $data.label -->
+    <strong text="$data.label"/>
+    <!-- /ko -->
+    <each args="data: elems, as: 'element'">
+        <render if="hasTemplate()"/>
+    </each>
+</div>

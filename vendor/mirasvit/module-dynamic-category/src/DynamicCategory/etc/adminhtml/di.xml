@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Magento\Catalog\Model\Category\DataProvider">
+        <plugin name="Mirasvit_DynamicCategory::addDynamicCategoryData" type="Mirasvit\DynamicCategory\Plugin\Backend\AddDynamicCategoryDataPlugin"/>
+    </type>
+
+    <type name="Magento\Catalog\Api\CategoryLinkManagementInterface">
+        <plugin name="Mirasvit_DynamicCategory::addDynamicCategoryOnProductSave" type="Mirasvit\DynamicCategory\Plugin\Backend\AddDynamicCategoryOnProductSavePlugin"/>
+    </type>
+
+    <type name="Magento\Catalog\Model\ResourceModel\Category">
+        <plugin name="Mirasvit_DynamicCategory::SaveDynamicCategoryOnCategorySave" type="Mirasvit\DynamicCategory\Plugin\Backend\SaveDynamicCategoryOnCategorySavePlugin"/>
+    </type>
+
+    <type name="Magento\Catalog\Block\Adminhtml\Category\Tree">
+        <plugin name="Mirasvit_DynamicCategory::ChangeDynamicCategoryIcon" type="Mirasvit\DynamicCategory\Plugin\Backend\ChangeDynamicCategoryIconPlugin"/>
+    </type>
+
+    <virtualType name="Magento\Catalog\Ui\DataProvider\Product\Form\Modifier\Pool">
+        <arguments>
+            <argument name="modifiers" xsi:type="array">
+                <item name="dynamicCategories" xsi:type="array">
+                    <item name="class" xsi:type="string">Mirasvit\DynamicCategory\Ui\DataProvider\Product\Form\Modifier\DynamicCategory</item>
+                    <item name="sortOrder" xsi:type="number">200</item>
+                </item>
+            </argument>
+        </arguments>
+    </virtualType>
+</config>

@@ -1,0 +1,129 @@
+.product_kit-kit-edit {
+
+}
+
+.mst-product_kit__kit-form-smart-items {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 -1rem 0 -1rem;
+
+    .fieldset-wrapper {
+        margin: 1rem;
+        flex-grow: 1;
+        min-width: 30rem;
+        border: 1px dashed #d5d5d5 !important;
+        padding: 0 1rem !important;
+
+        .fieldset-wrapper-title {
+            strong {
+                &:before {
+                    display: none;
+                }
+            }
+        }
+    }
+}
+
+.mst-product_kit__kit-form-discount {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 25rem;
+
+    .discount-amount {
+        width: 100%;
+
+        input {
+            width: 100%;
+        }
+    }
+
+    .discount-type {
+        white-space: nowrap;
+        position: absolute;
+        right: 0;
+        top: 0;
+
+        select {
+            width: 15rem;
+        }
+    }
+}
+
+.mst-product_kit__kit-form-evaluator {
+    padding: 1rem 0;
+
+    &._loading {
+        opacity: .3;
+    }
+
+    .line {
+        border: 1px solid #d6d6d6;
+        display: flex;
+        margin-bottom: -1px;
+        padding: 5px;
+
+        .index {
+            width: 5rem;
+            margin-right: 1rem;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            background: #e3e3e3;
+            justify-content: center;
+        }
+
+        .items {
+            padding: .5rem;
+            display: flex;
+            flex-grow: 1;
+            flex-wrap: wrap;
+
+            .item {
+                border: 1px dashed #d6d6d6;
+                padding: 1rem;
+                margin-right: 1rem;
+                width: 20rem;
+                display: flex;
+
+                &.A {
+                    background: rgba(255, 0, 0, 0.1);
+                    border-color: rgba(255, 0, 0, 0.2);
+                }
+
+                &.B {
+                    background: rgba(0, 255, 0, 0.1);
+                    border-color: rgba(0, 255, 0, 0.2);
+                }
+
+                &.C {
+                    background: rgba(0, 0, 255, 0.1);
+                    border-color: rgba(0, 0, 255, 0.2);
+                }
+
+                &.D {
+                    background: rgba(255, 255, 0, 0.1);
+                    border-color: rgba(255, 255, 0, 0.9);
+                }
+
+                &.E {
+                    background: rgba(0, 255, 255, 0.1);
+                    border-color: rgba(0, 255, 255, 0.2);
+                }
+
+                &.F {
+                    background: rgba(255, 0, 255, 0.1);
+                    border-color: rgba(255, 0, 255, 0.2);
+                }
+
+                .name {
+                    flex-grow: 1;
+                }
+
+                .amount {
+                    font-weight: 600;
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Indexer/etc/indexer.xsd">
+    <indexer id="mst_product_kit" view_id="mst_product_kit" class="Mirasvit\ProductKit\Model\Indexer">
+        <title>Product kits</title>
+        <description>Rebuild kit indexes</description>
+    </indexer>
+</config>

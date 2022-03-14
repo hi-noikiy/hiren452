@@ -1,0 +1,86 @@
+.block-rewards-account-summary {
+    margin-bottom: 2rem !important;
+
+    .unsubscribe {
+        font-size:   14px !important;
+        padding-top: 10px;
+    }
+
+    .block-title.earn.subtitle > strong {
+        font-weight:   bold !important;
+    }
+
+    .block-title.spend.subtitle > strong {
+        font-weight:   bold !important;
+    }
+}
+
+.rewards-notification-block {
+    list-style-type: none;
+    padding:         0;
+    background:      #ecfdff;
+
+    > li {
+        padding: 1rem;
+    }
+}
+
+.rewards-referral-link {
+    font-weight: 600;
+}
+
+.link.rewards {
+    .counter {
+        .lib-css(color, @text__color__muted);
+        white-space: nowrap;
+
+        &:before {
+            content: "(";
+        }
+
+        &:after {
+            content: ")";
+        }
+    }
+}
+
+.mst-rewards-logo {
+    height: 14px;
+}
+
+.mst-rewards-account-amount-wrapper {
+    display:       flex;
+    align-items:   flex-end;
+    margin-bottom: 25px;
+
+    .mst-rewards-account-amount {
+        display:     flex;
+        align-items: flex-end;
+
+        .points {
+            font-size:   36px;
+            font-weight: bold;
+            line-height: 36px;
+        }
+
+        .unit {
+            color:       #6d6d6d;
+            margin-left: 5px;
+        }
+
+        > img {
+            height: 28px;
+        }
+    }
+
+    .mst-rewards-account-subtitle {
+        font-size:     16px;
+        margin-bottom: 10px;
+        font-weight:   600;
+    }
+
+    .mst-rewards-logo {
+        height:      36px;
+        margin-left: 15px;
+    }
+}

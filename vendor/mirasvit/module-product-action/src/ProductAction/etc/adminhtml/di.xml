@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <virtualType name="Magento\Catalog\Ui\DataProvider\Product\Listing\Modifier\Pool" type="Magento\Ui\DataProvider\Modifier\Pool">
+        <arguments>
+            <argument name="modifiers" xsi:type="array">
+                <item name="mstActionsModifier" xsi:type="array">
+                    <item name="class" xsi:type="string">Mirasvit\ProductAction\Ui\Product\Listing\ActionsModifier</item>
+                    <item name="sortOrder" xsi:type="number">1000</item>
+                </item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="mstCategoryAction" type="Mirasvit\ProductAction\Action\GenericAction">
+        <arguments>
+            <argument name="label" xsi:type="string">Update Category</argument>
+            <argument name="code" xsi:type="string">update_category</argument>
+            <argument name="metaProvider" xsi:type="object">Mirasvit\ProductAction\Action\UpdateCategory\MetaProvider</argument>
+            <argument name="executor" xsi:type="object">Mirasvit\ProductAction\Action\UpdateCategory\Executor</argument>
+            <argument name="actionModel" xsi:type="object">Mirasvit\ProductAction\Action\UpdateCategory\ActionData</argument>
+        </arguments>
+    </virtualType>
+</config>

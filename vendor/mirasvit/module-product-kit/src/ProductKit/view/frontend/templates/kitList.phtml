@@ -1,0 +1,40 @@
+<?php
+/** @var \Mirasvit\ProductKit\Block\KitList $block */
+
+$offerKits = $block->getOfferKits();
+if (count($offerKits) == 0) {
+    return;
+}
+
+use Mirasvit\Core\Service\SerializeService; ?>
+<div class="mst-product_kit__kitList" data-element="kitList">
+    <?php if (count($offerKits) > 1): ?>
+        <div class="kitList-prev" data-element="prev"></div>
+    <?php endif ?>
+
+    <div class="kitList-list">
+        <?php foreach ($offerKits as $idx => $kit): ?>
+            <div class="kitList-list-item <?= $idx === 0 ? '_active' : '' ?>"
+                 data-index="<?= $idx ?>"
+                 data-element="item">
+                <?= $block->getKitHtml($kit) ?>
+            </div>
+        <?php endforeach ?>
+    </div>
+
+    <?php if (count($offerKits) > 1): ?>
+        <div class="kitList-next" data-element="next"></div>
+    <?php endif ?>
+
+    <?php if (count($offerKits) > 1): ?>
+        <div class="kitList-paging">
+            <?php foreach ($offerKits as $idx => $kit): ?>
+                <div class="kitList-page <?= $idx === 0 ? '_active' : '' ?>"
+                     data-index="<?= $idx ?>"
+                     data-element="page"></div>
+            <?php endforeach ?>
+        </div>
+    <?php endif ?>
+</div>
+
+<script type="text/x-magento-init"><?= SerializeService::encode($block->getJsonConfig()) ?></script>

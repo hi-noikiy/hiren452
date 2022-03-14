@@ -1,0 +1,13 @@
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Magento\SalesRule\Block\Adminhtml\Promo\Quote">
+        <plugin name="mstAddTreeButton" type="Mirasvit\SalesRule\Plugin\SalesRule\Block\Adminhtml\Promo\Quote\AddTreeButtonPlugin"/>
+    </type>
+
+    <type name="Magento\SalesRule\Model\Rule\Condition\Combine">
+        <plugin name="mstExtendConditions" type="Mirasvit\SalesRule\Plugin\SalesRule\Model\Rule\Condition\Combine\ExtendConditionsPlugin"/>
+    </type>
+
+    <type name="Magento\SalesRule\Model\Rule\Condition\Product\Combine">
+        <plugin name="mstExtendConditions" type="Mirasvit\SalesRule\Plugin\SalesRule\Model\Rule\Condition\Product\Combine\ExtendConditionsPlugin"/>
+    </type>
+</config>

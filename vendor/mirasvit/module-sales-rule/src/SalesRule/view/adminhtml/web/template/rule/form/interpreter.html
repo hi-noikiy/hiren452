@@ -1,0 +1,40 @@
+<div class="mst-sales-rule__form-interpreter">
+    <h3 text="simpleActionLabel"/>
+
+    <div data-bind="visible:simpleAction() == 'buy_x_get_y'">
+        <p>Buy <b text="qty(discountStep)"/> of product, get <b text="qty(discountAmount)"/> quantity of the same product for free.</p>
+        <p data-bind="visible: discountQty">Maximum number of free items is <b text="qty(discountQty)"/></p>
+    </div>
+
+    <div data-bind="visible: simpleAction() == 'mst_each_x_m_get_y_m'">
+        <p>Customer will receive <b text="money(discountAmount)"/> discount for each <b text="money(discountStep)"/> in cart.</p>
+        <p data-bind="visible: discountQty">Maximum discount is <b text="money(discountQty()*discountAmount())"/></p>
+    </div>
+
+    <div data-bind="visible: simpleAction() == 'mst_most_expensive'">
+        <p>Customer will receive <b text="percent(discountAmount)"/> discount for <u>most expensive</u> product in cart.</p>
+        <p data-bind="visible: discountQty">Maximum quantity to apply discount is <b text="qty(discountQty())"/></p>
+    </div>
+
+    <div data-bind="visible: simpleAction() == 'mst_most_cheapest'">
+        <p>Customer will receive <b text="percent(discountAmount)"/> discount for <u>most cheapest</u> product in cart.</p>
+        <p data-bind="visible: discountQty">Maximum quantity to apply discount is <b text="qty(discountQty())"/></p>
+    </div>
+
+    <div data-bind="visible: simpleAction() == 'mst_except_expensive'">
+        <p>Customer will receive <b text="percent(discountAmount)"/> discount for all except <u>most expensive</u> product in cart.</p>
+        <p data-bind="visible: discountQty">Maximum quantity to apply discount is <b text="qty(discountQty())"/></p>
+    </div>
+
+    <div data-bind="visible: simpleAction() == 'mst_buy_x_get_y'">
+        <p>Customer will receive <b text="percent(discountAmount)"/> discount for Y product.</p>
+        <p>Discount <strong>will not be applied</strong> if no conditions are set for this rule.</p>
+        <p data-bind="visible: discountQty">Maximum quantity to apply discount is <b text="qty(discountQty())"/></p>
+    </div>
+
+    <div data-bind="visible: simpleAction() == 'mst_buy_x_get_amount_y'">
+        <p>Customer will receive <b text="money(discountAmount)"/> discount for Y product.</p>
+        <p>Discount <strong>will not be applied</strong> if no conditions are set for this rule.</p>
+        <p data-bind="visible: discountQty">Maximum quantity to apply discount is <b text="qty(discountQty())"/></p>
+    </div>
+</div>

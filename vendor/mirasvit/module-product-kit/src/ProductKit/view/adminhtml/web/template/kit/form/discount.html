@@ -1,0 +1,13 @@
+<div class="mst-product_kit__kit-form-discount">
+    <div class="discount-type">
+        <select class="admin__control-select" data-bind="options: options,
+                       optionsText: 'label',
+                       optionsValue: 'value',
+                       value: discountType,
+                       attr: { disabled: isNonComplexDiscount(), }"></select>
+    </div>
+
+    <div class="discount-amount">
+        <input class="admin__control-text" type="number" data-bind="value: discountAmount"/>
+    </div>
+</div>

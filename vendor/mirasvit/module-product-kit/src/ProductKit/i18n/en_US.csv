@@ -1,0 +1,112 @@
+"Manage Kits","Manage Kits"
+"Suggest Kits","Suggest Kits"
+Configuration,Configuration
+"Product Kits","Product Kits"
+Kits,Kits
+"The product kit has been deleted.","The product kit has been deleted."
+"This product kit no longer exists.","This product kit no longer exists."
+"This kit no longer exists.","This kit no longer exists."
+"New Kit","New Kit"
+"Product %1","Product %1"
+"The product kit has been reindexed.","The product kit has been reindexed."
+"You have saved the kit.","You have saved the kit."
+"The changes will be applied only after Reindex.","The changes will be applied only after Reindex."
+"Suggestion #%1","Suggestion #%1"
+"Buy together","Buy together"
+"We can't find any suggestions. Try adjusting the selection criteria","We can't find any suggestions. Try adjusting the selection criteria"
+"Product is not available right now. Please try again later.","Product is not available right now. Please try again later."
+"Product kit was successfully added to the cart","Product kit was successfully added to the cart"
+"Product Page","Product Page"
+"Shopping Cart Page","Shopping Cart Page"
+"Conditions Combination","Conditions Combination"
+"Current Product ""%1""","Current Product ""%1"""
+"Exact value","Exact value"
+"Product Type","Product Type"
+"Discount (%1)","Discount (%1)"
+Discount,Discount
+Conditions,Conditions
+"Apply the rule only for the following products: ","Apply the rule only for the following products: "
+Back,Back
+Delete,Delete
+"Are you sure you want to do this?","Are you sure you want to do this?"
+Reindex,Reindex
+Reset,Reset
+"Save and Continue Edit","Save and Continue Edit"
+"Save Kit","Save Kit"
+"Is Primary","Is Primary"
+"Is Optional","Is Optional"
+Qty,Qty
+Edit,Edit
+"Fixed - $","Fixed - $"
+"Percentage - %","Percentage - %"
+"Relative - %, %, %","Relative - %, %, %"
+"Relative Kit - %, %, %","Relative Kit - %, %, %"
+Complex,Complex
+Save,Save
+"Add to Cart","Add to Cart"
+"Something went wrong. Please try again.","Something went wrong. Please try again."
+"Product Kit was added to your <a href=""%1"">shopping cart</a>.","Product Kit was added to your <a href=""%1"">shopping cart</a>."
+"Possible Combinations:","Possible Combinations:"
+"Number of orders:","Number of orders:"
+"Unique Customers:","Unique Customers:"
+"Average quantity:","Average quantity:"
+"Average Grand Total:","Average Grand Total:"
+"Create Kit","Create Kit"
+"Unexpected error","Unexpected error"
+Added,Added
+Adding...,Adding...
+"Display on","Display on"
+"Maximum number of kits in the block","Maximum number of kits in the block"
+"Maximum number of optional products per position","Maximum number of optional products per position"
+"Bind product kit block to","Bind product kit block to"
+"Bind position","Bind position"
+"General Information","General Information"
+Active,Active
+"Internal Name","Internal Name"
+Priority,Priority
+"Store View","Store View"
+"Customer Group","Customer Group"
+"Is Smart","Is Smart"
+"Number of products","Number of products"
+"Discount Type","Discount Type"
+Products,Products
+"
+                        Kits with products that are not visible individually on the site will not be displayed on the frontend.
+                        <br><br>
+                        The kit block is visible on the primary product.
+                    ","
+                        Kits with products that are not visible individually on the site will not be displayed on the frontend.
+                        <br><br>
+                        The kit block is visible on the primary product.
+                    "
+"Add Products","Add Products"
+Cancel,Cancel
+"Add Selected Products","Add Selected Products"
+Remove,Remove
+ID,ID
+SKU,SKU
+Thumbnail,Thumbnail
+Name,Name
+Status,Status
+Price,Price
+Actions,Actions
+Title,Title
+"The title of the kit block","The title of the kit block"
+Label,Label
+"Visible on the shopping cart page","Visible on the shopping cart page"
+"Override Cent Values?","Override Cent Values?"
+##.##,##.##
+"##.99: 13.23 => 13.99","##.99: 13.23 => 13.99"
+"Attribute Set","Attribute Set"
+StatusText,StatusText
+Type,Type
+"Add New Kit","Add New Kit"
+Filters,Filters
+"Number of products for kit","Number of products for kit"
+From,From
+To,To
+"Number of orders","Number of orders"
+"Kit price","Kit price"
+"Group by","Group by"
+"Same Customer","Same Customer"
+"Find Suggestions","Find Suggestions"

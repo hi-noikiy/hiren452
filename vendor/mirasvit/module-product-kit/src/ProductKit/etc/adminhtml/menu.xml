@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Mirasvit_ProductKit::kit" title="Product Kits" module="Mirasvit_ProductKit" resource="Mirasvit_ProductKit::kit"
+             sortOrder="1000" parent="Magento_Catalog::catalog"/>
+
+        <add id="Mirasvit_ProductKit::kit_management" title="Manage Kits" module="Mirasvit_ProductKit" resource="Mirasvit_ProductKit::kit_management"
+             action="product_kit/kit" parent="Mirasvit_ProductKit::kit"/>
+        <add id="Mirasvit_ProductKit::kit_suggester" title="Suggest Kits" module="Mirasvit_ProductKit" resource="Mirasvit_ProductKit::kit_suggester"
+             action="product_kit/suggester" parent="Mirasvit_ProductKit::kit"/>
+    </menu>
+</config>

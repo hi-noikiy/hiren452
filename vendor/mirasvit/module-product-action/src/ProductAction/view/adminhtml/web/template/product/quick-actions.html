@@ -1,0 +1,6 @@
+<div class="mst-product-action__quick-actions" data-bind="visible: visibility">
+    <!-- ko foreach: mstMassActions -->
+    <span class="mst-product-action__button" data-bind="text: $data.label,
+                click: $parent.mstApplyAction.bind($data, $data.type)"></span>
+    <!-- /ko -->
+</div>

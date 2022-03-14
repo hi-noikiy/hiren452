@@ -1,0 +1,153 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <!--DATA-->
+    <preference for="Mirasvit\ProductAction\Api\ActionDataInterface" type="Mirasvit\ProductAction\Action\GenericActionData"/>
+    <preference for="Mirasvit\ProductAction\Api\LinkActionDataInterface" type="Mirasvit\ProductAction\Action\LinkProducts\ActionData"/>
+
+    <virtualType name="Magento\Catalog\Ui\DataProvider\Product\Listing\Modifier\Pool" type="Magento\Ui\DataProvider\Modifier\Pool">
+        <arguments>
+            <argument name="modifiers" xsi:type="array">
+                <item name="mstActionsModifier" xsi:type="array">
+                    <item name="class" xsi:type="string">Mirasvit\ProductAction\Ui\Product\Listing\ActionsModifier</item>
+                    <item name="sortOrder" xsi:type="number">1000</item>
+                </item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="mstAttributeSetAction" type="Mirasvit\ProductAction\Action\GenericAction">
+        <arguments>
+            <argument name="label" xsi:type="string">Change Attribute Set</argument>
+            <argument name="code" xsi:type="string">change_attribute_set</argument>
+            <argument name="metaProvider" xsi:type="object">Mirasvit\ProductAction\Action\ChangeAttributeSet\MetaProvider</argument>
+            <argument name="executor" xsi:type="object">Mirasvit\ProductAction\Action\ChangeAttributeSet\Executor</argument>
+            <argument name="actionModel" xsi:type="object">Mirasvit\ProductAction\Action\ChangeAttributeSet\ActionData</argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="mstCopyAttributeAction" type="Mirasvit\ProductAction\Action\GenericAction">
+        <arguments>
+            <argument name="label" xsi:type="string">Copy Attributes</argument>
+            <argument name="code" xsi:type="string">copy_attributes</argument>
+            <argument name="metaProvider" xsi:type="object">Mirasvit\ProductAction\Action\CopyAttributes\MetaProvider</argument>
+            <argument name="executor" xsi:type="object">Mirasvit\ProductAction\Action\CopyAttributes\Executor</argument>
+            <argument name="actionModel" xsi:type="object">Mirasvit\ProductAction\Action\CopyAttributes\ActionData</argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="mstCategoryAction" type="Mirasvit\ProductAction\Action\GenericAction">
+        <arguments>
+            <argument name="label" xsi:type="string">Update Category</argument>
+            <argument name="code" xsi:type="string">update_category</argument>
+            <argument name="metaProvider" xsi:type="object">Mirasvit\ProductAction\Action\UpdateCategory\ConsoleMetaProvider</argument>
+            <argument name="executor" xsi:type="object">Mirasvit\ProductAction\Action\UpdateCategory\Executor</argument>
+            <argument name="actionModel" xsi:type="object">Mirasvit\ProductAction\Action\UpdateCategory\ActionData</argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="mstRelatedMetaProvider" type="Mirasvit\ProductAction\Action\LinkProducts\MetaProvider">
+        <arguments>
+            <argument name="label" xsi:type="string">Related</argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="mstUpSellMetaProvider" type="Mirasvit\ProductAction\Action\LinkProducts\MetaProvider">
+        <arguments>
+            <argument name="label" xsi:type="string">Up-Sell</argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="mstCrossSellMetaProvider" type="Mirasvit\ProductAction\Action\LinkProducts\MetaProvider">
+        <arguments>
+            <argument name="label" xsi:type="string">Cross-Sell</argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="mstRelatedAction" type="Mirasvit\ProductAction\Action\GenericAction">
+        <arguments>
+            <argument name="label" xsi:type="string">Update Related Products</argument>
+            <argument name="code" xsi:type="string">update_related</argument>
+            <argument name="metaProvider" xsi:type="object">mstRelatedMetaProvider</argument>
+            <argument name="executor" xsi:type="object">Mirasvit\ProductAction\Action\LinkProducts\Executor</argument>
+            <argument name="actionModel" xsi:type="object">Mirasvit\ProductAction\Action\LinkProducts\ActionData</argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="mstUpSellAction" type="Mirasvit\ProductAction\Action\GenericAction">
+        <arguments>
+            <argument name="label" xsi:type="string">Update Up-Sell Products</argument>
+            <argument name="code" xsi:type="string">update_up_sell</argument>
+            <argument name="metaProvider" xsi:type="object">mstUpSellMetaProvider</argument>
+            <argument name="executor" xsi:type="object">Mirasvit\ProductAction\Action\LinkProducts\Executor</argument>
+            <argument name="actionModel" xsi:type="object">Mirasvit\ProductAction\Action\LinkProducts\ActionData</argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="mstCrossSellAction" type="Mirasvit\ProductAction\Action\GenericAction">
+        <arguments>
+            <argument name="label" xsi:type="string">Update Cross-Sell Products</argument>
+            <argument name="code" xsi:type="string">update_cross_sell</argument>
+            <argument name="metaProvider" xsi:type="object">mstCrossSellMetaProvider</argument>
+            <argument name="executor" xsi:type="object">Mirasvit\ProductAction\Action\LinkProducts\Executor</argument>
+            <argument name="actionModel" xsi:type="object">Mirasvit\ProductAction\Action\LinkProducts\ActionData</argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="mstCopyCustomOptionsAction" type="Mirasvit\ProductAction\Action\GenericAction">
+        <arguments>
+            <argument name="label" xsi:type="string">Copy Custom Options</argument>
+            <argument name="code" xsi:type="string">copy_custom_options</argument>
+            <argument name="metaProvider" xsi:type="object">Mirasvit\ProductAction\Action\CopyCustomOptions\MetaProvider</argument>
+            <argument name="executor" xsi:type="object">Mirasvit\ProductAction\Action\CopyCustomOptions\Executor</argument>
+            <argument name="actionModel" xsi:type="object">Mirasvit\ProductAction\Action\CopyCustomOptions\ActionData</argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="mstUpdateGalleryAction" type="Mirasvit\ProductAction\Action\GenericAction">
+        <arguments>
+            <argument name="label" xsi:type="string">Update Gallery Images</argument>
+            <argument name="code" xsi:type="string">update_gallery</argument>
+            <argument name="metaProvider" xsi:type="object">Mirasvit\ProductAction\Action\UpdateGallery\MetaProvider</argument>
+            <argument name="executor" xsi:type="object">Mirasvit\ProductAction\Action\UpdateGallery\Executor</argument>
+            <argument name="actionModel" xsi:type="object">Mirasvit\ProductAction\Action\UpdateGallery\ActionData</argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="mstUpdatePriceAction" type="Mirasvit\ProductAction\Action\GenericAction">
+        <arguments>
+            <argument name="label" xsi:type="string">Update Price</argument>
+            <argument name="code" xsi:type="string">update_price</argument>
+            <argument name="metaProvider" xsi:type="object">Mirasvit\ProductAction\Action\UpdatePrice\MetaProvider</argument>
+            <argument name="executor" xsi:type="object">Mirasvit\ProductAction\Action\UpdatePrice\Executor</argument>
+            <argument name="actionModel" xsi:type="object">Mirasvit\ProductAction\Action\UpdatePrice\ActionData</argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="mstUpdateAttributeAction" type="Mirasvit\ProductAction\Action\GenericAction">
+        <arguments>
+            <argument name="label" xsi:type="string">Mass Attributes Update</argument>
+            <argument name="code" xsi:type="string">mass_attributes_update</argument>
+            <argument name="ajaxMode" xsi:type="boolean">true</argument>
+            <argument name="metaProvider" xsi:type="object">Mirasvit\ProductAction\Action\UpdateAttribute\MetaProvider</argument>
+            <argument name="executor" xsi:type="object">Mirasvit\ProductAction\Action\UpdateAttribute\Executor</argument>
+            <argument name="actionModel" xsi:type="object">Mirasvit\ProductAction\Action\UpdateAttribute\ActionData</argument>
+        </arguments>
+    </virtualType>
+
+    <type name="Mirasvit\ProductAction\Repository\ActionRepository">
+        <arguments>
+            <argument name="pool" xsi:type="array">
+                <item name="mstCategoryAction" xsi:type="object">mstCategoryAction</item>
+                <item name="mstAttributeSetAction" xsi:type="object">mstAttributeSetAction</item>
+                <item name="mstRelatedAction" xsi:type="object">mstRelatedAction</item>
+                <item name="mstUpSellAction" xsi:type="object">mstUpSellAction</item>
+                <item name="mstCrossSellAction" xsi:type="object">mstCrossSellAction</item>
+                <item name="mstCopyCustomOptionsAction" xsi:type="object">mstCopyCustomOptionsAction</item>
+                <item name="mstUpdateGalleryAction" xsi:type="object">mstUpdateGalleryAction</item>
+                <item name="mstUpdatePriceAction" xsi:type="object">mstUpdatePriceAction</item>
+                <item name="mstCopyAttributeAction" xsi:type="object">mstCopyAttributeAction</item>
+                <item name="mstUpdateAttributeAction" xsi:type="object">mstUpdateAttributeAction</item>
+            </argument>
+        </arguments>
+    </type>
+</config>

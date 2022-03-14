@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <section id="product_kit" showInDefault="1" showInWebsite="1" showInStore="1" type="text" translate="label" sortOrder="100">
+            <label>Product Kits</label>
+            <tab>mirasvit</tab>
+            <resource>Mirasvit_ProductKit::config</resource>
+
+            <group id="display" showInDefault="1" sortOrder="5">
+                <label>Display Settings</label>
+
+                <field id="display_on" translate="label" type="multiselect" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Display on</label>
+                    <source_model>Mirasvit\ProductKit\Model\Config\BlockPositionSource</source_model>
+                    <comment>The product kits block will be visible only on these pages.</comment>
+                </field>
+
+                <field id="kits_limit" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Maximum number of kits in the block</label>
+                </field>
+
+                <field id="products_per_position" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Maximum number of optional products per position</label>
+                </field>
+
+                <field id="is_show_discount_text" translate="label" type="select" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Is Show Discount Text</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>The text will be shown instead of the 100% discount</comment>
+                </field>
+                <field id="discount_text" translate="label" type="text" sortOrder="41" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Discount Text</label>
+                    <depends>
+                        <field id="*/*/is_show_discount_text">1</field>
+                    </depends>
+                </field>
+
+                <group id="layout" showInDefault="1" sortOrder="50">
+                    <label>Layout Settings</label>
+
+                    <field id="relative_container" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Bind product kit block to</label>
+                    </field>
+
+                    <field id="relative_position" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                       <label>Bind position</label>
+                        <comment>before, after</comment>
+                    </field>
+                </group>
+            </group>
+        </section>
+    </system>
+</config>

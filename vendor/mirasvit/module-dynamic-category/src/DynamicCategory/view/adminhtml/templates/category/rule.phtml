@@ -1,0 +1,57 @@
+<?php
+/** @var Mirasvit\DynamicCategory\Ui\Category\Form\Block\Rule $block */
+?>
+
+<div class="admin__fieldset" style="padding-top: 0;">
+    <div class="admin__field">
+        <div class="admin__field-label">
+            <label><span><?= __('Products Selection Conditions') ?></span></label>
+        </div>
+
+        <div class="admin__field-control mst-rule-conditions">
+            <?= $block->getConditionsHtml() ?>
+
+            <div class="admin__field-note">
+                <span><?= __('Only products matched by rule will be present in the category after save.') ?></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="admin__field">
+        <div class="admin__field-label">&nbsp;</div>
+
+        <div class="admin__field-control">
+            <div data-bind="scope: 'mstDynamicCategoryProductsPreview'">
+                <!-- ko template: getTemplate() --><!-- /ko -->
+                <button id="dynamic-category-refresh" type="button" class="action-default scalable action-secondary" data-dynamic-category="refresh"
+                        title="<?= __('Preview Products') ?>">
+                    <span><?= __('Preview Products') ?></span>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script type="text/x-magento-init">
+    {
+        "*": {
+            "Magento_Ui/js/core/app": {
+                "components": {
+                    "mstDynamicCategoryProductsPreview": {
+                        "component": "Mirasvit_DynamicCategory/js/preview",
+                        "config": <?= $block->getPreviewJson(); ?>
+                    }
+                }
+            }
+        }
+    }
+
+
+
+
+
+
+
+
+</script>

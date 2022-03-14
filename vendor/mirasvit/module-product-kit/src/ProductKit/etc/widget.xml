@@ -1,0 +1,7 @@
+<widgets xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Widget:etc/widget.xsd">
+    <widget class="Mirasvit\ProductKit\Block\KitList" id="mst-kit-list">
+        <label>Product Kit Widget</label>
+        <description>This widget can be used only on the pages that have the product context</description>
+    </widget>
+</widgets>
