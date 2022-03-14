@@ -1,0 +1,96 @@
+.job-index-detail .modals-wrapper .modal-popup .modal-inner-wrap .popup_form .title {
+  margin-bottom: 20px;
+    font-size: 20px;
+    font-weight: 600;
+}
+.job-index-detail .modals-wrapper .modal-popup .modal-inner-wrap .popup_form .fieldset {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 -10px;
+}
+.job-index-detail .modals-wrapper .modal-popup .modal-inner-wrap .popup_form .fieldset .field {
+  width: ~"calc(33.33% - 20px)";
+  margin: 0 10px 20px 10px;
+}
+.job-index-detail .modals-wrapper .modal-popup .modal-inner-wrap .popup_form .fieldset .field input {
+  height: 35px;
+  line-height: 35px;
+  border: 1px solid #000;
+  width: 100%;
+  padding: 0 10px;
+}
+.job-index-detail .modals-wrapper .modal-popup .modal-inner-wrap .popup_form .fieldset .field input#cvfile {
+  border: none;
+  padding: 0;
+}
+.job-index-detail .modals-wrapper .modal-popup .modal-inner-wrap .popup_form .fieldset .field input:hover,
+.job-index-detail .modals-wrapper .modal-popup .modal-inner-wrap .popup_form .fieldset .field input:focus {
+  box-shadow: none;
+}
+.job-index-detail .modals-wrapper .modal-popup .modal-inner-wrap .popup_form .fieldset .field label {  
+    display: block;
+    width: 100%;
+    margin-bottom: 4px;
+}
+
+.job-index-detail .modals-wrapper .modal-popup .modal-inner-wrap .popup_form .fieldset button{
+    color: #fff;
+    text-transform: uppercase;
+    font-size: 13px;
+    background: #2b2b2d;
+    padding: 0 25px;
+    border-radius: 5px;
+    height: 35px;
+    line-height: 35px;
+    border: 1px solid transparent;
+    margin-top: 22px;
+    margin-left: 10px;
+}
+.job-index-detail .modals-wrapper .modal-popup .modal-inner-wrap .modal-footer button { 
+  background-color: #6f86d6;
+  color: #fff;
+    text-transform: uppercase;
+    font-size: 13px;
+    padding: 0 25px;
+    border-radius: 5px;
+    height: 35px;
+    line-height: 35px;
+    border: 1px solid transparent;
+}
+
+@media (max-width:  991px) {
+  .job-index-detail .modals-wrapper .modal-popup .modal-inner-wrap {
+    width: ~"calc(100% - 30px)";
+  }
+}
+@media (max-width: 767px) {
+  .job-index-detail .modals-wrapper .modal-popup {
+    left: 0;
+  }
+  .job-index-detail .modals-wrapper .modal-popup .modal-inner-wrap {
+    width: ~"calc(100% - 30px)" !important;
+      min-height: auto;
+      margin: 0 auto;
+  }
+  .job-index-detail .modals-wrapper .modal-popup .modal-inner-wrap .modal-content {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+  .job-index-detail .modals-wrapper .modal-popup .modal-inner-wrap .popup_form .fieldset {
+    margin: 0;
+  }
+  .job-index-detail .modals-wrapper .modal-popup .modal-inner-wrap .popup_form .fieldset .field {
+    width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+  }
+  .job-index-detail .modals-wrapper .modal-popup .modal-inner-wrap .popup_form .fieldset button {
+    margin: 0;
+  }
+  .job-index-detail .modals-wrapper .modal-popup .modal-inner-wrap .modal-header {
+    padding-left: 15px;
+  }
+  .job-index-detail .modals-wrapper .modal-popup .modal-inner-wrap .modal-header {
+    font-size: 20px;
+  }
+}

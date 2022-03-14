@@ -1,0 +1,353 @@
+<?php
+$partialPayment = $this->getPartialPayment();
+$currencycode = $partialPayment->getCurrencyCode();
+$order = $this->getOrder();
+$store = $this->getStore($partialPayment->getStoreId());
+$gridrecords = $this->getInstallmentCollection();
+$helperData = $this->getHelperData();
+$name = array(
+    $store->getWebsite()->getName(),
+    $store->getGroup()->getName(),
+    $store->getName()
+);
+?>
+
+<div class="partialpro-content-header">
+    <div class="content-buttons-placeholder">
+        <p class="content-buttons form-buttons" style="text-align: right">
+            <button title="<?php echo __('Back') ?>" type="button" class="scalable back"
+                    onclick="setLocation('<?php echo $this->getUrl('*/*/index') ?>')" style="">
+                <span><span><span><?php echo __('Back') ?></span></span></span>
+            </button>
+        </p>
+    </div>
+    <h3><?php echo $this->getTitle(); ?></h3>
+</div>
+<div class="partialpro-entry-edit">
+    <div class="entry-edit-head" style="margin-top: 30px">
+        <h4>
+            <a href="<?php echo $this->getViewUrl($order->getId()) ?>">
+                <?php
+                $paymentInfoTitle = __('Order # ') . $order->getIncrementId();
+                echo $paymentInfoTitle;
+                ?>
+            </a>
+            <?php echo __(' - Payment Information'); ?>
+        </h4>
+    </div>
+    <fieldset>
+        <div class="box-left" style="width:100%;">
+            <table border="0" width="100%" class="data-table admin__table-primary edit-order-table">
+                <tr>
+                    <td width="45%">
+                        <table class="form-list">
+                            <tbody>
+                            <tr>
+                                <td class="label"><label><?php echo __('Customer Name') ?></label></td>
+                                <td class="value">
+                                    <?php if ($this->getCustomerViewUrl()): ?>
+                                        <a href="<?php echo $this->getCustomerViewUrl() ?>" target="_blank">
+                                            <strong><?php echo $partialPayment->getCustomerName() ?></strong>
+                                        </a>
+                                    <?php elseif (strlen($partialPayment->getCustomerName()) > 1): ?>
+                                        <strong><?php echo $partialPayment->getCustomerName() ?></strong>
+                                    <?php else: ?>
+                                        <?php
+                                        $billingAddress = $order->getBillingAddress();
+                                        $customername = $billingAddress->getFirstname() . ' ' . $billingAddress->getLastname();
+                                        ?>
+                                        <strong><?php echo $customername ?></strong>
+                                    <?php endif; ?>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="label"><label><?php echo __('Customer Email') ?></label></td>
+                                <td class="value">
+                                    <a href="mailto:<?php echo $partialPayment->getCustomerEmail() ?>">
+                                        <strong><?php echo $partialPayment->getCustomerEmail() ?></strong>
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="label"><label><?php echo __('Purchased From') ?></label></td>
+                                <td class="value">
+                                    <strong style="line-height: 25px"><?php echo implode('<br/>', $name) ?></strong>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                    <td width="10%">&nbsp;</td>
+                    <td width="45%">
+                        <table class="form-list">
+                            <tbody>
+                            <tr>
+                                <td class="label">
+                                    <label><?php echo __('Order Amount') ?></label>
+                                </td>
+                                <td class="value">
+                                    <strong>
+                                        <?php echo $helperData->getFormattedPrice($currencycode, $partialPayment->getOrderAmount()) ?>
+                                    </strong>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="label">
+                                    <label><?php echo __('Paid Amount') ?></label>
+                                </td>
+                                <td class="value">
+                                    <strong>
+                                        <?php echo $helperData->getFormattedPrice($currencycode, $partialPayment->getPaidAmount()) ?>
+                                    </strong>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="label">
+                                    <label><?php echo __('Remaining Amount') ?></label>
+                                </td>
+                                <td class="value">
+                                    <strong>
+                                        <?php echo $helperData->getFormattedPrice($currencycode, max(0, $partialPayment->getRemainingAmount())) ?>
+                                    </strong>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="label">
+                                    <label>
+                                        <?php echo __('Paid Installments') ?>
+                                    </label>
+                                </td>
+                                <td class="value">
+                                    <strong>
+                                        <?php echo $partialPayment->getPaidInstallments() ?>
+                                    </strong>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="label">
+                                    <label>
+                                        <?php echo __('Remaining Installments') ?>
+                                    </label>
+                                </td>
+                                <td class="value">
+                                    <strong id="dueinstallments">
+                                        <?php echo max(0, $partialPayment->getRemainingInstallments()) ?>
+                                    </strong>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="label">
+                                    <label>
+                                        <?php echo __('Payment Status') ?>
+                                    </label>
+                                </td>
+                                <td class="value">
+                                    <?php if ($partialPayment->getPaymentStatus() == 1) {
+                                        echo '<div style="text-align:center;width: 110px !important;padding: 5px 0; color:#FFF;background:#86cae4;border-radius:8px;width:100%">Processing</div>';
+                                    } else if ($partialPayment->getPaymentStatus() == 2) {
+                                        echo '<div style="text-align:center;width: 110px !important;padding: 5px 0; color:#FFF;background:#f7944b;border-radius:8px;width:100%">Paid</div>';
+                                    } else {
+                                        echo '<div style="text-align:center;width: 110px !important;padding: 5px 0; color:#FFF;background:#434a56;border-radius:8px;width:100%">Pending</div>';
+                                    } ?>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </fieldset>
+
+
+    <div class="entry-edit-head" style="margin-top: 30px">
+        <h4>
+            <?php echo __('Manage Installments'); ?>
+        </h4>
+    </div>
+
+    <fieldset>
+        <form class="form contact"
+              action="<?= $this->escapeUrl($this->getFormAction()) ?>"
+              id="installment-form"
+              method="post"
+              data-hasrequired="<?= $block->escapeHtmlAttr(__('* Required Fields')) ?>"
+              data-mage-init='{"validation":{}}'>
+
+            <input type="hidden" name="partial_payment_id" value="<?php echo $this->getPartialPaymentId() ?>"/>
+            <input type="hidden" name="order_id" value="<?php echo $this->getOrderId() ?>"/>
+            <input type="hidden" name="form_key" value="<?php echo $block->getFormKey() ?>"/>
+
+            <div class="box-left" style="width:100%;">
+                <table class="data table table-order-items history" id="my-orders-table" style="width:100%;">
+                    <thead>
+                    <tr>
+                        <th class="col pay"><?php echo __('Pay') ?></th>
+                        <th class="col installmentamount"><?php echo __('Installments Amount') ?></th>
+                        <th class="col duedate"><?php echo __('Due Date') ?></th>
+                        <th class="col paiddate"><?php echo __('Paid Date') ?></th>
+                        <th class="col installstatus"><?php echo __('Installments Status') ?></th>
+                        <th class="col paymentmethod"><?php echo __('Payment Method') ?></th>
+                        <th class="col approve"><?php echo __('Approve / Disapprove') ?></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <?php
+                    foreach ($gridrecords as $gridrecord): ?>
+                        <tr>
+                            <td class="col pay">
+                                <?php if ($gridrecord->getInstallmentStatus() == 0) { ?>
+                                    <input type="checkbox" name="pay[]"
+                                           class="input checkbox" value="<?php echo $gridrecord->getId() ?>">
+                                <?php } ?>
+                            </td>
+                            <td class="col installmentamount">
+                                <?php echo $helperData->getFormattedPrice($currencycode, max(0, $gridrecord->getInstallmentAmount())) ?>
+                            </td>
+                            <td class="col duedate">
+                                <?php
+                                $date = date('Y-m-d', strtotime($gridrecord->getInstallmentDueDate()));
+                                echo date('Y-m-d', strtotime($gridrecord->getInstallmentDueDate())); ?>
+
+                                <?php if ($gridrecord->getInstallmentStatus() == 0) { ?>
+
+                                    <a onclick="hideDueDateParent('#orgduedateparent_<?php echo $gridrecord->getData('installment_id'); ?>', '#changeduepatent_<?php echo $gridrecord->getData('installment_id'); ?>')"
+                                       style="cursor: pointer;"><?php echo __('Change') ?></a>
+
+                                    <div id="changeduepatent_<?php echo $gridrecord->getData('installment_id'); ?>"
+                                         style="display: none;">
+                                        <input type="text" class="admin__control-text"
+                                               name="newduedate_<?php echo $gridrecord->getData('installment_id'); ?>"
+                                               value="<?php ?>"
+                                               data-mage-init='{"calendar": {"showTime": false,"minDate": "new Date()","dateFormat": "yy-mm-dd"}}'
+                                               id="newduedate_<?php echo $gridrecord->getData('installment_id'); ?>"
+                                               style="width: 160px"/>
+                                        <div class="button-container">
+                                            <button onclick="dueDateChange('#newduedate_<?php echo $gridrecord->getData('installment_id'); ?>', '<?php echo $gridrecord->getData('installment_id'); ?>')"
+                                                    title="<?php echo __('Change') ?>" class="scalable "
+                                                    type="button">
+                                                <span>
+                                                    <span>
+                                                        <span><?php echo __('Change') ?></span>
+                                                    </span>
+                                                </span>
+                                            </button>
+                                            <button onclick="canceldueDateChange('#orgduedateparent_<?php echo $gridrecord->getData('installment_id'); ?>', '#changeduepatent_<?php echo $gridrecord->getData('installment_id'); ?>')"
+                                                    title="<?php echo __('Cancel') ?>" class="scalable " type="button">
+                                            <span>
+                                                <span>
+                                                    <span><?php echo __('Cancel') ?></span>
+                                                </span>
+                                            </span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                <?php } ?>
+
+                            </td>
+                            <td class="col paiddate">
+                                <?php if ($gridrecord->getInstallmentStatus() != 0) {
+                                    echo date('Y-m-d', strtotime($gridrecord->getInstallmentPaidDate()));
+                                } else {
+                                    echo 'N / A';
+                                } ?>
+                            </td>
+                            <td class="col installstatus">
+                                <?php if ($gridrecord->getInstallmentStatus() == 1) {
+                                    echo '<div style="text-align:center;width: 110px !important;padding: 5px 0; color:#FFF;background:#86cae4;border-radius:8px;width:100%">Processing</div>';
+                                } else if ($gridrecord->getInstallmentStatus() == 2) {
+                                    echo '<div style="text-align:center;width: 110px !important;padding: 5px 0; color:#FFF;background:#f7944b;border-radius:8px;width:100%">Paid</div>';
+                                } else {
+                                    echo '<div style="text-align:center;width: 110px !important;padding: 5px 0; color:#FFF;background:#434a56;border-radius:8px;width:100%">Pending</div>';
+                                } ?>
+                            </td>
+                            <td class="col paymentmethod">
+                                <?php echo $this->getOrderPaymentTitle($gridrecord->getPaymentMethod()) ?>
+                            </td>
+                            <td class="col paymentmethod">
+                                <?php if ($gridrecord->getInstallmentStatus() == 1) { ?>
+                                    <button type="button" class="scalable " title="<?php echo __('Approve') ?>"
+                                            onclick="confirmSetLocation('<?php echo __('Are you sure  to approve this installment payment?') ?>',
+                                                    '<?php echo $this->getUrl('*/*/approve', array('installment_id' => $gridrecord->getId(),
+                                                'partial_payment_id' => $gridrecord->getPartialPaymentId())) ?>')">
+                                        <span>
+                                            <span><?php echo __('Approve') ?></span>
+                                        </span>
+                                    </button>
+                                    <button style="margin-top:5px;" type="button" class="scalable "
+                                            title="<?php echo __('Disapprove') ?>"
+                                            onclick="confirmSetLocation('<?php echo __('Are you sure  to Disapprove this installment payment?') ?>',
+                                                    '<?php echo $this->getUrl('*/*/disapprove', array('installment_id' => $gridrecord->getId(),
+                                                'partial_payment_id' => $gridrecord->getPartialPaymentId())) ?>')">
+                                        <span>
+                                            <span><?php echo __('Disapprove') ?></span>
+                                        </span>
+                                    </button>
+                                <?php } else {
+                                    echo '--';
+                                } ?>
+                            </td>
+                        </tr>
+                    <?php endforeach; ?>
+                    </tbody>
+                </table>
+                <?php if ($this->getShowPaymentMethod()) {
+                    echo $this->getLayout()->createBlock('Meetanshi\Partialpro\Block\Adminhtml\Manage\Method\Form')->toHtml();
+                } ?>
+            </div>
+        </form>
+    </fieldset>
+
+</div>
+
+<style>
+    table#my-orders-table th, table#my-orders-table td {
+        padding: 11px 10px;
+        text-align: center;
+    }
+
+    td.col.installstatus div {
+        display: inline-block;
+    }
+
+</style>
+
+<script>
+    function hideDueDateParent(dueparent, newddueparent) {
+        jQuery(dueparent).hide();
+        jQuery(newddueparent).show();
+    }
+
+    function canceldueDateChange(dueparent, newddueparent) {
+        jQuery(newddueparent).hide();
+        jQuery(dueparent).show();
+    }
+
+    function dueDateChange(changedueid, installmentid) {
+        var changeduedate = jQuery(changedueid).val();
+        if (changeduedate) {
+
+            var confirmDueDateChange = confirm('<?php echo __('Are you sure to change Due Date ?')?>');
+
+            if (confirmDueDateChange == true) {
+                var dueaction = '<?php echo $this->getUrl("*/*/duedatechange") ?>';
+
+                jQuery.ajax({
+                    url: dueaction,
+                    method: 'GET',
+                    dataType: 'json',
+                    data: 'newdate=' + changeduedate + '&installmentid=' + installmentid,
+                    complete: function (transport) {
+                        location.reload();
+                    },
+                    error: function (transport) {
+                        alert("Please try after some time");
+                    }
+                });
+            }
+        }
+        else {
+            alert('<?php echo __('Please enter Due Date')?>');
+        }
+    }
+</script>

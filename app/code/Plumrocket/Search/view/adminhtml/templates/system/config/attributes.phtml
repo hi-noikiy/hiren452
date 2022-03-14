@@ -1,0 +1,49 @@
+<?php
+/**
+ * Plumrocket Inc.
+ * NOTICE OF LICENSE
+ * This source file is subject to the End-user License Agreement
+ * that is available through the world-wide-web at this URL:
+ * http://wiki.plumrocket.net/wiki/EULA
+ * If you are unable to obtain it through the world-wide-web, please
+ * send an email to support@plumrocket.com so we can send you a copy immediately.
+ *
+ * @package     Plumrocket Search Autocomplete & Suggest
+ * @copyright   Copyright (c) 2019 Plumrocket Inc. (http://www.plumrocket.com)
+ * @license     http://wiki.plumrocket.net/wiki/EULA  End-user License Agreement
+ */
+?>
+
+<tr id="<?= $block->getAttributeElementId() ?>">
+    <td class="label"><?= $block->getAttributeElementLabel(); ?></td>
+    <td class="psearch-form-wrapper">
+        <div class="psearch-form">
+            <div class="psearch-form-inner psearch-form-inner-left">
+                <p class="psearch-form-title"><?= __('All Attributes'); ?></p>
+                <ul id="sortable-attributes" data-list="off">
+                    <?php foreach ($this->getAttributes(true) as $attribute) : ?>
+                        <li data-id="<?= $attribute->getId(); ?>" data-name="<?= $this->escapeHtml($this->prepareLabel($attribute)); ?>">
+                            <span><?= $this->escapeHtml($this->prepareLabel($attribute)); ?></span>
+                        </li>
+                    <?php endforeach; ?>
+                </ul>
+            </div>
+            <div class="psearch-form-inner psearch-form-inner-right">
+                <p class="psearch-form-title"><?= __('Priority | Searchable Attributes'); ?></p>
+                <ul id="sortable-searchable" data-list="on">
+                    <?php $priority = 1; $order = [];
+                    foreach ($this->getAttributesSearchable() as $attribute) : ?>
+                        <?php $order[$priority] = $attribute->getId(); ?>
+                        <li data-id="<?= $attribute->getId(); ?>" data-name="<?= $this->escapeHtml($this->prepareLabel($attribute)); ?>">
+                            <span><?= $priority; ?> | <?= $this->escapeHtml($this->prepareLabel($attribute)); ?></span>
+                        </li>
+                        <?php $priority++; ?>
+                    <?php endforeach; ?>
+                </ul>
+            </div>
+            <input id="psearch-attributes-change" type="hidden" name="psearch-attributes-change" value='<?= $block->prepareAttributeOrder($order); ?>' />
+        </div>
+        <p class="note"><span><?= __('Drag &amp; drop attributes that should be used in search. You can set &quot;priority&quot; for Searchable Attributes. Products with matching higher priority attributes will be displayed on top of the search results.'); ?></span></p>
+    </td>
+    <td></td>
+</tr>

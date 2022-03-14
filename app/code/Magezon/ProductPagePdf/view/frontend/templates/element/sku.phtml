@@ -1,0 +1,12 @@
+<?php
+$sku        = $this->getProduct()->getSku();
+$element    = $this->getElement();
+$breakPage  = $element->getData('break_page');
+$fontSize   = $element->getData('font_size'); 
+$lineHeight = $element->getData('line_height'); 
+$textColor  = $element->getData('text_color'); 
+?>
+<?= $breakPage ? "<pagebreak />" : "" ?>
+<div class="ppbd-product-sku">
+    <span style="font-size:<?= $fontSize ?: '' ?>px; color:<?= $textColor ?: '' ?>; line-height:<?= $lineHeight ?: '' ?>px; " ><?= __('SKU: ') ?> <?= $sku ?></span>
+</div>

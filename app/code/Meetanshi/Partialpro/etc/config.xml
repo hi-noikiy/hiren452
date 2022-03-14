@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <partialpro>
+            <general>
+                <enable>0</enable>
+            </general>
+            <calculation>
+                <down_payment_text>Amount Paying Now</down_payment_text>
+                <pay_later_text>Amount To Be Pay Later</pay_later_text>
+                 <installment_fee_label>Installment Fee</installment_fee_label>
+            </calculation>
+        </partialpro>
+        <checkout>
+            <cart>
+                <delete_quote_after>3000</delete_quote_after>
+            </cart>
+        </checkout>
+    </default>
+</config>

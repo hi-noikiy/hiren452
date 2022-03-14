@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Plumrocket Inc.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End-user License Agreement
+ * that is available through the world-wide-web at this URL:
+ * http://wiki.plumrocket.net/wiki/EULA
+ * If you are unable to obtain it through the world-wide-web, please
+ * send an email to support@plumrocket.com so we can send you a copy immediately.
+ *
+ * @package     Plumrocket_AutoInvoiceShipment
+ * @copyright   Copyright (c) 2017 Plumrocket Inc. (http://www.plumrocket.com)
+ * @license     http://wiki.plumrocket.net/wiki/EULA  End-user License Agreement
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+
+        <add id="Plumrocket_AutoInvoiceShipment::autoinvoiceshipment"
+             title="Auto Invoice &amp; Shipment"
+             translate="title"
+             module="Plumrocket_AutoInvoiceShipment"
+             parent="Plumrocket_Base::elements"
+             sortOrder="454336"
+             resource="Plumrocket_AutoInvoiceShipment::autoinvoiceshipment"/>
+
+        <add id="Plumrocket_AutoInvoiceShipment::invoice_rules"
+             title="Auto Invoice Rules"
+             translate="title"
+             module="Plumrocket_AutoInvoiceShipment"
+             parent="Plumrocket_AutoInvoiceShipment::autoinvoiceshipment"
+             sortOrder="10"
+             action="prautoinvoiceshipment/invoicerules/"
+             resource="Plumrocket_AutoInvoiceShipment::invoice_rules"/>
+
+        <add id="Plumrocket_AutoInvoiceShipment::shipment_rules"
+             title="Auto Shipment Rules"
+             translate="title"
+             module="Plumrocket_AutoInvoiceShipment"
+             parent="Plumrocket_AutoInvoiceShipment::autoinvoiceshipment"
+             sortOrder="20"
+             action="prautoinvoiceshipment/shipmentrules/"
+             resource="Plumrocket_AutoInvoiceShipment::shipment_rules"/>
+
+        <add id="Plumrocket_AutoInvoiceShipment::autoinvoiceshipment_configuration"
+             title="Configuration"
+             translate="title"
+             module="Plumrocket_AutoInvoiceShipment"
+             parent="Plumrocket_AutoInvoiceShipment::autoinvoiceshipment"
+             sortOrder="30"
+             action="adminhtml/system_config/edit/section/prautoinvoiceshipment"
+             resource="Plumrocket_AutoInvoiceShipment::config_autoinvoiceshipment"/>
+    </menu>
+</config>

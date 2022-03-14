@@ -1,0 +1,88 @@
+<?php
+/**
+ * Plumrocket Inc.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End-user License Agreement
+ * that is available through the world-wide-web at this URL:
+ * http://wiki.plumrocket.net/wiki/EULA
+ * If you are unable to obtain it through the world-wide-web, please
+ * send an email to support@plumrocket.com so we can send you a copy immediately.
+ *
+ * @package     Plumrocket Ajaxcart v2.x.x
+ * @copyright   Copyright (c) 2018 Plumrocket Inc. (http://www.plumrocket.com)
+ * @license     http://wiki.plumrocket.net/wiki/EULA  End-user License Agreement
+ */
+?>
+
+<?php
+    /** @var Plumrocket\Ajaxcart\Block\AddInfo $block */
+    $dataHelper = $this->helper('Plumrocket\Ajaxcart\Helper\Data');
+    $cart = $block->getCart();
+    $addedQuoteItems = $dataHelper->getAddedQuoteItems();
+    $items = $this->getItems();
+    $itemsCount = count($addedQuoteItems);
+?>
+
+<div class="pac-item-total-related">
+    <div class="pac-2-message">
+        <span class="pac-sprite"></span>
+        <?php echo __('%1 item(s) added to cart', $block->getRegistry('qty_added')); ?>
+    </div>
+    <div class="pac-prinfo-wrap pac-flex al-center">
+        <div class="<?php if ($itemsCount > 1) echo 'pac-group-prd' ?>" id="pac-added-quote-items">
+            <div class="pac-product-info">
+                <?php foreach ($items as $item) { ?>
+                    <?php if (!isset($addedQuoteItems[$item->getId()])) continue; ?>
+                    <?php echo $block->getItemHtml($item) ?>
+                <?php } ?>
+            </div>
+        </div>
+        <div class="pac-cart-total">
+            <div class="pac-items"><?php echo __('There are <a href="%1">%2 item(s)</a> in your cart.', $this->getUrl('checkout/cart'), $cart->getSummaryQty()) ?></div>
+            <div class="pac-subtotal">
+                <?php echo __('Cart Subtotal:') ?>
+                <span class="pac-amount pac-highlight">
+                    <?php $totals = $cart->getQuote()->getTotals() ?>
+                    <?php echo $this->helper('Magento\Checkout\Helper\Data')->formatPrice($totals["subtotal"]->getValue()) ?>
+                </span>
+            </div>
+            <?php if ($checkoutUrl = $block->getCheckoutUrl()) { ?>
+                <a class="pac-checkout-button" href="<?php echo $checkoutUrl ?>"><?php echo __('Checkout Now') ?></a>
+            <?php } ?>
+            <div class="pac-continue-shop">
+                <span class="action-close"><?php echo __('Continue Shopping') ?></span>
+            </div>
+        </div>
+    </div>
+
+    <?php
+    if ($dataHelper->showRelatedOnEdit()) {
+        echo $crossSell = trim(preg_replace('/<!--(.*)-->/Uis', '', $block->getChildHtml('crosssell')));
+        if (!$crossSell) {
+            echo $block->getChildHtml('pac_related_products');
+        }
+        unset($crossSell);
+    }
+    ?>
+
+    <script>
+        require(
+            [
+                "jquery",
+                "domReady!"
+            ],
+            function ($) {
+                var continueLinkUrl = "<?php echo $block->getContinueLinkUrl()?>";
+
+                $(".pac-continue-shop .action-close").click(function(){
+                    $(".pac-modal-popup button.action-close").click();
+                    if (continueLinkUrl !== 'close') {
+                        window.location.href = continueLinkUrl;
+                    }
+                });
+            }
+        );
+    </script>
+</div>

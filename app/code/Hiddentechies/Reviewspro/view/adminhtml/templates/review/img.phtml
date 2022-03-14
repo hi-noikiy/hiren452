@@ -1,0 +1,36 @@
+<?php if (count($block->getReviewImage())) { ?>
+    <div class="review-attachments">
+        <div class="review-media-value">
+            <?php
+            foreach ($block->getReviewImage() as $img) {
+                $imgUrl = $block->getReviewImgUrl() . $img->getReviewImg();
+                ?>
+                <div class="image-wrapper">
+                    <div class="review-image-block">
+                        <img class="review-img" src="<?php echo $imgUrl; ?>" alt="review image">
+                        <div class="actions">
+                            <button type="button" class="btn-delete" image-id="<?php echo $img->getId(); ?>" title="Delete Review Image">
+                                <span>Delete Image</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <?php
+            }
+            ?>
+        </div>
+    </div>
+<?php } else { ?>
+    <?php echo $block->escapeHtml(__("Review image not available.")) ?>
+<?php } ?>
+
+<script>
+    require(['jquery'], function() {
+        jQuery('.btn-delete').on('click', function(e) {
+            var imageId = e.target.getAttribute('image-id');
+            jQuery('#deleted_img').val(imageId);
+            jQuery(e.target).parent().parent().parent().remove();
+        });
+    })
+</script>
+

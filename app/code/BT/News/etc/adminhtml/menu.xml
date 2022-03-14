@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="BT_News::news" title="Aumika News" translate="title" 
+          module="BT_News" sortOrder="20" resource="BT_News::news" />
+        <add id="BT_News::images" title="News Upload" translate="title" 
+          module="BT_News" sortOrder="0" parent="BT_News::news"
+          action="news/index" resource="BT_News::news" />
+    </menu>
+</config>

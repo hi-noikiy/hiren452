@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Meetanshi_Inquiry::inquiry" title="Dealer Inquiry" module="Meetanshi_Inquiry" sortOrder="51" resource="Meetanshi_Inquiry::inquiry"/>
+        <add id="Meetanshi_Inquiry::manageinquiry" title="Manage Dealer Inquiries" module="Meetanshi_Inquiry" sortOrder="10" action="meetanshi_inquiry/inquiry" resource="Meetanshi_Inquiry::inquiry" parent="Meetanshi_Inquiry::inquiry"/>
+        <add id="Meetanshi_Inquiry::inquiry_configuration" title="Configuration" module="Meetanshi_Inquiry" sortOrder="99" parent="Meetanshi_Inquiry::inquiry" action="adminhtml/system_config/edit/section/dealer_inquiry" resource="Meetanshi_Inquiry::inquiry_config"/>
+    </menu>
+</config>

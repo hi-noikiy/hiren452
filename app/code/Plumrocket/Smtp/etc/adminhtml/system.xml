@@ -1,0 +1,116 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Plumrocket Inc.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End-user License Agreement
+ * that is available through the world-wide-web at this URL:
+ * http://wiki.plumrocket.net/wiki/EULA
+ * If you are unable to obtain it through the world-wide-web, please
+ * send an email to support@plumrocket.com so we can send you a copy immediately.
+ *
+ * @package     Plumrocket SMTP
+ * @copyright   Copyright (c) 2019 Plumrocket Inc. (http://www.plumrocket.com)
+ * @license     http://wiki.plumrocket.net/wiki/EULA  End-user License Agreement
+ */
+ -->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <section id="prsmtp" translate="label" type="text" sortOrder="11342548" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>SMTP</label>
+            <tab>plumrocket</tab>
+            <resource>Plumrocket_Smtp::config_prsmtp</resource>
+            <group id="general" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>General</label>
+                <attribute type="expanded">1</attribute>
+
+                <field id="version" translate="label comment" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <frontend_model>Plumrocket\Smtp\Block\Adminhtml\System\Config\Form\Version</frontend_model>
+                </field>
+                <field id="enabled" translate="label" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable Extension</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+            </group>
+            <group id="configuration" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>SMTP Configuration</label>
+                <attribute type="expanded">1</attribute>
+                <field id="host" translate="label comment" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Host</label>
+                    <comment>SMTP server name or IP address.</comment>
+                </field>
+                <field id="port" translate="label comment" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Port</label>
+                    <comment>Default ports: 25, 465, or 587. Port 465 (coupled with SSL encryption), Port 587 (coupled with TLS encryption).</comment>
+                </field>
+                <field id="encryption" translate="label comment" type="select" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Encryption</label>
+                    <source_model>Plumrocket\Smtp\Model\Config\Source\Encryption</source_model>
+                    <comment>For most servers SSL is the recommended option.</comment>
+                </field>
+                <field id="authentication" translate="label comment" type="select" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Authentication</label>
+                    <source_model>Plumrocket\Smtp\Model\Config\Source\Authentication</source_model>
+                    <comment>Please choose your authentication method.</comment>
+                </field>
+                <field id="username" translate="label comment" type="text" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Username</label>
+                    <validate>required-entry validate-length</validate>
+                    <depends>
+                        <field id="authentication">login</field>
+                    </depends>
+                </field>
+                <field id="password" translate="label comment" type="obscure" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Password</label>
+                    <backend_model>Magento\Config\Model\Config\Backend\Encrypted</backend_model>
+                    <validate>required-entry validate-length</validate>
+                    <depends>
+                        <field id="authentication">login</field>
+                    </depends>
+                </field>
+            </group>
+            <group id="test_email" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Send Test Email</label>
+
+                <field id="template" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Select Email Template</label>
+                    <source_model>Magento\Config\Model\Config\Source\Email\Template</source_model>
+                </field>
+                <field id="from" translate="label comment" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Send Email From</label>
+                    <source_model>Magento\Config\Model\Config\Source\Email\Identity</source_model>
+                </field>
+                <field id="to" translate="label comment" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Send Email To</label>
+                </field>
+                <field id="send" translate="label" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <frontend_model>Plumrocket\Smtp\Block\Adminhtml\System\Config\Form\Button</frontend_model>
+                </field>
+            </group>
+            <group id="developer" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Developer Settings</label>
+
+                <field id="email_sending" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Email Delivery</label>
+                    <source_model>Plumrocket\Smtp\Model\Config\Source\Enabledisable</source_model>
+                    <comment>If disabled, the emails will not be sent.</comment>
+                </field>
+                <field id="log" translate="label comment" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Log</label>
+                    <source_model>Plumrocket\Smtp\Model\Config\Source\Enabledisable</source_model>
+                    <comment>Set to 'Enabled' to save sent email history.</comment>
+                </field>
+                <field id="clear_email_log" translate="label comment" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Clear Email Log After (Days)</label>
+                    <comment>Automatically clear log entries after the specified number of days. If set '0' the log will not be erased.</comment>
+                    <depends>
+                        <field id="log">1</field>
+                    </depends>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

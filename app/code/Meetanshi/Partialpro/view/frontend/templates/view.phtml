@@ -1,0 +1,75 @@
+<?php $gridrecords = $block->getOrderCollection(); ?>
+<?php if ($gridrecords && $gridrecords->count()): ?>
+    <div class="table-wrapper orders-history">
+        <form class="form contact"
+              action="<?= $block->escapeUrl($block->getFormAction()) ?>"
+              id="installment-form"
+              method="post"
+              data-hasrequired="<?= $block->escapeHtmlAttr(__('* Required Fields')) ?>"
+              data-mage-init='{"validation":{}}'>
+
+            <input type="hidden" name="partial_payment_id" value="<?php echo $block->getPartialPaymentId() ?>"/>
+            <input type="hidden" name="order_id" value="<?php echo $block->getOrderId() ?>"/>
+
+            <table class="data table table-order-items history" id="my-orders-table">
+                <caption class="table-caption"><?php echo __('Grid Record') ?></caption>
+                <thead>
+                <tr>
+                    <th scope="col" class="col pay"><?php echo __('Pay') ?></th>
+                    <th scope="col" class="col installmentamount"><?php echo __('Installments Amount') ?></th>
+                    <th scope="col" class="col duedate"><?php echo __('Due Date') ?></th>
+                    <th scope="col" class="col paiddate"><?php echo __('Paid Date') ?></th>
+                    <th scope="col" class="col installstatus"><?php echo __('Installments Status') ?></th>
+                    <th scope="col" class="col paymentmethod"><?php echo __('Payment Method') ?></th>
+                </tr>
+                </thead>
+                <tbody>
+                <?php
+                foreach ($gridrecords as $gridrecord): ?>
+                    <tr>
+                        <td data-th="<?= $block->escapeHtml(__('Pay')) ?>" class="col pay">
+                            <?php if ($gridrecord->getInstallmentStatus() == 0) { ?>
+                                <input type="checkbox" name="pay[]"
+                                       class="input checkbox" value="<?php echo $gridrecord->getId() ?>">
+                            <?php } ?>
+                        </td>
+                        <td data-th="<?= $block->escapeHtml(__('Installments Amount')) ?>"
+                            class="col installmentamount">
+                            <?php echo $block->getFormattedPrice($gridrecord->getInstallmentAmount()) ?>
+                        </td>
+                        <td data-th="<?= $block->escapeHtml(__('Due Date')) ?>" class="col duedate">
+                            <?php echo date('Y-m-d', strtotime($gridrecord->getInstallmentDueDate())); ?>
+                        </td>
+                        <td data-th="<?= $block->escapeHtml(__('Paid Date')) ?>" class="col paiddate">
+                            <?php if ($gridrecord->getInstallmentStatus() != 0) {
+                                echo date('Y-m-d', strtotime($gridrecord->getInstallmentPaidDate()));
+                            } else {
+                                echo 'N / A';
+                            } ?>
+                        </td>
+                        <td data-th="<?= $block->escapeHtml(__('Installments Status')) ?>" class="col installstatus">
+                            <?php if ($gridrecord->getInstallmentStatus() == 1) {
+                                echo '<div style="text-align:center;width: 110px !important;padding: 5px 0; color:#FFF;background:#86cae4;border-radius:8px;width:100%">Processing</div>';
+                            } else if ($gridrecord->getInstallmentStatus() == 2) {
+                                echo '<div style="text-align:center;width: 110px !important;padding: 5px 0; color:#FFF;background:#f7944b;border-radius:8px;width:100%">Paid</div>';
+                            } else {
+                                echo '<div style="text-align:center;width: 110px !important;padding: 5px 0; color:#FFF;background:#434a56;border-radius:8px;width:100%">Pending</div>';
+                            } ?>
+                        </td>
+                        <td data-th="<?= $block->escapeHtml(__('Payment Method')) ?>" class="col paymentmethod">
+                            <?php echo $block->getOrderPaymentTitle($gridrecord->getPaymentMethod()) ?>
+                        </td>
+                    </tr>
+                <?php endforeach; ?>
+                </tbody>
+            </table>
+            <?php if ($block->getShowPaymentMethod()) {
+                echo $this->getChildHtml('partialpro.payment.methods');
+            } ?>
+        </form>
+    </div>
+
+<?php else: ?>
+    <div class="message info empty"><span><?php echo __('No record found.'); ?></span></div>
+<?php endif ?>
+

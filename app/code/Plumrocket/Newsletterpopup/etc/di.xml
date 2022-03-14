@@ -1,0 +1,93 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Plumrocket Inc.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End-user License Agreement
+ * that is available through the world-wide-web at this URL:
+ * http://wiki.plumrocket.net/wiki/EULA
+ * If you are unable to obtain it through the world-wide-web, please
+ * send an email to support@plumrocket.com so we can send you a copy immediately.
+ *
+ * @package     Plumrocket_Newsletterpopup
+ * @copyright   Copyright (c) 2017 Plumrocket Inc. (http://www.plumrocket.com)
+ * @license     http://wiki.plumrocket.net/wiki/EULA  End-user License Agreement
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Magento\Customer\Model\ResourceModel\Address" type="Plumrocket\Newsletterpopup\Model\ResourceModel\Customer\Address" />
+    <preference for="Magento\Customer\Model\ResourceModel\Customer" type="Plumrocket\Newsletterpopup\Model\ResourceModel\Customer\Customer" />
+    <preference for="Magento\Newsletter\Model\Subscriber" type="Plumrocket\Newsletterpopup\Model\Subscriber" />
+    <preference for="Plumrocket\Newsletterpopup\Model\IntegrationIdentifierListInterface" type="Plumrocket\Newsletterpopup\Model\IntegrationIdentifierList"/>
+    <preference for="Plumrocket\Newsletterpopup\Model\IntegrationRepositoryInterface" type="Plumrocket\Newsletterpopup\Model\IntegrationRepository"/>
+    <preference for="Plumrocket\Newsletterpopup\Api\Data\PopupFieldDataInterface" type="Plumrocket\Newsletterpopup\Model\FormField"/>
+    <preference for="Plumrocket\Newsletterpopup\Api\PopupFieldsRegistryInterface" type="Plumrocket\Newsletterpopup\Model\Popup\Field\Registry"/>
+
+    <type name="Plumrocket\Newsletterpopup\Model\Integration\Logger\Handler">
+        <arguments>
+            <argument name="filesystem" xsi:type="object">Magento\Framework\Filesystem\Driver\File</argument>
+        </arguments>
+    </type>
+    <type name="Plumrocket\Newsletterpopup\Model\Integration\Logger">
+        <arguments>
+            <argument name="name" xsi:type="string">prnewsletterpopup</argument>
+            <argument name="handlers"  xsi:type="array">
+                <item name="system" xsi:type="object">Plumrocket\Newsletterpopup\Model\Integration\Logger\Handler</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Plumrocket\Newsletterpopup\Helper\Data">
+        <arguments>
+            <argument name="serializer" xsi:type="object">Magento\Framework\Serialize\Serializer\Serialize</argument>
+        </arguments>
+    </type>
+    <type name="Plumrocket\Newsletterpopup\Model\Integration\ConstantContact">
+        <arguments>
+            <argument name="logger" xsi:type="object">Plumrocket\Newsletterpopup\Model\Integration\Logger\Proxy</argument>
+            <argument name="serializer" xsi:type="object">Magento\Framework\Serialize\Serializer\Serialize</argument>
+        </arguments>
+    </type>
+    <type name="Plumrocket\Newsletterpopup\Model\Integration\SalesForce">
+        <arguments>
+            <argument name="logger" xsi:type="object">Plumrocket\Newsletterpopup\Model\Integration\Logger\Proxy</argument>
+            <argument name="serializer" xsi:type="object">Magento\Framework\Serialize\Serializer\Serialize</argument>
+        </arguments>
+    </type>
+    <type name="Plumrocket\Newsletterpopup\Model\Integration\Emma">
+        <arguments>
+            <argument name="logger" xsi:type="object">Plumrocket\Newsletterpopup\Model\Integration\Logger\Proxy</argument>
+            <argument name="serializer" xsi:type="object">Magento\Framework\Serialize\Serializer\Serialize</argument>
+        </arguments>
+    </type>
+    <type name="Plumrocket\Newsletterpopup\Model\AbstractIntegration">
+        <arguments>
+            <argument name="logger" xsi:type="object">Plumrocket\Newsletterpopup\Model\Integration\Logger\Proxy</argument>
+        </arguments>
+    </type>
+    <type name="Plumrocket\Newsletterpopup\Model\Popup">
+        <arguments>
+            <argument name="phpSerializer" xsi:type="object">Magento\Framework\Serialize\Serializer\Serialize</argument>
+        </arguments>
+    </type>
+    <type name="Plumrocket\Newsletterpopup\Setup\UpgradeData">
+        <arguments>
+            <argument name="serializer" xsi:type="object">Magento\Framework\Serialize\Serializer\Serialize</argument>
+        </arguments>
+    </type>
+
+    <virtualType name="dataPrivacyResponseStrategy" type="Plumrocket\GDPR\Model\Consent\Validation\JsonResponseStrategy">
+        <arguments>
+            <argument name="formatResponseData" xsi:type="object">Plumrocket\Newsletterpopup\Model\DataPrivacy\NotAgreedResponseDataFormat</argument>
+        </arguments>
+    </virtualType>
+
+    <type name="Plumrocket\GDPR\Observer\ValidateConsentsObserver">
+        <arguments>
+            <argument name="notAgreedResponseStrategies" xsi:type="array">
+                <item name="prnewsletterpopup_index_subscribe" xsi:type="object">dataPrivacyResponseStrategy</item>
+            </argument>
+        </arguments>
+    </type>
+</config>

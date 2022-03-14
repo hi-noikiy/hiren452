@@ -1,0 +1,97 @@
+<?php
+
+$_config = $this->helper('JB\AumikaFramework\Helper\Data');
+$isDisplay = $_config->getSupport('supportshow');
+
+$support1Main = $_config->getSupport('support1_main');
+$support1Sub = $_config->getSupport('support1_sub');
+$support1Desc = $_config->getSupport('support1_desc');
+
+$support2Main = $_config->getSupport('support2_main');
+$support2Sub = $_config->getSupport('support2_sub');
+$support2Desc = $_config->getSupport('support2_desc');
+
+$support3Main = $_config->getSupport('support3_main');
+$support3Sub = $_config->getSupport('support3_sub');
+$support3Desc = $_config->getSupport('support3_desc');
+
+$service1Main = $_config->getServices('sevice1_main');
+$service1Sub = $_config->getServices('sevice1_sub');
+
+$service2Main = $_config->getServices('sevice2_main');
+$service2Sub = $_config->getServices('sevice2_sub');
+
+$service3Main = $_config->getServices('sevice3_main');
+$service3Sub = $_config->getServices('sevice3_sub');
+
+
+
+?>
+<?php if($isDisplay == '1') : ?>
+
+<div style="padding-top: 45px; padding-bottom: 45px; background-color:#f7f7f7; margin-bottom: 0;" class="custom-support">
+  <div class="container">
+    <h2 class="filterproduct-title"><span class="content"><strong>Why Aumika</strong></span></h2>
+    <div class="row whyamukaSection">
+      <div class="col-lg-4 col-md-4 col-4 whyamukaItem">
+        <div class="content-inner">
+          <i class="porto-icon-shipping" style="line-height:58px; font-size:40px;"></i>
+          <div class="content">
+            <h2><?php echo $service1Main; ?></h2>
+            <p><?php echo $service1Sub; ?></p>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4 col-md-4 col-4 whyamukaItem">
+        <div class="content-inner">
+          <i class="porto-icon-us-dollar" style="line-height:58px; font-size:40px;"></i>
+          <div class="content">
+            <h2><?php echo $service2Main; ?></h2>
+            <p><?php echo $service2Sub; ?></p>
+          </div>
+        </div>  
+      </div>
+      <div class="col-lg-4 col-md-4 col-4 whyamukaItem">
+        <div class="content-inner">
+          <i class="porto-icon-support" style="line-height:58px; font-size:40px;"></i>
+          <div class="content">
+            <h2><?php echo $service3Main; ?></h2>
+            <p><?php echo $service3Sub; ?></p>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4 col-md-4 col-4 whyamukaItem">
+        <div class="content-inner">
+          <i class="porto-icon-earphones-alt" style="line-height:58px;font-size:40px;"></i>
+          <div class="content">
+            <h2><?php echo $support1Main; ?></h2>
+            <em><?php echo $support1Sub; ?></em>
+            <p><?php echo $support1Desc; ?></p>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4 col-md-4 col-4 whyamukaItem">
+        <div class="content-inner">
+          <i class="porto-icon-credit-card" style="line-height:58px;font-size:40px;"></i>
+          <div class="content">
+            <h2><?php echo $support2Main; ?></h2>
+            <em><?php echo $support2Sub; ?></em>
+            <p><?php echo $support2Desc; ?></p>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4 col-md-4 col-4 whyamukaItem">
+        <div class="content-inner">
+          <i class="porto-icon-action-undo" style="line-height:58px;font-size:40px;"></i>
+          <div class="content">
+            <h2><?php echo $support3Main; ?></h2>
+            <em><?php echo $support2Sub; ?></em>
+            <p><?php echo $support3Desc; ?></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<?php endif; ?>

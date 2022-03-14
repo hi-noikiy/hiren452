@@ -1,0 +1,45 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+// phpcs:disable Magento2.Templates.ThisInTemplate.FoundThis
+
+/**
+ * Product additional attributes template
+ *
+ * @var $block \Magento\Catalog\Block\Product\View\Attributes
+ */
+?>
+<?php
+    $_helper = $this->helper(Magento\Catalog\Helper\Output::class);
+    $_product = $block->getProduct();
+    $jbdesc = $_product->getResource()->getAttribute('description');
+?>
+
+
+<div class="additional-attributes-wrapper table-wrapper">
+    <!-- <div class="jbTitle"><strong>Product Details</strong></div> -->
+    <?php //if($jbdesc->getFrontend()->getValue($_product) == true) : ?>
+    <!-- <div class="jb_description" data-dynamic="description"> -->
+        <?php 
+            
+            //echo $jbdesc->getFrontend()->getValue($_product);
+        ?>        
+    <!-- </div> -->
+    <?php //endif; ?>
+    <?php if ($_additional = $block->getAdditionalData()) :?>
+    <table class="data table additional-attributes" id="product-attribute-specs-table">
+        <div class="jb-product-spc">Product Specifications:</div>
+        <tbody>
+        <?php foreach ($_additional as $_data) :?>
+            <tr class="<?php if($block->escapeHtmlAttr($_data['code']) == "description") { echo "JB-RM-DESC";}?>">
+                <th class="col label" scope="row"><?= $block->escapeHtml($_data['label']) ?></th>
+                <td class="col data" data-dynamic="<?= $block->escapeHtmlAttr($_data['code']) ?>" data-th="<?= $block->escapeHtmlAttr($_data['label']) ?>"><?= /* @noEscape */ $_helper->productAttribute($_product, $_data['value'], $_data['code']) ?></td>
+            </tr>
+        <?php endforeach; ?>
+        </tbody>
+    </table>
+    <?php endif;?>
+</div>

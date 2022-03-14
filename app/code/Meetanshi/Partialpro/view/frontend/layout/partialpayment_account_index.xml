@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../lib/internal/Magento/Framework/View/Layout/etc/page_configuration.xsd">
+	<update handle="customer_account"/>
+	<body>
+		<referenceBlock name="page.main.title">
+			<action method="setPageTitle">
+				<argument translate="true" name="title" xsi:type="string">Partial Payment Orders</argument>
+			</action>
+		</referenceBlock>
+		<referenceContainer name="content">
+			<block class="Meetanshi\Partialpro\Block\Account" name="partialpayment_account" template="Meetanshi_Partialpro::account.phtml" cacheable="false">
+			</block>
+		</referenceContainer>
+	</body>
+</page>

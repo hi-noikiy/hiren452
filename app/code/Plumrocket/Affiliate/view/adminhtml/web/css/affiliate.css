@@ -1,0 +1,104 @@
+/*
+ * Plumrocket Inc.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End-user License Agreement
+ * that is available through the world-wide-web at this URL:
+ * http://wiki.plumrocket.net/wiki/EULA
+ * If you are unable to obtain it through the world-wide-web, please
+ * send an email to support@plumrocket.com so we can send you a copy immediately.
+ *
+ * @package     Plumrocket_Affiliate
+ * @copyright   Copyright (c) 2016 Plumrocket Inc. (http://www.plumrocket.com)
+ * @license     http://wiki.plumrocket.net/wiki/EULA  End-user License Agreement
+ */
+
+#affiliate_base_fieldset {
+	margin-bottom: 10px;
+}
+
+ #affiliate_base_fieldset > .admin__field > .admin__field-control {
+	width: calc( (100%) * 0.44444444 + 130px );
+}
+
+.affilate-item {
+    display: inline-block;
+    width: 210px;
+    margin-bottom: 20px;
+}
+
+.affilate-item img {
+	vertical-align: middle;
+}
+
+.affilate-item input[type="radio"] {
+	display: inline-block;
+	vertical-align: middle;
+	margin-right: 5px;
+}
+
+.affilate-item label {
+	display: inline-block;
+	vertical-align: middle; 
+}
+
+.affilate-item label:hover {
+	cursor: pointer;
+}
+
+#affiliate-networks {
+    margin-top: 5rem;
+}
+
+#affiliate-networks .entry-edit-head {
+	background: none!important;
+    border-bottom: 1px solid #ccc;
+    margin-bottom: 1.7rem;
+    padding: 1.4rem 0 .5rem;
+}
+
+#affiliate-networks.entry-active .entry-edit-head {
+	color: #d51a1a;
+}
+
+#affiliate-networks .entry-edit-head h4 {
+	margin: 0;
+    font-weight: 400;
+    line-height: 1.2;
+    font-size: 2rem;
+}
+
+#affiliate-networks fieldset {
+    border: 0;
+    padding: 0 10px 10px 0;
+    margin: 0;
+}
+
+#affiliate-networks.entry-active fieldset {
+	background: #fbf2f2;
+	padding: 0 10px 10px 10px;
+}
+
+#affiliate_is_transaction_data table {
+	width: 100%;
+}
+
+#affiliate_is_transaction_data table td {
+	display: block;
+	width: 100%;
+}
+
+#affiliate_is_transaction_data table td.value {
+	padding: 5px 0;
+}
+
+#affiliate_is_transaction_data table td label {
+	font-weight: 700;
+    display: inline-block;
+    margin-top: 10px;
+}
+
+#affiliate_is_transaction_data table textarea {
+	width: 100%;
+}

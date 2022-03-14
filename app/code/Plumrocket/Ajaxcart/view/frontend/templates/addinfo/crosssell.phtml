@@ -1,0 +1,74 @@
+<?php
+/**
+ * Plumrocket Inc.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End-user License Agreement
+ * that is available through the world-wide-web at this URL:
+ * http://wiki.plumrocket.net/wiki/EULA
+ * If you are unable to obtain it through the world-wide-web, please
+ * send an email to support@plumrocket.com so we can send you a copy immediately.
+ *
+ * @package     Plumrocket Ajaxcart v2.x.x
+ * @copyright   Copyright (c) 2018 Plumrocket Inc. (http://www.plumrocket.com)
+ * @license     http://wiki.plumrocket.net/wiki/EULA  End-user License Agreement
+ */
+
+/** @var \Plumrocket\Ajaxcart\Block\AddInfo\Crosssell $block */
+
+?>
+
+<?php
+    $items = $block->getCrosssellItems();
+    $itemsCount = count($items);
+    $buttonTitle = __('Add to Cart');
+?>
+
+<?php if ($itemsCount) : ?>
+    <div id="pac-related-list">
+        <div class="pac-title"><?php echo __('Based on your selection, you may be interested in the following items:') ?></div>
+            <ul class="owl-carousel">
+            <?php foreach ($items as $item) : ?>
+                <li>
+                    <a class="pac-link" href="<?php echo $item->getProductUrl() ?>" title="<?php echo $this->escapeHtml($item->getName()) ?>">
+                        <?php $productImage = $block->getImage($item, 'category_page_grid', ['width'  => '88px']); ?>
+                        <?php echo $productImage->toHtml(); ?>
+                    </a>
+                    <div class="pac-pname"><?php echo $this->escapeHtml($item->getName()) ?></div>
+                    <div class="pac-price-hld pac-highlight">
+                        <?php echo $block->getProductPrice($item); ?>
+                    </div>
+                    <button type="button" prajaxCart="submit-button" prajaxcart-data='{"product":"<?php echo $item->getId(); ?>"}' title="<?php echo $buttonTitle ?>" class="pac-button pac-btn-cart p-border-box ajaxcart-el  pac-btn-cart-<?php echo $item->getId() ?>">
+                        <span class="pac-label">
+                            <span class="pac-helper"></span>
+                            <span class="pac-number"></span>
+                            <span class="pac-icon pac-sprite"></span>
+                            <span class="pac-loader"></span>
+                        </span>
+                        <?php echo $buttonTitle ?>
+                    </button>
+                </li>
+            <?php endforeach; ?>
+        </ul>
+    </div>
+    <script type="text/javascript">
+        require([
+            'jquery',
+            'Plumrocket_Ajaxcart/js/owlcarousel/owl.carousel.min',
+            '!domReady'
+        ], function($){
+            "use strict";
+
+        //Init owl carousel
+        $("#pac-related-list .owl-carousel").owlCarousel({
+            'nav' : true,
+            'responsive': {
+                0   : {'items' : 1,},
+                380 : {'items' : 2,},
+                540 : {'items' : 3,},
+            },
+        });
+    });
+</script>
+<?php endif; ?>

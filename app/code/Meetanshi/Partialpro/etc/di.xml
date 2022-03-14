@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+	<preference for="Magento\Paypal\Model\Api\Nvp" type="Meetanshi\Partialpro\Model\Api\Nvp"/>
+	<preference for="Meetanshi\OrangeIvory\Controller\Payment\Accept" type="Meetanshi\Partialpro\Controller\Orangeivory\Accept" />
+	<preference for="Meetanshi\TagPay\Controller\Payment\Notification" type="Meetanshi\Partialpro\Controller\Tagpay\Notification" />
+	<preference for="Meetanshi\Mtn\Controller\Payment\Ipn" type="Meetanshi\Partialpro\Controller\Mtn\Ipn" />
+
+	<preference for="Meetanshi\OrangeIvory\Controller\Payment\Redirect" type="Meetanshi\Partialpro\Controller\Orangeivory\OrangeIvoryRedirect" />
+	<preference for="Meetanshi\TagPay\Controller\Payment\Redirect" type="Meetanshi\Partialpro\Controller\Tagpay\TagpayRedirect" />
+	<preference for="Meetanshi\Mtn\Gateway\Request\CardDetailsDataBuilder" type="Meetanshi\Partialpro\Gateway\Request\MtnCardDetailsDataBuilder" />
+	<preference for="Magento\Braintree\Gateway\Request\PaymentDataBuilder" type="Meetanshi\Partialpro\Gateway\Request\BraintreePaymentDataBuilder" />
+	<preference for="Meetanshi\Sagepay\Gateway\Request\CardDetailsDataBuilder" type="Meetanshi\Partialpro\Gateway\Request\SagepayCardDetailsDataBuilder" />
+
+	<type name="Magento\Sales\Model\Order\Payment\State\AuthorizeCommand">
+		<plugin name="authcommand" type="Meetanshi\Partialpro\Gateway\Request\AuthorizeCommand" sortOrder="10"/>
+	</type>
+
+	<type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+		<arguments>
+			<argument name="collections" xsi:type="array">
+				<item name="partialpayment_post_listing_data_source" xsi:type="string">Meetanshi\Partialpro\Model\ResourceModel\Partialpayment\Grid\Collection</item>
+			</argument>
+		</arguments>
+	</type>
+
+	<type name="Meetanshi\Partialpro\Model\ResourceModel\Partialpayment\Grid\Collection">
+		<arguments>
+			<argument name="mainTable" xsi:type="string">meetanshi_partial_payment</argument>
+			<argument name="eventPrefix" xsi:type="string">meetanshi_partial_collection</argument>
+			<argument name="eventObject" xsi:type="string">meetanshi_partial_collection</argument>
+			<argument name="resourceModel" xsi:type="string">Meetanshi\Partialpro\Model\ResourceModel\Partialpayment</argument>
+		</arguments>
+	</type>
+
+</config>

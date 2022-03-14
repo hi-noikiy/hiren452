@@ -1,0 +1,215 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Magezon
+ *
+ * This source file is subject to the Magezon Software License, which is available at https://www.magezon.com/license
+ * Do not edit or add to this file if you wish to upgrade the to newer versions in the future.
+ * If you wish to customize this module for your needs.
+ * Please refer to https://www.magezon.com for more information.
+ *
+ * @category  Magezon
+ * @package   Magezon_ProductPagePdf
+ * @copyright Copyright (C) 2020 Magezon (https://www.magezon.com)
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../Config/etc/system_file.xsd">
+	<system>
+		<section id="productpagepdf" translate="label" sortOrder="100" type="text" showInDefault="1" showInWebsite="1" showInStore="1">
+			<class>separator-top</class>
+			<label>Product Page PDF</label>
+			<tab>magezon</tab>
+			<resource>Magezon_ProductPagePdf::settings</resource>
+			<group id="general" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+				<label>General Settings</label>
+				<field id="version" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Current Version</label>
+					<frontend_model>Magezon\ProductPagePdf\Block\Adminhtml\Renderer\Config\Version</frontend_model>
+				</field>
+				<field id="enabled" translate="label comment" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Enable Product Page PDF</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+				<field id="default_profile" translate="label comment" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Default Profile</label>
+					<source_model>Magezon\ProductPagePdf\Model\Config\Source\ProfileOptions</source_model>
+					<depends>
+						<field id="enabled">1</field>
+					</depends>
+					<comment>For the default profile, the PDF button will be on display even when you choose "Disable" Profile as status and ignore conditions and from/to dates.</comment>
+				</field>
+				<field id="customer_css" translate="label comment" type="textarea" sortOrder="200" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Custom CSS</label>
+					<depends>
+						<field id="enabled">1</field>
+					</depends>
+				</field>
+			</group>
+			<group id="footer" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+				<label>Footer Settings</label>
+				<field id="enabled" translate="label comment" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Enable Footer</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+				<field id="enable_numbering" translate="label comment" type="select" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Enable Page Numbering</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+					<depends>
+						<field id="enabled">1</field>
+					</depends>
+				</field>
+				<field id="numbering_position" translate="label comment" type="select" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Page Numbering Position</label>
+					<source_model>Magezon\ProductPagePdf\Model\Config\Source\PositionFoot</source_model>
+					<depends>
+						<field id="enabled">1</field>
+						<field id="enable_numbering">1</field>
+					</depends>
+				</field>
+				<field id="enable_current_date" translate="label comment" type="select" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Enable Current Date</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+					<depends>
+						<field id="enabled">1</field>
+					</depends>
+				</field>
+				<field id="current_date_position" translate="label comment" type="select" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Current Date Position</label>
+					<source_model>Magezon\ProductPagePdf\Model\Config\Source\PositionFoot</source_model>
+					<depends>
+						<field id="enabled">1</field>
+						<field id="enable_current_date">1</field>
+					</depends>
+				</field>
+				<field id="enable_text_foot" translate="label comment" type="select" sortOrder="65" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Enable Footer Text</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+					<depends>
+						<field id="enabled">1</field>
+					</depends>
+				</field>
+				<field id="text_footer" translate="label comment" type="text" sortOrder="70" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Text for Footer</label>
+					<depends>
+						<field id="enabled">1</field>
+						<field id="enable_text_foot">1</field>
+					</depends>
+				</field>
+				<depends>
+					<field id="productpagepdf/general/enabled">1</field>
+				</depends>
+			</group>
+			<group id="button" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+				<label>Button Settings</label>
+				<field id="title" translate="label comment" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Title</label>
+				</field>
+				<field id="title_font_size" translate="label comment" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Font Size</label>
+				</field>
+				<field id="title_font_weight" translate="label comment" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Font Weight</label>
+				</field>
+				<field id="type" translate="label comment" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Type</label>
+					<source_model>Magezon\ProductPagePdf\Model\Config\Source\ButtonOptions</source_model>
+					<depends>
+						<field id="enabled">1</field>
+					</depends>
+				</field>
+				<field id="text_color" translate="label comment" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Text Color</label>
+					<frontend_model>Magezon\Core\Block\Adminhtml\System\Config\Form\Field\Minicolors</frontend_model>
+				</field>
+				<field id="text_color_hover" translate="label comment" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Text Color Hover</label>
+					<frontend_model>Magezon\Core\Block\Adminhtml\System\Config\Form\Field\Minicolors</frontend_model>
+				</field>
+				<field id="background_color" translate="label comment" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Background Color</label>
+					<frontend_model>Magezon\Core\Block\Adminhtml\System\Config\Form\Field\Minicolors</frontend_model>
+					<depends>
+						<field id="type" separator=",">1,2,3,4,6</field>
+					</depends>
+				</field>
+				<field id="background_color_hover" translate="label comment" type="text" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Background Color Hover</label>
+					<frontend_model>Magezon\Core\Block\Adminhtml\System\Config\Form\Field\Minicolors</frontend_model>
+					<depends>
+						<field id="type" separator=",">1,2,3,4,6</field>
+					</depends>
+				</field>
+				<field id="box_shadow" translate="label comment" type="text" sortOrder="70" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Box Shadow</label>
+					<frontend_model>Magezon\Core\Block\Adminhtml\System\Config\Form\Field\Minicolors</frontend_model>
+					<depends>
+						<field id="type">4</field>
+					</depends>
+				</field>
+				<field id="box_shadow_hover" translate="label comment" type="text" sortOrder="80" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Box Shadow Hover</label>
+					<frontend_model>Magezon\Core\Block\Adminhtml\System\Config\Form\Field\Minicolors</frontend_model>
+					<depends>
+						<field id="type">4</field>
+					</depends>
+				</field>
+				<field id="gradient_bg_left" translate="label comment" type="text" sortOrder="82" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Background Color Left</label>
+					<frontend_model>Magezon\Core\Block\Adminhtml\System\Config\Form\Field\Minicolors</frontend_model>
+					<depends>
+						<field id="type">5</field>
+					</depends>
+				</field>
+				<field id="gradient_bg_right" translate="label comment" type="text" sortOrder="84" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Background Color Right</label>
+					<frontend_model>Magezon\Core\Block\Adminhtml\System\Config\Form\Field\Minicolors</frontend_model>
+					<depends>
+						<field id="type">5</field>
+					</depends>
+				</field>
+				<field id="border_size" translate="label comment" type="text" sortOrder="86" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Border Size</label>
+					<depends>
+						<field id="type">6</field>
+					</depends>
+				</field>
+				<field id="border_style" translate="label comment" type="select" sortOrder="86" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Border Style</label>
+					<source_model>Magezon\ProductPagePdf\Model\Config\Source\ButtonBorderStyle</source_model>
+					<depends>
+						<field id="type">6</field>
+					</depends>
+				</field>
+				<field id="border_color" translate="label comment" type="text" sortOrder="88" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Border Color</label>
+					<frontend_model>Magezon\Core\Block\Adminhtml\System\Config\Form\Field\Minicolors</frontend_model>
+					<depends>
+						<field id="type">6</field>
+					</depends>
+				</field>
+				<field id="border_radius" translate="label comment" type="text" sortOrder="90" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Border Radius</label>
+					<depends>
+						<field id="type" separator=",">1,2,3,4,6</field>
+					</depends>
+				</field>
+				<field id="enable_icon_upload" translate="label comment" type="select" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Enable Custom Icon</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+				<field id="icon_loading" translate="label comment" type="image" sortOrder="110" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Upload Icon</label>
+					<backend_model>Magezon\ProductPagePdf\Model\Config\Backend\Image</backend_model>
+					<base_url type="media" scope_info="1">banner</base_url>
+					<comment><![CDATA[Allowed file types: jpg, jpeg, gif, png]]></comment>
+					<depends>
+						<field id="enable_icon_upload">1</field>
+					</depends>
+				</field>
+				<depends>
+					<field id="productpagepdf/general/enabled">1</field>
+				</depends>
+			</group>
+		</section>
+	</system>
+</config>

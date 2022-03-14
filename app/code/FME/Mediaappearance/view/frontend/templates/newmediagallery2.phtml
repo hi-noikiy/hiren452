@@ -1,0 +1,211 @@
+<?php 
+    $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+    $block = $objectManager->create('FME\Mediaappearance\Block\Mediaappearance');
+    $helper = $objectManager->create('FME\Mediaappearance\Helper\Data');
+    $helperup = $objectManager->create('FME\Mediaappearance\Helper\DataUpgrade');
+   
+   
+?>
+<?php
+    $mediatype=0;//all
+    $parameter=$block->getParameters();
+    if($parameter=="video")
+    {
+        $collection=$block->getMediaAllCollectionVideos();
+    } elseif($parameter=="images") {
+
+        $collection=$block->getMediaAllCollectionImages();
+    }
+    else
+    {
+        $collection=$block->getMediaAllCollection();
+    }
+
+?>
+<script type="text/javascript" >
+        
+        require(['jquery'], function($){
+
+            <?php 
+            $parameter = $this->getParameters();
+            ?>
+            <?php if($parameter =="images"): ?>
+                $("#images").attr("Selected", "Selected");
+            <?php endif; ?>
+            <?php if($parameter =="video"): ?>
+                $("#vid").attr("Selected", "Selected");
+            <?php endif; ?>
+            <?php if($parameter =="all"): ?>
+                $("#all").attr("Selected", "Selected");
+            <?php endif; ?>
+            $('#mediadrop').on('change', function () {
+                    url=  window.location.href;
+                    url = url.split('?')[0];
+                    //alert(url);
+                    url=  url+'?id='+$(this).val();
+                    window.location = url; // redirect
+                    
+                    
+
+            });
+        });
+</script>  
+<style type="text/css">
+
+.jR3DCarouselGallery,.jR3DCarouselGalleryCustomeTemplate {
+	margin: 0 auto; /* optional - if want to center align */
+}
+</style>
+<style>
+        .white-popup {    position: relative;   
+            background: #fdfdfd;  
+            padding: 20px;    
+            width: 746px;   
+            margin: 20px auto;}
+</style>
+<style>
+.jR3DCarouselGalleryCustomeTemplate .captions{
+	position: relative;
+	padding: 4px 0;
+	bottom: 27px;
+	background: #ec1c8e;
+	display:block			
+}
+.jR3DCarouselGalleryCustomeTemplate a{
+	text-decoration: none;			
+}
+</style>
+
+
+
+
+<select id ="mediadrop"style="width: 10%;">
+    <option id="all" value="all">All</option>
+    <option id="vid"  value="video">Video</option>
+    <option id="images" value="images">Images</option>
+</select>
+<script>
+    require(['jquery','finalmagpop'], function($){
+        $('.open-popup-link3').magnificPopup({
+            type:'inline',
+            midClick: true // allow opening popup on middle mouse click. Always set it to true if you don't provide alternative source.
+        });
+    });
+</script>
+<div class="container">
+	<div class="jR3DCarouselGalleryCustomeTemplate">
+        <?php 
+            $counto=0;
+            $counti=0;
+        ?>
+
+        <?php foreach ($collection as $key => $value): ?> 
+            <?php $counto++;?>
+            <?php foreach ($value as $key => $value1): ?>
+                <?php $counti++;?>
+                <?php if($value1['mediatype']==1||$value1['mediatype']=="1"): //youtube ?>
+                    <a class="jR3DCarouselCustomSlide videoclass  open-youtube-link" href="<?php echo $value1['videourl']; ?>" >
+                        <img src="<?php echo $helper->getthumblinkdata(($value1["filethumb"])); ?>" />
+                    </a> 
+                <?php endif; ?>
+                <?php if($value1['mediatype']==2||$value1['mediatype']=="2"): ?>
+                    <?php 
+                        $image_path = $helper->getthumblinkdata($value1["filethumb"]);
+                        $video_path= $helper->getMediaUrl().'mediaappearance/files/'.$value1['filename'];
+                    ?>
+                    <a href="#test-popup<?php echo $counto.$counti; ?>" class="jR3DCarouselCustomSlide videoclass  open-popup-link3">
+                        <img src="<?php echo $image_path; ?>" />
+                    </a>
+                    <div id="test-popup<?php echo $counto.$counti; ?>" class="white-popup mfp-hide">
+                            <video id="player1" width="750" height="421" controls="" preload="none">
+                                <source src="<?php echo $video_path; ?>" type="video/mp4"> 
+                            </video>
+                    </div>
+                <?php endif; ?>
+                <?php if($value1['mediatype']==3||$value1['mediatype']=="3"): ?>
+
+                    <div class="jR3DCarouselCustomSlide imagegall" href="<?php echo $helper->getthumblinkdata(($value1["filethumb"])); ?>">
+					    <img src="<?php echo $helper->getthumblinkdata(($value1["filethumb"])); ?>" />				
+			        </div>
+                <?php endif; ?>
+            <?php endforeach; ?>
+        <?php endforeach; ?>
+	</div>
+<script type="text/javascript">
+
+    require(['jquery','tdgallery'], function($){
+        var carouselCustomeTemplateProps =  {
+	 		  width: 470, 				/* largest allowed width */
+			  height: 272, 				/* largest allowed height */
+			  slideLayout : 'fill',     /* "contain" (fit according to aspect ratio), "fill" (stretches object to fill) and "cover" (overflows box but maintains ratio) */
+			  animation: 'slide3D', 	/* slide | scroll | fade | zoomInSlide | zoomInScroll */
+			  animationCurve: 'ease',
+			  animationDuration: 1900,
+			  animationInterval: 2000,
+			  slideClass: 'jR3DCarouselCustomSlide',
+			  autoplay: false,
+			  controls: true,			/* control buttons */
+			  navigation: ''			/* circles | squares | '' */,
+			  perspective: 2200,
+			  rotationDirection: 'ltr',
+			  onSlideShow: slideShownCallback
+				  
+		}
+	function slideShownCallback($slide){
+		console.log("Slide shown: ", $slide.find('img').attr('src'))
+	}
+
+	jR3DCarouselCustomeTemplate = $('.jR3DCarouselGalleryCustomeTemplate').jR3DCarousel(carouselCustomeTemplateProps);
+
+
+    });
+    require(['jquery','finalmagpop'], function($){
+                                                    
+        $('.jR3DCarouselGalleryCustomeTemplate').magnificPopup({
+            type: 'image',
+            delegate: '.jR3DCarouselCustomSlide:not(.videoclass)',
+           // delegate: '.jR3DCarouselCustomSlide:not(.open-youtube-link)',
+            gallery: {
+                enabled: true,
+                preload: [0,2],	
+                 navigateByImgClick: true,
+                
+            },
+            zoom: {
+                //getPopupTime()
+                enabled: true,
+                duration: parseInt("1000"),
+                easing: 'ease-in-out',
+                opener: function(openerElement) {
+                return openerElement.is('img') ? openerElement : openerElement.find('img');
+                }
+            },
+            image: {
+                titleSrc: function(item) {
+                    return item.el.parents('.tile').find('h4').html() +   item.el.parents('.tile').find('h5').html();
+                }
+            },
+            fixedContentPos: true,
+            });
+
+            
+            //open-mp4-link
+            $('#xyza').magnificPopup({
+                        type: 'iframe',
+                    });
+    
+});
+</script> 
+<script type="text/javascript" >
+        require(['jquery','finalmagpop'], function($){
+            $('.open-youtube-link').magnificPopup({
+                disableOn: 700,
+                type: 'iframe',
+                mainClass: 'mfp-fade',
+                removalDelay: 160,
+                preloader: false,
+
+                fixedContentPos: false
+                });
+        });
+</script>

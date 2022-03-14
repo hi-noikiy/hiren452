@@ -1,0 +1,25 @@
+<?php
+/**
+ * @var \MyZillion\Insurance\Block\Adminhtml\Order\View $block
+ */
+
+?>
+<?php $insuranceStatus = $block->getInsuranceStatus(); ?>
+<?php if (!empty($insuranceStatus)) { ?>
+    <section class="admin__page-section">
+        <div class="admin__page-section-title">
+            <span class="title"><?= /* @noEscape */ __('Zillion Insurance') ?></span>
+        </div>
+        <div class="admin__page-section-content">
+            <div class="admin__page-section-item">
+                <div class="admin__page-section-item-title">
+                    <span class="title"><?= /* @noEscape */ __('Insurance Status') ?></span>
+                </div>
+                <div class="admin__page-section-item-content">
+                    <div class="order-payment-currency"><?= /* @noEscape */ __($insuranceStatus) ?></div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <?php
+}

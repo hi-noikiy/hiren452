@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+	 <update handle="styles"/>
+    <update handle="editor"/>
+    <head>
+        <css src="jquery/fileUploader/css/jquery.fileupload-ui.css"/>
+        <css src="Magento_Catalog::catalog/category-selector.css"/>
+        <css src="Magento_Catalog::product/product.css"/>
+        <css src="FME_Mediaappearance::css/custom.css"/>
+        
+    </head>
+	<body>
+		<referenceContainer name="content">
+			<uiComponent name="mediaappearance_index_form"/>
+			<!--<referenceContainer name="mediaappearance_index_form">
+                <block name="gallery" class="FME\Mediaappearance\Block\Adminhtml\Grid\Helper\Form\Gallery">
+                    <arguments>
+                        <argument name="config" xsi:type="array">
+                            <item name="label" xsi:type="string" translate="true">Images</item>
+                            <item name="collapsible" xsi:type="boolean">true</item>
+                            <item name="opened" xsi:type="boolean">false</item>
+                            <item name="sortOrder" xsi:type="string">22</item>
+                            <item name="canShow" xsi:type="boolean">true</item>
+                            <item name="componentType" xsi:type="string">fieldset</item>
+                        </argument>
+                    </arguments>
+                    <block class="FME\Mediaappearance\Block\Adminhtml\Grid\Helper\Form\Gallery\Content" as="content" template="FME_Mediaappearance::helper/gallery.phtml">
+                        <arguments>
+                            <argument name="config" xsi:type="array">
+                                <item name="parentComponent" xsi:type="string">mediaappearance_index_form.mediaappearance_index_form.block_gallery.block_gallery</item>
+
+                            </argument>
+                        </arguments>
+
+                    </block>
+                </block>
+            </referenceContainer>	
+            -->
+		</referenceContainer>
+		
+	</body>
+</page>

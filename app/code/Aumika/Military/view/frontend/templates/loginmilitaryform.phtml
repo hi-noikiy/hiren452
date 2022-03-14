@@ -1,0 +1,101 @@
+<?php $viewModelMagicMethod = $block->getViewModel(); ?>
+<?php $url = $this->getUrl('military/index/fileupload'); ?>
+<?php if($viewModelMagicMethod->getCustomerGroup() == 'Military Members'): ?>
+    <?= $escaper->escapeHtml(__('You Are Already Military Customer !!')) ?>
+<?php else: ?>
+    <form id="pl_ajax_file_upload" style="display: none"><input type="file" name="pl_ajax_file_upload"></form>
+    <form class="credit__application" id="military-form" action="<?php echo $block->getMilitaryFormAction() ?>" data-mage-init='{"validation":{}}' method="post">
+        <div class="field required">
+            <div class="control">
+                <div class="pluploader upload__file" id="pl-res-cer-upload-btn">
+                    <input type="hidden" title="Upload Signature" name="pllegelsignature" id="pldealerupload" data-validate='{"required":true}'>
+                    <label class="label file" >
+                        <span class="fileupload-btn"><img src="<?= $block->getViewFileUrl('images/fileuploader.png'); ?>" /></span>
+                        <span class="upload__signature__title"><?= $escaper->escapeHtml(__('Upload Military Document')) ?></span>
+                    </label>
+                </div>
+                <div style="display:none" id="pl-preview-file"><a href='javascript:void(0);' id="pl-remove-file">Remove</a></div>
+                <div style="display:none;color: green;" id="pl-success-msg"></div>
+                <div style="display:none" id="pl-error-msg"></div>
+            </div><!-- control -->
+        </div><!-- field -->
+        <div class="submit__form">
+            <input type="submit" id="submit-form" value="Submit">
+        </div><!-- submit__form -->
+    </form>
+    <script type="text/javascript">
+    require(['jquery','jquery/ui'], function($){
+        $(document).ready(function(){
+            //personal Signature Upload functionality
+            $(".pluploader").on("click", plfileUpload);
+            $("#pl_ajax_file_upload input").on("change", plsubmitUploadFile);
+            function plfileUpload(){
+                $("#pl_ajax_file_upload input").click();
+            }
+            function plsubmitUploadFile(){
+                var data = $("#pl_ajax_file_upload").get(0);
+                $.ajax({
+                    url: '<?= $url ?>' + "?isAjax=true",
+                    type: "POST",
+                    data: new FormData(data),
+                    processData: false,
+                    contentType: false,
+                    showLoader: true,
+                    success: function (response) {
+                        if (response.error) {
+                            $("#pldealerupload").val("");
+                            $("#pl-res-cer-upload-btn").show();
+                            $("#pl-preview-file").hide();
+                            $("#pl-success-msg").hide();
+                        } else {
+                            if (response.data.path) {
+                                $("#pl-remove-file").before("<a target='_blank' id='pl-view-image' href='"+response.data.path+"'>View</a>");
+                            }
+                            if (response.data.filename) {
+                                $("#pldealerupload").val(response.data.filename);
+                            }
+                            $("#pl-res-cer-upload-btn").show();
+                            $("#pl-preview-file").show();
+                            $("#pl-remove-file").show();
+                        }
+                        if (response.error == true) {
+                            $("#pl-error-msg").html(response.message);
+                            $("#pl-error-msg").show();
+                            $("#pl-success-msg").hide();
+                        }else if(response.message) {
+                            $("#pl-success-msg").html(response.message);
+                            $("#pl-success-msg").show();
+                            $("#pl-error-msg").hide();
+                        }
+                        $("#pl_ajax_file_upload")[0].reset();
+                    },
+                    error: function (response) {
+                        $("#pl_ajax_file_upload")[0].reset();
+                    }
+                });
+            }
+            $("#pl-remove-file").click(function () {
+                $("#pldealerupload").val("");
+                $("#pl-res-cer-upload-btn").show();
+                $("#pl-preview-file").hide();
+                $("#pl-view-image").remove();
+                $("#pl-remove-file").hide();
+                $("#pl-error-msg").hide();
+                $("#pl-success-msg").hide();
+            });
+            $("#submit-form").click(function (){
+                if($("#pldealerupload").val() == ''){
+                    $("#pl-error-msg").html("<span style='color:#e02b27'>This is a required field.</span>");
+                    $("#pl-error-msg").show();
+                }
+            });
+            $('#military-form').submit(function() {
+                if(($("#pldealerupload").val() == ''))
+                {
+                    return false;
+                }
+            });
+        });
+    });
+    </script>
+<?php endif; ?>

@@ -1,0 +1,42 @@
+<?xml version="1.0" ?>
+<!--
+
+ * Plumrocket Inc.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End-user License Agreement
+ * that is available through the world-wide-web at this URL:
+ * http://wiki.plumrocket.net/wiki/EULA
+ * If you are unable to obtain it through the world-wide-web, please
+ * send an email to support@plumrocket.com so we can send you a copy immediately.
+ *
+ * @package     Plumrocket Ajaxcart v2.x.x
+ * @copyright   Copyright (c) 2019 Plumrocket Inc. (http://www.plumrocket.com)
+ * @license     http://wiki.plumrocket.net/wiki/EULA  End-user License Agreement
+ -->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <css src="mage/gallery/gallery.css"/>
+        <css src="Plumrocket_Ajaxcart::css/owlcarousel/owl.carousel.min.css"/>
+        <css src="Plumrocket_Ajaxcart::css/owlcarousel/owl.theme.default.min.css"/>
+        <css src="Plumrocket_Ajaxcart::css/ajaxcart.css"/>
+        <css src="Plumrocket_Ajaxcart::css/ajaxcart-custom.css"/>
+    </head>
+    <body>
+        <referenceContainer name="after.body.start">
+            <block class="Plumrocket\Ajaxcart\Block\Style" name="ajaxcart.style" template="Plumrocket_Ajaxcart::style.phtml" />
+            <block class="Plumrocket\Ajaxcart\Block\Config" name="ajaxcart.product.qty" template="Plumrocket_Ajaxcart::config.phtml" />
+        </referenceContainer>
+
+        <referenceContainer name="before.body.end">
+            <block class="Plumrocket\Ajaxcart\Block\Page\Js" template="Plumrocket_Ajaxcart::page/manual_mode.phtml" name="prajaxcart_manual_mode"/>
+        </referenceContainer>
+
+        <referenceBlock name="minicart">
+            <action method="setTemplate">
+                <argument name="template" xsi:type="helper" helper="Plumrocket\Ajaxcart\Helper\Data::getMinicartTemplate"/>
+            </action>
+        </referenceBlock>
+    </body>
+</page>

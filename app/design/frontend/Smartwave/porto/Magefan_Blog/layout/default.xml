@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="2columns-left" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+    	<referenceBlock name="header.links">
+            <block class="Magefan\Blog\Block\Link" name="top_blog_link" after="-" />
+            <block class="Smartwave\Porto\Block\Template" name="militry" after="top_blog_link" template="Smartwave_Porto::html/militry_service.phtml" />
+        </referenceBlock>
+    </body>
+</page>

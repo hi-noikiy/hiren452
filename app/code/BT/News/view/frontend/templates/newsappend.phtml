@@ -1,0 +1,39 @@
+<?php $data = $block->getData(); ?>
+<?php $pageNo = $data['data']; ?>
+<?php $collecion =  $block->getAjaxNewsCollection($pageNo); ?>
+<?php foreach ($collecion as $key => $value): ?>
+	<?php if($value->getImageupload()): ?>
+	<div class="news news-image">
+			<div class="image__left">
+				<div class="icons">
+					<div class="images">
+						<img height="300px" width="400px" alt="announcement image"  title="announcement image" src="<?= $value->getImageupload() ?>">
+					</div><!-- images -->
+				</div>
+			</div><!-- image__left -->
+			<div class="right__sec">
+				<div class="title"><?= $value->getTitle() ?></div><!-- title -->
+				<div class="descriptionlist" data-date="<?= $value->getEventdate() ?>" data-title="<?= $value->getTitle() ?>" data-image="<?= $value->getImageupload() ?>" data-description="<?= $value->getDescription() ?>" style="display: block;"><?=  $value->getDescription() ?></div>
+			</div><!-- right__sec -->
+	</div>
+	<?php else: ?>
+		<div class="news news-icon">
+			<div class="header_wrap">
+					<?php if($value->getIconupdate()): ?>
+						<div class="icon">
+							<img alt="icon" title="icon" src="<?= $value->getIconupdate() ?>"/>
+						</div><!-- icon -->
+					<?php else: ?>
+						<div class="icon">
+							<img alt="icon" title="icon" src='<?php echo $this->getViewFileUrl('images/news__icon.png'); ?>' alt="icon">
+						</div><!-- icon -->
+					<?php endif; ?>
+					<div class="title"><?= $value->getTitle() ?></div><!-- title -->
+					<div class="date"><?= ($value->getEventdate() !== '') ? $value->getEventdate() : '' ?></div><!-- Date -->
+			</div>
+			<div class="description">
+				<div class="descriptionlist" data-date="<?= $value->getEventdate() ?>" data-title="<?= $value->getTitle() ?>" data-image="<?= $value->getImageupload() ?>" data-description="<?= $value->getDescription() ?>" style="display: block;"><?=  substr($value->getDescription(), 0, 180) . '... <a class="popup" id="popup-readmore" href="javascript:void(0)">Read More</a>' ?></div>
+			</div><!-- description__sec -->
+	</div>
+	<?php endif; ?>
+<?php endforeach; ?>

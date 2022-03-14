@@ -1,0 +1,191 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+// @codingStandardsIgnoreFile
+
+/** @var Magento\Review\Block\Product\View\ListView $block */
+$_items = $block->getReviewsCollection()->getItems();
+$format = $block->getDateFormat() ? : \IntlDateFormatter::SHORT;
+$reviewsproHelper = $this->helper('Hiddentechies\Reviewspro\Helper\Data');
+$badgeEnabled = $reviewsproHelper->getConfigValue('reviewsprossection/verified_settings/enabled');
+$badgeText = $reviewsproHelper->getConfigValue('reviewsprossection/verified_settings/badge_text');
+$imageEnabled = $reviewsproHelper->getConfigValue('reviewsprossection/image_settings/enabled');
+$imageWidth = $reviewsproHelper->getConfigValue('reviewsprossection/image_settings/image_width');
+$imageHeight = $reviewsproHelper->getConfigValue('reviewsprossection/image_settings/image_height');
+$feedbackEnabled = $reviewsproHelper->getConfigValue('reviewsprossection/feedback_settings/enabled');
+$feedbackText = $reviewsproHelper->getConfigValue('reviewsprossection/feedback_settings/feedback_text');
+$mediaUrl = $reviewsproHelper->getMediaUrl() . 'review_customer_img/';
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+?>
+<?php if (count($_items)): ?>
+    <div class="block review-list" id="customer-reviews">
+        <div class="block-title">
+            <strong><?= $block->escapeHtml(__('Customer Reviews')) ?></strong>
+        </div>
+        <div class="block-content">
+            <div class="toolbar review-toolbar">
+                <?= $block->getChildHtml('toolbar') ?>
+            </div>
+            <ol class="items review-items">
+                <?php foreach ($_items as $_review): ?>
+                    <li class="item review-item" itemscope itemprop="review" itemtype="http://schema.org/Review">
+                        <div class="review-title" itemprop="name"><?= $block->escapeHtml($_review->getTitle()) ?></div>
+                        <?php if (count($_review->getRatingVotes())): ?>
+                            <div class="review-ratings">
+                                <?php foreach ($_review->getRatingVotes() as $_vote): ?>
+                                    <div class="rating-summary item" itemprop="reviewRating" itemscope itemtype="http://schema.org/Rating">
+                                        <span class="label rating-label"><span><?= $block->escapeHtml($_vote->getRatingCode()) ?></span></span>
+                                        <div class="rating-result" title="<?= $block->escapeHtmlAttr($_vote->getPercent()) ?>%">
+                                            <meta itemprop="worstRating" content = "1"/>
+                                            <meta itemprop="bestRating" content = "100"/>
+                                            <span style="width:<?= $block->escapeHtmlAttr($_vote->getPercent()) ?>%">
+                                                <span itemprop="ratingValue"><?= $block->escapeHtml($_vote->getPercent()) ?>%</span>
+                                            </span>
+                                        </div>
+                                    </div>
+                                <?php endforeach; ?>
+                            </div>
+                        <?php endif; ?>
+                        <div class="review-content" itemprop="description">
+                            <?= nl2br($block->escapeHtml($_review->getDetail())) ?>
+                        </div>
+                        <div class="review-details">
+                            <p class="review-author">
+                                <span class="review-details-label"><?= $block->escapeHtml(__('Review by')) ?></span>
+                                <strong class="review-details-value" itemprop="author"><?= $block->escapeHtml($_review->getNickname()) ?></strong>
+                            </p>
+                            <p class="review-date">
+                                <span class="review-details-label"><?= $block->escapeHtml(__('Posted on')) ?></span>
+                                <time class="review-details-value" itemprop="datePublished" datetime="<?= $block->escapeHtmlAttr($block->formatDate($_review->getCreatedAt(), $format)) ?>"><?= $block->escapeHtml($block->formatDate($_review->getCreatedAt(), $format)) ?></time>
+                            </p>
+                            <?php
+                            if ($badgeEnabled == 1) {
+                                $customerId = $_review->getCustomerId();
+                                $reviewProductId = $_review->getEntityPkValue();
+                                if ($customerId != '' && $reviewProductId != '') {
+                                    $checkVerified = $reviewsproHelper->checkVerifiedReview($customerId, $reviewProductId);
+                                    if ($checkVerified == 1) {
+                                        ?>
+                                        <span class="verified-rating">
+                                            <?php echo __($badgeText); ?>
+                                        </span>
+                                        <?php
+                                    }
+                                }
+                            }
+                            ?>
+                        </div>
+                        <?php
+                        if ($imageEnabled == 1) {
+                            $reviewImgData = $objectManager->get('\Hiddentechies\Reviewspro\Model\ReviewsproFactory')
+                                    ->create()
+                                    ->getCollection()
+                                    ->addFieldToFilter('review_id', $_review->getReviewId());
+                            ?>
+                            <div class="review-image-block">
+                                <?php
+                                if (count($reviewImgData)) {
+                                    foreach ($reviewImgData as $img) {
+                                        ?>
+                                        <img class="review-image" src="<?php echo $mediaUrl . $img->getReviewImg(); ?>" width="<?php echo $imageWidth; ?>" height="<?php echo $imageHeight; ?>" alt="Image" />
+                                        <?php
+                                    }
+                                }
+                                ?>
+                            </div>
+                        <?php } ?>
+                        <?php if ($feedbackEnabled == 1) { ?>
+                            <div class="review-feedback-block">
+                                <?php
+                                if (count($reviewImgData)) {
+                                    ?>
+                                    <?php if ($feedbackText != '') { ?>
+                                        <p><?php echo __($feedbackText); ?></p>
+                                    <?php } ?>
+                                    <?php
+                                    foreach ($reviewImgData as $img) {
+                                        ?>
+                                        <div id="review_positive_<?php echo $_review->getReviewId(); ?>" class="rating-item rating-positive" data-feedback="positive" data-review-id="<?php echo $_review->getReviewId(); ?>">
+                                            <span class="icon-span"></span>
+                                            <span class="count-span"><?php echo $img->getReviewPositive(); ?></span>
+                                        </div>
+                                        <div id="review_negative_<?php echo $_review->getReviewId(); ?>" class="rating-item rating-negative" data-feedback="negative" data-review-id="<?php echo $_review->getReviewId(); ?>">
+                                            <span class="icon-span"></span>
+                                            <span class="count-span"><?php echo $img->getReviewNegative(); ?></span>
+                                        </div>
+                                        <?php
+                                    }
+                                }
+                                ?>
+                            </div>
+                        <?php } ?>
+                    </li>
+                <?php endforeach; ?>
+            </ol>
+            <div class="toolbar review-toolbar">
+                <?= $block->getChildHtml('toolbar') ?>
+            </div>
+        </div>
+    </div>
+<?php endif; ?>
+<script>
+    require(['jquery'], function() {
+        jQuery(document).ready(function() {
+            jQuery('.review-feedback-block .rating-item').click('click', function() {
+                var review_id = jQuery(this).attr('data-review-id');
+                var feedback_type = jQuery(this).attr('data-feedback');
+                var feedback = 'inc';
+                if (jQuery(this).hasClass('selected')) {
+                    feedback = 'dec';
+                }
+                jQuery.ajax({
+                    url: '<?php echo $this->getUrl('reviewspro/index/index') ?>',
+                    type: 'post',
+                    data: {review_id: review_id, feedback_type: feedback_type, feedback: feedback},
+                    success: function(data) {
+                        if (jQuery('#review_' + feedback_type + '_' + review_id).hasClass('selected')) {
+                            jQuery('#review_' + feedback_type + '_' + review_id).removeClass('selected');
+                        } else {
+                            jQuery('#review_' + feedback_type + '_' + review_id).addClass('selected');
+                        }
+                        var count = jQuery('#review_' + feedback_type + '_' + review_id + ' .count-span').html();
+                        if (feedback == 'inc') {
+                            count = parseInt(count) + 1;
+                        } else if (feedback == 'dec') {
+                            count = parseInt(count) - 1;
+                        }
+                        jQuery('#review_' + feedback_type + '_' + review_id + ' .count-span').html(count);
+                    }
+                });
+
+                // Opposite Reaction
+                var feedback_type_reverse = 'negative';
+                if (feedback_type == 'positive') {
+                    feedback_type_reverse = 'negative';
+                } else if (feedback_type == 'negative') {
+                    feedback_type_reverse = 'positive';
+                }
+                if (jQuery('#review_' + feedback_type_reverse + '_' + review_id).hasClass('selected')) {
+                    jQuery.ajax({
+                        url: '<?php echo $this->getUrl('reviewspro/index/index') ?>',
+                        type: 'post',
+                        data: {review_id: review_id, feedback_type: feedback_type_reverse, feedback: 'dec'},
+                        success: function(data) {
+                            if (jQuery('#review_' + feedback_type_reverse + '_' + review_id).hasClass('selected')) {
+                                jQuery('#review_' + feedback_type_reverse + '_' + review_id).removeClass('selected');
+                            } else {
+                                jQuery('#review_' + feedback_type_reverse + '_' + review_id).addClass('selected');
+                            }
+                            var count = jQuery('#review_' + feedback_type_reverse + '_' + review_id + ' .count-span').html();
+                            count = parseInt(count) - 1;
+                            jQuery('#review_' + feedback_type_reverse + '_' + review_id + ' .count-span').html(count);
+                        }
+                    });
+                }
+            });
+
+        });
+    });
+</script>

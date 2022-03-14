@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * Magedelight
+ * Copyright (C) 2019 Magedelight <info@magedelight.com>
+ *
+ * @category Magedelight
+ * @package Magedelight_Facebook
+ * @copyright Copyright (c) 2019 Mage Delight (http://www.magedelight.com/)
+ * @license http://opensource.org/licenses/gpl-3.0.html GNU General Public License,version 3 (GPL-3.0)
+ * @author Magedelight <info@magedelight.com>
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <section id="magedelight_facebook" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>Facebook</label>
+            <class>md_section_facebook</class>
+            <tab>magedelight</tab>
+            <resource>Magedelight_Facebook::config_root</resource>          
+            <group id="general" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>General Configuration</label>
+                <field id="enabled" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable Facebook Native</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="enable_cron_schedule" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable Cron Schedule</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="frequency" translate="label" type="select" sortOrder="18" showInDefault="1" showInStore="0" showInWebsite="1">
+                    <depends>
+                        <field id="magedelight_facebook/general/enable_cron_schedule">1</field>
+                    </depends>
+                    <label>CRON JOB Frequency</label>
+                    <source_model>Magento\Cron\Model\Config\Source\Frequency</source_model>
+                    <backend_model>Magedelight\Facebook\Model\System\Config\Cron\Frequency</backend_model>
+                    <comment><![CDATA[Define CRON Frequency to generate feed file for facebook.]]></comment>
+                </field>
+                <field id="time" translate="label" type="time" sortOrder="19" showInDefault="1" showInStore="0" showInWebsite="1">
+                    <depends>
+                        <field id="magedelight_facebook/general/enable_cron_schedule">1</field>
+                    </depends>
+                    <label>CRON JOB Start Time</label>
+                    <comment><![CDATA[Define CRON Start Time. It should be earlier from facebook schedule time for up to date feed.]]></comment>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

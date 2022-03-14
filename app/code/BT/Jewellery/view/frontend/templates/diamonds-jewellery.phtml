@@ -1,0 +1,62 @@
+<?php $helper = $this->helper("BT\Jewellery\Helper\Data"); ?>
+<?php $designCollection = $helper->getDiamondJewelleryCollection(); ?>
+
+<div class="container">
+    <h2 class="filterproduct-title"><span class="content"><strong>Learn about Diamonds</strong></span></h2>
+</div>
+<!-- page-title-wrapper -->
+<div class="news-section-main" id="diamonds-jewellery">
+    <?php $count = 0; ?>
+    <?php foreach ($designCollection as $key => $value):?>
+        <div class="news-section-wrap <?= (++$count%2 ? "":"img-right") ?>">
+            <div class="news-logo">
+                <img src="<?= $value->getImageupload(); ?>">
+            </div>
+            <div class="news-description">
+                <div>
+                    <?php $description = $value->getDescription() ?>
+                    <?= $description.'<a href="javascript:void(0)" id="readmore">ReadMore</a>' ?>
+                    <div style="display:none;" class="popup-section-hide">
+                        <div class="news-logo">
+                            <img src="<?= $value->getImageupload(); ?>">
+                        </div>
+                        <div class="news-description">
+                            <div>
+                                <?php $description = $value->getDescription() ?>
+                                <?= $description ?>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <?php endforeach; ?>
+</div>
+<div id="popup-modal">
+</div>
+<script type="text/javascript">
+require(["jquery","Magento_Ui/js/modal/modal" ,"jquery/ui"], function($,modal){
+  $(document).ready( function() {
+     var options = {
+        type: 'popup',
+        responsive: true,
+        innerScroll: true,
+       // title: 'Main title',
+        buttons: [{
+            text: $.mage.__('Cancel'),
+            class: '',
+            click: function () {
+                this.closeModal();
+            }
+        }]
+    };
+
+    var popup = modal(options, $('#popup-modal'));
+    $(document).on('click', '#readmore', function(){
+        var tempHtml = $(this).next().html();
+        $('#popup-modal').html(tempHtml);
+        $('#popup-modal').modal('openModal');
+    });
+  });
+});
+</script>

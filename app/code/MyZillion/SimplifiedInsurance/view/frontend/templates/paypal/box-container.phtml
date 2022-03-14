@@ -1,0 +1,92 @@
+<?php
+/**
+ * Copyright (c) 2020, Zillion Insurance Services, Inc.
+ * All rights reserved.
+ * Redistribution and use in source and binary forms, with or without modification,
+ * are permitted provided that the following conditions are met:
+ *   * Redistributions of source code must retain the above copyright notice,
+ *     this list of conditions and the following disclaimer.
+ *   * Redistributions in binary form must reproduce the above copyright notice,
+ *     this list of conditions and the following disclaimer in the documentation
+ *     and/or other materials provided with the distribution.
+ *   * Neither the name of Zend Technologies USA, Inc. nor the names of its
+ *     contributors may be used to endorse or promote products derived from this
+ *     software without specific prior written permission.
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+ * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+ * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR
+ * ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+ * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+ * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
+ * ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+ * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+ * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ *
+ * @package myzillion
+ * @subpackage module-simplified-insurance
+ * @author Serfe <info@serfe.com>
+ * @copyright 2020 Zillion Insurance Services, Inc.
+ * @since 1.0.0
+ */
+
+$quoteId = $block->getQuoteId();
+$storeCode = $block->getStoreCode();
+$isLoggedIn = ($block->getIsLoggedIn()) ? 'true' : 'false';
+$modulePath = 'MyZillion_SimplifiedInsurance::images/';
+?>
+<div id="zillion-loader"></div>
+ <div data-bind="scope: 'zillion'">
+ <!-- ko template: getTemplate() --><!-- /ko -->
+ </div>
+<script>
+// Console.log is just for debug. Remove it
+<?php if ($quoteId) : ?>
+window.quoteId = "<?= /* @noEscape */ $quoteId ?>";
+<?php endif; ?>
+<?php if ($storeCode) : ?>
+if (!window.checkoutConfig) {
+  window.checkoutConfig = {
+    storeCode: "<?= /* @noEscape */  $storeCode ?>"
+  }
+} else if (!window.checkoutConfig.storeCode) {
+  window.checkoutConfig.storeCode = "<?= /* @noEscape */  $storeCode ?>";
+}
+<?php endif; ?>
+window.customer_is_logged = <?= /* @noEscape */ $isLoggedIn ?>
+</script>
+<script>
+  // Initialize checkout configuration used by the Zillion component
+    window.checkoutConfig.zillionImagesPath = {
+        logo:      "<?= /* @noEscape */ $block->getViewFileUrl($modulePath . 'logo_small.png') ?>",
+        logo2x:    "<?= /* @noEscape */ $block->getViewFileUrl($modulePath . 'logo_small_2x.png') ?>",
+        axaLogo:   "<?= /* @noEscape */ $block->getViewFileUrl($modulePath . 'axa_logo.png') ?>",
+        axaLogo2x: "<?= /* @noEscape */ $block->getViewFileUrl($modulePath . 'axa_logo_2x.png') ?>",
+        <?php $zillionLogoPath = $block->getViewFileUrl($modulePath . 'zillion_logo_transparent_crop.png'); ?>
+        zillion_logo: "<?= /* @noEscape */ $zillionLogoPath ?>",
+    };
+    <?php
+    $__objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+        $__name = $__objectManager->get(Magento\Framework\App\Config\ScopeConfigInterface::class)
+        ->getValue('general/store_information/name');
+    ?>
+    window.checkoutConfig.storeInformation = {
+        name: "<?= /* @noEscape */ $__name ?>"
+    }
+    window.checkoutConfig.zillionConfig = <?= /* @noEscape */ $block->getConfigJson() ?>;
+</script>
+
+<script type="text/x-magento-init">
+        {
+            "*": {
+                "Magento_Ui/js/core/app": {
+                    "components": {
+                        "zillion": {
+                            "component": "MyZillion_SimplifiedInsurance/js/form/element/insurance-checkbox-no-checkout",
+                            "template" : "MyZillion_SimplifiedInsurance/ui/form/element/quote-offer-template.html"
+                        }
+                    }
+                }
+            }
+        }
+</script>

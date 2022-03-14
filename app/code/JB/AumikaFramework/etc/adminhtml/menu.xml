@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../Magento/Backend/etc/menu.xsd">
+    <menu>
+        <add id="JB_AumikaFramework::jitesh" title="Jitesh Baagul" module="JB_AumikaFramework" sortOrder="30" dependsOnModule="JB_AumikaFramework" resource="JB_AumikaFramework::jb_settings"/>
+
+        <add id="JB_AumikaFramework::jb_settings" title="Aumika Configuration" module="JB_AumikaFramework" sortOrder="5" parent="JB_AumikaFramework::jitesh" action="adminhtml/system_config/edit/section/jb_settings" resource="JB_AumikaFramework::jb_settings"/>
+    </menu>
+</config>

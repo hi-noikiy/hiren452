@@ -1,0 +1,25 @@
+{
+    "name": "myzillion/module-simplified-insurance",
+    "description": "Simplified Magento 2 MyZillion Insurance module",
+    "type": "magento2-module",
+    "license": "proprietary",
+    "authors": [
+        {
+            "email": "serfe@info.com",
+            "name": "Serfe SA"
+        }
+    ],
+    "version": "1.0.15.4",
+    "minimum-stability": "stable",
+    "require": {
+        "myzillion/insurance-api": "^2.0.3"
+    },
+    "autoload": {
+        "psr-4": {
+            "MyZillion\\SimplifiedInsurance\\": ""
+        },
+        "files": [
+            "registration.php"
+        ]
+    }
+}

@@ -1,0 +1,73 @@
+<?php
+/**
+ * Plumrocket Inc.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End-user License Agreement
+ * that is available through the world-wide-web at this URL:
+ * http://wiki.plumrocket.net/wiki/EULA
+ * If you are unable to obtain it through the world-wide-web, please
+ * send an email to support@plumrocket.com so we can send you a copy immediately.
+ *
+ * @package     Plumrocket Ajaxcart v2.x.x
+ * @copyright   Copyright (c) 2018 Plumrocket Inc. (http://www.plumrocket.com)
+ * @license     http://wiki.plumrocket.net/wiki/EULA  End-user License Agreement
+ */
+?>
+
+<?php
+    /** @codingStandardsIgnoreFile */
+    /** @var \Magento\Checkout\Block\Cart\Item\Renderer $block */
+    $item = $block->getItem();
+    $product = $item->getProduct();
+    $finalPrice = $product->getPriceInfo()->getPrice('final_price')->getValue();
+    $regularPrice = $product->getPriceInfo()->getPrice('regular_price')->getValue();
+    $isVisibleProduct = $product->isVisibleInSiteVisibility();
+    $helper = $this->helper(\Magento\Msrp\Helper\Data::class);
+    $canApplyMsrp = $helper->isShowBeforeOrderConfirm($product) && $helper->isMinimalPriceLessMsrp($product);
+?>
+<div class="pac-item-wrap">
+    <div class="pac-img">
+        <span class="product-item-photo">
+            <?= $block->getImage($block->getProductForThumbnail(), 'cart_page_product_thumbnail')->toHtml() ?>
+        </span>
+    </div>
+    <div class="pac-desc">
+        <strong class="product-item-name">
+            <?php if ($block->hasProductUrl()) :?>
+                <a href="<?= /* @escapeNotVerified */ $block->getProductUrl() ?>"><?= $block->escapeHtml($block->getProductName()) ?></a>
+            <?php else: ?>
+                <?= $block->escapeHtml($block->getProductName()) ?>
+            <?php endif; ?>
+        </strong>
+        <div class="pac-item-price">
+            <?php if ($canApplyMsrp): ?>
+                <span class="pricing msrp">
+                    <span class="msrp notice"><?= /* @escapeNotVerified */ __('See price before order confirmation.') ?></span>
+                    <?php $helpLinkId = 'cart-msrp-help-' . $item->getId(); ?>
+                    <a href="#" class="action help map" id="<?= /* @escapeNotVerified */ ($helpLinkId) ?>" data-mage-init='{"addToCart":{"helpLinkId": "#<?= /* @escapeNotVerified */ $helpLinkId ?>","productName": "<?= /* @escapeNotVerified */ $product->getName() ?>","showAddToCart": false}}'>
+                        <span><?= /* @escapeNotVerified */ __("What's this?") ?></span>
+                    </a>
+                </span>
+            <?php else: ?>
+                <?php echo $this->getProductPriceHtml($product) ?>
+            <?php endif; ?>
+        </div>
+        <?php if ($options = $block->getOptionList()):?>
+            <dl class="item-options">
+                <?php foreach ($options as $_option) : ?>
+                    <?php $formatedOptionValue = $block->getFormatedOptionValue($_option) ?>
+                    <dt><?= $block->escapeHtml($_option['label']) ?></dt>
+                    <dd>
+                        <?php if (isset($formatedOptionValue['full_view'])): ?>
+                            <?= /* @escapeNotVerified */ $formatedOptionValue['full_view'] ?>
+                        <?php else: ?>
+                            <?= /* @escapeNotVerified */ $formatedOptionValue['value'] ?>
+                        <?php endif; ?>
+                    </dd>
+                <?php endforeach; ?>
+            </dl>
+        <?php endif;?>
+    </div>
+</div>

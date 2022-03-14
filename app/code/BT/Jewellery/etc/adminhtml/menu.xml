@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="BT_Jewellery::jewellery" title="Diamond/Gemstone Upload" translate="title" 
+          module="BT_Jewellery" sortOrder="0" parent="BT_News::news"
+          action="jewellery/index" resource="BT_News::news" />
+    </menu>
+</config>

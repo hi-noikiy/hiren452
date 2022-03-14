@@ -1,0 +1,187 @@
+<?xml version="1.0" ?>
+<!--
+
+ * Plumrocket Inc.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End-user License Agreement
+ * that is available through the world-wide-web at this URL:
+ * http://wiki.plumrocket.net/wiki/EULA
+ * If you are unable to obtain it through the world-wide-web, please
+ * send an email to support@plumrocket.com so we can send you a copy immediately.
+ *
+ * @package     Plumrocket Ajaxcart v2.x.x
+ * @copyright   Copyright (c) 2018 Plumrocket Inc. (http://www.plumrocket.com)
+ * @license     http://wiki.plumrocket.net/wiki/EULA  End-user License Agreement
+ -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <section id="prajaxcart" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="9477345" translate="label">
+            <label>Ajax Cart</label>
+            <tab>plumrocket</tab>
+            <resource>Plumrocket_Ajaxcart::config_plumrocket_prajaxcart</resource>
+            <group id="general" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="10" translate="label">
+                <label>General</label>
+                <attribute type="expanded">1</attribute>
+                <field id="version" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="10" translate="label" type="text">
+                    <frontend_model>Plumrocket\Ajaxcart\Block\Adminhtml\System\Config\Form\Version</frontend_model>
+                </field>
+                <field id="enabled" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="20" translate="label" type="select">
+                    <label>Enable Extension</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="serial" translate="label comment" type="text" sortOrder="30" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Serial Key</label>
+                    <frontend_model>Plumrocket\Base\Block\Adminhtml\System\Config\Form\Serial</frontend_model>
+                    <comment><![CDATA[You can find <strong>Serial Key</strong> in your account at <a target="_blank" href="https://store.plumrocket.com/downloadable/customer/products/">store.plumrocket.com</a>.For manual <a target="_blank" href="http://wiki.plumrocket.com/wiki/License_Installation">click here</a>.]]></comment>
+                    <hint>Ajaxcart</hint>
+                </field>
+                <field id="minicart_style" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="35" translate="label" type="select">
+                    <label>Minicart Style</label>
+                    <source_model>Plumrocket\Ajaxcart\Model\System\Config\Source\MinicartStyle</source_model>
+                </field>
+                <field id="checkout_btn_action" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="40" translate="label" type="select">
+                    <label>Checkout Button Action</label>
+                    <comment><![CDATA[Specify whether “Checkout” button in Ajax Cart Detailed Popup should lead to “Shopping Cart Page” or “Checkout Page”]]></comment>
+                    <source_model>Plumrocket\Ajaxcart\Model\System\Config\Source\Checkoutbtn</source_model>
+                </field>
+                <field id="continue_shoping_link" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="50" translate="label" type="select">
+                    <label>Continue Shopping Link Action</label>
+                    <source_model>Plumrocket\Ajaxcart\Model\System\Config\Source\Contlink</source_model>
+                </field>
+                <field id="continue_custom_link" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="60" translate="label" type="text">
+                    <label>Continue Shopping Link Custom Url</label>
+                    <depends>
+                        <field id="continue_shoping_link">2</field>
+                    </depends>
+                </field>
+                <field id="related_on_edit" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="70" translate="label" type="select">
+                    <label>Show Related Products &amp; Cross-sells In Ajax Cart Popup</label>
+                    <comment><![CDATA[Display magento related products and cross-sells in ajax cart popup when adding &amp; editing shopping cart contents]]></comment>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="qty_on_product_list" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="80" translate="label" type="select">
+                    <label>Show Qty of Products in Cart on Product List</label>
+                    <comment>Display label on product list items to indicate Qty of each product in cart.</comment>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="product_qty_selector" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="90" translate="label" type="text">
+                    <label>Qty Label Selector</label>
+                    <comment><![CDATA[HTML class of the product item where Qty label should be inserted to. Default class name - "product-image-wrapper".]]></comment>
+                    <depends>
+                        <field id="qty_on_product_list">1</field>
+                    </depends>
+                </field>
+            </group>
+            <group id="_design" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                <frontend_model>Plumrocket\Base\Block\Adminhtml\System\Config\Form\Color</frontend_model>
+            </group>
+            <group id="design" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="21" translate="label">
+                <label>Design</label>
+                <attribute type="expanded">1</attribute>
+                <group id="minicart" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="10" translate="label">
+                    <label>Detailed Popup</label>
+                    <frontend_model>Magento\Config\Block\System\Config\Form\Fieldset</frontend_model>
+                    <field id="link_color" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="10" translate="label" type="text">
+                        <label>Link Color</label>
+                        <frontend_class>color{hash:true, required:true}</frontend_class>
+                    </field>
+                    <field id="link_color_hover" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="20" translate="label" type="text">
+                        <label>Link Color (On Hover)</label>
+                        <frontend_class>color{hash:true, required:true}</frontend_class>
+                    </field>
+                    <field id="button_bg_color" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="30" translate="label" type="text">
+                        <label>Button Background Color</label>
+                        <frontend_class>color{hash:true, required:true}</frontend_class>
+                    </field>
+                    <field id="button_bg_color_hover" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="40" translate="label" type="text">
+                        <label>Button Background Color (On Hover)</label>
+                        <frontend_class>color{hash:true, required:true}</frontend_class>
+                    </field>
+                    <field id="button_text_color" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="50" translate="label" type="text">
+                        <label>Button Text Color</label>
+                        <frontend_class>color{hash:true, required:true}</frontend_class>
+                    </field>
+                    <field id="button_text_color_hover" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="60" translate="label" type="text">
+                        <label>Button Text Color (On Hover)</label>
+                        <frontend_class>color{hash:true, required:true}</frontend_class>
+                    </field>
+                </group>
+                <group id="product_page_add_button" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="20" translate="label">
+                    <label>Add to Cart Button on Product Page</label>
+                    <frontend_model>Magento\Config\Block\System\Config\Form\Fieldset</frontend_model>
+                    <field id="button_text_color" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="10" translate="label" type="text">
+                        <label>Button Text Color</label>
+                        <frontend_class>color{hash:true, required:true}</frontend_class>
+                    </field>
+                    <field id="button_text_color_hover" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="20" translate="label" type="text">
+                        <label>Button Text Color (On Hover)</label>
+                        <frontend_class>color{hash:true, required:true}</frontend_class>
+                    </field>
+                    <field id="button_bg_color" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="30" translate="label" type="text">
+                        <label>Button Background Color</label>
+                        <frontend_class>color{hash:true, required:true}</frontend_class>
+                    </field>
+                    <field id="button_bg_color_hover" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="40" translate="label" type="text">
+                        <label>Button Background Color (On Hover)</label>
+                        <frontend_class>color{hash:true, required:true}</frontend_class>
+                    </field>
+                    <field id="button_icon_background_color" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="50" translate="label" type="text">
+                        <label>Button Icon Background Color</label>
+                        <frontend_class>color{hash:true, required:true}</frontend_class>
+                    </field>
+                    <field id="button_icon_background_color_hover" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="60" translate="label" type="text">
+                        <label>Button Icon Background Color (On Hover)</label>
+                        <frontend_class>color{hash:true, required:true}</frontend_class>
+                    </field>
+                </group>
+                <group id="product_list_add_button" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="30" translate="label">
+                    <label>Add to Cart Button on Product List</label>
+                    <frontend_model>Magento\Config\Block\System\Config\Form\Fieldset</frontend_model>
+                    <field id="button_text_color" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="10" translate="label" type="text">
+                        <label>Button Text Color</label>
+                        <frontend_class>color{hash:true, required:true}</frontend_class>
+                    </field>
+                    <field id="button_text_color_hover" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="20" translate="label" type="text">
+                        <label>Button Text Color (On Hover)</label>
+                        <frontend_class>color{hash:true, required:true}</frontend_class>
+                    </field>
+                    <field id="button_bg_color" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="30" translate="label" type="text">
+                        <label>Button Background Color</label>
+                        <frontend_class>color{hash:true, required:true}</frontend_class>
+                    </field>
+                    <field id="button_bg_color_hover" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="40" translate="label" type="text">
+                        <label>Button Background Color (On Hover)</label>
+                        <frontend_class>color{hash:true, required:true}</frontend_class>
+                    </field>
+                    <field id="button_icon_background_color" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="50" translate="label" type="text">
+                        <label>Button Icon Background Color</label>
+                        <frontend_class>color{hash:true, required:true}</frontend_class>
+                    </field>
+                    <field id="button_icon_background_color_hover" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="60" translate="label" type="text">
+                        <label>Button Icon Background Color (On Hover)</label>
+                        <frontend_class>color{hash:true, required:true}</frontend_class>
+                    </field>
+                </group>
+            </group>
+            <group id="additional_configuration" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="40" translate="label">
+                <label>Additional Configuration</label>
+                <frontend_model>Magento\Config\Block\System\Config\Form\Fieldset</frontend_model>
+
+                <field id="mode" type="select" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="10" translate="label">
+                    <label>Mode</label>
+                    <comment><![CDATA[]]></comment>
+                    <source_model>Plumrocket\Ajaxcart\Model\System\Config\Source\Modes</source_model>
+                </field>
+                <field id="button_selector" type="text" translate="label comment" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Button Selector</label>
+                    <comment><![CDATA[CSS selector of the "Add To Cart" button. For example: ".action.primary.tocart"]]></comment>
+                    <depends>
+                        <field id="mode">1</field>
+                    </depends>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

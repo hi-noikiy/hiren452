@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <dealer_inquiry>
+            <settings>
+                <enable>0</enable>
+                <url_key>Inquiry</url_key>
+                <enable_top_link>1</enable_top_link>
+                <enable_footer_link>1</enable_footer_link>
+                <customer_group>1</customer_group>
+            </settings>
+            <form>
+                <form_settings>
+                    <heading>Dealer Inquiry</heading>
+                    <description>Fill below information for inquiry.</description>
+                    <submit_button_label>Submit</submit_button_label>
+                    <success_message>Thanks for contacting us. We will respond to you very soon.</success_message>
+                    <enable_fields>1,2,3,4,5,6,7,8</enable_fields>
+                    <allowed_file_types>jpeg,jpg,png</allowed_file_types>
+                </form_settings>
+                <change_label>
+                    <first_name>First Name</first_name>
+                    <last_name>Last Name</last_name>
+                    <company_name>Company Name</company_name>
+                    <tax_vat_number>Tax/VAT Number</tax_vat_number>
+                    <street_address>Street Address</street_address>
+                    <city>City</city>
+                    <state>State</state>
+                    <country>Country</country>
+                    <zip_postal_code>Zip/Postal Code</zip_postal_code>
+                    <contact_number>Contact Number</contact_number>
+                    <email>Email</email>
+                    <website>Website</website>
+                    <description>Description</description>
+                    <date_time>Date Time</date_time>
+                    <upload_files>Upload Files</upload_files>
+                    <extra_field_1>Extra Field 1</extra_field_1>
+                    <extra_field_2>Extra Field 2</extra_field_2>
+                    <extra_field_3>Extra Field 3</extra_field_3>
+                </change_label>
+            </form>
+            <owner_template>dealer_inquiry_owner_template_owner_email_template</owner_template>
+            <customer_template>dealer_inquiry_customer_template_customer_email_template</customer_template>
+            <create_customer_template>dealer_inquiry_create_customer_template_create_customer_email_template</create_customer_template>
+            <term_condition>
+                <enable_fields>0</enable_fields>
+                <content>All information received by us from your registration will be used in accordance with our Privacy Policy.</content>
+            </term_condition>
+            <recaptcha>
+                <enable_fields>0</enable_fields>
+            </recaptcha>
+        </dealer_inquiry>
+    </default>
+</config>

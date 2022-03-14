@@ -1,0 +1,11 @@
+<?php 
+$tierPrice = $this->getTierPricesHtml();
+$element   = $this->getElement();
+$fontSise  = $element->getData('tierprice_font_size');
+$color     = $element->getData('tierprice_color');
+?>
+<div class="ppbd-product-tierprice">
+    <div style="font-size: <?= $fontSise ?: '16' ?>px; color: <?= $color ?: '#333333' ?>">
+        <?= $tierPrice ?>
+    </div>
+</div>

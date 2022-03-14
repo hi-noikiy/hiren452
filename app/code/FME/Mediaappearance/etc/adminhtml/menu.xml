@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        
+        <update id="FME_Extensions::fmeextensions" title="FME Extensions" module="Magento_Backend" sortOrder="300" resource="FME_Extensions::fmeextensions"/>
+        <add id="FME_Mediaappearance::fmeextensions_mediaappearance" title="Media Gallery" module="FME_Mediaappearance" sortOrder="10" parent="FME_Extensions::fmeextensions" resource="FME_Mediaappearance::fmeextensions_mediaappearance"/>
+        <add id="FME_Mediaappearance::fmeextensions_mediaappearance_items" title="Manage Media" module="FME_Mediaappearance" sortOrder="20" parent="FME_Mediaappearance::fmeextensions_mediaappearance" action="mediaappearanceadmin/mediaappearance/index" resource="FME_Mediaappearance::fmeextensions_mediaappearance_items"/>
+      <add id="FME_Mediaappearance::config_mediaappearance"
+             title="Configurations" 
+             module="FME_Mediaappearance" sortOrder="36" 
+             parent="FME_Mediaappearance::fmeextensions_mediaappearance" 
+             action="adminhtml/system_config/edit/section/mediaappearance"
+             resource="FME_Mediaappearance::config_mediaappearance" /> 
+        
+        
+        </menu>
+</config>

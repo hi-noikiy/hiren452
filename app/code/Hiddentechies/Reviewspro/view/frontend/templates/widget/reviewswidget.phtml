@@ -1,0 +1,190 @@
+<?php
+$reviewsproHelper = $this->helper('Hiddentechies\Reviewspro\Helper\Data');
+
+$title = $this->getData('title');
+$reviewsCount = $this->getData('reviews_count');
+$displayDate = $this->getData('display_date');
+$displayRatings = $this->getData('display_ratings');
+$displayProduct = $this->getData('display_product');
+$enableSlider = $this->getData('enable_slider');
+$showNavigation = $this->getData('show_navigation');
+
+if ($showNavigation) {
+    $showNavigation = 'true';
+} else {
+    $showNavigation = 'false';
+}
+$showPagination = $this->getData('show_pagination');
+if ($showPagination) {
+    $showPagination = 'true';
+} else {
+    $showPagination = 'false';
+}
+$enableAutoplay = $this->getData('enable_autoplay');
+if ($enableAutoplay) {
+    $enableAutoplay = 'true';
+} else {
+    $enableAutoplay = 'false';
+}
+if ($reviewsCount == '') {
+    $reviewsCount = 5;
+}
+$itemDesktop = $this->getData('item_desktop');
+$itemSmallDesktop = $this->getData('item_small_desktop');
+$itemTablet = $this->getData('item_tablet');
+$itemSmallTablet = $this->getData('item_small_tablet');
+$itemMobile = $this->getData('item_mobile');
+$itemSmallMobile = $this->getData('item_small_mobile');
+
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+$storeManager = $objectManager->get('Magento\Store\Model\StoreManagerInterface');
+$currentStoreId = $storeManager->getStore()->getId();
+$reviewsCollection = $objectManager->get("Magento\Review\Model\ResourceModel\Review\CollectionFactory");
+
+$collection = $reviewsCollection->create()
+        ->addFieldToSelect('*')
+        ->addFieldToFilter('review_testimonial', 1)
+        ->addStoreFilter($currentStoreId)
+        ->addStatusFilter(\Magento\Review\Model\Review::STATUS_APPROVED)
+        ->setDateOrder();
+
+$collection->getSelect()->joinLeft(['hidden_reviewspro' => $collection->getTable('hidden_reviewspro')], 'main_table.review_id = hidden_reviewspro.review_id', ['review_testimonial' => 'hidden_reviewspro.review_testimonial']);
+$collection->getSelect()->limit($reviewsCount);
+$collection->addRateVotes();
+
+$_reviewItems = $collection->getItems();
+
+$format = $block->getDateFormat() ? : \IntlDateFormatter::SHORT;
+$randNum = rand(10, 1000000);
+if ($collection->getSize() > 0) {
+    ?>
+    <div class="reviews-widget-wrapper">
+        <strong class="title"><?php echo __($title); ?></strong>
+        <div class="content-main">
+            <div class="reviews-row">
+                <ul id="reviewsslider-<?php echo $randNum; ?>" class="review-items <?php if ($enableSlider == 1) { ?>reviews-pro-slider-ul<?php } ?>">
+                    <?php foreach ($collection as $_review) { ?>
+                        <li class="item" <?php if ($enableSlider == 1) { ?> style="display: none;" <?php } ?>>
+                            <div class="item-inner">
+                                <strong class="review-title">
+                                    <?php echo $_review->getTitle(); ?>
+                                </strong>
+                                <?php
+                                $reviewProductId = $_review->getEntityPkValue();
+                                if ($displayProduct == 1 && $reviewProductId != '') {
+                                    $reviewProductData = $objectManager->create('Magento\Catalog\Model\Product')->load($reviewProductId);
+                                    if (is_array($reviewProductData) && count($reviewProductData) > 0) {
+                                        ?>
+                                        <div class="pro-info">
+                                            <span class="span-label"><?php echo __('Product: '); ?></span>
+                                            <span class="span-value">
+                                                <a href="<?php echo $reviewProductData->getProductUrl(); ?>" title="<?php echo $reviewProductData->getName(); ?>">
+                                                    <?php echo $reviewProductData->getName(); ?>
+                                                </a>
+                                            </span>
+                                        </div>
+                                        <?php
+                                    }
+                                }
+                                ?>
+                                <?php
+                                if ($displayRatings == 1) {
+                                    $countRatings = count($_review->getRatingVotes());
+                                    if ($countRatings > 0) {
+                                        ?>
+                                        <div class="review-ratings">
+                                            <?php
+                                            $allRatings = 0;
+                                            foreach ($_review->getRatingVotes() as $_vote) {
+                                                $allRatings = $allRatings + $_vote->getPercent();
+                                            }
+                                            $allRatingsAvg = $allRatings / $countRatings;
+                                            ?>
+                                            <div class="rating-summary">
+                                                <div class="rating-result" title="<?php echo $allRatingsAvg; ?>%">
+                                                    <meta itemprop="worstRating" content = "1"/>
+                                                    <meta itemprop="bestRating" content = "100"/>
+                                                    <span style="width:<?php echo $allRatingsAvg; ?>%">
+                                                        <span itemprop="ratingValue"><?php echo $allRatingsAvg; ?>%</span>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    <?php } ?>
+                                <?php } ?>
+                                <p class="review-content">
+                                    <?php echo $_review->getDetail(); ?>
+                                </p>
+                                <div class="author-info">
+                                    <p>
+                                        <span class="span-label"><?php echo $block->escapeHtml(__('Review by')) ?></span>
+                                        <strong class="span-value"><?php echo $_review->getNickname(); ?></strong>
+                                    </p>
+                                    <?php if ($displayDate == 1) { ?>
+                                        <p>
+                                            <span class="span-label"><?php echo $block->escapeHtml(__('Posted on')) ?></span>
+                                            <span class="span-value"><?php echo $block->escapeHtml($block->formatDate($_review->getCreatedAt(), $format)) ?></span>
+                                        </p>
+                                    <?php } ?>
+                                </div>
+                            </div>
+                        </li>
+                    <?php } ?>
+                </ul>
+            </div>
+
+            <?php if ($enableSlider == 1) { ?>
+                <script>
+                    require(['jquery', 'reviewsproowlcarousel'], function() {
+                        jQuery(document).ready(function() {
+                            jQuery('#reviewsslider-<?php echo $randNum; ?>').owlCarousel({
+                                items: <?php echo $itemDesktop; ?>,
+                                itemsDesktop: [1199, <?php echo $itemSmallDesktop; ?>],
+                                itemsDesktopSmall: [991, <?php echo $itemTablet; ?>],
+                                itemsTablet: [767, <?php echo $itemSmallTablet; ?>],
+                                itemsTabletSmall: [639, <?php echo $itemMobile; ?>],
+                                itemsMobile: [479, <?php echo $itemSmallMobile; ?>],
+                                navigation: <?php echo $showNavigation; ?>,
+                                pagination: <?php echo $showPagination; ?>,
+                                autoPlay: <?php echo $enableAutoplay; ?>,
+                                navigationText: ["<div class='prev-arrow'>Previous</div>", "<div class='next-arrow'>Next</div>"],
+                            });
+                            jQuery('#reviewsslider-<?php echo $randNum; ?> .item').show();
+                        });
+                    });
+                </script>
+            <?php } else { ?>
+                <style>
+                    .reviews-widget-wrapper > .content-main .review-items .item {
+                        width: <?php echo 100 / $itemDesktop . '%'; ?>
+                    }
+                    @media(max-width: 1199px) {
+                        .reviews-widget-wrapper > .content-main .review-items .item {
+                            width: <?php echo 100 / $itemSmallDesktop . '%'; ?>
+                        }
+                    }
+                    @media(max-width: 991px) {
+                        .reviews-widget-wrapper > .content-main .review-items .item {
+                            width: <?php echo 100 / $itemTablet . '%'; ?>
+                        }
+                    }
+                    @media(max-width: 767px) {
+                        .reviews-widget-wrapper > .content-main .review-items .item {
+                            width: <?php echo 100 / $itemSmallTablet . '%'; ?>
+                        }
+                    }
+                    @media(max-width: 639px) {
+                        .reviews-widget-wrapper > .content-main .review-items .item {
+                            width: <?php echo 100 / $itemMobile . '%'; ?>
+                        }
+                    }
+                    @media(max-width: 479px) {
+                        .reviews-widget-wrapper > .content-main .review-items .item {
+                            width: <?php echo 100 / $itemSmallMobile . '%'; ?>
+                        }
+                    }
+                </style>
+            <?php } ?>
+        </div>
+    </div>
+<?php } ?>

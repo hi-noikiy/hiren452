@@ -1,0 +1,35 @@
+version: 2.1
+jobs:
+  test_meqp:
+    machine: true
+    working_directory: ~/repo
+    steps:
+      - checkout
+      - run: docker run --rm --init -it -e "COMPOSER_AUTH=${COMPOSER_AUTH}" -v ~/repo:/extension wizkunde/docker-meqp
+  deploy_to_satis:
+    machine: true
+    working_directory: ~/repo
+    steps:
+      - checkout
+      - run: docker run --rm --init -it -e "COMPOSER_AUTH=${COMPOSER_AUTH}" -v $(pwd)/.satis:/build -v $(pwd)/.composer:/composer composer/satis
+      - deploy:
+          command: aws s3 sync .satis/output s3://magento2connector.unific.com/ --include "*" --acl=public-read --delete
+  clear_aws_cache:
+    machine: true
+    working_directory: ~/repo
+    steps:
+      - run: aws cloudfront create-invalidation --paths "/*" --distribution-id ${AWS_DISTRIBUTION_ID}
+workflows:
+  version: 2
+  deploy_extension_to_satis:
+    jobs:
+      - test_meqp:
+          context: unific-prod
+      - deploy_to_satis:
+          context: unific-prod
+          requires:
+            - test_meqp
+      - clear_aws_cache:
+          context: unific-prod
+          requires:
+            - deploy_to_satis

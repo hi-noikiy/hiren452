@@ -1,0 +1,120 @@
+<?php
+/**
+ * Plumrocket Inc.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End-user License Agreement
+ * that is available through the world-wide-web at this URL:
+ * http://wiki.plumrocket.net/wiki/EULA
+ * If you are unable to obtain it through the world-wide-web, please
+ * send an email to support@plumrocket.com so we can send you a copy immediately.
+ *
+ * @package     Plumrocket_Ajaxcart
+ * @copyright   Copyright (c) 2019 Plumrocket Inc. (http://www.plumrocket.com)
+ * @license     http://wiki.plumrocket.net/wiki/EULA  End-user License Agreement
+ */
+?>
+<?php
+    $outputHelper   = $this->helper(\Magento\Catalog\Helper\Output::class);
+    $dataHelper     = $this->helper(\Plumrocket\Ajaxcart\Helper\Data::class);
+    /** @var \Magento\Catalog\Model\Product $product */
+    $product        = $block->getProduct();
+    $productType    = $product->getTypeId();
+?>
+<div class="pac-loader-wrapper">
+    <div class="pac-loader"></div>
+</div>
+<div class="column main">
+    <div class="product-view <?= $productType?>-product" id="pac-product-option">
+        <div class="product-essential">
+            <div id="product_addtocart_form"></div>
+            <form action="<?php echo $block->getSubmitUrl($product); ?>" method="post" id="pac_product_addtocart_form"<?php if($product->getOptions()): ?> enctype="multipart/form-data"<?php endif; ?>>
+                <div class="no-display">
+                    <input type="hidden" name="id" value="<?php echo $this->escapeHtml($this->getRequest()->getParam('id')) ?>" />
+                    <input type="hidden" name="product" value="<?php echo $product->getId() ?>" />
+                    <input type="hidden" name="related_product" id="pac-related-products-field" value="" />
+                    <?php echo $block->getBlockHtml('formkey')?>
+                </div>
+                <div class="product-shop product-info-main">
+                    <div class="pac-clearfix">
+                        <div class="pac-product-name">
+                            <span class="pac-h1"><?php echo $outputHelper->productAttribute($product, $product->getName(), 'name') ?></span>
+                        </div>
+                        <div class="pac-product-price price-box price-final_price" data-role="priceBox" data-product-id="<?php echo $product->getId(); ?>">
+                            <span><?php echo $block->getBlockHtml('product.price.final')?></span>
+                        </div>
+                    </div>
+                    <div class="product media">
+                    <?php echo $block->getChildHtml('pac.media.image'); ?>
+                    </div>
+                    <?php if (!$block->hasOptions()) : ?>
+                        <?php echo $block->getChildHtml('product_info_form_content'); ?>
+                    <?php else: ?>
+                        <?php if ($product->isSaleable() && $block->getOptionsContainer() == 'container1'):?>
+                            <?php echo $block->getChildChildHtml('options_container') ?>
+                        <?php endif; ?>
+                    <?php endif; ?>
+
+                    <?php if ($product->isSaleable() && $block->hasOptions() && $block->getOptionsContainer() == 'container2'):?>
+                        <?php echo $block->getChildChildHtml('options_container') ?>
+                    <?php endif; ?>
+                </div>
+            </form>
+        </div>
+        <?php
+            if ($dataHelper->showRelatedOnEdit()) {
+                echo $related = trim(preg_replace('/<!--(.*)-->/Uis', '', $block->getChildHtml('pac_related_products')));
+                // echo $related = trim($block->getChildHtml('pac_related_products'));
+                if (!$related) {
+                    echo $block->getChildHtml('crosssell');
+                }
+                unset($related);
+            }
+        ?>
+        <script>
+            require([
+                'jquery',
+                'mage/mage',
+                'priceBox',
+                '!domReady'
+            ], function($){
+
+                /* Add form to mage validation, refresh swatches and change submit button */
+                $('#pac_product_addtocart_form').mage('validation', {})
+                    .trigger('contentUpdated')
+                    .find('button[type=submit]')
+                    .addClass("pac-btn-cart pac-add-configure")
+                    .attr({
+                        "type" : "button",
+                        "prajaxCart" : "submit-button",
+                    });
+
+                /*Fix for configure popup width*/
+                $relatedBlock = $('.pac-block-related, #pac-related-list');
+                if (!$relatedBlock.length) {
+                    $('.pac-modal-popup .modal-inner-wrap').addClass('popup-without-related');
+                }
+
+                var priceBoxes = $('[data-role=priceBox][data-product-id=<?= $block->escapeHtml($product->getId()) ?>]');
+
+                priceBoxes = priceBoxes.filter(function(i, el){
+                    return !$(el).find('.price-from').length;
+                });
+
+                priceBoxes.priceBox({'priceConfig': <?php echo /* @escapeNotVerified */ $block->getJsonConfig() ?>});
+
+                //Fix for required field notifications
+                setTimeout(function(){
+                    var swInputs = $('#pac_product_addtocart_form input.swatch-input'),
+                        swContainers = $('#pac_product_addtocart_form div[data-role=swatch-options] div.swatch-attribute');
+                    if (swInputs.length && (swInputs.length == swContainers.length) ) {
+                        swInputs.each(function(i, el){
+                            $(el).appendTo(swContainers[i]);
+                        });
+                    }
+                },500);
+            });
+        </script>
+    </div>
+</div>

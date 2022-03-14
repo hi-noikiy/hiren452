@@ -1,0 +1,158 @@
+<?xml version="1.0"?>
+<!--
+ * Plumrocket Inc.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End-user License Agreement
+ * that is available through the world-wide-web at this URL:
+ * http://wiki.plumrocket.net/wiki/EULA
+ * If you are unable to obtain it through the world-wide-web, please
+ * send an email to support@plumrocket.com so we can send you a copy immediately.
+ *
+ * @package     Plumrocket Search Autocomplete & Suggest
+ * @copyright   Copyright (c) 2019 Plumrocket Inc. (http://www.plumrocket.com)
+ * @license     http://wiki.plumrocket.net/wiki/EULA  End-user License Agreement
+ -->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <section id="prsearch" translate="label" type="text" sortOrder="11152094" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>Search Autocomplete &amp; Suggest</label>
+            <tab>plumrocket</tab>
+            <resource>Plumrocket_Search::config_prsearch</resource>
+
+            <group id="general" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>General</label>
+                <attribute type="expanded">1</attribute>
+                <field id="version" translate="label comment" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <frontend_model>Plumrocket\Search\Block\Adminhtml\System\Config\Form\Version</frontend_model>
+                </field>
+                <field id="enabled" translate="label" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable Extension</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="serial" translate="label comment" type="text" sortOrder="30" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <frontend_model>Plumrocket\Base\Block\Adminhtml\System\Config\Form\Serial</frontend_model>
+                    <label>Serial Key</label>
+                    <hint>Search</hint>
+                </field>
+            </group>
+
+            <group id="search" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Search Settings</label>
+                <attribute type="expanded">1</attribute>
+                <field id="reindex" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <frontend_model>Plumrocket\Search\Block\Adminhtml\System\Config\Form\Reindex</frontend_model>
+                </field>
+                <field id="product_attributes" translate="label comment" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <frontend_model>Plumrocket\Search\Block\Adminhtml\System\Config\Form\Attributes</frontend_model>
+                    <label>Searchable Product Attributes</label>
+                </field>
+                <field id="filter_categories_enable" translate="label" type="select" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <label>Show Category Filter</label>
+                </field>
+                <field id="filter_categories_exclude" translate="label comment" type="multiselect" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <source_model>Plumrocket\Search\Model\System\Config\Source\Categories</source_model>
+                    <label>Hidden Categories in Filter</label>
+                    <comment><![CDATA[Selected categories will be searchable but hidden to the visitor]]></comment>
+                    <depends>
+                        <field id="prsearch/search/filter_categories_enable">1</field>
+                    </depends>
+                </field>
+                <field id="query_delay" translate="label comment" type="text" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Query Delay</label>
+                    <comment><![CDATA[In milliseconds, e.g. 500 means 0.5 of a second]]></comment>
+                </field>
+                <field id="like_separator" translate="label" type="select" sortOrder="70" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <source_model>Plumrocket\Search\Model\System\Config\Source\Andor</source_model>
+                    <label>Search Condition</label>
+                </field>
+
+                <group id="general_additional_tab" translate="label" type="text" sortOrder="70" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Additional Settings</label>
+                    <attribute type="expanded">1</attribute>
+                    <field id="general_additional" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <frontend_model>Plumrocket\Search\Block\Adminhtml\System\Config\Form\GeneralAdditional</frontend_model>
+                        <label>Standard Configuration</label>
+                    </field>
+                </group>
+
+            </group>
+            <group id="product_suggestion" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Product Suggestion Settings</label>
+                <attribute type="expanded">1</attribute>
+                <field id="enable" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <label>Display Product Suggestions</label>
+                </field>
+                <field id="count" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Max. Number of Suggestions</label>
+                    <depends>
+                        <field id="prsearch/product_suggestion/enable">1</field>
+                    </depends>
+                </field>
+                <field id="thumbs_show" translate="label" type="select" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <label>Show Thumbnails</label>
+                    <depends>
+                        <field id="prsearch/product_suggestion/enable">1</field>
+                    </depends>
+                </field>
+                <field id="price_show" translate="label" type="select" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <label>Show Price</label>
+                    <depends>
+                        <field id="prsearch/product_suggestion/enable">1</field>
+                    </depends>
+                </field>
+                <field id="rating_show" translate="label" type="select" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <label>Show Rating</label>
+                    <depends>
+                        <field id="prsearch/product_suggestion/enable">1</field>
+                    </depends>
+                </field>
+                <field id="short_description_show" translate="label" type="select" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <label>Show Short Description</label>
+                    <depends>
+                        <field id="prsearch/product_suggestion/enable">1</field>
+                    </depends>
+                </field>
+                <field id="short_description_lenght" translate="label" type="text" sortOrder="70" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Max. Length of Short Description</label>
+                    <depends>
+                        <field id="prsearch/product_suggestion/enable">1</field>
+                        <field id="prsearch/product_suggestion/short_description_show">1</field>
+                    </depends>
+                </field>
+            </group>
+            <group id="keyword_suggestion" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Keyword Suggestions Settings</label>
+                <attribute type="expanded">1</attribute>
+                <field id="category_enable" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <label>Display Category Suggestions</label>
+                </field>
+                <field id="category_count" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Max. Number of Category Suggestions</label>
+                    <depends>
+                        <field id="prsearch/keyword_suggestion/category_enable">1</field>
+                    </depends>
+                </field>
+                <field id="terms_enable" translate="label" type="select" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <label>Display Keyword Suggestions</label>
+                </field>
+                <field id="terms_count" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Max. Number of Keyword Suggestions</label>
+                    <depends>
+                        <field id="prsearch/keyword_suggestion/terms_enable">1</field>
+                    </depends>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

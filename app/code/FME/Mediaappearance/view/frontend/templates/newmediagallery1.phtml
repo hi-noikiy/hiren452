@@ -1,0 +1,306 @@
+<?php 
+    $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+    $block = $objectManager->create('FME\Mediaappearance\Block\Mediaappearance');
+    $helper = $objectManager->create('FME\Mediaappearance\Helper\Data');
+    $helperup = $objectManager->create('FME\Mediaappearance\Helper\DataUpgrade');
+   
+   
+?>
+<?php
+    $mediatype=0;//all
+    $parameter=$block->getParameters();
+    if($parameter=="video")
+    {
+       // $mediatype=1;
+        $collection=$block->getMediaAllCollectionVideos();
+    } elseif($parameter=="images") {
+       // $mediatype=2;
+        $collection=$block->getMediaAllCollectionImages();
+    }
+    else
+    {
+        $collection=$block->getMediaAllCollection();
+    }
+   // $collection=$block->getMediaappearance($mediatype);
+   // echo $block->mediagalleryHtml($collection->getData(),$parameter);
+?>
+<script type="text/javascript" >
+        
+        require(['jquery'], function($){
+
+            <?php 
+            $parameter = $this->getParameters();
+            ?>
+            <?php if($parameter =="images"): ?>
+                $("#images").attr("Selected", "Selected");
+            <?php endif; ?>
+            <?php if($parameter =="video"): ?>
+                $("#vid").attr("Selected", "Selected");
+            <?php endif; ?>
+            <?php if($parameter =="all"): ?>
+                $("#all").attr("Selected", "Selected");
+            <?php endif; ?>
+            $('#mediadrop').on('change', function () {
+                    url=  window.location.href;
+                    url = url.split('?')[0];
+                    //alert(url);
+                    url=  url+'?id='+$(this).val();
+                    window.location = url; // redirect
+                    
+                    
+
+            });
+        });
+</script>           
+<!-- ### start of the gallery definition ### -->
+<select id ="mediadrop"style="width: 10%;">
+    <option id="all" value="all">All</option>
+    <option id="vid"  value="video">Video</option>
+    <option id="images" value="images">Images</option>
+</select>
+<div id="my_nanogallery2" style="margin-top: 22px;" >
+        
+    <!-- gallery content -->
+   <?php 
+        $counto=0;
+        $counti=0;
+        
+   ?>
+
+    <?php if ($helperup->getGalleryType()=="thumb"): ?> 
+    <!-- thumB -->
+        <?php foreach ($collection as $key => $value): ?> 
+            <?php $counto++;?>
+            <?php foreach ($value as $key => $value1): ?>
+                <?php $counti++;?>
+                <?php if($value1['mediatype']==3||$value1['mediatype']=="3"): ?>
+                    <a href="<?php echo $helper->getthumblinkdata(($value1["filethumb"])); ?>"  data-ngthumb="<?php echo $helper->getthumblinkdata(($value1["filethumb"])); ?>"><?php echo $value1['media_title']; ?></a>
+                <?php endif; ?>
+                <?php if($value1['mediatype']==2||$value1['mediatype']=="2"): ?>
+                    <?php 
+                        $image_path = $helper->getthumblinkdata($value1["filethumb"]);
+                        $video_path= $helper->getMediaUrl().'mediaappearance/files/'.$value1['filename'];
+                    ?>
+                    <a href="<?php echo $video_path; ?>" data-ngthumb="<?php echo $image_path; ?>"><?php echo $value1['media_title']; ?></a>
+                <?php endif; ?>
+                <?php if($value1['mediatype']==1||$value1['mediatype']=="1"): //youtube ?>
+                    <a href="<?php echo $value1['videourl']; ?>" data-ngthumb="<?php echo $helper->getthumblinkdata(($value1["filethumb"])); ?>"><?php echo $value1['media_title']; ?></a>
+                <?php endif; ?>
+            <?php endforeach; ?>
+        <?php endforeach; ?>
+	<?php endif; ?>
+    <?php if ($helperup->getGalleryType()=="gal"): ?>
+    <!-- gALLERY -->
+        <?php foreach ($collection as $key => $value): ?> 
+            <?php $counto++;?>
+            <?php foreach ($value as $key => $value1): ?>
+                <?php $counti++;?>
+                <?php if($value1['mediatype']==3||$value1['mediatype']=="3"): ?>
+                    <a href="<?php echo $helper->getthumblinkdata(($value1["filethumb"])); ?>" data-ngid="<?php echo $value1['mediagallery_id']; ?>" data-ngthumb="<?php echo $helper->getthumblinkdata(($value1["filethumb"])); ?>"><?php echo $value1['media_title']; ?></a>
+                <?php endif; ?>
+                <?php if($value1['mediatype']==2||$value1['mediatype']=="2"): ?>
+                    <?php 
+                        $image_path = $helper->getthumblinkdata($value1["filethumb"]);
+                        $video_path= $helper->getMediaUrl().'mediaappearance/files/'.$value1['filename'];
+                    ?>
+                    <a href="<?php echo $video_path; ?>" data-ngid="<?php echo $value1['mediagallery_id']; ?>" data-ngthumb="<?php echo $image_path; ?>"><?php echo $value1['media_title']; ?></a>
+                <?php endif; ?>
+                <?php if($value1['mediatype']==1||$value1['mediatype']=="1"): //youtube ?>
+                    <a href="<?php echo $value1['videourl']; ?>" data-ngid="<?php echo $value1['mediagallery_id']; ?>" data-ngthumb="<?php echo $helper->getthumblinkdata(($value1["filethumb"])); ?>"><?php echo $value1['media_title']; ?></a>
+                <?php endif; ?>
+            <?php endforeach; ?>
+        <?php endforeach; ?>
+    <?php endif; ?>
+</div>
+<!-- ### end of the gallery definition ### -->
+
+<script type="text/javascript">
+require(['jquery','nanogallery3'], function($){
+    $("#my_nanogallery2").nanogallery2({
+
+
+
+        //Water Fall gallery
+        <?php if ($helperup->getGalleryDefaultLayout()=='wfl'): ?>
+            thumbnailHeight:           200,
+            thumbnailWidth:            200,
+            galleryMosaic:             [
+                                        { 'w': 5, 'h': 3, 'c': 2,  'r': 1 },
+                                        { 'w': 2, 'h': 2, 'c': 1,  'r': 2 },
+                                        { 'w': 2, 'h': 2, 'c': 7,  'r': 2 },
+                                        { 'w': 2, 'h': 2, 'c': 2,  'r': 4 },
+                                        { 'w': 3, 'h': 4, 'c': 4,  'r': 4 },
+                                        { 'w': 3, 'h': 4, 'c': 7,  'r': 4 },
+                                        { 'w': 2, 'h': 2, 'c': 10, 'r': 5 },
+                                        { 'w': 4, 'h': 2, 'c': 11, 'r': 6 }
+                                        ],
+            thumbnailGutterWidth:      0,
+            thumbnailGutterHeight:     0,
+            thumbnailBorderHorizontal: 5,
+            thumbnailBorderVertical:   5,
+            galleryMaxRows:            1,
+            galleryDisplayMode:        'rows',
+            galleryDisplayMode:        'pagination', 
+            thumbnailLabel:            { display : false }
+        <?php endif; ?>
+        <?php if ($helperup->getGalleryDefaultLayout()=='jl'): ?>
+            thumbnailHeight:    150,
+            thumbnailWidth:     'auto',
+            galleryLastRowFull:  true
+        <?php endif; ?>
+        //bml
+        <?php if ($helperup->getGalleryDefaultLayout()=='bml'): ?>
+            thumbnailHeight:           200,
+            thumbnailWidth:            200,
+            galleryMosaic:             [
+                                        { 'w': 2, 'h': 2, 'c': 1,  'r': 1 },
+                                        { 'w': 1, 'h': 1, 'c': 3,  'r': 1 },
+                                        { 'w': 1, 'h': 1, 'c': 3,  'r': 2 },
+                                        { 'w': 1, 'h': 2, 'c': 4,  'r': 1 },
+                                        { 'w': 2, 'h': 1, 'c': 5,  'r': 1 },
+                                        { 'w': 1, 'h': 2, 'c': 1,  'r': 3 },
+                                        { 'w': 2, 'h': 1, 'c': 2, 'r': 3 },
+                                        { 'w': 1, 'h': 1, 'c': 2, 'r': 4 },
+                                        { 'w': 2, 'h': 1, 'c': 3, 'r': 4 },
+                                        { 'w': 1, 'h': 1, 'c': 4, 'r': 3 },
+                                        { 'w': 2, 'h': 2, 'c': 5, 'r': 2 },
+                                        { 'w': 1, 'h': 1, 'c': 5, 'r': 4 },
+                                        { 'w': 1, 'h': 1, 'c': 6, 'r': 4 }
+                                        ],
+            thumbnailGutterWidth:      0,
+            thumbnailGutterHeight:     0,
+            thumbnailBorderHorizontal: 0,   
+            galleryLastRowFull:true,
+            galleryDisplayMode: 'rows',
+            thumbnailHoverEffect2: 'scale120',
+            galleryMaxRows: 1,
+        <?php endif; ?>
+
+        <?php if ($helperup->getGalleryDefaultLayout()=='il'): ?>
+            thumbnailHeight:           300,
+            thumbnailWidth: 300,
+            thumbnailBorderVertical: 0,
+            thumbnailBorderHorizontal: 0,
+            colorScheme: {
+            thumbnail: {
+                background: 'rgba(255,255,255,1)'
+            }
+            },
+            thumbnailLabel: {
+            position: 'onBottom'
+            },
+            thumbnailAlignment: 'center',
+            thumbnailGutterWidth: 80,
+            thumbnailGutterHeight: 80,
+            colorScheme: {
+            thumbnail: {
+                background: 'rgba(255,255,255,1)'
+            }
+            },
+            thumbnailHoverEffect2: [{ name: 'image_scale_1.00_1.15', duration: 500}]
+        <?php endif; ?>
+        <?php if ($helperup->getGalleryDefaultLayout()=='fc'): ?>
+            thumbnailHeight: 150, 
+            thumbnailWidth: 150,
+            album:           'none'
+        <?php endif; ?>    
+        <?php if ($helperup->getGalleryDefaultLayout()=='cwmb'): ?>
+            thumbnailHeight:         150, 
+            thumbnailWidth: 150,
+            album:                   'none',
+            galleryDisplayMode:      'moreButton',
+            galleryDisplayMoreStep:  2
+        <?php endif; ?> 
+        <?php if ($helperup->getGalleryDefaultLayout()=='pbn'): ?>
+            thumbnailHeight:       150, 
+            thumbnailWidth: 150,
+            galleryDisplayMode:    'pagination',
+            galleryMaxRows:        2,
+            galleryPaginationMode: 'numbers'
+        <?php endif; ?> 
+
+        <?php if ($helperup->getGalleryDefaultLayout()=='pbd'): ?>
+            thumbnailHeight:       150, thumbnailWidth: 150,
+            album:                 'none',
+            galleryDisplayMode:    'pagination',
+            galleryMaxRows:        2,
+            galleryPaginationMode: 'dots'
+        <?php endif; ?> 
+        <?php if ($helperup->getGalleryDefaultLayout()=='pbr'): ?>
+            thumbnailHeight:     150, 
+            thumbnailWidth: 150,
+            album:               'none',
+            galleryDisplayMode:  'rows',
+            galleryMaxRows:      2,
+            galleryLastRowFull:  true
+        <?php endif; ?>
+
+        <?php if ($helperup->getGalleryDefaultLayout()=='cl'): ?>
+        thumbnailWidth:  <?php echo $helperup->getOverallWidth(); ?>,
+        thumbnailHeight: <?php echo $helperup->getOverallHeight(); ?>,
+        thumbnailBorderHorizontal: <?php echo $helperup->getNanoThumbTBH(); ?>,
+        thumbnailBorderVertical:<?php echo $helperup->getNanoThumbTBV(); ?>,
+        thumbnailGutterWidth:<?php echo $helperup->getNanoThumbTGW(); ?>,
+        thumbnailGutterHeight: <?php echo $helperup->getNanoThumbTGH(); ?>,
+        thumbnailAlignment: '<?php echo $helperup->getNanoThumbAlign(); ?>',
+        <?php if ($helperup->getNanolayout()=='mosaic'): ?>
+            galleryMosaic :  <?php echo $helperup->getNanoMosacSettings(); ?>,
+        <?php endif; ?>
+            thumbnailDisplayInterval: <?php echo $helperup->getNanoThumbDisplayInterval(); ?>,
+            thumbnailDisplayTransition:'<?php echo $helperup->getNanoThumbDisplayTransition(); ?>',
+            thumbnailDisplayTransitionDuration: <?php echo $helperup->getNanoThumbDisplayTransitionDuration(); ?>,
+            thumbnailLabel:     { position: '<?php echo $helperup->getNanoThumbGalleryLabelPosition(); ?>', align: '<?php echo $helperup->getNanoThumbGalleryLabelPosition(); ?>', display : <?php echo $helperup->isLabelDisplay(); ?>},
+            
+            thumbnailStacksTranslateZ: 0.3,
+            thumbnailStacksRotateX:    0.9,
+           
+            thumbnailHoverEffect2: <?php echo $helperup->getNanoThumbHoverEffect(); ?>,
+            thumbnailToolbarImage: { topLeft:'<?php echo $helperup->getNanoThumbToolTL(); ?>', topRight: '<?php echo $helperup->getNanoThumbToolTR(); ?>', bottomLeft: '<?php echo $helperup->getNanoThumbToolBL(); ?>', bottomRight: '<?php echo $helperup->getNanoThumbToolBR(); ?>'},
+            thumbnailStacks:         4,
+            thumbnailStacksRotateY:  0.4,
+            thumbnailBuildInit2:     'thumbnail_transform-origin_50% 150%',
+
+            viewerToolbar:    {
+            standard:  '<?php echo $helperup->getNanoLightBOXVTS(); ?>',
+            minimized: '<?php echo $helperup->getNanoLightBOXVTB(); ?>' },
+            viewerTools:    {
+            topLeft:   '<?php echo $helperup->getNanoLightBOXTL(); ?>',
+            topRight:  '<?php echo $helperup->getNanoLightBOXTR(); ?>' },
+            colorScheme: {
+                thumbnail: {
+                    borderColor: '<?php echo $helperup->getGalleryBackgroundColor(); ?>'
+                }
+                },  
+            <?php if ($helperup->getGalleryPaginition()=='plr'): ?>
+                <?php if ($helperup->isAllowMaxRows()): ?>
+                    galleryDisplayMode: 'rows',
+                    galleryMaxRows: <?php echo $helperup->getMaxRows(); ?>,
+                <?php endif; ?>
+                galleryLastRowFull: <?php echo $helperup->getGalleryThumbLastFill(); ?>,
+            <?php endif; ?>
+            <?php if ($helperup->getGalleryPaginition()=='pbtoon'): ?>
+                galleryDisplayMode: 'moreButton',
+                galleryDisplayMoreStep: <?php echo $helperup->getGalleryPaginitionMoreStep(); ?>,
+            <?php endif; ?>
+            <?php if ($helperup->getGalleryPaginition()=='pdot'): ?>
+                galleryDisplayMode: 'pagination',
+                galleryMaxRows: <?php echo $helperup->getGalleryPaginitionRowsDots();?>,
+                galleryPaginationMode: 'dots',
+            <?php endif; ?>
+            <?php if ($helperup->getGalleryPaginition()=='pnum'): ?>
+                galleryDisplayMode: 'pagination',
+                galleryMaxRows: <?php echo $helperup->getGalleryPaginitionRowsNums();?>,
+                galleryPaginationMode: 'numbers',
+            <?php endif; ?>
+            <?php if ($helperup->getGalleryPaginition()=='prect'): ?>
+                galleryDisplayMode: 'pagination',
+                galleryMaxRows: <?php echo $helperup->getGalleryPaginitionRowsRect(); ?>,
+            <?php endif; ?>
+
+        <?php endif; ?>
+
+
+    });
+});
+
+</script>

@@ -1,0 +1,20 @@
+<?php
+$ratingSummary = (int) $this->getRatingSummary();
+$dataHelper    = $this->helper('\Magezon\ProductPagePdf\Helper\Data');
+$imgLoad       = '/app/code/Magezon/ProductPagePdf/view/frontend/web/images/' . $ratingSummary . '.png';
+$src           = $dataHelper->getRootPath() . $imgLoad;
+?>
+<div class="ppbd-reviews-summary">
+    <div class="item review-item">
+        <div class="review-ratings">
+            <div class="rating-summary item">
+               <span class="label rating-label"><?= __('Reviews Summary: ') ?> <?= $ratingSummary ?><?= __('%') ?></span>
+                <div class="rating-result" title="<?= $ratingSummary ?>%">
+                    <span class="ratingValue" style="width:<?= $ratingSummary ?>%">
+                        <img src="<?= $src ?>" />
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

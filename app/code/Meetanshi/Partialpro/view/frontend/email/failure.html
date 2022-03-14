@@ -1,0 +1,59 @@
+
+<!--@subject Installment Auto Capture Failure for the Order {{var order_id}}  @-->
+
+<body leftmargin="0" topmargin="0" marginwidth="0" marginheight="0" bgcolor="#eaeced" style="background-color: #eaeced;margin:0; padding:0; -webkit-text-size-adjust:none; -ms-text-size-adjust:none;width:100%;margin: 0 auto;padding: 25px 0px;">
+
+<div style="width:100%;margin: 0 auto;max-width: 625px">
+    <div class="logodiv" style="width:100%;text-align: center">
+        <a href= "{{var store_url}}">
+            <img width="244px" src = "{{var logo_url }}" alt="{{var logo_alt}}" border="0" />
+        </a>
+    </div>
+    <table style="width: 100%">
+        <tr>
+            <td align="center" valign="top" style="padding:20px 0 20px 0">
+                <table cellspacing="0" cellpadding="10" border="0">
+                    <tr style="background-color: #fff">
+                        <td valign="top" colspan="5" style="padding: 20px;">
+                            <p style="color:#888888; font-size:20px; margin-bottom: 16px;">Hello <span style="font-size: 20px;color:#000;">{{var customer_name}}</span>,</p>
+                            <p style="color:#888888; font-size:16px; margin-bottom: 0px;">
+
+                                We are sorry to inform you that our attempt to auto capture installment payment
+                                for the {{var order_id}} of amount {{var amount}} has been failed due to
+                                insufficient card balance. Please pay the installment ASAP by
+                                <a style="color: #f1592a" href='{{config path="web/secure/base_url"}}customer/account/login'>Logging into your Account</a>
+                                to avoid order cancellation or penalty charges.
+
+                                <br><br>
+                                Your installment payment detail is as below:
+
+                        </td>
+                    </tr>
+                    <tr style="background-color: #fff;">
+                        <td bgcolor="#EAEAEA" align="center" style="background:#fff; text-align:center;font-size: 13px;padding: 20px;padding-bottom: 0;">
+                            {{var partialpayment_installment_grid|raw}}
+                        </td>
+                    </tr>
+                    <tr style="background-color: #fff;">
+                        <td valign="top" colspan="5" style="padding: 20px;padding-top: 0;">
+                            <p style=" font-size:16px; margin-bottom: 20px;color:#888888;text-align: center">
+                                If you have paid recently, ignore this Email and accept our thanks.
+                            </p>
+                        </td>
+                    </tr>
+                    <tr style="background-color: #fff;margin-top: 20px;display: block;">
+                        <td valign="top" colspan="5" style="padding: 0">
+                            <p style=" font-size:16px; line-height:25px; margin:0; padding:13px 18px; background:#fff; text-align:center;color: #888888">
+                                <span style="width: 100%;float: left;text-transform: uppercase;font-size: 26px;margin: 10px 0;color: #f1592a;font-weight: bold;">Thank you!</span>
+                                for choosing {{var store.getFrontendName()}}. Visit
+                                <a style="color: #f1592a" href='{{config path="web/secure/base_url"}}'>{{config path="web/secure/base_url"}}</a>
+                                for more products and exciting offers.
+                            </p>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+</div>
+</body>

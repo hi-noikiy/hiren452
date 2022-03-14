@@ -1,0 +1,59 @@
+"Clear Log","Clear Log"
+"Are you sure you want to remove all the logs?","Are you sure you want to remove all the logs?"
+Back,Back
+"SMTP Email View","SMTP Email View"
+Send,Send
+"SMTP Email Log","SMTP Email Log"
+"All the logs have been removed.","All the logs have been removed."
+"Something went wrong.","Something went wrong."
+"Email was sent successfully.","Email was sent successfully."
+Error(s),Error(s)
+"Email address is invalid.","Email address is invalid."
+"SMTP host is invalid.","SMTP host is invalid."
+"SMTP port is invalid.","SMTP port is invalid."
+"SMTP Test Email","SMTP Test Email"
+None,None
+"Username and Password","Username and Password"
+Enabled,Enabled
+Disabled,Disabled
+TLS,TLS
+SSL,SSL
+Error,Error
+Success,Success
+"The host is not specified. Please check the extension configuration.","The host is not specified. Please check the extension configuration."
+From:,From:
+To:,To:
+"Email Content:","Email Content:"
+"Send test email","Send test email"
+SMTP,SMTP
+General,General
+"Enable Extension","Enable Extension"
+"SMTP Configuration","SMTP Configuration"
+Host,Host
+"SMTP server name or IP address.","SMTP server name or IP address."
+Port,Port
+"Default ports: 25, 465, or 587. Port 465 (coupled with SSL encryption), Port 587 (coupled with TLS encryption).","Default ports: 25, 465, or 587. Port 465 (coupled with SSL encryption), Port 587 (coupled with TLS encryption)."
+Encryption,Encryption
+"For most servers SSL is the recommended option.","For most servers SSL is the recommended option."
+Authentication,Authentication
+"Please choose your authentication method.","Please choose your authentication method."
+Username,Username
+Password,Password
+"Send Test Email","Send Test Email"
+"Select Email Template","Select Email Template"
+"Send Email From","Send Email From"
+"Send Email To","Send Email To"
+"Developer Settings","Developer Settings"
+"Email Delivery","Email Delivery"
+"If disabled, the emails will not be sent.","If disabled, the emails will not be sent."
+Log,Log
+"Set to 'Enabled' to save sent email history.","Set to 'Enabled' to save sent email history."
+"Clear Email Log After (Days)","Clear Email Log After (Days)"
+"Automatically clear log entries after the specified number of days. If set '0' the log will not be erased.","Automatically clear log entries after the specified number of days. If set '0' the log will not be erased."
+ID,ID
+From,From
+To,To
+Subject,Subject
+"Sent At","Sent At"
+"Debug Log","Debug Log"
+Status,Status

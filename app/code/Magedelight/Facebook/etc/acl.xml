@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Acl/etc/acl.xsd">
+    <acl>
+        <resources>
+            <resource id="Magento_Backend::admin">
+                <resource id="Magedelight_Base::root" title="Magedelight" translate="title" sortOrder="40">
+                    <resource id="Magedelight_Base::md_modules">
+                        <resource id="Magedelight_Facebook::root" title="Magedelight Facebook" translate="title" sortOrder="40">
+                            <resource id="Magedelight_Facebook::attributemapper" title="Facebook Attributes Mapping" translate="title" sortOrder="10"/>
+                            <resource id="Magedelight_Facebook::categoryfeed" title="Category Products Feed" translate="title" sortOrder="20"/>
+                            <resource id="Magedelight_Facebook::importproductfeed" title="Import Products Feed" translate="title" sortOrder="30"/>
+                            <resource id="Magedelight_Facebook::feedaction" title="Products Feed Action" translate="title" sortOrder="40"/>
+                            <resource id="Magedelight_Facebook::cronhistory" title="Cron History" translate="title" sortOrder="50"/>
+                            <resource id="Magedelight_Facebook::settings" title="Settings" translate="title" sortOrder="60"/>
+                        </resource>
+                    </resource>
+                </resource>
+                <resource id="Magento_Backend::stores">
+                    <resource id="Magento_Backend::stores_settings">
+                        <resource id="Magento_Config::config">
+                            <resource id="Magedelight_Base::config_root">
+                                <resource id="Magedelight_Facebook::config_root" title="Magedelight Facebook Shop" sortOrder="50" />
+                            </resource>
+                        </resource>
+                    </resource>
+                </resource>
+            </resource>
+        </resources>
+    </acl>
+</config>

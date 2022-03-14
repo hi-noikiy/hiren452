@@ -1,0 +1,68 @@
+<?php
+/**
+ * Magedelight
+ * Copyright (C) 2019 Magedelight <info@magedelight.com>
+ *
+ * @category Magedelight
+ * @package Magedelight_Facebook
+ * @copyright Copyright (c) 2019 Mage Delight (http://www.magedelight.com/)
+ * @license http://opensource.org/licenses/gpl-3.0.html GNU General Public License,version 3 (GPL-3.0)
+ * @author Magedelight <info@magedelight.com>
+ */
+?>
+<div class="page-main-actions">
+    <div class="page-actions-placeholder" style=""></div>
+    <div class="page-actions" data-ui-id="page-actions-toolbar-content-header">
+        <div class="page-actions-inner">
+            <div class="page-actions-buttons">
+                <div title="Import CSV" class="actions-split import primary">
+                    <?php  echo $block->getFeedProductImportButtonHtml(); ?>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="admin__control-table-wrapper">
+    <form data-mage-init='{"validation":{}}' method="post" enctype="multipart/form-data" id="import_csv_form" action="<?php echo $block->getUrl('md_facebook/assignfeed/import'); ?>">
+        <fieldset class="admin__fieldset">
+            <div><input name="form_key" type="hidden" value="<?php /* @escapeNotVerified */ echo $block->getFormKey() ?>" /></div>
+            <div class="admin__field field">
+                <label class="label admin__field-label">
+                    <span></span>
+                </label>
+                <div class="admin__field-control control">
+                    <div class="admin__field">
+                        <label class="addafter" for="entity">
+                            <span id="sample-file-span" class="no-display" style="display: inline;">
+                                <a id="sample-file-link" href="<?php echo $block->getUrl('md_facebook/assignfeed/download'); ?>">
+                                    <?php echo __("Download Sample File"); ?>
+                                </a>
+                            </span>
+                        </label>
+                    </div>                            
+                </div>
+            </div>            
+            <div class="admin__field required _required">
+                <label class="admin__field-label">
+                    <span><?php echo __("Select File to Import:"); ?></span>
+                </label>
+                <div class="admin__field-control">
+                    <input id="import_file" accept=".csv" name="importfile" data-ui-id="import-form-container-form-fieldset-element-file-import-file" title="Select File to Import" class="input-file required-entry _required" type="file" aria-required="true">
+                </div>
+            </div>
+        </fieldset>
+    </form>
+</div>
+<style type="text/css">
+    .page-actions .actions-split .action-default{
+        margin-right: 0px;
+    }   
+</style>
+<script type="text/javascript">
+    function importCsv()
+    {
+       if(jQuery("#import_csv_form").valid()){
+           jQuery("#import_csv_form").submit();
+       } 
+    }
+</script>

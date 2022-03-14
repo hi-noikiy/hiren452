@@ -1,0 +1,21 @@
+<div class="fieldset-wrapper customer-information">
+    <div class="fieldset-wrapper-title">
+        <span class="title"><?php /* @escapeNotVerified */
+            echo __('Military Men Document Verification') ?></span>
+    </div>
+    <table class="admin__table-secondary">
+        <tbody>
+        <?php echo $block->getChildHtml(); ?>
+        <?php $imagePath = $block->getCustomerData($block->getCustomerId()); ?>
+        <?php if($imagePath != null): ?>
+        <tr>
+            <th><?php /* @escapeNotVerified */
+                echo __('Military Document:') ?></th>
+            <td><a target='_blank' href="<?= $block->getDownloadUrl($imagePath) ?>">View</a></td>
+        </tr>
+        <?php else: ?>
+            <span><?php /* @escapeNotVerified */echo __('Document Not Uploaded') ?></span>
+        <?php endif; ?>
+        </tbody>
+    </table>
+</div>

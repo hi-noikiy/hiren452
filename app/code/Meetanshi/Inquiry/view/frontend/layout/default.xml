@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceBlock name="header.links">
+            <block class="Meetanshi\Inquiry\Block\Link" name="dealer-inquiry-1" after="contactus.link" ifconfig="dealer_inquiry/settings/enable_top_link">
+                <arguments>
+                    <argument name="label" xsi:type="string" translate="true">Dealer Inquiry</argument>
+                    <argument name="path" xsi:type="string" translate="true">inquiry</argument>
+                </arguments>
+            </block>
+        </referenceBlock>
+        <referenceBlock name="footer_links">
+            <block class="Meetanshi\Inquiry\Block\Link" name="dealer-inquiry-2" ifconfig="dealer_inquiry/settings/enable_footer_link">
+                <arguments>
+                    <argument name="label" xsi:type="string" translate="true">Dealer Inquiry</argument>
+                    <argument name="path" xsi:type="string">inquiry</argument>
+                </arguments>
+            </block>
+        </referenceBlock>
+    </body>
+</page>

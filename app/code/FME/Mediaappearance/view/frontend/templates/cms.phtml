@@ -1,0 +1,544 @@
+<?php
+
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+
+//Load product by product id
+$helper = $objectManager->create('FME\Mediaappearance\Helper\Data');
+
+?>
+<?php if ($helper->isEnabledInFrontend()) : ?>
+<?php $collection = $this->getCmsvideos(); ?>
+<?php
+ //print_r($collection->getData()); 
+?>
+<?php endif; ?> 
+<?php
+//echo $this->_helper->getPMVTypeCMS();
+//echo $this->_helper->getNewTHemeCMS();
+ //print_r($collection->getData()); 
+?>
+<?php if (count($collection )): ?>
+<?php if ($this->_helper->enableCMSMV()): ?>
+<?php if ($this->_helper->getPMVTypeCMS()=="carousel"): ?>
+
+<div id="gallery" style="display:none;">
+			<?php
+				$i = 1;
+				foreach ($collection as $_item):
+			?> 
+
+			<?php 
+			//$data = $this->_helper->getMediaData($_item);
+			?>
+				<?php if ($_item['mediatype']=="3"): ?>
+					<img alt= "<?php echo $_item['media_title']; ?>"
+					src="<?php  echo $this->_helper->getMediaUrl().'mediaappearance/files/'.$_item['filethumb'];  ?>"
+					data-image="<?php  echo $this->_helper->getthumblinkdata($_item['filethumb']);  ?>"
+					data-description="">
+					<?php endif; ?>
+				<?php if ($_item['mediatype']=="2"): ?>
+					
+					<img alt="<?php echo $_item['media_title']; ?>"
+					src="<?php  echo $this->_helper->getMediaUrl().'mediaappearance/files/'.$_item['filethumb'];  ?>"
+					data-type="html5video"
+					data-videomp4="<?php echo $this->_helper->getMediaUrl().'mediaappearance/files/'.$_item['filename']; ?>"
+					data-title="<?php echo $_item['media_title']; ?>">
+					
+	
+
+				<?php endif; ?>
+				<?php if ($_item['mediatype']=="1"): ?>
+					<?php if ( $this->_helper->videoType($_item['videourl'])=="youtube"): ?>
+						
+						<img alt="<?php echo $_item['media_title']; ?>"
+						data-type="youtube"
+						data-image="<?php  echo $this->_helper->getthumblinkdata($_item['filethumb']);  ?>"
+						<?php  
+							$url = $_item["videourl"];
+							parse_str( parse_url( $url, PHP_URL_QUERY ), $my_array_of_vars );           
+						?> 
+						data-videoid="<?php echo $my_array_of_vars['v']; ?>"
+						data-title="<?php echo $_item['media_title']; ?>">
+					<?php endif; ?>
+						<?php if ( $this->_helper->videoType($_item['videourl'])=="vimeo"): ?>
+						
+						<img alt="<?php echo $_item['media_title']; ?>"
+						data-type="vimeo"
+						data-image="<?php  echo $this->_helper->getthumblinkdata($_item['filethumb']);  ?>"
+						<?php  
+							$url = $_item['videourl'];
+							//parse_str( parse_url( $url, PHP_URL_QUERY ), $my_array_of_vars );           
+						?> 
+						data-videoid="<?php echo substr(parse_url($url, PHP_URL_PATH), 1) ?>"
+						data-title="<?php echo $_item['media_title']; ?>">
+						
+					<?php endif; ?>
+				<?php endif; ?>
+
+			<?php
+				$i++;
+				endforeach;
+			?>
+		</div>
+		<script type="text/javascript">
+		require(['jquery','ugallery','uthemecarousel'], function ($) {
+			$("#gallery").unitegallery();
+			});
+			</script>
+<?php endif; ?> 
+<?php if ($this->_helper->getPMVTypeCMS()=="slider"): ?>
+		<div id="gallery" style="display:none;">
+			<?php
+				$i = 1;
+				foreach ($collection as $_item):
+			?> 
+
+			<?php 
+			//$data = $this->_helper->getMediaData($_item);
+			?>
+				<?php if ($_item['mediatype']=="3"): ?>
+					<img alt= "<?php echo $_item['media_title']; ?>"
+					src="<?php  echo $this->_helper->getMediaUrl().'mediaappearance/files/'.$_item['filethumb'];  ?>"
+					data-image="<?php  echo $this->_helper->getthumblinkdata($_item['filethumb']);  ?>"
+					data-description="">
+					<?php endif; ?>
+				<?php if ($_item['mediatype']=="2"): ?>
+					
+					<img alt="<?php echo $_item['media_title']; ?>"
+					src="<?php  echo $this->_helper->getMediaUrl().'mediaappearance/files/'.$_item['filethumb'];  ?>"
+					data-type="html5video"
+					data-videomp4="<?php echo $this->_helper->getMediaUrl().'mediaappearance/files/'.$_item['filename']; ?>"
+					data-title="<?php echo $_item['media_title']; ?>">
+					
+	
+
+				<?php endif; ?>
+				<?php if ($_item['mediatype']=="1"): ?>
+					<?php if ( $this->_helper->videoType($_item['videourl'])=="youtube"): ?>
+						
+						<img alt="<?php echo $_item['media_title']; ?>"
+						data-type="youtube"
+						data-image="<?php  echo $this->_helper->getthumblinkdata($_item['filethumb']);  ?>"
+						<?php  
+							$url = $_item["videourl"];
+							parse_str( parse_url( $url, PHP_URL_QUERY ), $my_array_of_vars );           
+						?> 
+						data-videoid="<?php echo $my_array_of_vars['v']; ?>"
+						data-title="<?php echo $_item['media_title']; ?>">
+					<?php endif; ?>
+						<?php if ( $this->_helper->videoType($_item['videourl'])=="vimeo"): ?>
+						
+						<img alt="<?php echo $_item['media_title']; ?>"
+						data-type="vimeo"
+						data-image="<?php  echo $this->_helper->getthumblinkdata($_item['filethumb']);  ?>"
+						<?php  
+							$url = $_item['videourl'];
+							//parse_str( parse_url( $url, PHP_URL_QUERY ), $my_array_of_vars );           
+						?> 
+						data-videoid="<?php echo substr(parse_url($url, PHP_URL_PATH), 1) ?>"
+						data-title="<?php echo $_item['media_title']; ?>">
+						
+					<?php endif; ?>
+				<?php endif; ?>
+
+			<?php
+				$i++;
+				endforeach;
+			?>
+		</div>
+		<script type="text/javascript">
+		require(['jquery','ugallery','uthemeslider'], function ($) {
+			$("#gallery").unitegallery({
+					slider_transition: "<?=  $this->_helper->getNewSliderTransition() ?>",				//fade, slide - the transition of the slide change
+					slider_transition_speed:parseInt("<?=  $this->_helper->getNewSliderTransitionDuration() ?>"),				//transition duration of slide change
+					slider_transition_easing: "easeInOutQuad",	//transition easing function of slide change
+					<?php if ($this->_helper->getNewSliderControlSwipe()): ?>
+					slider_control_swipe:true,
+					<?php else: ?>
+					slider_control_swipe:false,
+					<?php endif; ?>
+			
+					<?php if ($this->_helper->getNewSliderEnableBullet()): ?>
+					slider_enable_bullets:true,
+					<?php else: ?>
+					slider_enable_bullets:false,
+					<?php endif; ?>
+					//slider_enable_bullets: true,				//enable the bullets onslider element
+					slider_bullets_skin: "",					//skin of the bullets, if empty inherit from gallery skin
+					slider_bullets_space_between: -1,			//set the space between bullets. If -1 then will be set default space from the skins
+					slider_bullets_align_hor:"<?=  $this->_helper->getNewSliderBulletHor() ?>",			//left, center, right - bullets horizontal align
+					slider_bullets_align_vert:"<?=  $this->_helper->getNewSliderBulletVer() ?>",			//top, middle, bottom - bullets vertical algin
+					slider_bullets_offset_hor:0,				//bullets horizontal offset 
+					slider_bullets_offset_vert:10,				//bullets vertical offset
+					<?php if ($this->_helper->getNewSliderEnableArrows()): ?>
+					slider_enable_arrows:true,
+					<?php else: ?>
+					slider_enable_arrows:false,
+					<?php endif; ?>
+					//slider_enable_arrows: true,					//enable arrows onslider element
+					slider_arrows_skin: "",						//skin of the slider arrows, if empty inherit from gallery skin
+					slider_arrow_left_align_hor:"left",	  		//left, center, right - left arrow horizonal align
+					slider_arrow_left_align_vert:"middle", 		//top, middle, bottom - left arrow vertical align
+					slider_arrow_left_offset_hor:20,		  	//left arrow horizontal offset
+					slider_arrow_left_offset_vert:0,		  	//left arrow vertical offset
+					slider_arrow_right_align_hor:"right",   	//left, center, right - right arrow horizontal algin
+					slider_arrow_right_align_vert:"middle", 	//top, middle, bottom - right arrow vertical align
+					slider_arrow_right_offset_hor:20,	   		//right arrow horizontal offset 
+					slider_arrow_right_offset_vert:0,	   		//right arrow vertical offset
+					<?php if ($this->_helper->getNewSliderPIndicator()): ?>
+					slider_enable_progress_indicator:true,
+					<?php else: ?>
+					slider_enable_progress_indicator:false,
+					<?php endif; ?>
+					//slider_enable_progress_indicator: true,		 //enable progress indicator element
+					slider_progress_indicator_type: "<?=  $this->_helper->getNewSliderPIndicatorType() ?>",			 //pie, pie2, bar (if pie not supported, it will switch to bar automatically)
+					slider_progress_indicator_align_hor:"left",  //left, center, right - progress indicator horizontal align
+					slider_progress_indicator_align_vert:"<?=  $this->_helper->getNewSliderPIndicatorVAlign() ?>",	  //top, middle, bottom - progress indicator vertical align
+					slider_progress_indicator_offset_hor:16,	 //progress indicator horizontal offset 
+					slider_progress_indicator_offset_vert:36,	 //progress indicator vertical offset
+					slider_progressbar_color:"<?=  $this->_helper->getNewSliderPBarColor() ?>",			 //progress bar color
+					slider_progressbar_opacity: "<?=  $this->_helper->getNewSliderPBarOpacity() ?>",			 //progress bar opacity
+					slider_progressbar_line_width: parseInt("<?=  $this->_helper->getNewSliderPBLWidth() ?>"),			 //progress bar line width
+					<?php if ($this->_helper->getNewSliderPPTYPEFill()): ?>
+					slider_progresspie_type_fill:true,
+					<?php else: ?>
+					slider_progresspie_type_fill:false,
+					<?php endif; ?>
+					slider_progresspie_color1:  "<?=  $this->_helper->getNewSliderPPColor1() ?>",		 //the first color of the progress pie
+					slider_progresspie_color2:  "<?=  $this->_helper->getNewSliderPPColor2() ?>",		 //progress pie second color 
+					slider_progresspie_stroke_width: parseInt("<?=  $this->_helper->getNewSliderPPSWidth() ?>"),			 //progress pie stroke width 
+					slider_progresspie_width: parseInt("<?=  $this->_helper->getNewSliderPPWidth() ?>"),				 //progess pie width
+					slider_progresspie_height:parseInt("<?=  $this->_helper->getNewSliderPPHeight() ?>"),				 //progress pie height
+					<?php if ($this->_helper->getNewSliderEnablePB()): ?>
+					slider_enable_play_button:true,
+					<?php else: ?>
+					slider_enable_play_button:false,
+					<?php endif; ?>
+					//slider_enable_play_button: true,			 //true,false - enable play / pause button onslider element
+					slider_play_button_skin: "",				 //skin of the slider play button, if empty inherit from gallery skin
+					slider_play_button_align_hor:"<?=  $this->_helper->getNewSliderEnablePBHor() ?>",    	 //left, center, right - play button horizontal align
+					slider_play_button_align_vert:"<?=  $this->_helper->getNewSliderEnablePBVer() ?>",         //top, middle, bottom - play button vertical align
+					slider_play_button_offset_hor:40,	       	 //play button horizontal offset 
+					slider_play_button_offset_vert:8,	   		 //play button vertical offset
+					<?php if ($this->_helper->getNewSliderEnableFS()): ?>
+					slider_enable_fullscreen_button:true,
+					<?php else: ?>
+					slider_enable_fullscreen_button:false,
+					<?php endif; ?>
+					//slider_enable_fullscreen_button: true,		 //true,false - enable fullscreen button onslider element
+					slider_fullscreen_button_skin: "",			 //skin of the slider fullscreen button, if empty inherit from gallery skin
+					slider_fullscreen_button_align_hor:"<?=  $this->_helper->getNewSliderEnableFSHor() ?>",   //left, center, right	- fullscreen button horizonatal align
+					slider_fullscreen_button_align_vert:"<?=  $this->_helper->getNewSliderEnableFSVer() ?>",   //top, middle, bottom - fullscreen button vertical align
+					slider_fullscreen_button_offset_hor:11,	     //fullscreen button horizontal offset 
+					slider_fullscreen_button_offset_vert:9,	   	 //fullscreen button vertical offset
+					<?php if ($this->_helper->getNewSliderControlAlwaysOn()): ?>
+					slider_controls_always_on:true,
+					<?php else: ?>
+					slider_controls_always_on:false,
+					<?php endif; ?>
+					
+					slider_controls_appear_duration: parseInt("<?=  $this->_helper->getNewSliderControlAppearDur() ?>"),			 //the duration of appearing controls
+					<?php if ($this->_helper->getNewSliderEnableTextpanel()): ?>
+					slider_enable_text_panel:true,
+					<?php else: ?>
+					slider_enable_text_panel:false,
+					<?php endif; ?>
+					slider_textpanel_always_on: true,			  //true,false - text panel are always on, false - show only on mouseover
+					slider_textpanel_margin:0,					  //margin from the textpanel position according the slider_textpanel_align
+					slider_textpanel_text_valign:"middle",		  //middle, top, bottom - text vertical align
+					slider_textpanel_padding_top:10,			  //textpanel padding top 
+					slider_textpanel_padding_bottom:10,				//textpanel padding bottom
+					slider_textpanel_height: null,					//textpanel height. if null it will be set dynamically
+					slider_textpanel_padding_title_description: 5,	//the space between the title and the description
+					slider_textpanel_padding_right: 11,				//cut some space for text from right
+					slider_textpanel_padding_left: 11,				//cut some space for text from left
+					slider_textpanel_fade_duration: 200,			//the fade duration of textpanel appear
+					slider_textpanel_enable_title: true,			//enable the title text
+					slider_textpanel_enable_description: true,		//enable the description text
+					slider_textpanel_enable_bg: true,				//enable the textpanel background
+					slider_textpanel_bg_color:"<?=  $this->_helper->getNewSliderTextpanelBGColor() ?>",			//textpanel background color
+					slider_textpanel_bg_opacity: "<?=  $this->_helper->getNewSliderTextpanelOpacity() ?>",				//textpanel background opacity
+					slider_textpanel_bg_css:{},						//textpanel background css
+					slider_textpanel_css_title:{},					//textpanel additional css of the title
+					slider_textpanel_css_description:{}			    //textpanel additional css of the description				
+			});
+		});
+	</script>		
+
+<?php endif; ?> 
+<?php if ($this->_helper->getPMVTypeCMS()=="mplayer"): ?>
+<?php if ($this->_helper->getNewTHemeCMS()=="gridb" || $this->_helper->getNewTHemeCMS()=="gridl" || $this->_helper->getNewTHemeCMS()=="gridr" || $this->_helper->getNewTHemeCMS()=="gridt"): ?>
+	<div id="gallery" style="display:none;">
+			<?php
+				$i = 1;
+				foreach ($collection as $_item):
+			?> 
+
+			<?php 
+			//$data = $this->_helper->getMediaData($_item);
+			?>
+				<?php if ($_item['mediatype']=="3"): ?>
+					<img alt= "<?php echo $_item['media_title']; ?>"
+					src="<?php  echo $this->_helper->getMediaUrl().'mediaappearance/files/'.$_item['filethumb'];  ?>"
+					data-image="<?php  echo $this->_helper->getthumblinkdata($_item['filethumb']);  ?>"
+					data-description="">
+					<?php endif; ?>
+				<?php if ($_item['mediatype']=="2"): ?>
+					
+					<img alt="<?php echo $_item['media_title']; ?>"
+					src="<?php  echo $this->_helper->getMediaUrl().'mediaappearance/files/'.$_item['filethumb'];  ?>"
+					data-type="html5video"
+					data-videomp4="<?php echo $this->_helper->getMediaUrl().'mediaappearance/files/'.$_item['filename']; ?>"
+					data-title="<?php echo $_item['media_title']; ?>">
+					
+	
+
+				<?php endif; ?>
+				<?php if ($_item['mediatype']=="1"): ?>
+					<?php if ( $this->_helper->videoType($_item['videourl'])=="youtube"): ?>
+						
+						<img alt="<?php echo $_item['media_title']; ?>"
+						data-type="youtube"
+						data-image="<?php  echo $this->_helper->getthumblinkdata($_item['filethumb']);  ?>"
+						<?php  
+							$url = $_item["videourl"];
+							parse_str( parse_url( $url, PHP_URL_QUERY ), $my_array_of_vars );           
+						?> 
+						data-videoid="<?php echo $my_array_of_vars['v']; ?>"
+						data-title="<?php echo $_item['media_title']; ?>">
+					<?php endif; ?>
+						<?php if ( $this->_helper->videoType($_item['videourl'])=="vimeo"): ?>
+						
+						<img alt="<?php echo $_item['media_title']; ?>"
+						data-type="vimeo"
+						data-image="<?php  echo $this->_helper->getthumblinkdata($_item['filethumb']);  ?>"
+						<?php  
+							$url = $_item['videourl'];
+							//parse_str( parse_url( $url, PHP_URL_QUERY ), $my_array_of_vars );           
+						?> 
+						data-videoid="<?php echo substr(parse_url($url, PHP_URL_PATH), 1) ?>"
+						data-title="<?php echo $_item['media_title']; ?>">
+						
+					<?php endif; ?>
+				<?php endif; ?>
+
+			<?php
+				$i++;
+				endforeach;
+			?>
+		</div>
+		<script type="text/javascript">
+			require(['jquery','ugallery','uthemegrid'], function ($) {
+				$("#gallery").unitegallery({
+					<?php if ($this->_helper->getNewTHemeCMS()=="gridb"): ?>
+						theme_panel_position: "bottom",
+					<?php elseif ($this->_helper->getNewTHemeCMS()=="gridl"):  ?>
+					theme_panel_position: "left",
+					<?php elseif ($this->_helper->getNewTHemeCMS()=="gridt"):  ?>
+					theme_panel_position: "top",
+					<?php elseif ($this->_helper->getNewTHemeCMS()=="strgridr"):  ?>
+					theme_panel_position: "right",
+					<?php endif; ?>
+					thumb_width:parseInt("<?= /* @escapeNotVerified */ $this->_helper->getNewThumbsWidth() ?>"),							//thumb width
+					thumb_height:parseInt("<?= /* @escapeNotVerified */ $this->_helper->getNewThumbsHeight() ?>"),							//thumb height
+					<?php if ($this->_helper->getNewThumbsBE()): ?>
+						thumb_border_effect:true,
+					<?php else: ?>
+						thumb_border_effect:false,
+					<?php endif; ?>
+					thumb_border_width: parseInt("<?= /* @escapeNotVerified */ $this->_helper->getNewThumbsBW() ?>"),						//thumb border width
+					thumb_border_color: "<?= /* @escapeNotVerified */ $this->_helper->getNewThumbsBC() ?>",				//thumb border color
+					thumb_over_border_width: parseInt("<?= /* @escapeNotVerified */ $this->_helper->getNewThumbsOverBW() ?>"),					//thumb border width in mouseover state
+					thumb_over_border_color: "<?= /* @escapeNotVerified */ $this->_helper->getNewThumbsOverBC() ?>",			//thumb border color in mouseover state
+					thumb_selected_border_width: parseInt("<?= /* @escapeNotVerified */ $this->_helper->getNewThumbsSelectedBW() ?>"),				//thumb width in selected state
+					thumb_selected_border_color: "<?= /* @escapeNotVerified */ $this->_helper->getNewThumbsSelectedBC() ?>",
+					thumb_round_corners_radius:parseInt("<?= /* @escapeNotVerified */ $this->_helper->getNewThumbsRoundCorner() ?>"),
+					<?php if ($this->_helper->getNewThumbsColorOverlayEffect()): ?>
+						thumb_color_overlay_effect:true,
+					<?php else: ?>
+						thumb_color_overlay_effect:false,
+					<?php endif; ?>
+					thumb_overlay_color: "<?= /* @escapeNotVerified */ $this->_helper->getNewThumbsOVerlayColor() ?>",			//thumb overlay color
+					thumb_overlay_opacity: "<?= /* @escapeNotVerified */ $this->_helper->getNewThumbsOVerlayOpacity() ?>",					//thumb overlay color opacity
+					<?php if ($this->_helper->getNewThumbsOVerlayReverse()): ?>
+						thumb_overlay_reverse:true,
+					<?php else: ?>
+						thumb_overlay_reverse:false,
+					<?php endif; ?>
+					<?php if ($this->_helper->getNewThumbsImageOverlayEffect()): ?>
+						thumb_image_overlay_effect:true,
+					<?php else: ?>
+						thumb_image_overlay_effect:false,
+					<?php endif; ?>
+					thumb_image_overlay_type: "<?= /* @escapeNotVerified */ $this->_helper->getNewThumbsImageOverlayType() ?>",			//thumb overlay color
+					thumb_transition_duration: parseInt("<?= /* @escapeNotVerified */ $this->_helper->getNewThumbsTransitionDuration() ?>"),				//thumb effect transition duration
+					thumb_transition_easing: "easeOutQuad",		//thumb effect transition easing
+					strippanel_padding_top:parseInt("<?= /* @escapeNotVerified */ $this->_helper->getNewStripPadtop() ?>"),				//space from top of the panel
+					strippanel_padding_bottom:parseInt("<?= /* @escapeNotVerified */ $this->_helper->getNewStripPadBottom() ?>"),				//space from bottom of the panel
+					strippanel_padding_left: parseInt("<?= /* @escapeNotVerified */ $this->_helper->getNewStripPadLeft() ?>"),				//space from left of the panel
+					strippanel_padding_right:parseInt("<?= /* @escapeNotVerified */ $this->_helper->getNewStripPadRight() ?>"),				//space from right of the panel
+					strippanel_background_color:"<?= /* @escapeNotVerified */ $this->_helper->getNewStripBackgroundColor() ?>",			//thumb overlay color
+					strip_thumbs_align: "<?= /* @escapeNotVerified */ $this->_helper->getNewStripThumbAlign() ?>",			//thumb overlay color
+					strip_space_between_thumbs:parseInt("<?= /* @escapeNotVerified */ $this->_helper->getNewStripSpacebtthumbs() ?>"),				//space between thumbs
+					strip_scroll_to_thumb_duration:parseInt("<?= /* @escapeNotVerified */ $this->_helper->getNewStripScrollToThumbDur() ?>"),			//duration of scrolling to thumb
+					strip_scroll_to_thumb_easing:"easeOutCubic",		//easing of scrolling to thumb animation
+					strip_control_avia:true,					//avia control - move the strip according strip moseover position
+					strip_control_touch:true,
+					<?php if ($this->_helper->getNewGridVScrol()): ?>
+					gridpanel_vertical_scroll:true,
+					<?php else: ?>
+					gridpanel_vertical_scroll:false,
+					<?php endif; ?>
+					gridpanel_grid_align:  "<?= /* @escapeNotVerified */ $this->_helper->getNewGridGridAlign() ?>",			//top , middle , bottom, left, center, right - the align of the grid panel in the gallery 
+					gridpanel_background_color:"<?=  $this->_helper->getNewGridHandleBackColor() ?>",//W					//background color of the grid wrapper, if not set, it will be taken from the css
+					grid_num_cols: parseInt("<?=  $this->_helper->getNewGridNoColumns() ?>"),							//number of grid columns
+					grid_space_between_cols: parseInt("<?=  $this->_helper->getNewGridSpaceBtColumns() ?>"),					//space between columns
+					grid_space_between_rows: parseInt("<?=  $this->_helper->getNewGridSpaceBtRows() ?>"),					//space between rows
+					grid_transition_duration:parseInt("<?=  $this->_helper->getNewGridTransitionDuration() ?>"),					//transition of the panes change duration 
+					grid_transition_easing: "easeInOutQuad",
+					<?php if ($this->_helper->getNewGridCarousel()): ?>
+					grid_carousel:true,
+					<?php else: ?>
+					grid_carousel:false,
+					<?php endif; ?>
+				});
+			});
+		</script>
+	<?php endif; ?>
+
+
+
+<?php if ($this->_helper->getNewTHemeCMS()=="stripeb" || $this->_helper->getNewTHemeCMS()=="stripet" || $this->_helper->getNewTHemeCMS()=="striper" || $this->_helper->getNewTHemeCMS()=="stripel"): ?>
+	<div id="gallery" style="display:none;">
+			<?php
+				$i = 1;
+				foreach ($collection as $_item):
+			?> 
+
+			<?php 
+			//$data = $this->_helper->getMediaData($_item);
+			?>
+				<?php if ($_item['mediatype']=="3"): ?>
+					<img alt= "<?php echo $_item['media_title']; ?>"
+					src="<?php  echo $this->_helper->getMediaUrl().'mediaappearance/files/'.$_item['filethumb'];  ?>"
+					data-image="<?php  echo $this->_helper->getthumblinkdata($_item['filethumb']);  ?>"
+					data-description="">
+					<?php endif; ?>
+				<?php if ($_item['mediatype']=="2"): ?>
+					
+					<img alt="<?php echo $_item['media_title']; ?>"
+					src="<?php  echo $this->_helper->getMediaUrl().'mediaappearance/files/'.$_item['filethumb'];  ?>"
+					data-type="html5video"
+					data-videomp4="<?php echo $this->_helper->getMediaUrl().'mediaappearance/files/'.$_item['filename']; ?>"
+					data-title="<?php echo $_item['media_title']; ?>">
+					
+	
+
+				<?php endif; ?>
+				<?php if ($_item['mediatype']=="1"): ?>
+					<?php if ( $this->_helper->videoType($_item['videourl'])=="youtube"): ?>
+						
+						<img alt="<?php echo $_item['media_title']; ?>"
+						data-type="youtube"
+						data-image="<?php  echo $this->_helper->getthumblinkdata($_item['filethumb']);  ?>"
+						<?php  
+							$url = $_item["videourl"];
+							parse_str( parse_url( $url, PHP_URL_QUERY ), $my_array_of_vars );           
+						?> 
+						data-videoid="<?php echo $my_array_of_vars['v']; ?>"
+						data-title="<?php echo $_item['media_title']; ?>">
+					<?php endif; ?>
+						<?php if ( $this->_helper->videoType($_item['videourl'])=="vimeo"): ?>
+						
+						<img alt="<?php echo $_item['media_title']; ?>"
+						data-type="vimeo"
+						data-image="<?php  echo $this->_helper->getthumblinkdata($_item['filethumb']);  ?>"
+						<?php  
+							$url = $_item['videourl'];
+							//parse_str( parse_url( $url, PHP_URL_QUERY ), $my_array_of_vars );           
+						?> 
+						data-videoid="<?php echo substr(parse_url($url, PHP_URL_PATH), 1) ?>"
+						data-title="<?php echo $_item['media_title']; ?>">
+						
+					<?php endif; ?>
+				<?php endif; ?>
+
+			<?php
+				$i++;
+				endforeach;
+			?>
+		</div>
+	<script type="text/javascript">
+	require(['jquery','ugallery','utheme'], function ($) {
+        $("#gallery").unitegallery({
+			<?php if ($this->_helper->getNewTHemeCMS()=="stripeb"): ?>
+						theme_panel_position: "bottom",
+					<?php elseif ($this->_helper->getNewTHemeCMS()=="stripel"):  ?>
+					theme_panel_position: "left",
+					<?php elseif ($this->_helper->getNewTHemeCMS()=="stripet"):  ?>
+					theme_panel_position: "top",
+					<?php elseif ($this->_helper->getNewTHemeCMS()=="striper"):  ?>
+					theme_panel_position: "right",
+					<?php endif; ?>
+			thumb_width:parseInt("<?= /* @escapeNotVerified */ $this->_helper->getNewThumbsWidth() ?>"),							//thumb width
+			thumb_height:parseInt("<?= /* @escapeNotVerified */ $this->_helper->getNewThumbsHeight() ?>"),							//thumb height
+			<?php if ($this->_helper->getNewThumbsBE()): ?>
+            	thumb_border_effect:true,
+			<?php else: ?>
+				thumb_border_effect:false,
+			<?php endif; ?>
+			thumb_border_width: parseInt("<?= /* @escapeNotVerified */ $this->_helper->getNewThumbsBW() ?>"),						//thumb border width
+			thumb_border_color: "<?= /* @escapeNotVerified */ $this->_helper->getNewThumbsBC() ?>",				//thumb border color
+			thumb_over_border_width: parseInt("<?= /* @escapeNotVerified */ $this->_helper->getNewThumbsOverBW() ?>"),					//thumb border width in mouseover state
+			thumb_over_border_color: "<?= /* @escapeNotVerified */ $this->_helper->getNewThumbsOverBC() ?>",			//thumb border color in mouseover state
+			thumb_selected_border_width: parseInt("<?= /* @escapeNotVerified */ $this->_helper->getNewThumbsSelectedBW() ?>"),				//thumb width in selected state
+			thumb_selected_border_color: "<?= /* @escapeNotVerified */ $this->_helper->getNewThumbsSelectedBC() ?>",
+			thumb_round_corners_radius:parseInt("<?= /* @escapeNotVerified */ $this->_helper->getNewThumbsRoundCorner() ?>"),
+			<?php if ($this->_helper->getNewThumbsColorOverlayEffect()): ?>
+				thumb_color_overlay_effect:true,
+			<?php else: ?>
+				thumb_color_overlay_effect:false,
+			<?php endif; ?>
+			thumb_overlay_color: "<?= /* @escapeNotVerified */ $this->_helper->getNewThumbsOVerlayColor() ?>",			//thumb overlay color
+			thumb_overlay_opacity: "<?= /* @escapeNotVerified */ $this->_helper->getNewThumbsOVerlayOpacity() ?>",					//thumb overlay color opacity
+			<?php if ($this->_helper->getNewThumbsOVerlayReverse()): ?>
+				thumb_overlay_reverse:true,
+			<?php else: ?>
+				thumb_overlay_reverse:false,
+			<?php endif; ?>
+			<?php if ($this->_helper->getNewThumbsImageOverlayEffect()): ?>
+				thumb_image_overlay_effect:true,
+			<?php else: ?>
+				thumb_image_overlay_effect:false,
+			<?php endif; ?>
+			thumb_image_overlay_type: "<?= /* @escapeNotVerified */ $this->_helper->getNewThumbsImageOverlayType() ?>",			//thumb overlay color
+			thumb_transition_duration: parseInt("<?= /* @escapeNotVerified */ $this->_helper->getNewThumbsTransitionDuration() ?>"),				//thumb effect transition duration
+			thumb_transition_easing: "easeOutQuad",		//thumb effect transition easing
+			<?php if ($this->_helper->getNewThumbShowLoader()): ?>
+				thumb_show_loader:true,
+			<?php else: ?>
+				thumb_show_loader:false,
+			<?php endif; ?>
+			thumb_loader_type:"<?= /* @escapeNotVerified */ $this->_helper->getNewThumbLoaderType() ?>",					//dark, light - thumb loader type
+			strippanel_padding_top:parseInt("<?= /* @escapeNotVerified */ $this->_helper->getNewStripPadtop() ?>"),				//space from top of the panel
+			strippanel_padding_bottom:parseInt("<?= /* @escapeNotVerified */ $this->_helper->getNewStripPadBottom() ?>"),				//space from bottom of the panel
+			strippanel_padding_left: parseInt("<?= /* @escapeNotVerified */ $this->_helper->getNewStripPadLeft() ?>"),				//space from left of the panel
+			strippanel_padding_right:parseInt("<?= /* @escapeNotVerified */ $this->_helper->getNewStripPadRight() ?>"),				//space from right of the panel
+			strippanel_background_color:"<?= /* @escapeNotVerified */ $this->_helper->getNewStripBackgroundColor() ?>",			//thumb overlay color
+			strip_thumbs_align: "<?= /* @escapeNotVerified */ $this->_helper->getNewStripThumbAlign() ?>",			//thumb overlay color
+			strip_space_between_thumbs:parseInt("<?= /* @escapeNotVerified */ $this->_helper->getNewStripSpacebtthumbs() ?>"),				//space between thumbs
+			strip_scroll_to_thumb_duration:parseInt("<?= /* @escapeNotVerified */ $this->_helper->getNewStripScrollToThumbDur() ?>"),			//duration of scrolling to thumb
+			strip_scroll_to_thumb_easing:"easeOutCubic",		//easing of scrolling to thumb animation
+			strip_control_avia:true,					//avia control - move the strip according strip moseover position
+			strip_control_touch:true			 
+
+		});
+	});
+	</script>
+<?php endif; ?>
+
+
+<?php endif; ?>
+
+<?php endif; ?>
+<?php endif; ?>

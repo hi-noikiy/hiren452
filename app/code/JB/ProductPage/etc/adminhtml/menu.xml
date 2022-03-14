@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../Magento/Backend/etc/menu.xsd">
+    <menu>
+
+        <add id="JB_AumikaFramework::jb_productpage" title="Product Page Configuration" module="JB_ProductPage" sortOrder="6" parent="JB_AumikaFramework::jitesh" action="adminhtml/system_config/edit/section/jb_productpage" resource="JB_AumikaFramework::jb_productpage"/>
+    </menu>
+</config>

@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Acl/etc/acl.xsd">
+    <acl>
+        <resources>
+            <resource id="Magento_Backend::admin">
+                <resource id="Meetanshi_Partialpro::partialpayment" title="Partial Payment">
+                    <resource id="Meetanshi_Partialpro::managepartialpayment" title="Manage Partial Payment"/>
+                    <resource id="Meetanshi_Partialpro::revanuepartialpayment" title="Revenue Report"/>
+                    <resource id="Meetanshi_Partialpro::configpartialpayment" title="Configuration"/>
+                </resource>
+                <resource id="Magento_Backend::stores">
+                    <resource id="Magento_Backend::stores_settings">
+                        <resource id="Magento_Config::config">
+                            <resource id="Meetanshi_Partialpro::config_partial" title="Meetanshi Partial Payment" />
+                        </resource>
+                    </resource>
+                </resource>
+            </resource>
+        </resources>
+    </acl>
+</config>

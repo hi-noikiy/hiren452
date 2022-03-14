@@ -1,0 +1,89 @@
+<?php
+/**
+ * Plumrocket Inc.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End-user License Agreement
+ * that is available through the world-wide-web at this URL:
+ * http://wiki.plumrocket.net/wiki/EULA
+ * If you are unable to obtain it through the world-wide-web, please
+ * send an email to support@plumrocket.com so we can send you a copy immediately.
+ *
+ * @package     Plumrocket Ajaxcart v2.x.x
+ * @copyright   Copyright (c) 2018 Plumrocket Inc. (http://www.plumrocket.com)
+ * @license     http://wiki.plumrocket.net/wiki/EULA  End-user License Agreement
+ */
+
+/** @var \Plumrocket\Ajaxcart\Block\Catalog\Product\ProductList\Related $block */
+
+?>
+<?php
+    $items = $block->getRelatedItems();
+    $itemsCount = count($items);
+    $hasCheckbox = false;
+?>
+<?php if ($itemsCount) : ?>
+    <div class="pac-block-related">
+        <div class="pac-block-title">
+            <h2><?php echo __('Related Products') ?></h2>
+        </div>
+        <div class="pac-block-content">
+            <div class="pac-products-hld pac-clearfix" id="pac-related-list-slider">
+                <ul class="owl-carousel">
+                <?php foreach ($items as $item) : ?>
+                    <li class="pac-item">
+                        <?php if (! $item->isComposite() && $item->isSaleable()) : ?>
+                            <?php if (! $item->getRequiredOptions()) : $hasCheckbox = true; ?>
+                                <input type="checkbox" class="checkbox pac-related-checkbox" id="pac-related-checkbox<?php echo $item->getId() ?>" name="related_products[]" value="<?php echo $item->getId() ?>" />
+                            <?php endif; ?>
+                        <?php endif; ?>
+                        <div class="pac-product">
+                            <a href="<?php echo $item->getProductUrl() ?>" title="<?php echo $this->escapeHtml($item->getName()) ?>" class="product-image"><img src="<?php echo $this->helper('\Magento\Catalog\Helper\Image')->init($item, 'product_thumbnail_image')->setImageFile($item->getFile())->resize(75)->getUrl(); ?>" width="75" height="75" alt="<?php echo $this->escapeHtml($item->getName()) ?>" /></a>
+                            <div class="pac-product-details">
+                                <p class="pac-product-name"><a href="<?php echo $item->getProductUrl() ?>"><?php echo $this->escapeHtml($item->getName()) ?></a></p>
+                                <?php echo $block->getProductPrice($item); ?>
+                            </div>
+                        </div>
+                    </li>
+                <?php endforeach; ?>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        require([
+            'jquery',
+            'Plumrocket_Ajaxcart/js/owlcarousel/owl.carousel.min',
+            '!domReady'
+        ], function($){
+            "use strict";
+
+            var relatedProductsCheckFlag = false;
+
+            /* Init owl carousel */
+            /* 480 : {'items' : 3,} */
+            $("#pac-related-list-slider .owl-carousel").owlCarousel({
+                'nav' : true,
+                'responsive': {
+                    0   : {'items' : 1,},
+                    380 : {'items' : 2,},
+                },
+            });
+
+            $('#pac-popup-content').on('click', '.pac-related-checkbox', pacAddRelatedToProduct);
+
+            function pacAddRelatedToProduct(){
+                var checkboxes = $('.pac-related-checkbox');
+                var values = [];
+                for(var i=0;i<checkboxes.length;i++){
+                    if(checkboxes[i].checked) values.push(checkboxes[i].value);
+                }
+                if($('#pac-related-products-field')){
+                    $('#pac-related-products-field').val(values.join(','));
+                }
+            }
+        });
+    </script>
+<?php endif ?>

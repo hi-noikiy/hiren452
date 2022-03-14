@@ -1,0 +1,27 @@
+<?php $categoryCollection = $this->helper("BT\Homeslider\Helper\Data")->getCategoryCollection(); ?>
+<?php $helper = $this->helper("BT\Homeslider\Helper\Data"); ?>
+<div class="jb_homepageCategory">
+    <div class="container"> 
+        <h2 class="filterproduct-title"><span class="content"><strong>Shop by Category</strong></span></h2>
+    	<div id="homepage_category" class="owl-carousel">
+    		<?php foreach ($categoryCollection as $key => $value): ?>
+    			<?php if($value->getHomeCategoryImage()): ?>
+	    			<div class="item">
+						<div class="catImage">
+							<a href="<?= __($value->getUrl()) ?>">
+								<img class="jbimage" alt="#" src="<?= __($helper->getBaseUrl().$value->getHomeCategoryImage()) ?>" />
+							</a>	
+						</div>
+		                <div class="cartDetails">
+		    				<div class="catTitle"><?= __($value->getHomeCategorySortorder()) ?></div>
+		                    <div class="catDesc"></div>
+		                    <div class="cartBtn">
+		                        <a class="btn btn-default" style="font-weight: 400;" href="<?= __($value->getUrl()) ?>"><?= __('Browse') ?></a>
+		                    </div>
+		                </div>
+					</div>	
+				<?php endif; ?>
+    		<?php endforeach; ?>
+        </div>
+    </div>
+</div>

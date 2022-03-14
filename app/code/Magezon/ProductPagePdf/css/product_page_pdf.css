@@ -1,0 +1,282 @@
+/* #region => General */
+*{
+	padding:0;
+	margin:0;
+}
+h1,h2,h3,h4,h5,h6,p{
+	padding:0;
+	margin:0;
+}
+body {
+	margin: 0;
+	padding: 0;
+	line-height: 1.5;
+	font-size: 13px;
+	background-image: url(https://aumika.com/pub/media/jbpdf/Aumika_Certificate_background.jpg);
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: contain ;
+    width: 100%;
+    height: 100%;
+}
+
+
+nav ul, nav ol {
+	list-style: none none;
+}
+img {
+	border: 0;
+}
+img, object, video, embed {
+	max-height: 100%;
+	max-width: 100%;
+}
+figure {
+	margin: 0;
+}
+p {
+	margin-top: 0rem;
+	margin-bottom: 1rem;
+}
+b, strong {
+	font-weight: 700;
+}
+em, i {
+	font-style: italic;
+}
+mark {
+	background: #f6f6f6;
+	color: #000000;
+}
+hr {
+	border: 0;
+	border-top: 1px solid #cccccc;
+	margin-bottom: 20px;
+	margin-top: 20px;
+}
+dfn {
+	font-style: italic;
+}
+ul, ol {
+	margin-top: 0rem;
+	margin-bottom: 2.5rem;
+}
+ul > li, ol > li {
+	margin-top: 0rem;
+	margin-bottom: 1rem;
+}
+ul ul, ol ul, ul ol, ol ol {
+	margin-bottom: 0;
+}
+dl {
+	margin-bottom: 20px;
+	margin-top: 0;
+}
+dt {
+	font-weight: 700;
+	margin-bottom: 5px;
+	margin-top: 0;
+}
+dd {
+	margin-bottom: 10px;
+	margin-top: 0;
+	margin-left: 0;
+}
+table {
+	width: 100%;
+	border-collapse: collapse;
+	border-spacing: 0;
+	max-width: 100%;
+	line-height: 1.5 
+}
+table th {
+	text-align: left;
+}
+table > tbody > tr > th, table > tfoot > tr > th, table > tbody > tr > td, table > tfoot > tr > td {
+	vertical-align: top;
+}
+table > thead > tr > th, table > thead > tr > td {
+	vertical-align: bottom;
+}
+table > thead > tr > th, table > tbody > tr > th, table > tfoot > tr > th, table > thead > tr > td, table > tbody > tr > td, table > tfoot > tr > td {
+	padding: 11px 10px;
+}
+
+.mgz-col-md-1,.mgz-col-md-10,.mgz-col-md-11,.mgz-col-md-12,.mgz-col-md-15,.mgz-col-md-2,.mgz-col-md-25,.mgz-col-md-3,.mgz-col-md-35,.mgz-col-md-4,.mgz-col-md-45,.mgz-col-md-5,.mgz-col-md-6,.mgz-col-md-7,.mgz-col-md-8,.mgz-col-md-9{
+	float:left;
+	height:1px;
+}
+.mgz-col-md-12{
+	width:100%;
+}
+.mgz-col-md-11{
+	width:91.66666667%;
+}
+.mgz-col-md-10{
+	width:83.33333333%;
+}
+.mgz-col-md-9{
+	width:75%;
+}
+.mgz-col-md-8{
+	width:66.66666667%;
+}
+.mgz-col-md-7{
+	width:58.33333333%;
+}
+.mgz-col-md-6{
+	width:50%;
+}
+.mgz-col-md-5{
+	width:41.66666667%;
+}
+.mgz-col-md-4{
+	width:33.33333333%;
+}
+.mgz-col-md-3{
+	width:25%;
+}
+.mgz-col-md-15{
+	width:20%;
+}
+.mgz-col-md-25{
+	width:40%;
+}
+.mgz-col-md-35{
+	width:60%;
+}
+.mgz-col-md-45{
+	width:80%;
+}
+.mgz-col-md-2{
+	width:16.66666667%;
+}
+.mgz-col-md-1{
+	width:8.33333333%;
+}
+table thead th,
+table tbody td{
+    padding: 5px 10px;
+}
+strong{
+    font-weight: bold
+}
+.mgz-element-pdf_items thead th{
+    background: #edebeb
+}
+/* #endregion */
+/* ================== Customer nb ================== */
+/* #region => ppbd-product-gallerys */
+.ppbd-product-gallerys {
+	position: relative;
+	width: 100%;
+}
+.ppbd-product-gallerys .customer_gallery {
+	overflow: hidden;
+	width: 100%;
+}
+.ppbd-product-gallerys .customer_gallery .element {
+	width: 25%;
+	float: left;
+}
+.ppbd-product-gallerys .customer_gallery.simple .element {
+	width: 33.33%;
+	margin-bottom: 5px;
+	float: left;
+}
+.ppbd-product-gallerys .customer_gallery.simple .element .imgc {
+	overflow: hidden;
+	margin: 5px;
+	padding: 5px;
+	box-sizing: border-box;
+}
+/*bottom*/
+.ppbd-product-gallerys .customer_gallery.bottom .element{
+	width: 25%;
+	float: left;
+}
+.ppbd-product-gallerys .customer_gallery.bottom .element .imgc{
+	overflow: hidden;
+	margin: 5px;
+	padding: 5px;
+	box-sizing: border-box;
+}
+.ppbd-product-gallerys .customer_gallery.bottom .element.main{
+	width: 100%;
+}
+.ppbd-product-gallerys .customer_gallery.bottom .element.main .imgc {
+	padding: 5px;
+}
+/* right */
+.ppbd-product-gallerys .customer_gallery.right .element{
+	width: 25%;
+	float: right;
+}
+.ppbd-product-gallerys .customer_gallery.right .element .imgc{
+	overflow: hidden;
+	margin: 5px;
+	padding: 5px;
+	box-sizing: border-box;
+}
+.ppbd-product-gallerys .customer_gallery.right .element.main{
+	width: 75%;
+	float: left;
+}
+.ppbd-product-gallerys .customer_gallery.right .element.main .imgc {
+	padding: 5px;
+}
+/* left */
+.ppbd-product-gallerys .customer_gallery.left .element{
+	width: 25%;
+	float: left;
+}
+.ppbd-product-gallerys .customer_gallery.left .element .imgc{
+	overflow: hidden;
+	margin: 5px;
+	padding: 5px;
+	box-sizing: border-box;
+}
+.ppbd-product-gallerys .customer_gallery.left .element.main{
+	width: 75%;
+	float: right;
+}
+.ppbd-product-gallerys .customer_gallery.left .element.main .imgc {
+	padding: 5px;
+}
+/* one_row */
+.ppbd-product-gallerys .customer_gallery.one_row .element{
+	width: 100%;
+	float: left;
+}
+.ppbd-product-gallerys .customer_gallery.one_row .element .imgc{
+	overflow: hidden;
+	margin: 5px;
+	padding: 5px;
+	box-sizing: border-box;
+}
+.ppbd-product-gallerys .customer_gallery.one_row .element.main{
+	width: 100%;
+	float: left;
+}
+.ppbd-product-gallerys .customer_gallery.one_row .element.main .imgc {
+	padding: 5px;
+}
+/* two_row */
+.ppbd-product-gallerys .customer_gallery.two_row .element{
+	width: 50%;
+	float: left;
+}
+.ppbd-product-gallerys .customer_gallery.two_row .element .imgc{
+	overflow: hidden;
+	margin: 5px;
+	padding: 5px;
+	box-sizing: border-box;
+}
+.ppbd-product-gallerys .customer_gallery.two_row .element.main{
+	width: 50%;
+	float: left;
+}
+.ppbd-product-gallerys .customer_gallery.two_row .element.main .imgc {
+	padding: 5px;
+}
+/*#endregion*/

@@ -1,0 +1,1771 @@
+<?php if ($this->_helper->getModuleEnable()): ?>
+
+
+<?php
+
+
+//getModuleEnable
+
+
+$collection=$this->getMediaForBlock();
+
+//echo $this->getTilesGalleryBackgroundColor();
+//echo $this->getLType();
+?>
+<?php if ($this->getLType()=="td"): ?>
+	<?php 
+		$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+		$block = $objectManager->create('FME\Mediaappearance\Block\Mediaappearance');
+		$helper = $objectManager->create('FME\Mediaappearance\Helper\Data');
+		$helperup = $objectManager->create('FME\Mediaappearance\Helper\DataUpgrade');
+	?>
+
+	<?php if (count($collection )): ?>
+		<script>
+			require(['jquery','finalmagpop'], function($){
+				$('.open-popup-link3').magnificPopup({
+					type:'inline',
+					midClick: true // allow opening popup on middle mouse click. Always set it to true if you don't provide alternative source.
+				});
+			});
+		</script>
+		<style type="text/css">
+
+			.jR3DCarouselGallery,.jR3DCarouselGalleryCustomeTemplate {
+				margin: 0 auto; /* optional - if want to center align */
+			}
+		</style>
+		<style>
+			.white-popup {    position: relative;   
+				background: #fdfdfd;  
+				padding: 20px;    
+				width: 746px;   
+				margin: 20px auto;
+			}
+		</style>
+		<style>
+			.jR3DCarouselGalleryCustomeTemplate .captions{
+				position: relative;
+				padding: 4px 0;
+				bottom: 27px;
+				background: #ec1c8e;
+				display:block			
+			}
+			.jR3DCarouselGalleryCustomeTemplate a{
+				text-decoration: none;			
+			}
+		</style>
+		<div class="container">
+			<div class="jR3DCarouselGalleryCustomeTemplate">
+				<?php
+					$i = 1;
+					$counto=0;
+					foreach ($collection as $_item):
+				?> 
+					<?php  $value1=$_item;
+					$counto++;
+					?>
+					<?php if($value1['mediatype']==1||$value1['mediatype']=="1"): //youtube ?>
+							<a class="jR3DCarouselCustomSlide videoclass  open-youtube-link" href="<?php echo $value1['videourl']; ?>" >
+								<img src="<?php echo $helper->getthumblinkdata(($value1["filethumb"])); ?>" />
+							</a> 
+						<?php endif; ?>
+						<?php if($value1['mediatype']==2||$value1['mediatype']=="2"): ?>
+							<?php 
+								$image_path = $helper->getthumblinkdata($value1["filethumb"]);
+								$video_path= $helper->getMediaUrl().'mediaappearance/files/'.$value1['filename'];
+							?>
+							<a href="#test-popup<?php echo $counto; ?>" class="jR3DCarouselCustomSlide videoclass  open-popup-link3">
+								<img src="<?php echo $image_path; ?>" />
+							</a>
+							<div id="test-popup<?php echo $counto; ?>" class="white-popup mfp-hide">
+									<video id="player1" width="750" height="421" controls="" preload="none">
+										<source src="<?php echo $video_path; ?>" type="video/mp4"> 
+									</video>
+							</div>
+						<?php endif; ?>
+						<?php if($value1['mediatype']==3||$value1['mediatype']=="3"): ?>
+
+							<div class="jR3DCarouselCustomSlide imagegall" href="<?php echo $helper->getthumblinkdata(($value1["filethumb"])); ?>">
+								<img src="<?php echo $helper->getthumblinkdata(($value1["filethumb"])); ?>" />				
+							</div>
+						<?php endif; ?>
+				<?php
+					$i++;
+					endforeach;
+				?>
+			</div>
+		</div>
+	<?php endif; ?>
+	<script type="text/javascript">
+		require(['jquery','tdgallery'], function($){
+			var carouselCustomeTemplateProps =  {
+				width: 470, 				/* largest allowed width */
+				height: 272, 				/* largest allowed height */
+				slideLayout : 'fill',     /* "contain" (fit according to aspect ratio), "fill" (stretches object to fill) and "cover" (overflows box but maintains ratio) */
+				animation: 'slide3D', 	/* slide | scroll | fade | zoomInSlide | zoomInScroll */
+				animationCurve: 'ease',
+				animationDuration: 1900,
+				animationInterval: 2000,
+				slideClass: 'jR3DCarouselCustomSlide',
+				autoplay: false,
+				controls: true,			/* control buttons */
+				navigation: ''			/* circles | squares | '' */,
+				perspective: 2200,
+				rotationDirection: 'ltr',
+				onSlideShow: slideShownCallback
+					
+			}
+		function slideShownCallback($slide){
+			console.log("Slide shown: ", $slide.find('img').attr('src'))
+		}
+
+		jR3DCarouselCustomeTemplate = $('.jR3DCarouselGalleryCustomeTemplate').jR3DCarousel(carouselCustomeTemplateProps);
+
+
+		});
+		require(['jquery','finalmagpop'], function($){
+														
+			$('.jR3DCarouselGalleryCustomeTemplate').magnificPopup({
+				type: 'image',
+				delegate: '.jR3DCarouselCustomSlide:not(.videoclass)',
+			// delegate: '.jR3DCarouselCustomSlide:not(.open-youtube-link)',
+				gallery: {
+					enabled: true,
+					preload: [0,2],	
+					navigateByImgClick: true,
+					
+				},
+				zoom: {
+					//getPopupTime()
+					enabled: true,
+					duration: parseInt("1000"),
+					easing: 'ease-in-out',
+					opener: function(openerElement) {
+					return openerElement.is('img') ? openerElement : openerElement.find('img');
+					}
+				},
+				image: {
+					titleSrc: function(item) {
+						return item.el.parents('.tile').find('h4').html() +   item.el.parents('.tile').find('h5').html();
+					}
+				},
+				fixedContentPos: true,
+				});
+
+				
+				//open-mp4-link
+				$('#xyza').magnificPopup({
+							type: 'iframe',
+						});
+
+		});
+	</script> 
+	<script type="text/javascript" >
+		require(['jquery','finalmagpop'], function($){
+			$('.open-youtube-link').magnificPopup({
+				disableOn: 700,
+				type: 'iframe',
+				mainClass: 'mfp-fade',
+				removalDelay: 160,
+				preloader: false,
+
+				fixedContentPos: false
+				});
+		});
+	</script>
+<?php endif; ?>
+<?php if ($this->getLType()=="nano"): ?>
+
+	<?php 
+	$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+	$block = $objectManager->create('FME\Mediaappearance\Block\Mediaappearance');
+	$helper = $objectManager->create('FME\Mediaappearance\Helper\Data');
+	$helperup = $objectManager->create('FME\Mediaappearance\Helper\DataUpgrade');
+	?>
+	<?php if (count($collection )): ?>
+		<div id="my_nanogallery2" style="margin-top: 22px;" >
+			<?php if ($helperup->getGalleryType()=="thumb"): ?> 
+				<?php
+					$i = 1;
+					foreach ($collection as $_item):
+				?> 
+					<?php  $value1=$_item; ?>
+					<?php if($value1['mediatype']==3||$value1['mediatype']=="3"): ?>
+						<a href="<?php echo $helper->getthumblinkdata(($value1["filethumb"])); ?>"  data-ngthumb="<?php echo $helper->getthumblinkdata(($value1["filethumb"])); ?>"><?php echo $value1['media_title']; ?></a>
+					<?php endif; ?>
+					<?php if($value1['mediatype']==2||$value1['mediatype']=="2"): ?>
+						<?php 
+							$image_path = $helper->getthumblinkdata($value1["filethumb"]);
+							$video_path= $helper->getMediaUrl().'mediaappearance/files/'.$value1['filename'];
+						?>
+						<a href="<?php echo $video_path; ?>" data-ngthumb="<?php echo $image_path; ?>"><?php echo $value1['media_title']; ?></a>
+					<?php endif; ?>
+					<?php if($value1['mediatype']==1||$value1['mediatype']=="1"): //youtube ?>
+						<a href="<?php echo $value1['videourl']; ?>" data-ngthumb="<?php echo $helper->getthumblinkdata(($value1["filethumb"])); ?>"><?php echo $value1['media_title']; ?></a>
+					<?php endif; ?>		
+				<?php
+					$i++;
+					endforeach;
+				?>
+			<?php endif; ?>
+			<?php if ($helperup->getGalleryType()=="gal"): ?>
+				<?php
+					$i = 1;
+					foreach ($collection as $_item):
+				?> 
+					<?php  $value1=$_item; ?>
+					<?php if($value1['mediatype']==3||$value1['mediatype']=="3"): ?>
+						<a href="<?php echo $helper->getthumblinkdata(($value1["filethumb"])); ?>" data-ngid="<?php echo $value1['mediagallery_id']; ?>" data-ngthumb="<?php echo $helper->getthumblinkdata(($value1["filethumb"])); ?>"><?php echo $value1['media_title']; ?></a>
+					<?php endif; ?>
+					<?php if($value1['mediatype']==2||$value1['mediatype']=="2"): ?>
+						<?php 
+							$image_path = $helper->getthumblinkdata($value1["filethumb"]);
+							$video_path= $helper->getMediaUrl().'mediaappearance/files/'.$value1['filename'];
+						?>
+						<a href="<?php echo $video_path; ?>" data-ngid="<?php echo $value1['mediagallery_id']; ?>" data-ngthumb="<?php echo $image_path; ?>"><?php echo $value1['media_title']; ?></a>
+					<?php endif; ?>
+					<?php if($value1['mediatype']==1||$value1['mediatype']=="1"): //youtube ?>
+						<a href="<?php echo $value1['videourl']; ?>" data-ngid="<?php echo $value1['mediagallery_id']; ?>" data-ngthumb="<?php echo $helper->getthumblinkdata(($value1["filethumb"])); ?>"><?php echo $value1['media_title']; ?></a>
+					<?php endif; ?>	
+				<?php
+					$i++;
+					endforeach;
+				?>
+			<?php endif; ?>
+		<div>
+	<?php endif; ?>
+	<script type="text/javascript">
+		require(['jquery','nanogallery3'], function($){
+			$("#my_nanogallery2").nanogallery2({
+
+
+
+				//Water Fall gallery
+				<?php if ($helperup->getGalleryDefaultLayout()=='wfl'): ?>
+					thumbnailHeight:           200,
+					thumbnailWidth:            200,
+					galleryMosaic:             [
+												{ 'w': 5, 'h': 3, 'c': 2,  'r': 1 },
+												{ 'w': 2, 'h': 2, 'c': 1,  'r': 2 },
+												{ 'w': 2, 'h': 2, 'c': 7,  'r': 2 },
+												{ 'w': 2, 'h': 2, 'c': 2,  'r': 4 },
+												{ 'w': 3, 'h': 4, 'c': 4,  'r': 4 },
+												{ 'w': 3, 'h': 4, 'c': 7,  'r': 4 },
+												{ 'w': 2, 'h': 2, 'c': 10, 'r': 5 },
+												{ 'w': 4, 'h': 2, 'c': 11, 'r': 6 }
+												],
+					thumbnailGutterWidth:      0,
+					thumbnailGutterHeight:     0,
+					thumbnailBorderHorizontal: 5,
+					thumbnailBorderVertical:   5,
+					galleryMaxRows:            1,
+					galleryDisplayMode:        'rows',
+					galleryDisplayMode:        'pagination', 
+					thumbnailLabel:            { display : false }
+				<?php endif; ?>
+				<?php if ($helperup->getGalleryDefaultLayout()=='jl'): ?>
+					thumbnailHeight:    150,
+					thumbnailWidth:     'auto',
+					galleryLastRowFull:  true
+				<?php endif; ?>
+				//bml
+				<?php if ($helperup->getGalleryDefaultLayout()=='bml'): ?>
+					thumbnailHeight:           200,
+					thumbnailWidth:            200,
+					galleryMosaic:             [
+												{ 'w': 2, 'h': 2, 'c': 1,  'r': 1 },
+												{ 'w': 1, 'h': 1, 'c': 3,  'r': 1 },
+												{ 'w': 1, 'h': 1, 'c': 3,  'r': 2 },
+												{ 'w': 1, 'h': 2, 'c': 4,  'r': 1 },
+												{ 'w': 2, 'h': 1, 'c': 5,  'r': 1 },
+												{ 'w': 1, 'h': 2, 'c': 1,  'r': 3 },
+												{ 'w': 2, 'h': 1, 'c': 2, 'r': 3 },
+												{ 'w': 1, 'h': 1, 'c': 2, 'r': 4 },
+												{ 'w': 2, 'h': 1, 'c': 3, 'r': 4 },
+												{ 'w': 1, 'h': 1, 'c': 4, 'r': 3 },
+												{ 'w': 2, 'h': 2, 'c': 5, 'r': 2 },
+												{ 'w': 1, 'h': 1, 'c': 5, 'r': 4 },
+												{ 'w': 1, 'h': 1, 'c': 6, 'r': 4 }
+												],
+					thumbnailGutterWidth:      0,
+					thumbnailGutterHeight:     0,
+					thumbnailBorderHorizontal: 0,   
+					galleryLastRowFull:true,
+					galleryDisplayMode: 'rows',
+					thumbnailHoverEffect2: 'scale120',
+					galleryMaxRows: 1,
+				<?php endif; ?>
+
+				<?php if ($helperup->getGalleryDefaultLayout()=='il'): ?>
+					thumbnailHeight:           300,
+					thumbnailWidth: 300,
+					thumbnailBorderVertical: 0,
+					thumbnailBorderHorizontal: 0,
+					colorScheme: {
+					thumbnail: {
+						background: 'rgba(255,255,255,1)'
+					}
+					},
+					thumbnailLabel: {
+					position: 'onBottom'
+					},
+					thumbnailAlignment: 'center',
+					thumbnailGutterWidth: 80,
+					thumbnailGutterHeight: 80,
+					colorScheme: {
+					thumbnail: {
+						background: 'rgba(255,255,255,1)'
+					}
+					},
+					thumbnailHoverEffect2: [{ name: 'image_scale_1.00_1.15', duration: 500}]
+				<?php endif; ?>
+				<?php if ($helperup->getGalleryDefaultLayout()=='fc'): ?>
+					thumbnailHeight: 150, 
+					thumbnailWidth: 150,
+					album:           'none'
+				<?php endif; ?>    
+				<?php if ($helperup->getGalleryDefaultLayout()=='cwmb'): ?>
+					thumbnailHeight:         150, 
+					thumbnailWidth: 150,
+					album:                   'none',
+					galleryDisplayMode:      'moreButton',
+					galleryDisplayMoreStep:  2
+				<?php endif; ?> 
+				<?php if ($helperup->getGalleryDefaultLayout()=='pbn'): ?>
+					thumbnailHeight:       150, 
+					thumbnailWidth: 150,
+					galleryDisplayMode:    'pagination',
+					galleryMaxRows:        2,
+					galleryPaginationMode: 'numbers'
+				<?php endif; ?> 
+
+				<?php if ($helperup->getGalleryDefaultLayout()=='pbd'): ?>
+					thumbnailHeight:       150, thumbnailWidth: 150,
+					album:                 'none',
+					galleryDisplayMode:    'pagination',
+					galleryMaxRows:        2,
+					galleryPaginationMode: 'dots'
+				<?php endif; ?> 
+				<?php if ($helperup->getGalleryDefaultLayout()=='pbr'): ?>
+					thumbnailHeight:     150, 
+					thumbnailWidth: 150,
+					album:               'none',
+					galleryDisplayMode:  'rows',
+					galleryMaxRows:      2,
+					galleryLastRowFull:  true
+				<?php endif; ?>
+
+				<?php if ($helperup->getGalleryDefaultLayout()=='cl'): ?>
+				thumbnailWidth:  <?php echo $helperup->getOverallWidth(); ?>,
+				thumbnailHeight: <?php echo $helperup->getOverallHeight(); ?>,
+				thumbnailBorderHorizontal: <?php echo $helperup->getNanoThumbTBH(); ?>,
+				thumbnailBorderVertical:<?php echo $helperup->getNanoThumbTBV(); ?>,
+				thumbnailGutterWidth:<?php echo $helperup->getNanoThumbTGW(); ?>,
+				thumbnailGutterHeight: <?php echo $helperup->getNanoThumbTGH(); ?>,
+				thumbnailAlignment: '<?php echo $helperup->getNanoThumbAlign(); ?>',
+				<?php if ($helperup->getNanolayout()=='mosaic'): ?>
+					galleryMosaic :  <?php echo $helperup->getNanoMosacSettings(); ?>,
+				<?php endif; ?>
+					thumbnailDisplayInterval: <?php echo $helperup->getNanoThumbDisplayInterval(); ?>,
+					thumbnailDisplayTransition:'<?php echo $helperup->getNanoThumbDisplayTransition(); ?>',
+					thumbnailDisplayTransitionDuration: <?php echo $helperup->getNanoThumbDisplayTransitionDuration(); ?>,
+					thumbnailLabel:     { position: '<?php echo $helperup->getNanoThumbGalleryLabelPosition(); ?>', align: '<?php echo $helperup->getNanoThumbGalleryLabelPosition(); ?>', display : <?php echo $helperup->isLabelDisplay(); ?>},
+					
+					thumbnailStacksTranslateZ: 0.3,
+					thumbnailStacksRotateX:    0.9,
+				
+					thumbnailHoverEffect2: <?php echo $helperup->getNanoThumbHoverEffect(); ?>,
+					thumbnailToolbarImage: { topLeft:'<?php echo $helperup->getNanoThumbToolTL(); ?>', topRight: '<?php echo $helperup->getNanoThumbToolTR(); ?>', bottomLeft: '<?php echo $helperup->getNanoThumbToolBL(); ?>', bottomRight: '<?php echo $helperup->getNanoThumbToolBR(); ?>'},
+					thumbnailStacks:         4,
+					thumbnailStacksRotateY:  0.4,
+					thumbnailBuildInit2:     'thumbnail_transform-origin_50% 150%',
+
+					viewerToolbar:    {
+					standard:  '<?php echo $helperup->getNanoLightBOXVTS(); ?>',
+					minimized: '<?php echo $helperup->getNanoLightBOXVTB(); ?>' },
+					viewerTools:    {
+					topLeft:   '<?php echo $helperup->getNanoLightBOXTL(); ?>',
+					topRight:  '<?php echo $helperup->getNanoLightBOXTR(); ?>' },
+					colorScheme: {
+						thumbnail: {
+							borderColor: '<?php echo $helperup->getGalleryBackgroundColor(); ?>'
+						}
+						},  
+					<?php if ($helperup->getGalleryPaginition()=='plr'): ?>
+						<?php if ($helperup->isAllowMaxRows()): ?>
+							galleryDisplayMode: 'rows',
+							galleryMaxRows: <?php echo $helperup->getMaxRows(); ?>,
+						<?php endif; ?>
+						galleryLastRowFull: <?php echo $helperup->getGalleryThumbLastFill(); ?>,
+					<?php endif; ?>
+					<?php if ($helperup->getGalleryPaginition()=='pbtoon'): ?>
+						galleryDisplayMode: 'moreButton',
+						galleryDisplayMoreStep: <?php echo $helperup->getGalleryPaginitionMoreStep(); ?>,
+					<?php endif; ?>
+					<?php if ($helperup->getGalleryPaginition()=='pdot'): ?>
+						galleryDisplayMode: 'pagination',
+						galleryMaxRows: <?php echo $helperup->getGalleryPaginitionRowsDots();?>,
+						galleryPaginationMode: 'dots',
+					<?php endif; ?>
+					<?php if ($helperup->getGalleryPaginition()=='pnum'): ?>
+						galleryDisplayMode: 'pagination',
+						galleryMaxRows: <?php echo $helperup->getGalleryPaginitionRowsNums();?>,
+						galleryPaginationMode: 'numbers',
+					<?php endif; ?>
+					<?php if ($helperup->getGalleryPaginition()=='prect'): ?>
+						galleryDisplayMode: 'pagination',
+						galleryMaxRows: <?php echo $helperup->getGalleryPaginitionRowsRect(); ?>,
+					<?php endif; ?>
+
+				<?php endif; ?>
+
+
+			});
+		});
+	</script>
+<?php endif; ?>
+<?php if ($this->getLType()=="filter"): ?>
+
+<?php 
+
+//getMediaForBlock
+echo $this->generateMediagalleryFilter();
+?>
+<?php if (count($this->getMediaForBlock())): ?>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">        
+<style>
+.white-popup {    position: relative;   
+     /*background: #000;  */ 
+     padding: 20px;    
+     width: 746px;   
+      margin: 20px auto;}
+</style>
+<script type="text/javascript" >
+ 
+require(['jquery','finaltilesgallery','finalmagpop'], function($){
+    $('.open-popup-link').magnificPopup({
+  type:'inline',
+  midClick: true,
+  });
+});
+
+</script>
+<script>
+	   player= new MediaElementPlayer('player1', {
+            features: ['playpause', 'current', 'progress', 'duration', 'volume', 'fullscreen', 'airplay'],
+        });
+        //player.play();
+</script>
+
+<script type="text/javascript" >
+ 
+require(['jquery','finaltilesgallery','finalmagpop'], function($){
+	<?php 
+				$blockid=$this->getBlock();
+				$gall_id="gallery".$blockid;
+				?>
+				<?php
+				echo "var sr2 = \"" . $gall_id . "\"";
+				?>
+			
+                
+				
+				
+				
+			$('#'+sr2).finalTilesGallery({
+            <?php if ($this->_helper->enableMargin()): ?>
+                    	margin: parseInt("<?= /* @escapeNotVerified */ $this->_helper->getMarginSize() ?>"),
+					<?php endif; ?>
+
+					<?php if ($this->enableThumbsInColuumn()=="columns"): ?>
+                    	layout: 'columns',
+					<?php endif; ?>
+					<?php if ($this->enableThumbsInColuumn()=="final"): ?>
+                    	layout: 'final',
+					<?php endif; ?>
+
+        });
+		
+        $('#'+sr2).magnificPopup({
+					
+                    type: 'image',
+                    
+                    delegate: '.tile:not(.ftg-hidden) .tile-inner',
+                
+                    gallery: {
+                        //enablegalonPopUp
+                    <?php if ($this->_helper->enablegalonPopUp()): ?>
+                    enabled: true,
+                    <?php else: ?>
+                    enabled: false,
+                    <?php endif; ?>	
+
+                    preload: [0,2],	
+                    <?php if ($this->_helper->enablePopupNavOnCLick()): ?>
+                    navigateByImgClick: true,
+                    <?php else: ?>
+                    navigateByImgClick: false,
+                    <?php endif; ?>	
+                    },
+                    zoom: {
+                        //getPopupTime()
+                        enabled: true,
+                        duration: parseInt("<?= /* @escapeNotVerified */ $this->_helper->getPopupTime() ?>"),
+                        easing: 'ease-in-out',
+                        opener: function(openerElement) {
+                        return openerElement.is('img') ? openerElement : openerElement.find('img');
+                        }
+                    },
+                    callbacks: {
+                        change: function() {
+                            if (this.isOpen) {
+                                this.wrap.addClass('mfp-open');
+                            }
+                        }
+                    },
+                    image: {
+                    titleSrc: function(item) {
+                        return item.el.parents('.tile').find('h4').html() +   item.el.parents('.tile').find('h5').html();
+                        }
+                },
+                    fixedContentPos: true,
+            });
+            $('.pop-video').magnificPopup({
+                type: 'iframe',
+            });
+});
+</script>
+<?php endif; ?>
+<?php endif; ?>
+<?php if (count($collection )): ?>
+<?php if (!($this->getLType()=="filter" || $this->getLType()=="nano" || $this->getLType()=="td")): ?>
+        <div id="gallery<?php echo $this->getBlock() ?>" style="display:none;">
+			<?php
+				$i = 1;
+				foreach ($collection as $_item):
+			?> 
+
+			<?php 
+			//$data = $this->_helper->getMediaData($_item);
+			?>
+				<?php if ($_item['mediatype']=="3"): ?>
+					<img alt= "<?php echo $_item['media_title']; ?>"
+					src="<?php  echo $this->_helper->getthumblinkdata($_item['filethumb']);  ?>"
+					data-image="<?php  echo $this->_helper->getthumblinkdata($_item['filethumb']);  ?>"
+					 >
+					<?php endif; ?>
+				<?php if ($_item['mediatype']=="2"): ?>
+					
+					<img alt="<?php echo $_item['media_title']; ?>"
+					src="<?php  echo $this->_helper->getthumblinkdata($_item['filethumb']);  ?>"
+					data-type="html5video"
+					data-videomp4="<?php echo $this->_helper->getMediaUrl().'mediaappearance/files/'.$_item['filename']; ?>"
+					data-title="<?php echo $_item['media_title']; ?>"/>
+					
+	
+
+				<?php endif; ?>
+				<?php if ($_item['mediatype']=="1"): ?>
+					<?php if ( $this->_helper->videoType($_item['videourl'])=="youtube"): ?>
+						
+						<img alt="<?php echo $_item['media_title']; ?>"
+						data-type="youtube"
+						data-image="<?php  echo $this->_helper->getthumblinkdata($_item['filethumb']);  ?>"
+						<?php  
+							$url = $_item["videourl"];
+							parse_str( parse_url( $url, PHP_URL_QUERY ), $my_array_of_vars );           
+						?> 
+						data-videoid="<?php echo $my_array_of_vars['v']; ?>"
+						data-title="<?php echo $_item['media_title']; ?>"/>
+					<?php endif; ?>
+						<?php if ( $this->_helper->videoType($_item['videourl'])=="vimeo"): ?>
+						
+						<img alt="<?php echo $_item['media_title']; ?>"
+						data-type="vimeo"
+						data-image="<?php  echo $this->_helper->getthumblinkdata($_item['filethumb']);  ?>"
+						<?php  
+							$url = $_item['videourl'];
+							//parse_str( parse_url( $url, PHP_URL_QUERY ), $my_array_of_vars );           
+						?> 
+						data-videoid="<?php echo substr(parse_url($url, PHP_URL_PATH), 1) ?>"
+						data-title="<?php echo $_item['media_title']; ?>"/>
+						
+					<?php endif; ?>
+				<?php endif; ?>
+
+			<?php
+				$i++;
+				endforeach;
+			?>
+		</div>
+		<?php endif; ?>
+<?php if ($this->getLType()=="player_grid_bottom" || $this->getLType()=="player_grid_left" || $this->getLType()=="player_grid_right" || $this->getLType()=="player_grid_top"): ?>
+	<script type="text/javascript">
+			require(['jquery','ugallery','uthemegrid'], function ($) {
+				
+				<?php 
+				$blockid=$this->getBlock();
+				$gall_id="gallery".$blockid;
+				?>
+				<?php
+				echo "var sr2 = \"" . $gall_id . "\"";
+				?>
+			
+                
+				
+				
+				$('#'+sr2).unitegallery({
+
+					<?php if ($this->getLType()=="player_grid_bottom"): ?>
+						theme_panel_position: "bottom",
+					<?php elseif ($this->getLType()=="player_grid_left"):  ?>
+					theme_panel_position: "left",
+					<?php elseif ($this->getLType()=="player_grid_top"):  ?>
+					theme_panel_position: "top",
+					<?php elseif ($this->getLType()=="player_grid_right"):  ?>
+					theme_panel_position: "right",
+					<?php endif; ?>
+
+					
+					thumb_width:parseInt("<?= /* @escapeNotVerified */ $this->_helper->getNewThumbsWidth() ?>"),							//thumb width
+					thumb_height:parseInt("<?= /* @escapeNotVerified */ $this->_helper->getNewThumbsHeight() ?>"),							//thumb height
+					<?php if ($this->_helper->getNewThumbsBE()): ?>
+						thumb_border_effect:true,
+					<?php else: ?>
+						thumb_border_effect:false,
+					<?php endif; ?>
+					thumb_border_width: parseInt("<?= /* @escapeNotVerified */ $this->_helper->getNewThumbsBW() ?>"),						//thumb border width
+					thumb_border_color: "<?= /* @escapeNotVerified */ $this->_helper->getNewThumbsBC() ?>",				//thumb border color
+					thumb_over_border_width: parseInt("<?= /* @escapeNotVerified */ $this->_helper->getNewThumbsOverBW() ?>"),					//thumb border width in mouseover state
+					thumb_over_border_color: "<?= /* @escapeNotVerified */ $this->_helper->getNewThumbsOverBC() ?>",			//thumb border color in mouseover state
+					thumb_selected_border_width: parseInt("<?= /* @escapeNotVerified */ $this->_helper->getNewThumbsSelectedBW() ?>"),				//thumb width in selected state
+					thumb_selected_border_color: "<?= /* @escapeNotVerified */ $this->_helper->getNewThumbsSelectedBC() ?>",
+					thumb_round_corners_radius:parseInt("<?= /* @escapeNotVerified */ $this->_helper->getNewThumbsRoundCorner() ?>"),
+					<?php if ($this->_helper->getNewThumbsColorOverlayEffect()): ?>
+						thumb_color_overlay_effect:true,
+					<?php else: ?>
+						thumb_color_overlay_effect:false,
+					<?php endif; ?>
+					thumb_overlay_color: "<?= /* @escapeNotVerified */ $this->_helper->getNewThumbsOVerlayColor() ?>",			//thumb overlay color
+					thumb_overlay_opacity: "<?= /* @escapeNotVerified */ $this->_helper->getNewThumbsOVerlayOpacity() ?>",					//thumb overlay color opacity
+					<?php if ($this->_helper->getNewThumbsOVerlayReverse()): ?>
+						thumb_overlay_reverse:true,
+					<?php else: ?>
+						thumb_overlay_reverse:false,
+					<?php endif; ?>
+					<?php if ($this->_helper->getNewThumbsImageOverlayEffect()): ?>
+						thumb_image_overlay_effect:true,
+					<?php else: ?>
+						thumb_image_overlay_effect:false,
+					<?php endif; ?>
+					thumb_image_overlay_type: "<?= /* @escapeNotVerified */ $this->_helper->getNewThumbsImageOverlayType() ?>",			//thumb overlay color
+					thumb_transition_duration: parseInt("<?= /* @escapeNotVerified */ $this->_helper->getNewThumbsTransitionDuration() ?>"),				//thumb effect transition duration
+					thumb_transition_easing: "easeOutQuad",		//thumb effect transition easing
+					strippanel_padding_top:parseInt("<?= /* @escapeNotVerified */ $this->_helper->getNewStripPadtop() ?>"),				//space from top of the panel
+					strippanel_padding_bottom:parseInt("<?= /* @escapeNotVerified */ $this->_helper->getNewStripPadBottom() ?>"),				//space from bottom of the panel
+					strippanel_padding_left: parseInt("<?= /* @escapeNotVerified */ $this->_helper->getNewStripPadLeft() ?>"),				//space from left of the panel
+					strippanel_padding_right:parseInt("<?= /* @escapeNotVerified */ $this->_helper->getNewStripPadRight() ?>"),				//space from right of the panel
+					strippanel_background_color:"<?= /* @escapeNotVerified */ $this->_helper->getNewStripBackgroundColor() ?>",			//thumb overlay color
+					strip_thumbs_align: "<?= /* @escapeNotVerified */ $this->_helper->getNewStripThumbAlign() ?>",			//thumb overlay color
+					strip_space_between_thumbs:parseInt("<?= /* @escapeNotVerified */ $this->_helper->getNewStripSpacebtthumbs() ?>"),				//space between thumbs
+					strip_scroll_to_thumb_duration:parseInt("<?= /* @escapeNotVerified */ $this->_helper->getNewStripScrollToThumbDur() ?>"),			//duration of scrolling to thumb
+					strip_scroll_to_thumb_easing:"easeOutCubic",		//easing of scrolling to thumb animation
+					strip_control_avia:true,					//avia control - move the strip according strip moseover position
+					strip_control_touch:true,
+
+
+					<?php if ($this->_helper->getNewGridVScrol()): ?>
+					gridpanel_vertical_scroll:true,
+					<?php else: ?>
+					gridpanel_vertical_scroll:false,
+					<?php endif; ?>
+					gridpanel_grid_align:  "<?= /* @escapeNotVerified */ $this->_helper->getNewGridGridAlign() ?>",			//top , middle , bottom, left, center, right - the align of the grid panel in the gallery 
+					gridpanel_background_color:"<?=  $this->_helper->getNewGridHandleBackColor() ?>",//W					//background color of the grid wrapper, if not set, it will be taken from the css
+					grid_num_cols: parseInt("<?=  $this->_helper->getNewGridNoColumns() ?>"),							//number of grid columns
+					grid_space_between_cols: parseInt("<?=  $this->_helper->getNewGridSpaceBtColumns() ?>"),					//space between columns
+					grid_space_between_rows: parseInt("<?=  $this->_helper->getNewGridSpaceBtRows() ?>"),					//space between rows
+					grid_transition_duration:parseInt("<?=  $this->_helper->getNewGridTransitionDuration() ?>"),					//transition of the panes change duration 
+					grid_transition_easing: "easeInOutQuad",
+					<?php if ($this->_helper->getNewGridCarousel()): ?>
+					grid_carousel:true,
+					<?php else: ?>
+					grid_carousel:false,
+					<?php endif; ?>
+				});
+			});
+		</script>	
+	
+<?php endif; ?>
+<?php if ($this->getLType()=="player_compact_bottom" || $this->getLType()=="player_compact_left" || $this->getLType()=="player_compact_top" || $this->getLType()=="player_compact_right"): ?>
+<script type="text/javascript">
+	require(['jquery','ugallery','utheme'], function ($) {
+        <?php 
+				$blockid=$this->getBlock();
+				$gall_id="gallery".$blockid;
+				?>
+				<?php
+				echo "var sr2 = \"" . $gall_id . "\"";
+				?>
+			
+                
+				
+				
+				$('#'+sr2).unitegallery({
+					<?php if ($this->getLType()=="player_compact_bottom"): ?>
+						theme_panel_position: "bottom",
+					<?php elseif ($this->getLType()=="player_compact_left"):  ?>
+					theme_panel_position: "left",
+					<?php elseif ($this->getLType()=="player_compact_top"):  ?>
+					theme_panel_position: "top",
+					<?php elseif ($this->getLType()=="player_compact_right"):  ?>
+					theme_panel_position: "right",
+					<?php endif; ?>
+			
+			thumb_width:parseInt("<?= /* @escapeNotVerified */ $this->_helper->getNewThumbsWidth() ?>"),							//thumb width
+			thumb_height:parseInt("<?= /* @escapeNotVerified */ $this->_helper->getNewThumbsHeight() ?>"),							//thumb height
+			<?php if ($this->_helper->getNewThumbsBE()): ?>
+            	thumb_border_effect:true,
+			<?php else: ?>
+				thumb_border_effect:false,
+			<?php endif; ?>
+			thumb_border_width: parseInt("<?= /* @escapeNotVerified */ $this->_helper->getNewThumbsBW() ?>"),						//thumb border width
+			thumb_border_color: "<?= /* @escapeNotVerified */ $this->_helper->getNewThumbsBC() ?>",				//thumb border color
+			thumb_over_border_width: parseInt("<?= /* @escapeNotVerified */ $this->_helper->getNewThumbsOverBW() ?>"),					//thumb border width in mouseover state
+			thumb_over_border_color: "<?= /* @escapeNotVerified */ $this->_helper->getNewThumbsOverBC() ?>",			//thumb border color in mouseover state
+			thumb_selected_border_width: parseInt("<?= /* @escapeNotVerified */ $this->_helper->getNewThumbsSelectedBW() ?>"),				//thumb width in selected state
+			thumb_selected_border_color: "<?= /* @escapeNotVerified */ $this->_helper->getNewThumbsSelectedBC() ?>",
+			thumb_round_corners_radius:parseInt("<?= /* @escapeNotVerified */ $this->_helper->getNewThumbsRoundCorner() ?>"),
+			<?php if ($this->_helper->getNewThumbsColorOverlayEffect()): ?>
+				thumb_color_overlay_effect:true,
+			<?php else: ?>
+				thumb_color_overlay_effect:false,
+			<?php endif; ?>
+			thumb_overlay_color: "<?= /* @escapeNotVerified */ $this->_helper->getNewThumbsOVerlayColor() ?>",			//thumb overlay color
+			thumb_overlay_opacity: "<?= /* @escapeNotVerified */ $this->_helper->getNewThumbsOVerlayOpacity() ?>",					//thumb overlay color opacity
+			<?php if ($this->_helper->getNewThumbsOVerlayReverse()): ?>
+				thumb_overlay_reverse:true,
+			<?php else: ?>
+				thumb_overlay_reverse:false,
+			<?php endif; ?>
+			<?php if ($this->_helper->getNewThumbsImageOverlayEffect()): ?>
+				thumb_image_overlay_effect:true,
+			<?php else: ?>
+				thumb_image_overlay_effect:false,
+			<?php endif; ?>
+			thumb_image_overlay_type: "<?= /* @escapeNotVerified */ $this->_helper->getNewThumbsImageOverlayType() ?>",			//thumb overlay color
+			thumb_transition_duration: parseInt("<?= /* @escapeNotVerified */ $this->_helper->getNewThumbsTransitionDuration() ?>"),				//thumb effect transition duration
+			thumb_transition_easing: "easeOutQuad",		//thumb effect transition easing
+			<?php if ($this->_helper->getNewThumbShowLoader()): ?>
+				thumb_show_loader:true,
+			<?php else: ?>
+				thumb_show_loader:false,
+			<?php endif; ?>
+			thumb_loader_type:"<?= /* @escapeNotVerified */ $this->_helper->getNewThumbLoaderType() ?>",					//dark, light - thumb loader type
+			strippanel_padding_top:parseInt("<?= /* @escapeNotVerified */ $this->_helper->getNewStripPadtop() ?>"),				//space from top of the panel
+			strippanel_padding_bottom:parseInt("<?= /* @escapeNotVerified */ $this->_helper->getNewStripPadBottom() ?>"),				//space from bottom of the panel
+			strippanel_padding_left: parseInt("<?= /* @escapeNotVerified */ $this->_helper->getNewStripPadLeft() ?>"),				//space from left of the panel
+			strippanel_padding_right:parseInt("<?= /* @escapeNotVerified */ $this->_helper->getNewStripPadRight() ?>"),				//space from right of the panel
+			strippanel_background_color:"<?= /* @escapeNotVerified */ $this->_helper->getNewStripBackgroundColor() ?>",			//thumb overlay color
+			strip_thumbs_align: "<?= /* @escapeNotVerified */ $this->_helper->getNewStripThumbAlign() ?>",			//thumb overlay color
+			strip_space_between_thumbs:parseInt("<?= /* @escapeNotVerified */ $this->_helper->getNewStripSpacebtthumbs() ?>"),				//space between thumbs
+			strip_scroll_to_thumb_duration:parseInt("<?= /* @escapeNotVerified */ $this->_helper->getNewStripScrollToThumbDur() ?>"),			//duration of scrolling to thumb
+			strip_scroll_to_thumb_easing:"easeOutCubic",		//easing of scrolling to thumb animation
+			strip_control_avia:true,					//avia control - move the strip according strip moseover position
+			strip_control_touch:true			 
+
+		});
+	});
+	</script>
+	
+<?php endif; ?>
+
+<?php if ($this->getLType()=="slider"): ?>
+	<script type="text/javascript">
+		require(['jquery','ugallery','uthemeslider'], function ($) {
+			<?php 
+				$blockid=$this->getBlock();
+				$gall_id="gallery".$blockid;
+				?>
+				<?php
+				echo "var sr2 = \"" . $gall_id . "\"";
+				?>
+			
+                
+				
+				
+				$('#'+sr2).unitegallery({
+					slider_transition: "<?=  $this->_helper->getNewSliderTransition() ?>",				//fade, slide - the transition of the slide change
+					slider_transition_speed:parseInt("<?=  $this->_helper->getNewSliderTransitionDuration() ?>"),				//transition duration of slide change
+					slider_transition_easing: "easeInOutQuad",	//transition easing function of slide change
+					<?php if ($this->_helper->getNewSliderControlSwipe()): ?>
+					slider_control_swipe:true,
+					<?php else: ?>
+					slider_control_swipe:false,
+					<?php endif; ?>
+			
+					<?php if ($this->_helper->getNewSliderEnableBullet()): ?>
+					slider_enable_bullets:true,
+					<?php else: ?>
+					slider_enable_bullets:false,
+					<?php endif; ?>
+					//slider_enable_bullets: true,				//enable the bullets onslider element
+					slider_bullets_skin: "",					//skin of the bullets, if empty inherit from gallery skin
+					slider_bullets_space_between: -1,			//set the space between bullets. If -1 then will be set default space from the skins
+					slider_bullets_align_hor:"<?=  $this->_helper->getNewSliderBulletHor() ?>",			//left, center, right - bullets horizontal align
+					slider_bullets_align_vert:"<?=  $this->_helper->getNewSliderBulletVer() ?>",			//top, middle, bottom - bullets vertical algin
+					slider_bullets_offset_hor:0,				//bullets horizontal offset 
+					slider_bullets_offset_vert:10,				//bullets vertical offset
+					<?php if ($this->_helper->getNewSliderEnableArrows()): ?>
+					slider_enable_arrows:true,
+					<?php else: ?>
+					slider_enable_arrows:false,
+					<?php endif; ?>
+					//slider_enable_arrows: true,					//enable arrows onslider element
+					slider_arrows_skin: "",						//skin of the slider arrows, if empty inherit from gallery skin
+					slider_arrow_left_align_hor:"left",	  		//left, center, right - left arrow horizonal align
+					slider_arrow_left_align_vert:"middle", 		//top, middle, bottom - left arrow vertical align
+					slider_arrow_left_offset_hor:20,		  	//left arrow horizontal offset
+					slider_arrow_left_offset_vert:0,		  	//left arrow vertical offset
+					slider_arrow_right_align_hor:"right",   	//left, center, right - right arrow horizontal algin
+					slider_arrow_right_align_vert:"middle", 	//top, middle, bottom - right arrow vertical align
+					slider_arrow_right_offset_hor:20,	   		//right arrow horizontal offset 
+					slider_arrow_right_offset_vert:0,	   		//right arrow vertical offset
+					<?php if ($this->_helper->getNewSliderPIndicator()): ?>
+					slider_enable_progress_indicator:true,
+					<?php else: ?>
+					slider_enable_progress_indicator:false,
+					<?php endif; ?>
+					//slider_enable_progress_indicator: true,		 //enable progress indicator element
+					slider_progress_indicator_type: "<?=  $this->_helper->getNewSliderPIndicatorType() ?>",			 //pie, pie2, bar (if pie not supported, it will switch to bar automatically)
+					slider_progress_indicator_align_hor:"left",  //left, center, right - progress indicator horizontal align
+					slider_progress_indicator_align_vert:"<?=  $this->_helper->getNewSliderPIndicatorVAlign() ?>",	  //top, middle, bottom - progress indicator vertical align
+					slider_progress_indicator_offset_hor:16,	 //progress indicator horizontal offset 
+					slider_progress_indicator_offset_vert:36,	 //progress indicator vertical offset
+					slider_progressbar_color:"<?=  $this->_helper->getNewSliderPBarColor() ?>",			 //progress bar color
+					slider_progressbar_opacity: "<?=  $this->_helper->getNewSliderPBarOpacity() ?>",			 //progress bar opacity
+					slider_progressbar_line_width: parseInt("<?=  $this->_helper->getNewSliderPBLWidth() ?>"),			 //progress bar line width
+					<?php if ($this->_helper->getNewSliderPPTYPEFill()): ?>
+					slider_progresspie_type_fill:true,
+					<?php else: ?>
+					slider_progresspie_type_fill:false,
+					<?php endif; ?>
+					slider_progresspie_color1:  "<?=  $this->_helper->getNewSliderPPColor1() ?>",		 //the first color of the progress pie
+					slider_progresspie_color2:  "<?=  $this->_helper->getNewSliderPPColor2() ?>",		 //progress pie second color 
+					slider_progresspie_stroke_width: parseInt("<?=  $this->_helper->getNewSliderPPSWidth() ?>"),			 //progress pie stroke width 
+					slider_progresspie_width: parseInt("<?=  $this->_helper->getNewSliderPPWidth() ?>"),				 //progess pie width
+					slider_progresspie_height:parseInt("<?=  $this->_helper->getNewSliderPPHeight() ?>"),				 //progress pie height
+					<?php if ($this->_helper->getNewSliderEnablePB()): ?>
+					slider_enable_play_button:true,
+					<?php else: ?>
+					slider_enable_play_button:false,
+					<?php endif; ?>
+					//slider_enable_play_button: true,			 //true,false - enable play / pause button onslider element
+					slider_play_button_skin: "",				 //skin of the slider play button, if empty inherit from gallery skin
+					slider_play_button_align_hor:"<?=  $this->_helper->getNewSliderEnablePBHor() ?>",    	 //left, center, right - play button horizontal align
+					slider_play_button_align_vert:"<?=  $this->_helper->getNewSliderEnablePBVer() ?>",         //top, middle, bottom - play button vertical align
+					slider_play_button_offset_hor:40,	       	 //play button horizontal offset 
+					slider_play_button_offset_vert:8,	   		 //play button vertical offset
+					<?php if ($this->_helper->getNewSliderEnableFS()): ?>
+					slider_enable_fullscreen_button:true,
+					<?php else: ?>
+					slider_enable_fullscreen_button:false,
+					<?php endif; ?>
+					//slider_enable_fullscreen_button: true,		 //true,false - enable fullscreen button onslider element
+					slider_fullscreen_button_skin: "",			 //skin of the slider fullscreen button, if empty inherit from gallery skin
+					slider_fullscreen_button_align_hor:"<?=  $this->_helper->getNewSliderEnableFSHor() ?>",   //left, center, right	- fullscreen button horizonatal align
+					slider_fullscreen_button_align_vert:"<?=  $this->_helper->getNewSliderEnableFSVer() ?>",   //top, middle, bottom - fullscreen button vertical align
+					slider_fullscreen_button_offset_hor:11,	     //fullscreen button horizontal offset 
+					slider_fullscreen_button_offset_vert:9,	   	 //fullscreen button vertical offset
+					<?php if ($this->_helper->getNewSliderControlAlwaysOn()): ?>
+					slider_controls_always_on:true,
+					<?php else: ?>
+					slider_controls_always_on:false,
+					<?php endif; ?>
+					
+					slider_controls_appear_duration: parseInt("<?=  $this->_helper->getNewSliderControlAppearDur() ?>"),			 //the duration of appearing controls
+					<?php if ($this->_helper->getNewSliderEnableTextpanel()): ?>
+					slider_enable_text_panel:true,
+					<?php else: ?>
+					slider_enable_text_panel:false,
+					<?php endif; ?>
+					slider_textpanel_always_on: true,			  //true,false - text panel are always on, false - show only on mouseover
+					slider_textpanel_margin:0,					  //margin from the textpanel position according the slider_textpanel_align
+					slider_textpanel_text_valign:"middle",		  //middle, top, bottom - text vertical align
+					slider_textpanel_padding_top:10,			  //textpanel padding top 
+					slider_textpanel_padding_bottom:10,				//textpanel padding bottom
+					slider_textpanel_height: null,					//textpanel height. if null it will be set dynamically
+					slider_textpanel_padding_title_description: 5,	//the space between the title and the description
+					slider_textpanel_padding_right: 11,				//cut some space for text from right
+					slider_textpanel_padding_left: 11,				//cut some space for text from left
+					slider_textpanel_fade_duration: 200,			//the fade duration of textpanel appear
+					slider_textpanel_enable_title: true,			//enable the title text
+					slider_textpanel_enable_description: true,		//enable the description text
+					slider_textpanel_enable_bg: true,				//enable the textpanel background
+					slider_textpanel_bg_color:"<?=  $this->_helper->getNewSliderTextpanelBGColor() ?>",			//textpanel background color
+					slider_textpanel_bg_opacity: "<?=  $this->_helper->getNewSliderTextpanelOpacity() ?>",				//textpanel background opacity
+					slider_textpanel_bg_css:{},						//textpanel background css
+					slider_textpanel_css_title:{},					//textpanel additional css of the title
+					slider_textpanel_css_description:{}			    //textpanel additional css of the description				
+			});
+		});
+
+	</script>
+<?php endif; ?>
+    <?php if ($this->getLType()=="carousel"): ?>
+        <script type="text/javascript">
+		require(['jquery','ugallery','uthemecarousel'], function ($) {
+			<?php 
+				$blockid=$this->getBlock();
+				$gall_id="gallery".$blockid;
+				?>
+				<?php
+				echo "var sr2 = \"" . $gall_id . "\"";
+				?>
+			
+                
+				
+				
+				$('#'+sr2).unitegallery({
+					
+				tile_width:parseInt("<?= $this->getTilesstile_width() ?>"),
+				tile_height:parseInt("<?= $this->getTilessstile_height() ?>"),
+				
+					theme_gallery_padding: 0,				//the padding of the gallery wrapper
+					theme_carousel_align: "center",			//the align of the carousel
+					theme_carousel_offset: 0,				//the offset of the carousel from the align sides
+
+					//gallery options:
+					
+					gallery_theme: "carousel",				//choose gallery theme (if more then one themes includes)
+					gallery_width:"100%",				//gallery width
+					gallery_min_width: 150,				//gallery minimal width when resizing
+					gallery_background_color: "<?php  echo $this->getTilesGalleryBackgroundColor(); ?>",		//set custom background color. If not set it will be taken from css.
+												
+					//carousel options
+					
+					carousel_padding: 8,					//padding at the sides of the carousel
+					carousel_space_between_tiles: 20,		//space between tiles
+					carousel_navigation_numtiles:3,			//number of tiles to scroll when user clicks on next/prev button
+					carousel_scroll_duration:500,			//duration of scrolling to tile
+					carousel_scroll_easing:"easeOutCubic",	//easing of scrolling to tile animation
+					
+					carousel_autoplay:"<?php  echo $this->getTilesscarousel_autoplay(); ?>",
+					carousel_autoplay_timeout: parseInt("<?= $this->getTilesscarousel_autoplay_timeout() ?>"),	//autoplay timeout
+					carousel_autoplay_direction: "<?php  echo $this->getTilesscarousel_autoplay_direction(); ?>",
+					carousel_autoplay_pause_onhover: true,	//pause the autoplay on mouse over
+					
+					//navigation options
+					
+					theme_enable_navigation: true,
+					theme_navigation_position: "bottom",	//top,bottom: the vertical position of the navigation reative to the carousel
+					theme_navigation_enable_play: true,		//enable / disable the play button of the navigation
+					theme_navigation_align: "center",		//the align of the navigation
+					theme_navigation_offset_hor: 0,			//horizontal offset of the navigation
+					theme_navigation_margin: 20,			//the space between the carousel and the navigation
+					theme_space_between_arrows: 5	,		//the space between arrows in the navigation
+					tile_enable_border: parseInt("<?= $this->getTilesssEnableBorder() ?>"),	//yes		//enable border of the tile
+					tile_border_width: parseInt("<?= $this->getTilesssBorderWidth() ?>"),	//yes		//enable border of the tile	//yes			//tile border width
+					tile_border_color:"<?php  echo $this->getTilesGalleryBackgroundColor(); ?>",//yes		//tile border color
+					tile_border_radius:parseInt("<?= $this->getTilesssBorderRadius() ?>"),	//yes			//tile border radius (applied to border only, not to outline)
+					
+					tile_enable_outline: parseInt("<?= $this->getTilesssEnableOutline() ?>"),	//yes		//enable outline of the tile (works only together with the border)
+					tile_outline_color: "<?php  echo $this->getTilesssOutlineColor(); ?>",
+					
+					tile_enable_shadow:parseInt("<?= $this->getTilessstile_enable_shadow() ?>"),			//enable shadow of the tile
+					tile_shadow_h:1,					//position of horizontal shadow
+					tile_shadow_v:1,					//position of vertical shadow
+					tile_shadow_blur:parseInt("<?= $this->getTilessstile_shadow_blur() ?>"),
+					tile_shadow_spread:2,				//shadow spread
+					tile_shadow_color:"<?php  echo $this->getTilessstile_shadow_color(); ?>",
+					
+					tile_enable_action:	true,			//enable tile action on click like lightbox
+					tile_as_link: false,				//act the tile as link, no lightbox will appear
+					tile_link_newpage: true,			//open the tile link in new page
+		
+					tile_enable_overlay: parseInt("<?= $this->getTilessstile_enable_overlay() ?>"),			//enable tile color overlay (on mouseover)
+					tile_overlay_opacity:"<?php  echo $this->getTilessstile_overlay_opacity(); ?>",			//tile overlay opacity
+					tile_overlay_color: "<?php  echo $this->getTilessstile_overlay_color(); ?>",		//tile overlay color
+					
+					tile_enable_icons: true,			//enable icons in mouseover mode
+					tile_show_link_icon: false,			//show link icon (if the tile has a link). In case of tile_as_link this option not enabled
+					tile_space_between_icons: 26,		//initial space between icons, (on small tiles it may change)
+					
+					tile_enable_image_effect:false,		//enable tile image effect
+					tile_image_effect_type: "bw",		//bw, blur, sepia - tile effect type
+					tile_image_effect_reverse: false,	//reverce the image, set only on mouseover state
+					
+					//tile text panel options:
+					
+					tile_enable_textpanel: false,		 	//enable textpanel
+					tile_textpanel_source: "title",		 	//title,desc,desc_title. source of the textpanel. desc_title - if description empty, put title
+					tile_textpanel_always_on: false,	 	//textpanel always visible
+					tile_textpanel_appear_type: "slide", 	//slide, fade - appear type of the textpanel on mouseover
+					tile_textpanel_position:"inside_bottom", //inside_bottom, inside_top, inside_center, top, bottom the position of the textpanel
+					tile_textpanel_offset:0,			    //vertical offset of the textpanel
+					
+					tile_textpanel_padding_top:8,		 	//textpanel padding top 
+					tile_textpanel_padding_bottom:8,	 	//textpanel padding bottom
+					tile_textpanel_padding_right: 11,	 	//cut some space for text from right
+					tile_textpanel_padding_left: 11,	 	//cut some space for text from left
+					tile_textpanel_bg_opacity: 0.4,		 	//textpanel background opacity
+					tile_textpanel_bg_color:"#000000",	 	//textpanel background color
+					tile_textpanel_bg_css:{},			 	//textpanel background css
+					
+					tile_textpanel_title_color:null,		 //textpanel title color. if null - take from css
+					tile_textpanel_title_font_family:null,	 //textpanel title font family. if null - take from css
+					tile_textpanel_title_text_align:null,	 //textpanel title text align. if null - take from css
+					tile_textpanel_title_font_size:null,	 //textpanel title font size. if null - take from css
+					tile_textpanel_title_bold:null,			 //textpanel title bold. if null - take from css
+					tile_textpanel_css_title:{},			 //textpanel additional css of the title
+		
+					tile_textpanel_desc_color:null,			 //textpanel description font family. if null - take from css
+					tile_textpanel_desc_font_family:null,	 //textpanel description font family. if null - take from css
+					tile_textpanel_desc_text_align:null,	 //textpanel description text align. if null - take from css
+					tile_textpanel_desc_font_size:null,		 //textpanel description font size. if null - take from css
+					tile_textpanel_desc_bold:null,			 //textpanel description bold. if null - take from css
+					tile_textpanel_css_description:{},		 //textpanel additional css of the description
+					//getTilessslightbox_type
+		 			//lightbox options:
+					
+					lightbox_type: "<?php  echo $this->getTilessslightbox_type(); ?>",			
+					lightbox_hide_arrows_onvideoplay: true,			//hide the arrows when video start playing and show when stop
+					lightbox_arrows_position: "sides",				//sides, inside: position of the arrows, used on compact type			
+					lightbox_arrows_offset: 10,						//The horizontal offset of the arrows
+					lightbox_arrows_inside_offset: 10,				//The offset from the image border if the arrows placed inside
+					lightbox_arrows_inside_alwayson: false,			//Show the arrows on mouseover, or always on.
+					
+					lightbox_overlay_color:null,					//the color of the overlay. if null - will take from css
+					lightbox_overlay_opacity:1,						//the opacity of the overlay. for compact type - 0.6
+					lightbox_top_panel_opacity: null,				//the opacity of the top panel
+					
+					lightbox_close_on_emptyspace:true,				//close the lightbox on empty space
+					
+					lightbox_show_numbers: true,					//show numbers on the right side
+					lightbox_numbers_size: null,					//the size of the numbers string
+					lightbox_numbers_color: null,					//the color of the numbers
+					lightbox_numbers_padding_top:null,				//the top padding of the numbers (used in compact mode)
+					lightbox_numbers_padding_right:null,			//the right padding of the numbers (used in compact mode)
+		 			
+					lightbox_slider_image_border: true,	
+					//getTilessslightbox_slider_image_border_width			//enable border around the image (for compact type only)
+				    lightbox_slider_image_border_width: parseInt("<?= $this->getTilessslightbox_slider_image_border_width() ?>"),				//image border width
+				    lightbox_slider_image_border_color:  "<?php  echo $this->getTilessstile_overlay_color(); ?>",
+				    lightbox_slider_image_border_radius: 0,			//image border radius
+				   
+				    lightbox_slider_image_shadow: true,				//enable border shadow the image
+					
+				    lightbox_slider_control_swipe:true,				//true,false - enable swiping control
+				    lightbox_slider_control_zoom:true,				//true, false - enable zooming control
+				    
+		 			//lightbox text panel:
+					
+					lightbox_show_textpanel: true,						//show the text panel
+					lightbox_textpanel_width: 550,						//the width of the text panel. wide type only
+		 			
+					lightbox_textpanel_enable_title: true,				//enable the title text
+					lightbox_textpanel_enable_description: false,		//enable the description text
+					
+					lightbox_textpanel_padding_top:5,					//textpanel padding top 
+					lightbox_textpanel_padding_bottom:5,				//textpanel padding bottom
+					lightbox_textpanel_padding_right: 11,				//cut some space for text from right
+					lightbox_textpanel_padding_left: 11,				//cut some space for text from left
+		
+					lightbox_textpanel_title_color:null,				//textpanel title color. if null - take from css
+					lightbox_textpanel_title_font_family:null,			//textpanel title font family. if null - take from css
+					lightbox_textpanel_title_text_align:null,			//textpanel title text align. if null - take from css
+					lightbox_textpanel_title_font_size:null,			//textpanel title font size. if null - take from css
+					lightbox_textpanel_title_bold:null,					//textpanel title bold. if null - take from css
+					lightbox_textpanel_css_title:{},					//textpanel additional css of the title
+					
+					lightbox_textpanel_desc_color:null,					//textpanel description font family. if null - take from css
+					lightbox_textpanel_desc_font_family:null,			//textpanel description font family. if null - take from css
+					lightbox_textpanel_desc_text_align:null,			//textpanel description text align. if null - take from css
+					lightbox_textpanel_desc_font_size:null,				//textpanel description font size. if null - take from css
+					lightbox_textpanel_desc_bold:null,					//textpanel description bold. if null - take from css
+					lightbox_textpanel_css_description:{},	
+
+
+			});
+			});
+		</script>
+    <?php endif; ?>
+    <?php if ($this->getLType()=="simpleTiles"): ?>
+        <script type="text/javascript">
+		require(['jquery','ugallery','uthemetiles'], function ($) {
+			<?php 
+				$blockid=$this->getBlock();
+				$gall_id="gallery".$blockid;
+				?>
+				<?php
+				echo "var sr2 = \"" . $gall_id . "\"";
+				?>
+			
+                
+				
+				
+				$('#'+sr2).unitegallery({
+					theme_enable_preloader: true,		//enable preloader circle
+					theme_preloading_height: 200,		//the height of the preloading div, it show before the gallery
+					theme_preloader_vertpos: 100,		//the vertical position of the preloader
+					theme_gallery_padding: 0,			//the horizontal padding of the gallery from the sides
+					theme_appearance_order: "normal",	//normal, shuffle, keep - the appearance order of the tiles. The keep is "keep order"
+					theme_auto_open:null,			//auto open lightbox at start - if some number gived, like 0
+					
+					//gallery options:
+					
+					gallery_theme: "tiles",				//choose gallery theme (if more then one themes includes)
+					gallery_width:"100%",				//gallery width
+					gallery_min_width: 150,
+					//getTilesGalleryBackgroundColor				//gallery minimal width when resizing
+					gallery_background_color: "<?php  echo $this->getTilesGalleryBackgroundColor(); ?>",		//set custom background color. If not set it will be taken from css.
+							
+					//tiles options:
+					//tiles_type: "justified",	
+					tiles_col_width: parseInt("<?= $this->getTilesgetTilesColWidth() ?>"),	//yes				//column width - exact or base according the settings
+		 			tiles_align:"center",					//align of the tiles in the space
+					tiles_space_between_cols: 20,			//space between images
+					tiles_exact_width: false,				//exact width of column - disables the min and max columns
+					tiles_space_between_cols: 20,			//space between images
+					tiles_space_between_cols_mobile: 3,     //space between cols for mobile type
+					tiles_include_padding: true,			//include padding at the sides of the columns, equal to current space between cols
+					tiles_min_columns: 2,					//min columns
+					tiles_max_columns: 0,					//max columns (0 for unlimited)
+					
+					tiles_set_initial_height: true,			//columns type related only
+		 			tiles_enable_transition: true,			//enable transition when screen width change
+
+					//tile design options:
+									//getTilesssEnableBorder						
+					tile_enable_border: parseInt("<?= $this->getTilesssEnableBorder() ?>"),	//yes		//enable border of the tile
+					tile_border_width: parseInt("<?= $this->getTilesssBorderWidth() ?>"),	//yes		//enable border of the tile	//yes			//tile border width
+					tile_border_color:"<?php  echo $this->getTilesGalleryBackgroundColor(); ?>",//yes		//tile border color
+					tile_border_radius:parseInt("<?= $this->getTilesssBorderRadius() ?>"),	//yes			//tile border radius (applied to border only, not to outline)
+					
+					tile_enable_outline: parseInt("<?= $this->getTilesssEnableOutline() ?>"),	//yes		//enable outline of the tile (works only together with the border)
+					tile_outline_color: "<?php  echo $this->getTilesssOutlineColor(); ?>",
+					
+					tile_enable_shadow:parseInt("<?= $this->getTilessstile_enable_shadow() ?>"),			//enable shadow of the tile
+					tile_shadow_h:1,					//position of horizontal shadow
+					tile_shadow_v:1,					//position of vertical shadow
+					tile_shadow_blur:parseInt("<?= $this->getTilessstile_shadow_blur() ?>"),
+					tile_shadow_spread:2,				//shadow spread
+					tile_shadow_color:"<?php  echo $this->getTilessstile_shadow_color(); ?>",
+					
+					tile_enable_action:	true,			//enable tile action on click like lightbox
+					tile_as_link: false,				//act the tile as link, no lightbox will appear
+					tile_link_newpage: true,			//open the tile link in new page
+		
+					tile_enable_overlay: parseInt("<?= $this->getTilessstile_enable_overlay() ?>"),			//enable tile color overlay (on mouseover)
+					tile_overlay_opacity:"<?php  echo $this->getTilessstile_overlay_opacity(); ?>",			//tile overlay opacity
+					tile_overlay_color: "<?php  echo $this->getTilessstile_overlay_color(); ?>",		//tile overlay color
+					
+					tile_enable_icons: true,			//enable icons in mouseover mode
+					tile_show_link_icon: false,			//show link icon (if the tile has a link). In case of tile_as_link this option not enabled
+					tile_space_between_icons: 26,		//initial space between icons, (on small tiles it may change)
+					
+					tile_enable_image_effect:false,		//enable tile image effect
+					tile_image_effect_type: "bw",		//bw, blur, sepia - tile effect type
+					tile_image_effect_reverse: false,	//reverce the image, set only on mouseover state
+					
+					//tile text panel options:
+					
+					tile_enable_textpanel: false,		 	//enable textpanel
+					tile_textpanel_source: "title",		 	//title,desc,desc_title. source of the textpanel. desc_title - if description empty, put title
+					tile_textpanel_always_on: false,	 	//textpanel always visible
+					tile_textpanel_appear_type: "slide", 	//slide, fade - appear type of the textpanel on mouseover
+					tile_textpanel_position:"inside_bottom", //inside_bottom, inside_top, inside_center, top, bottom the position of the textpanel
+					tile_textpanel_offset:0,			    //vertical offset of the textpanel
+					
+					tile_textpanel_padding_top:8,		 	//textpanel padding top 
+					tile_textpanel_padding_bottom:8,	 	//textpanel padding bottom
+					tile_textpanel_padding_right: 11,	 	//cut some space for text from right
+					tile_textpanel_padding_left: 11,	 	//cut some space for text from left
+					tile_textpanel_bg_opacity: 0.4,		 	//textpanel background opacity
+					tile_textpanel_bg_color:"#000000",	 	//textpanel background color
+					tile_textpanel_bg_css:{},			 	//textpanel background css
+					
+					tile_textpanel_title_color:null,		 //textpanel title color. if null - take from css
+					tile_textpanel_title_font_family:null,	 //textpanel title font family. if null - take from css
+					tile_textpanel_title_text_align:null,	 //textpanel title text align. if null - take from css
+					tile_textpanel_title_font_size:null,	 //textpanel title font size. if null - take from css
+					tile_textpanel_title_bold:null,			 //textpanel title bold. if null - take from css
+					tile_textpanel_css_title:{},			 //textpanel additional css of the title
+		
+					tile_textpanel_desc_color:null,			 //textpanel description font family. if null - take from css
+					tile_textpanel_desc_font_family:null,	 //textpanel description font family. if null - take from css
+					tile_textpanel_desc_text_align:null,	 //textpanel description text align. if null - take from css
+					tile_textpanel_desc_font_size:null,		 //textpanel description font size. if null - take from css
+					tile_textpanel_desc_bold:null,			 //textpanel description bold. if null - take from css
+					tile_textpanel_css_description:{},		 //textpanel additional css of the description
+					//getTilessslightbox_type
+		 			//lightbox options:
+					
+					lightbox_type: "<?php  echo $this->getTilessslightbox_type(); ?>",			
+					lightbox_hide_arrows_onvideoplay: true,			//hide the arrows when video start playing and show when stop
+					lightbox_arrows_position: "sides",				//sides, inside: position of the arrows, used on compact type			
+					lightbox_arrows_offset: 10,						//The horizontal offset of the arrows
+					lightbox_arrows_inside_offset: 10,				//The offset from the image border if the arrows placed inside
+					lightbox_arrows_inside_alwayson: false,			//Show the arrows on mouseover, or always on.
+					
+					lightbox_overlay_color:null,					//the color of the overlay. if null - will take from css
+					lightbox_overlay_opacity:1,						//the opacity of the overlay. for compact type - 0.6
+					lightbox_top_panel_opacity: null,				//the opacity of the top panel
+					
+					lightbox_close_on_emptyspace:true,				//close the lightbox on empty space
+					
+					lightbox_show_numbers: true,					//show numbers on the right side
+					lightbox_numbers_size: null,					//the size of the numbers string
+					lightbox_numbers_color: null,					//the color of the numbers
+					lightbox_numbers_padding_top:null,				//the top padding of the numbers (used in compact mode)
+					lightbox_numbers_padding_right:null,			//the right padding of the numbers (used in compact mode)
+		 			
+					lightbox_slider_image_border: true,	
+					//getTilessslightbox_slider_image_border_width			//enable border around the image (for compact type only)
+				    lightbox_slider_image_border_width: parseInt("<?= $this->getTilessslightbox_slider_image_border_width() ?>"),				//image border width
+				    lightbox_slider_image_border_color:  "<?php  echo $this->getTilessstile_overlay_color(); ?>",
+				    lightbox_slider_image_border_radius: 0,			//image border radius
+				   
+				    lightbox_slider_image_shadow: true,				//enable border shadow the image
+					
+				    lightbox_slider_control_swipe:true,				//true,false - enable swiping control
+				    lightbox_slider_control_zoom:true,				//true, false - enable zooming control
+				    
+		 			//lightbox text panel:
+					
+					lightbox_show_textpanel: true,						//show the text panel
+					lightbox_textpanel_width: 550,						//the width of the text panel. wide type only
+		 			
+					lightbox_textpanel_enable_title: true,				//enable the title text
+					lightbox_textpanel_enable_description: false,		//enable the description text
+					
+					lightbox_textpanel_padding_top:5,					//textpanel padding top 
+					lightbox_textpanel_padding_bottom:5,				//textpanel padding bottom
+					lightbox_textpanel_padding_right: 11,				//cut some space for text from right
+					lightbox_textpanel_padding_left: 11,				//cut some space for text from left
+		
+					lightbox_textpanel_title_color:null,				//textpanel title color. if null - take from css
+					lightbox_textpanel_title_font_family:null,			//textpanel title font family. if null - take from css
+					lightbox_textpanel_title_text_align:null,			//textpanel title text align. if null - take from css
+					lightbox_textpanel_title_font_size:null,			//textpanel title font size. if null - take from css
+					lightbox_textpanel_title_bold:null,					//textpanel title bold. if null - take from css
+					lightbox_textpanel_css_title:{},					//textpanel additional css of the title
+					
+					lightbox_textpanel_desc_color:null,					//textpanel description font family. if null - take from css
+					lightbox_textpanel_desc_font_family:null,			//textpanel description font family. if null - take from css
+					lightbox_textpanel_desc_text_align:null,			//textpanel description text align. if null - take from css
+					lightbox_textpanel_desc_font_size:null,				//textpanel description font size. if null - take from css
+					lightbox_textpanel_desc_bold:null,					//textpanel description bold. if null - take from css
+					lightbox_textpanel_css_description:{},	
+				
+                });
+			});
+		</script>
+    <?php endif; ?>
+    <?php if ($this->getLType()=="justifiedTiles"): ?>
+        <script type="text/javascript">
+		require(['jquery','ugallery','uthemetiles'], function ($) {
+			<?php 
+				$blockid=$this->getBlock();
+				$gall_id="gallery".$blockid;
+				?>
+				<?php
+				echo "var sr2 = \"" . $gall_id . "\"";
+				?>
+			
+                
+				
+				
+				$('#'+sr2).unitegallery(
+                {
+					theme_enable_preloader: true,		//enable preloader circle
+					theme_preloading_height: 200,		//the height of the preloading div, it show before the gallery
+					theme_preloader_vertpos: 100,		//the vertical position of the preloader
+					theme_gallery_padding: 0,			//the horizontal padding of the gallery from the sides
+					theme_appearance_order: "normal",	//normal, shuffle, keep - the appearance order of the tiles. The keep is "keep order"
+					theme_auto_open:null,			//auto open lightbox at start - if some number gived, like 0
+					
+					//gallery options:
+					
+					gallery_theme: "tiles",				//choose gallery theme (if more then one themes includes)
+					gallery_width:"100%",				//gallery width
+					gallery_min_width: 150,
+					//getTilesGalleryBackgroundColor				//gallery minimal width when resizing
+					gallery_background_color: "<?php  echo $this->getTilesGalleryBackgroundColor(); ?>",		//set custom background color. If not set it will be taken from css.
+							
+					tiles_type: "justified",			//must option for the tiles - justified type
+					tiles_justified_row_height: parseInt("<?= $this->getTilessstiles_justified_row_height() ?>"),
+					tiles_justified_space_between: parseInt("<?= $this->getTilessstiles_justified_space_between() ?>"),
+					tiles_set_initial_height: true,		//columns type related only
+		 			tiles_enable_transition: true,				//enable transition when screen width change
+
+					//tile design options:
+									//getTilesssEnableBorder						
+					tile_enable_border: parseInt("<?= $this->getTilesssEnableBorder() ?>"),	//yes		//enable border of the tile
+					tile_border_width: parseInt("<?= $this->getTilesssBorderWidth() ?>"),	//yes		//enable border of the tile	//yes			//tile border width
+					tile_border_color:"<?php  echo $this->getTilesGalleryBackgroundColor(); ?>",//yes		//tile border color
+					tile_border_radius:parseInt("<?= $this->getTilesssBorderRadius() ?>"),	//yes			//tile border radius (applied to border only, not to outline)
+					
+					tile_enable_outline: parseInt("<?= $this->getTilesssEnableOutline() ?>"),	//yes		//enable outline of the tile (works only together with the border)
+					tile_outline_color: "<?php  echo $this->getTilesssOutlineColor(); ?>",
+					
+					tile_enable_shadow:parseInt("<?= $this->getTilessstile_enable_shadow() ?>"),			//enable shadow of the tile
+					tile_shadow_h:1,					//position of horizontal shadow
+					tile_shadow_v:1,					//position of vertical shadow
+					tile_shadow_blur:parseInt("<?= $this->getTilessstile_shadow_blur() ?>"),
+					tile_shadow_spread:2,				//shadow spread
+					tile_shadow_color:"<?php  echo $this->getTilessstile_shadow_color(); ?>",
+					
+					tile_enable_action:	true,			//enable tile action on click like lightbox
+					tile_as_link: false,				//act the tile as link, no lightbox will appear
+					tile_link_newpage: true,			//open the tile link in new page
+		
+					tile_enable_overlay: parseInt("<?= $this->getTilessstile_enable_overlay() ?>"),			//enable tile color overlay (on mouseover)
+					tile_overlay_opacity:"<?php  echo $this->getTilessstile_overlay_opacity(); ?>",			//tile overlay opacity
+					tile_overlay_color: "<?php  echo $this->getTilessstile_overlay_color(); ?>",		//tile overlay color
+					
+					tile_enable_icons: true,			//enable icons in mouseover mode
+					tile_show_link_icon: false,			//show link icon (if the tile has a link). In case of tile_as_link this option not enabled
+					tile_space_between_icons: 26,		//initial space between icons, (on small tiles it may change)
+					
+					tile_enable_image_effect:false,		//enable tile image effect
+					tile_image_effect_type: "bw",		//bw, blur, sepia - tile effect type
+					tile_image_effect_reverse: false,	//reverce the image, set only on mouseover state
+					
+					//tile text panel options:
+					
+					tile_enable_textpanel: false,		 	//enable textpanel
+					tile_textpanel_source: "title",		 	//title,desc,desc_title. source of the textpanel. desc_title - if description empty, put title
+					tile_textpanel_always_on: false,	 	//textpanel always visible
+					tile_textpanel_appear_type: "slide", 	//slide, fade - appear type of the textpanel on mouseover
+					tile_textpanel_position:"inside_bottom", //inside_bottom, inside_top, inside_center, top, bottom the position of the textpanel
+					tile_textpanel_offset:0,			    //vertical offset of the textpanel
+					
+					tile_textpanel_padding_top:8,		 	//textpanel padding top 
+					tile_textpanel_padding_bottom:8,	 	//textpanel padding bottom
+					tile_textpanel_padding_right: 11,	 	//cut some space for text from right
+					tile_textpanel_padding_left: 11,	 	//cut some space for text from left
+					tile_textpanel_bg_opacity: 0.4,		 	//textpanel background opacity
+					tile_textpanel_bg_color:"#000000",	 	//textpanel background color
+					tile_textpanel_bg_css:{},			 	//textpanel background css
+					
+					tile_textpanel_title_color:null,		 //textpanel title color. if null - take from css
+					tile_textpanel_title_font_family:null,	 //textpanel title font family. if null - take from css
+					tile_textpanel_title_text_align:null,	 //textpanel title text align. if null - take from css
+					tile_textpanel_title_font_size:null,	 //textpanel title font size. if null - take from css
+					tile_textpanel_title_bold:null,			 //textpanel title bold. if null - take from css
+					tile_textpanel_css_title:{},			 //textpanel additional css of the title
+		
+					tile_textpanel_desc_color:null,			 //textpanel description font family. if null - take from css
+					tile_textpanel_desc_font_family:null,	 //textpanel description font family. if null - take from css
+					tile_textpanel_desc_text_align:null,	 //textpanel description text align. if null - take from css
+					tile_textpanel_desc_font_size:null,		 //textpanel description font size. if null - take from css
+					tile_textpanel_desc_bold:null,			 //textpanel description bold. if null - take from css
+					tile_textpanel_css_description:{},		 //textpanel additional css of the description
+					//getTilessslightbox_type
+		 			//lightbox options:
+					
+					lightbox_type: "<?php  echo $this->getTilessslightbox_type(); ?>",			
+					lightbox_hide_arrows_onvideoplay: true,			//hide the arrows when video start playing and show when stop
+					lightbox_arrows_position: "sides",				//sides, inside: position of the arrows, used on compact type			
+					lightbox_arrows_offset: 10,						//The horizontal offset of the arrows
+					lightbox_arrows_inside_offset: 10,				//The offset from the image border if the arrows placed inside
+					lightbox_arrows_inside_alwayson: false,			//Show the arrows on mouseover, or always on.
+					
+					lightbox_overlay_color:null,					//the color of the overlay. if null - will take from css
+					lightbox_overlay_opacity:1,						//the opacity of the overlay. for compact type - 0.6
+					lightbox_top_panel_opacity: null,				//the opacity of the top panel
+					
+					lightbox_close_on_emptyspace:true,				//close the lightbox on empty space
+					
+					lightbox_show_numbers: true,					//show numbers on the right side
+					lightbox_numbers_size: null,					//the size of the numbers string
+					lightbox_numbers_color: null,					//the color of the numbers
+					lightbox_numbers_padding_top:null,				//the top padding of the numbers (used in compact mode)
+					lightbox_numbers_padding_right:null,			//the right padding of the numbers (used in compact mode)
+		 			
+					lightbox_slider_image_border: true,	
+					//getTilessslightbox_slider_image_border_width			//enable border around the image (for compact type only)
+				    lightbox_slider_image_border_width: parseInt("<?= $this->getTilessslightbox_slider_image_border_width() ?>"),				//image border width
+				    lightbox_slider_image_border_color:  "<?php  echo $this->getTilessstile_overlay_color(); ?>",
+				    lightbox_slider_image_border_radius: 0,			//image border radius
+				   
+				    lightbox_slider_image_shadow: true,				//enable border shadow the image
+					
+				    lightbox_slider_control_swipe:true,				//true,false - enable swiping control
+				    lightbox_slider_control_zoom:true,				//true, false - enable zooming control
+				    
+		 			//lightbox text panel:
+					
+					lightbox_show_textpanel: true,						//show the text panel
+					lightbox_textpanel_width: 550,						//the width of the text panel. wide type only
+		 			
+					lightbox_textpanel_enable_title: true,				//enable the title text
+					lightbox_textpanel_enable_description: false,		//enable the description text
+					
+					lightbox_textpanel_padding_top:5,					//textpanel padding top 
+					lightbox_textpanel_padding_bottom:5,				//textpanel padding bottom
+					lightbox_textpanel_padding_right: 11,				//cut some space for text from right
+					lightbox_textpanel_padding_left: 11,				//cut some space for text from left
+		
+					lightbox_textpanel_title_color:null,				//textpanel title color. if null - take from css
+					lightbox_textpanel_title_font_family:null,			//textpanel title font family. if null - take from css
+					lightbox_textpanel_title_text_align:null,			//textpanel title text align. if null - take from css
+					lightbox_textpanel_title_font_size:null,			//textpanel title font size. if null - take from css
+					lightbox_textpanel_title_bold:null,					//textpanel title bold. if null - take from css
+					lightbox_textpanel_css_title:{},					//textpanel additional css of the title
+					
+					lightbox_textpanel_desc_color:null,					//textpanel description font family. if null - take from css
+					lightbox_textpanel_desc_font_family:null,			//textpanel description font family. if null - take from css
+					lightbox_textpanel_desc_text_align:null,			//textpanel description text align. if null - take from css
+					lightbox_textpanel_desc_font_size:null,				//textpanel description font size. if null - take from css
+					lightbox_textpanel_desc_bold:null,					//textpanel description bold. if null - take from css
+					lightbox_textpanel_css_description:{},	
+                }
+            );
+			});
+		</script>
+    <?php endif; ?>
+    <?php if ($this->getLType()=="nestedTiles"): ?>
+        <script type="text/javascript">
+		require(['jquery','ugallery','uthemetiles'], function ($) {
+			<?php 
+				$blockid=$this->getBlock();
+				$gall_id="gallery".$blockid;
+				?>
+				<?php
+				echo "var sr2 = \"" . $gall_id . "\"";
+				?>
+			
+                
+				
+				
+				$('#'+sr2).unitegallery(
+                {
+					theme_enable_preloader: true,		//enable preloader circle
+					theme_preloading_height: 200,		//the height of the preloading div, it show before the gallery
+					theme_preloader_vertpos: 100,		//the vertical position of the preloader
+					theme_gallery_padding: 0,			//the horizontal padding of the gallery from the sides
+					theme_appearance_order: "normal",	//normal, shuffle, keep - the appearance order of the tiles. The keep is "keep order"
+					theme_auto_open:null,			//auto open lightbox at start - if some number gived, like 0
+					
+					//gallery options:
+					
+					gallery_theme: "tiles",				//choose gallery theme (if more then one themes includes)
+					gallery_width:"100%",				//gallery width
+					gallery_min_width: 150,
+					//getTilesGalleryBackgroundColor				//gallery minimal width when resizing
+					gallery_background_color: "<?php  echo $this->getTilesGalleryBackgroundColor(); ?>",		//set custom background color. If not set it will be taken from css.
+							
+					tiles_type: "nested",					//must option for the tiles - justified type
+		 			tiles_enable_transition: true,			//enable transition when screen width change
+					tiles_space_between_cols: parseInt("<?= $this->getTilessstiles_space_between_cols() ?>"),
+					tiles_space_between_cols_mobile: 3,     //space between cols for mobile type
+		 			tiles_nested_optimal_tile_width: parseInt("<?= $this->getTilessstiles_nested_optimal_tile_width() ?>"),
+					tiles_min_columns: 2,				//enable transition when screen width change
+
+					//tile design options:
+									//getTilesssEnableBorder						
+					tile_enable_border: parseInt("<?= $this->getTilesssEnableBorder() ?>"),	//yes		//enable border of the tile
+					tile_border_width: parseInt("<?= $this->getTilesssBorderWidth() ?>"),	//yes		//enable border of the tile	//yes			//tile border width
+					tile_border_color:"<?php  echo $this->getTilesGalleryBackgroundColor(); ?>",//yes		//tile border color
+					tile_border_radius:parseInt("<?= $this->getTilesssBorderRadius() ?>"),	//yes			//tile border radius (applied to border only, not to outline)
+					
+					tile_enable_outline: parseInt("<?= $this->getTilesssEnableOutline() ?>"),	//yes		//enable outline of the tile (works only together with the border)
+					tile_outline_color: "<?php  echo $this->getTilesssOutlineColor(); ?>",
+					
+					tile_enable_shadow:parseInt("<?= $this->getTilessstile_enable_shadow() ?>"),			//enable shadow of the tile
+					tile_shadow_h:1,					//position of horizontal shadow
+					tile_shadow_v:1,					//position of vertical shadow
+					tile_shadow_blur:parseInt("<?= $this->getTilessstile_shadow_blur() ?>"),
+					tile_shadow_spread:2,				//shadow spread
+					tile_shadow_color:"<?php  echo $this->getTilessstile_shadow_color(); ?>",
+					
+					tile_enable_action:	true,			//enable tile action on click like lightbox
+					tile_as_link: false,				//act the tile as link, no lightbox will appear
+					tile_link_newpage: true,			//open the tile link in new page
+		
+					tile_enable_overlay: parseInt("<?= $this->getTilessstile_enable_overlay() ?>"),			//enable tile color overlay (on mouseover)
+					tile_overlay_opacity:"<?php  echo $this->getTilessstile_overlay_opacity(); ?>",			//tile overlay opacity
+					tile_overlay_color: "<?php  echo $this->getTilessstile_overlay_color(); ?>",		//tile overlay color
+					
+					tile_enable_icons: true,			//enable icons in mouseover mode
+					tile_show_link_icon: false,			//show link icon (if the tile has a link). In case of tile_as_link this option not enabled
+					tile_space_between_icons: 26,		//initial space between icons, (on small tiles it may change)
+					
+					tile_enable_image_effect:false,		//enable tile image effect
+					tile_image_effect_type: "bw",		//bw, blur, sepia - tile effect type
+					tile_image_effect_reverse: false,	//reverce the image, set only on mouseover state
+					
+					//tile text panel options:
+					
+					tile_enable_textpanel: false,		 	//enable textpanel
+					tile_textpanel_source: "title",		 	//title,desc,desc_title. source of the textpanel. desc_title - if description empty, put title
+					tile_textpanel_always_on: false,	 	//textpanel always visible
+					tile_textpanel_appear_type: "slide", 	//slide, fade - appear type of the textpanel on mouseover
+					tile_textpanel_position:"inside_bottom", //inside_bottom, inside_top, inside_center, top, bottom the position of the textpanel
+					tile_textpanel_offset:0,			    //vertical offset of the textpanel
+					
+					tile_textpanel_padding_top:8,		 	//textpanel padding top 
+					tile_textpanel_padding_bottom:8,	 	//textpanel padding bottom
+					tile_textpanel_padding_right: 11,	 	//cut some space for text from right
+					tile_textpanel_padding_left: 11,	 	//cut some space for text from left
+					tile_textpanel_bg_opacity: 0.4,		 	//textpanel background opacity
+					tile_textpanel_bg_color:"#000000",	 	//textpanel background color
+					tile_textpanel_bg_css:{},			 	//textpanel background css
+					
+					tile_textpanel_title_color:null,		 //textpanel title color. if null - take from css
+					tile_textpanel_title_font_family:null,	 //textpanel title font family. if null - take from css
+					tile_textpanel_title_text_align:null,	 //textpanel title text align. if null - take from css
+					tile_textpanel_title_font_size:null,	 //textpanel title font size. if null - take from css
+					tile_textpanel_title_bold:null,			 //textpanel title bold. if null - take from css
+					tile_textpanel_css_title:{},			 //textpanel additional css of the title
+		
+					tile_textpanel_desc_color:null,			 //textpanel description font family. if null - take from css
+					tile_textpanel_desc_font_family:null,	 //textpanel description font family. if null - take from css
+					tile_textpanel_desc_text_align:null,	 //textpanel description text align. if null - take from css
+					tile_textpanel_desc_font_size:null,		 //textpanel description font size. if null - take from css
+					tile_textpanel_desc_bold:null,			 //textpanel description bold. if null - take from css
+					tile_textpanel_css_description:{},		 //textpanel additional css of the description
+					//getTilessslightbox_type
+		 			//lightbox options:
+					
+					lightbox_type: "<?php  echo $this->getTilessslightbox_type(); ?>",			
+					lightbox_hide_arrows_onvideoplay: true,			//hide the arrows when video start playing and show when stop
+					lightbox_arrows_position: "sides",				//sides, inside: position of the arrows, used on compact type			
+					lightbox_arrows_offset: 10,						//The horizontal offset of the arrows
+					lightbox_arrows_inside_offset: 10,				//The offset from the image border if the arrows placed inside
+					lightbox_arrows_inside_alwayson: false,			//Show the arrows on mouseover, or always on.
+					
+					lightbox_overlay_color:null,					//the color of the overlay. if null - will take from css
+					lightbox_overlay_opacity:1,						//the opacity of the overlay. for compact type - 0.6
+					lightbox_top_panel_opacity: null,				//the opacity of the top panel
+					
+					lightbox_close_on_emptyspace:true,				//close the lightbox on empty space
+					
+					lightbox_show_numbers: true,					//show numbers on the right side
+					lightbox_numbers_size: null,					//the size of the numbers string
+					lightbox_numbers_color: null,					//the color of the numbers
+					lightbox_numbers_padding_top:null,				//the top padding of the numbers (used in compact mode)
+					lightbox_numbers_padding_right:null,			//the right padding of the numbers (used in compact mode)
+		 			
+					lightbox_slider_image_border: true,	
+					//getTilessslightbox_slider_image_border_width			//enable border around the image (for compact type only)
+				    lightbox_slider_image_border_width: parseInt("<?= $this->getTilessslightbox_slider_image_border_width() ?>"),				//image border width
+				    lightbox_slider_image_border_color:  "<?php  echo $this->getTilessstile_overlay_color(); ?>",
+				    lightbox_slider_image_border_radius: 0,			//image border radius
+				   
+				    lightbox_slider_image_shadow: true,				//enable border shadow the image
+					
+				    lightbox_slider_control_swipe:true,				//true,false - enable swiping control
+				    lightbox_slider_control_zoom:true,				//true, false - enable zooming control
+				    
+		 			//lightbox text panel:
+					
+					lightbox_show_textpanel: true,						//show the text panel
+					lightbox_textpanel_width: 550,						//the width of the text panel. wide type only
+		 			
+					lightbox_textpanel_enable_title: true,				//enable the title text
+					lightbox_textpanel_enable_description: false,		//enable the description text
+					
+					lightbox_textpanel_padding_top:5,					//textpanel padding top 
+					lightbox_textpanel_padding_bottom:5,				//textpanel padding bottom
+					lightbox_textpanel_padding_right: 11,				//cut some space for text from right
+					lightbox_textpanel_padding_left: 11,				//cut some space for text from left
+		
+					lightbox_textpanel_title_color:null,				//textpanel title color. if null - take from css
+					lightbox_textpanel_title_font_family:null,			//textpanel title font family. if null - take from css
+					lightbox_textpanel_title_text_align:null,			//textpanel title text align. if null - take from css
+					lightbox_textpanel_title_font_size:null,			//textpanel title font size. if null - take from css
+					lightbox_textpanel_title_bold:null,					//textpanel title bold. if null - take from css
+					lightbox_textpanel_css_title:{},					//textpanel additional css of the title
+					
+					lightbox_textpanel_desc_color:null,					//textpanel description font family. if null - take from css
+					lightbox_textpanel_desc_font_family:null,			//textpanel description font family. if null - take from css
+					lightbox_textpanel_desc_text_align:null,			//textpanel description text align. if null - take from css
+					lightbox_textpanel_desc_font_size:null,				//textpanel description font size. if null - take from css
+					lightbox_textpanel_desc_bold:null,					//textpanel description bold. if null - take from css
+					lightbox_textpanel_css_description:{},	
+                }
+            );
+			});
+		</script>
+    <?php endif; ?>
+
+    <?php if ($this->getLType()=="gridTiles"): ?>
+        <script type="text/javascript">
+		require(['jquery','ugallery','uthemegridtiles'], function ($) {
+			<?php 
+				$blockid=$this->getBlock();
+				$gall_id="gallery".$blockid;
+				?>
+				<?php
+				echo "var sr2 = \"" . $gall_id . "\"";
+				?>
+			
+                
+				
+				
+				$('#'+sr2).unitegallery(
+                {
+					tile_width:parseInt("<?= $this->getTilesstile_width() ?>"),
+					tile_height:parseInt("<?= $this->getTilessstile_height() ?>"),
+					
+					theme_gallery_padding: 0,				//padding from sides of the gallery
+					grid_padding:10,						//set padding to the grid
+					grid_space_between_cols: 10,			//space between columns
+					grid_space_between_rows: 20,			//space between rows
+					
+					theme_auto_open:null,					//auto open lightbox at start - if some number gived, like 0
+					
+					//gallery options:
+					
+					gallery_theme: "tilesgrid",				//choose gallery theme (if more then one themes includes)
+					gallery_width:"100%",				//gallery width
+					gallery_min_width: 150,				//gallery minimal width when resizing
+					gallery_background_color: "<?php  echo $this->getTilesGalleryBackgroundColor(); ?>",		//set custom background color. If not set it will be taken from css.
+							
+					//navigation options
+					
+					grid_num_rows:3,						//maximum number of grid rows. If set to big value, the navigation will not appear.
+					
+					theme_navigation_type: "<?php  echo $this->getTilesstheme_navigation_type(); ?>",
+					
+					theme_bullets_margin_top: 40,			//the space to bullets
+					theme_bullets_color: "<?php  echo $this->getTilesstheme_bullets_color(); ?>",			//gray, blue, brown, green, red - color of the bullets
+					bullets_space_between: 12,				//space between bullets
+					
+					theme_arrows_margin_top: 20,			//the space between arrows and grid
+					theme_space_between_arrows: 5,			//horizontal space between arrows
+					
+					theme_navigation_align: "center",		//center, left, right - horizontal align of the navigation
+					theme_navigation_offset_hor: 0,			//horizontal offset of the navigation, according the align
+
+					
+                    tile_enable_border: parseInt("<?= $this->getTilesssEnableBorder() ?>"),	//yes		//enable border of the tile
+					tile_border_width: parseInt("<?= $this->getTilesssBorderWidth() ?>"),	//yes		//enable border of the tile	//yes			//tile border width
+					tile_border_color:"<?php  echo $this->getTilesGalleryBackgroundColor(); ?>",//yes		//tile border color
+					tile_border_radius:parseInt("<?= $this->getTilesssBorderRadius() ?>"),	//yes			//tile border radius (applied to border only, not to outline)
+					
+					tile_enable_outline: parseInt("<?= $this->getTilesssEnableOutline() ?>"),	//yes		//enable outline of the tile (works only together with the border)
+					tile_outline_color: "<?php  echo $this->getTilesssOutlineColor(); ?>",
+					
+					tile_enable_shadow:parseInt("<?= $this->getTilessstile_enable_shadow() ?>"),			//enable shadow of the tile
+					tile_shadow_h:1,					//position of horizontal shadow
+					tile_shadow_v:1,					//position of vertical shadow
+					tile_shadow_blur:parseInt("<?= $this->getTilessstile_shadow_blur() ?>"),
+					tile_shadow_spread:2,				//shadow spread
+					tile_shadow_color:"<?php  echo $this->getTilessstile_shadow_color(); ?>",
+					
+					tile_enable_action:	true,			//enable tile action on click like lightbox
+					tile_as_link: false,				//act the tile as link, no lightbox will appear
+					tile_link_newpage: true,			//open the tile link in new page
+		
+					tile_enable_overlay: parseInt("<?= $this->getTilessstile_enable_overlay() ?>"),			//enable tile color overlay (on mouseover)
+					tile_overlay_opacity:"<?php  echo $this->getTilessstile_overlay_opacity(); ?>",			//tile overlay opacity
+					tile_overlay_color: "<?php  echo $this->getTilessstile_overlay_color(); ?>",		//tile overlay color
+					
+					tile_enable_icons: true,			//enable icons in mouseover mode
+					tile_show_link_icon: false,			//show link icon (if the tile has a link). In case of tile_as_link this option not enabled
+					tile_space_between_icons: 26,		//initial space between icons, (on small tiles it may change)
+					
+					tile_enable_image_effect:false,		//enable tile image effect
+					tile_image_effect_type: "bw",		//bw, blur, sepia - tile effect type
+					tile_image_effect_reverse: false,	//reverce the image, set only on mouseover state
+					
+					//tile text panel options:
+					
+					tile_enable_textpanel: false,		 	//enable textpanel
+					tile_textpanel_source: "title",		 	//title,desc,desc_title. source of the textpanel. desc_title - if description empty, put title
+					tile_textpanel_always_on: false,	 	//textpanel always visible
+					tile_textpanel_appear_type: "slide", 	//slide, fade - appear type of the textpanel on mouseover
+					tile_textpanel_position:"inside_bottom", //inside_bottom, inside_top, inside_center, top, bottom the position of the textpanel
+					tile_textpanel_offset:0,			    //vertical offset of the textpanel
+					
+					tile_textpanel_padding_top:8,		 	//textpanel padding top 
+					tile_textpanel_padding_bottom:8,	 	//textpanel padding bottom
+					tile_textpanel_padding_right: 11,	 	//cut some space for text from right
+					tile_textpanel_padding_left: 11,	 	//cut some space for text from left
+					tile_textpanel_bg_opacity: 0.4,		 	//textpanel background opacity
+					tile_textpanel_bg_color:"#000000",	 	//textpanel background color
+					tile_textpanel_bg_css:{},			 	//textpanel background css
+					
+					tile_textpanel_title_color:null,		 //textpanel title color. if null - take from css
+					tile_textpanel_title_font_family:null,	 //textpanel title font family. if null - take from css
+					tile_textpanel_title_text_align:null,	 //textpanel title text align. if null - take from css
+					tile_textpanel_title_font_size:null,	 //textpanel title font size. if null - take from css
+					tile_textpanel_title_bold:null,			 //textpanel title bold. if null - take from css
+					tile_textpanel_css_title:{},			 //textpanel additional css of the title
+		
+					tile_textpanel_desc_color:null,			 //textpanel description font family. if null - take from css
+					tile_textpanel_desc_font_family:null,	 //textpanel description font family. if null - take from css
+					tile_textpanel_desc_text_align:null,	 //textpanel description text align. if null - take from css
+					tile_textpanel_desc_font_size:null,		 //textpanel description font size. if null - take from css
+					tile_textpanel_desc_bold:null,			 //textpanel description bold. if null - take from css
+					tile_textpanel_css_description:{},		 //textpanel additional css of the description
+					//getTilessslightbox_type
+		 			//lightbox options:
+					
+					lightbox_type: "<?php  echo $this->getTilessslightbox_type(); ?>",			
+					lightbox_hide_arrows_onvideoplay: true,			//hide the arrows when video start playing and show when stop
+					lightbox_arrows_position: "sides",				//sides, inside: position of the arrows, used on compact type			
+					lightbox_arrows_offset: 10,						//The horizontal offset of the arrows
+					lightbox_arrows_inside_offset: 10,				//The offset from the image border if the arrows placed inside
+					lightbox_arrows_inside_alwayson: false,			//Show the arrows on mouseover, or always on.
+					
+					lightbox_overlay_color:null,					//the color of the overlay. if null - will take from css
+					lightbox_overlay_opacity:1,						//the opacity of the overlay. for compact type - 0.6
+					lightbox_top_panel_opacity: null,				//the opacity of the top panel
+					
+					lightbox_close_on_emptyspace:true,				//close the lightbox on empty space
+					
+					lightbox_show_numbers: true,					//show numbers on the right side
+					lightbox_numbers_size: null,					//the size of the numbers string
+					lightbox_numbers_color: null,					//the color of the numbers
+					lightbox_numbers_padding_top:null,				//the top padding of the numbers (used in compact mode)
+					lightbox_numbers_padding_right:null,			//the right padding of the numbers (used in compact mode)
+		 			
+					lightbox_slider_image_border: true,	
+					//getTilessslightbox_slider_image_border_width			//enable border around the image (for compact type only)
+				    lightbox_slider_image_border_width: parseInt("<?= $this->getTilessslightbox_slider_image_border_width() ?>"),				//image border width
+				    lightbox_slider_image_border_color:  "<?php  echo $this->getTilessstile_overlay_color(); ?>",
+				    lightbox_slider_image_border_radius: 0,			//image border radius
+				   
+				    lightbox_slider_image_shadow: true,				//enable border shadow the image
+					
+				    lightbox_slider_control_swipe:true,				//true,false - enable swiping control
+				    lightbox_slider_control_zoom:true,				//true, false - enable zooming control
+				    
+		 			//lightbox text panel:
+					
+					lightbox_show_textpanel: true,						//show the text panel
+					lightbox_textpanel_width: 550,						//the width of the text panel. wide type only
+		 			
+					lightbox_textpanel_enable_title: true,				//enable the title text
+					lightbox_textpanel_enable_description: false,		//enable the description text
+					
+					lightbox_textpanel_padding_top:5,					//textpanel padding top 
+					lightbox_textpanel_padding_bottom:5,				//textpanel padding bottom
+					lightbox_textpanel_padding_right: 11,				//cut some space for text from right
+					lightbox_textpanel_padding_left: 11,				//cut some space for text from left
+		
+					lightbox_textpanel_title_color:null,				//textpanel title color. if null - take from css
+					lightbox_textpanel_title_font_family:null,			//textpanel title font family. if null - take from css
+					lightbox_textpanel_title_text_align:null,			//textpanel title text align. if null - take from css
+					lightbox_textpanel_title_font_size:null,			//textpanel title font size. if null - take from css
+					lightbox_textpanel_title_bold:null,					//textpanel title bold. if null - take from css
+					lightbox_textpanel_css_title:{},					//textpanel additional css of the title
+					
+					lightbox_textpanel_desc_color:null,					//textpanel description font family. if null - take from css
+					lightbox_textpanel_desc_font_family:null,			//textpanel description font family. if null - take from css
+					lightbox_textpanel_desc_text_align:null,			//textpanel description text align. if null - take from css
+					lightbox_textpanel_desc_font_size:null,				//textpanel description font size. if null - take from css
+					lightbox_textpanel_desc_bold:null,					//textpanel description bold. if null - take from css
+					lightbox_textpanel_css_description:{},	
+                }
+            );
+			});
+		</script>
+    <?php endif; ?>
+<?php endif; ?>  
+<?php endif; ?>  

@@ -1,0 +1,15 @@
+<?php
+$coreHelper  = $this->helper('\Magezon\Core\Helper\Data');
+$element     = $this->getElement();
+$productName = $this->getProduct()->getName();
+$breakPage   = $element->getData('break_page');
+$headingType = $element->getData('heading_type');
+$fontSize    = $element->getData('font_size');
+$textColor   = $element->getData('text_color');
+$lineHeight  = $element->getData('line_height');
+$fontWeight  = $element->getData('font_weight');
+?>
+<?= $breakPage ? "<pagebreak />" : "" ?>
+<<?= $headingType ?> class="ppbd-product-name" style="font-size: <?= $fontSize ?: '30' ?>px; color: <?= $textColor ?: '#333333' ?>px; line-height: <?= $lineHeight ?: '32' ?>px; font-weight: <?= $fontWeight ?: '400' ?>;">
+    <?= $coreHelper->filter($productName) ?>
+</<?= $headingType ?>>

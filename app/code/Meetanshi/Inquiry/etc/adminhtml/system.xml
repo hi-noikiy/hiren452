@@ -1,0 +1,238 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="meetanshi" translate="label" class="meetanshi" sortOrder="100">
+            <label></label>
+        </tab>
+        <section id="dealer_inquiry" translate="label" sortOrder="130" showInDefault="1" showInWebsite="1" showInStore="1">
+            <class>separator-top</class>
+            <label>Dealer Inquiry</label>
+            <tab>meetanshi</tab>
+            <resource>Meetanshi_Inquiry::inquiry_config</resource>
+            <group id="settings" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Configuration</label>
+                <field id="enable" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Dealer Inquiry</label>
+                    <source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
+                </field>
+                <field id="meta_title" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Page Meta Title</label>
+                    <depends>
+                        <field id="*/*/enable">1</field>
+                    </depends>
+                </field>
+                <field id="meta_description" translate="label" type="textarea" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Meta Description</label>
+                    <depends>
+                        <field id="*/*/enable">1</field>
+                    </depends>
+                </field>
+                <field id="url_key" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Page URL Key</label>
+                    <depends>
+                        <field id="*/*/enable">1</field>
+                    </depends>
+                </field>
+                <field id="enable_top_link" translate="label" type="select" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Show Page URL in Top Link</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <depends>
+                        <field id="*/*/enable">1</field>
+                    </depends>
+                </field>
+                <field id="enable_footer_link" translate="label" type="select" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Show Page URL in Footer</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <depends>
+                        <field id="*/*/enable">1</field>
+                    </depends>
+                </field>
+                <field id="customer_group" translate="label" type="select" sortOrder="70" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Add New Dealers in Customer Group</label>
+                    <source_model>Magento\Customer\Model\Config\Source\Group</source_model>
+                    <comment><![CDATA[Select customer group to add dealers in after creating them as new customers.]]></comment>
+                    <depends>
+                        <field id="*/*/enable">1</field>
+                    </depends>
+                </field>
+            </group>
+            <group id="form" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Form Settings</label>
+                <group id="form_settings" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Form Options</label>
+                    <field id="heading" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Form Title</label>
+                    </field>
+                    <field id="description" translate="label" type="textarea" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Form Description</label>
+                        <comment><![CDATA[Add text to show under the Dealer Inquiry form title.]]></comment>
+                        <validate>required-entry</validate>
+                    </field>
+                    <field id="submit_button_label" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Submit Button Label</label>
+                        <comment><![CDATA[Set label for form submit button.]]></comment>
+                        <validate>required-entry</validate>
+                    </field>
+                    <field id="success_message" translate="label" type="textarea" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Form Submission Success Message</label>
+                        <validate>required-entry</validate>
+                    </field>
+                    <field id="enable_fields" translate="label" type="multiselect" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Show Form Fields</label>
+                        <source_model>Meetanshi\Inquiry\Model\Config\Source\Fields</source_model>
+                        <comment><![CDATA[Select fields to show in dealer inquiry form.]]></comment>
+                        <validate>required-select</validate>
+                    </field>
+                    <field id="allowed_file_types" translate="label" type="text" sortOrder="70" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Allowed Upload File Types</label>
+                        <comment><![CDATA[Add comma separated file extensions to allow file upload from the form(for e.g. jpeg,jpg,png).]]></comment>
+                        <validate>required-entry</validate>
+                    </field>
+                </group>
+                <group id="change_label" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Custom Form Labels</label>
+                    <field id="first_name" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>First Name</label>
+                        <validate>required-entry</validate>
+                    </field>
+                    <field id="last_name" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Last Name</label>
+                        <validate>required-entry</validate>
+                    </field>
+                    <field id="company_name" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Company Name</label>
+                        <validate>required-entry</validate>
+                    </field>
+                    <field id="tax_vat_number" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Tax/VAT Number</label>
+                        <validate>required-entry</validate>
+                    </field>
+                    <field id="street_address" translate="label" type="text" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Street Address</label>
+                        <validate>required-entry</validate>
+                    </field>
+                    <field id="city" translate="label" type="text" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>City</label>
+                        <validate>required-entry</validate>
+                    </field>
+                    <field id="state" translate="label" type="text" sortOrder="70" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>State</label>
+                        <validate>required-entry</validate>
+                    </field>
+                    <field id="country" translate="label" type="text" sortOrder="80" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Country</label>
+                        <validate>required-entry</validate>
+                    </field>
+                    <field id="zip_postal_code" translate="label" type="text" sortOrder="90" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Zip/Postal Code</label>
+                        <validate>required-entry</validate>
+                    </field>
+                    <field id="contact_number" translate="label" type="text" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Contact Number</label>
+                        <validate>required-entry</validate>
+                    </field>
+                    <field id="email" translate="label" type="text" sortOrder="110" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Email</label>
+                        <validate>required-entry</validate>
+                    </field>
+                    <field id="website" translate="label" type="text" sortOrder="120" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Website</label>
+                        <validate>required-entry</validate>
+                    </field>
+                    <field id="description" translate="label" type="text" sortOrder="130" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Description</label>
+                        <validate>required-entry</validate>
+                    </field>
+                    <field id="date_time" translate="label" type="text" sortOrder="140" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Date Time</label>
+                        <validate>required-entry</validate>
+                    </field>
+                    <field id="upload_files" translate="label" type="text" sortOrder="150" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Upload Files</label>
+                        <validate>required-entry</validate>
+                    </field>
+                    <field id="extra_field_1" translate="label" type="text" sortOrder="160" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Extra Field 1</label>
+                    </field>
+                    <field id="extra_field_2" translate="label" type="text" sortOrder="170" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Extra Field 2</label>
+                    </field>
+                    <field id="extra_field_3" translate="label" type="text" sortOrder="180" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Extra Field 3</label>
+                    </field>
+                </group>
+            </group>
+            <group id="owner_template" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>New Dealer Inquiry Email Settings</label>
+                <field id="owner_email_template" translate="label" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Email Template</label>
+                    <source_model>Magento\Config\Model\Config\Source\Email\Template</source_model>
+                </field>
+                <field id="owner_email" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Email ID of Admin</label>
+                    <validate>required-entry validate-email</validate>
+                </field>
+            </group>
+            <group id="customer_template" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Dealer Inquiry Successful Submission Email Settings</label>
+                <field id="customer_email_sender" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Email Sender</label>
+                    <source_model>Magento\Config\Model\Config\Source\Email\Identity</source_model>
+                    <validate>required-entry</validate>
+                </field>
+                <field id="customer_email_template" translate="label" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Email Template</label>
+                    <source_model>Magento\Config\Model\Config\Source\Email\Template</source_model>
+                </field>
+            </group>
+            <group id="create_customer_template" translate="label" type="text" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>New Dealer Account Registration Email Settings</label>
+                <field id="create_customer_email_sender" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Email Sender</label>
+                    <source_model>Magento\Config\Model\Config\Source\Email\Identity</source_model>
+                    <validate>required-entry</validate>
+                </field>
+                <field id="create_customer_email_template" translate="label" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Email Template</label>
+                    <source_model>Magento\Config\Model\Config\Source\Email\Template</source_model>
+                </field>
+            </group>
+            <group id="term_condition" translate="label" type="text" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>GDPR Compliance Notice Settings</label>
+                <field id="enable_fields" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>GDPR Compliance Notice in Form</label>
+                    <source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
+                </field>
+                <field id="content" translate="label" type="textarea" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Notice Text</label>
+                    <validate>required-entry</validate>
+                    <depends>
+                        <field id="*/*/enable_fields">1</field>
+                    </depends>
+                </field>
+            </group>
+            <group id="recaptcha" translate="label" type="text" sortOrder="70" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Google reCAPTCHA Settings</label>
+                <field id="enable_fields" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Google reCAPTCHA </label>
+                    <source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
+                </field>
+                <field id="site_key" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Site Key</label>
+                    <depends>
+                        <field id="*/*/enable_fields">1</field>
+                    </depends>
+                    <validate>required-entry</validate>
+                </field>
+                <field id="secret_key" translate="label comment" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Secret key</label>
+                    <comment><![CDATA[Register with <a target="_blank" href="https://www.google.com/recaptcha/admin">Google reCAPTCHA </a>to get your site key.]]></comment>
+                    <depends>
+                        <field id="*/*/enable_fields">1</field>
+                    </depends>
+                    <validate>required-entry</validate>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Acl/etc/acl.xsd">
+    <acl>
+        <resources>
+            <resource id="Magento_Backend::admin">
+                <resource id="Magento_Backend::stores">
+                    <resource id="Magento_Backend::stores_settings">
+                        <resource id="Magento_Config::config">
+                            <resource id="Meetanshi_Inquiry::inquiry_config" title="Dealer Inquiry"/>
+                        </resource>
+                    </resource>
+                </resource>
+                <resource id="Meetanshi_Inquiry::inquiry" title="Dealer Inquiry" sortOrder="10" >
+                    <resource id="Meetanshi_Inquiry::manageinquiry" title="Manage Dealer Inquiry" sortOrder="0" />
+                </resource>
+            </resource>
+        </resources>
+    </acl>
+</config>

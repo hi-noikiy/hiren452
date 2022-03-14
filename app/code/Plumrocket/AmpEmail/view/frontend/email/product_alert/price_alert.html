@@ -1,0 +1,30 @@
+<!--
+/**
+ * Plumrocket Inc.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End-user License Agreement
+ * that is available through the world-wide-web at this URL:
+ * http://wiki.plumrocket.net/wiki/EULA
+ * If you are unable to obtain it through the world-wide-web, please
+ * send an email to support@plumrocket.com so we can send you a copy immediately.
+ *
+ * @package     Plumrocket_AmpEmail
+ * @copyright   Copyright (c) 2019 Plumrocket Inc. (http://www.plumrocket.com)
+ * @license     http://wiki.plumrocket.net/wiki/EULA  End-user License Agreement
+ */
+-->
+
+<!--@pramp-styles-start@-->
+<style>
+/* add custome styles here */
+</style>
+<!--@pramp-styles-end@-->
+
+{{template config_path="design/email/header_template"}}
+
+<p class="user__name">{{trans "%name," name=$customerName}}</p>
+{{pramp_component type="Plumrocket\AmpEmail\Block\Component\ProductAlert\Price"}}
+
+{{template config_path="design/email/footer_template"}}

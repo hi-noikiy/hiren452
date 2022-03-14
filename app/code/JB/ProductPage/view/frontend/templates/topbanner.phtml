@@ -1,0 +1,24 @@
+<?php
+
+$_config = $this->helper('JB\ProductPage\Helper\Data');
+$isDisplay = $_config->getTopBanner('showtopbanner');
+
+
+$topbanner = $_config->getTopBanner('jbtop_banner');
+$folderName = \JB\AumikaFramework\Model\Config\Backend\Image\ItemImage::UPLOAD_DIR;
+$path = $folderName . '/' . $topbanner;
+$topbannerImg = $_config->getBaseUrl() . $path;
+
+
+
+
+?>
+<?php if($isDisplay == '1') : ?>
+
+<div class="jb_topbanner">
+      <div class="topbannerInner">     
+      <img class="jbtopbanner" src="<?php echo $topbannerImg; ?>" alt="">
+      </div>      
+</div>
+
+<?php endif; ?>

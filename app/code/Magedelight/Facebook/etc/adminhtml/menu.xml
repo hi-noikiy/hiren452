@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * Magedelight
+ * Copyright (C) 2019 Magedelight <info@magedelight.com>
+ *
+ * @category Magedelight
+ * @package Magedelight_Facebook
+ * @copyright Copyright (c) 2019 Mage Delight (http://www.magedelight.com/)
+ * @license http://opensource.org/licenses/gpl-3.0.html GNU General Public License,version 3 (GPL-3.0)
+ * @author Magedelight <info@magedelight.com>
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <!-- main -->
+        <add id="Magedelight_Facebook::facebook_root" 
+             title="Facebook" 
+             module="Magedelight_Facebook"  
+             sortOrder="50" 
+             resource="Magedelight_Facebook::root" 
+             toolTip="magedelight_base"/>
+        
+        <add id="Magedelight_Facebook::facebook_root_commonlyvisible"
+             title="Facebook Shop"
+             module="Magedelight_Facebook"
+             sortOrder="10"
+             parent="Magedelight_Base::md_modules"
+             resource="Magedelight_Facebook::root"/>
+        
+        <add id="Magedelight_Facebook::attributemapper" 
+             title="Facebook Attributes Mapping" 
+             sortOrder="45" 
+             module="Magedelight_Facebook" 
+             action="md_facebook/attributemapper/index" 
+             parent="Magedelight_Facebook::facebook_root" 
+             dependsOnConfig="magedelight_facebook/general/enabled"
+             resource="Magedelight_Facebook::attributemapper"/>
+        
+        <add id="Magedelight_Facebook::categoryfeed" 
+             title="Category Products Feed" 
+             sortOrder="50" 
+             module="Magedelight_Facebook" 
+             action="md_facebook/assignfeed/catindex" 
+             parent="Magedelight_Facebook::facebook_root" 
+             dependsOnConfig="magedelight_facebook/general/enabled"
+             resource="Magedelight_Facebook::categoryfeed"/>
+        
+        <add id="Magedelight_Facebook::importproductfeed" 
+             title="Import Products Feed" 
+             sortOrder="55" 
+             module="Magedelight_Facebook" 
+             action="md_facebook/assignfeed/prodindex" 
+             parent="Magedelight_Facebook::facebook_root" 
+             dependsOnConfig="magedelight_facebook/general/enabled"
+             resource="Magedelight_Facebook::importproductfeed"/>
+        
+        <add id="Magedelight_Facebook::productfeedaction" 
+             title="Products Feed Action" 
+             sortOrder="60" 
+             module="Magedelight_Facebook" 
+             action="md_facebook/feedaction/index" 
+             dependsOnConfig="magedelight_facebook/general/enabled"
+             parent="Magedelight_Facebook::facebook_root" 
+             resource="Magedelight_Facebook::feedaction"/>
+        
+        <add id="Magedelight_Facebook::cronhistory" 
+             title="Cron History" 
+             translate="title" 
+             module="Magedelight_Facebook" 
+             parent="Magedelight_Facebook::facebook_root" 
+             dependsOnConfig="magedelight_facebook/general/enabled"
+             action="md_facebook/cronhistory/index" 
+             sortOrder="80" 
+             resource="Magedelight_Facebook::cronhistory" />
+        
+        <add id="Magedelight_Facebook::settings" 
+             title="Settings" 
+             translate="title" 
+             module="Magedelight_Facebook" 
+             parent="Magedelight_Facebook::facebook_root" 
+             action="adminhtml/system_config/edit/section/magedelight_facebook/" 
+             sortOrder="80" 
+             resource="Magedelight_Facebook::settings" />
+    </menu>
+</config>

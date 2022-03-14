@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<page   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  xsi:noNamespaceSchemaLocation="../../../../../../../lib/internal/Magento/Framework/View/Layout/etc/page_configuration.xsd">
+	<head>
+	<css src="FME_Mediaappearance::css/upgrade/unite-gallery.css" />
+        <css src="FME_Mediaappearance::css/upgrade/video/skin-right-no-thumb.css" />
+        <css src="FME_Mediaappearance::css/upgrade/video/skin-right-thumb.css" />
+     <css src="FME_Mediaappearance::css/upgrade/video/skin-right-title-only.css" />
+     <css src="FME_Mediaappearance::css/upgrade/video/skin-bottom-text.css" />
+     <css src="FME_Mediaappearance::css/normalize.min.css" />
+         <css src="FME_Mediaappearance::css/mediaelementplayer.css" />
+   <css src="FME_Mediaappearance::css/airplay.css" />
+   <script src="FME_Mediaappearance::js/mediaelement-and-player.min.js"/>
+   <script src="FME_Mediaappearance::js/airplay.js"/> 
+    
+	</head>
+	<body>
+<referenceContainer name="content">
+	   		
+	         <block name="cms.media" class="FME\Mediaappearance\Block\Cmsvideos" template="FME_Mediaappearance::cms.phtml" before="-" />
+	   </referenceContainer>
+	
+	</body>
+</page>

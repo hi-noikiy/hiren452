@@ -1,0 +1,344 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="meetanshi" translate="label" class="meetanshi" sortOrder="100">
+            <label></label>
+        </tab>
+        <section id="partialpro" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1"
+                 showInStore="1">
+            <class>separator-top</class>
+            <label>Partial Payment Pro</label>
+            <tab>meetanshi</tab>
+            <resource>Meetanshi_Partialpro::config_partial</resource>
+            <group id="general" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1"
+                   showInStore="1">
+                <label>Configuration</label>
+                <field id="enable" translate="label comment" type="select" sortOrder="10" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Partial Payment</label>
+                    <source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
+                </field>
+                <field id="customer_group" translate="label" type="multiselect" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Allowed Customer Groups</label>
+                    <source_model>Meetanshi\Partialpro\Model\Config\Source\Groups</source_model>
+                    <depends>
+                        <field id="enable">1</field>
+                    </depends>
+                </field>
+                <field id="payment_methods" translate="label" type="multiselect" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Allowed Payment Methods</label>
+                    <source_model>Meetanshi\Partialpro\Model\Config\Source\Methods</source_model>
+                    <depends>
+                        <field id="enable">1</field>
+                    </depends>
+                </field>
+                <field id="apply_methods" translate="label" type="select" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Apply Partial Payment to</label>
+                    <source_model>Meetanshi\Partialpro\Model\Config\Source\Applymethod</source_model>
+                    <depends>
+                        <field id="enable">1</field>
+                    </depends>
+                </field>
+                <field id="min_amount" translate="label" type="text" sortOrder="45" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Minimum Order Amount For Whole Cart</label>
+                    <depends>
+                        <field id="enable">1</field>
+                        <field id="apply_methods">2</field>
+                    </depends>
+                </field>
+                <field id="include_shipping_tex" translate="label comment" type="select" sortOrder="50" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Charge Shipping and Tax Amount</label>
+                    <source_model>Meetanshi\Partialpro\Model\Config\Source\ChargeShippingTex</source_model>
+                    <depends>
+                        <field id="enable">1</field>
+                    </depends>
+                </field>
+                <field id="disable_guest" translate="label comment" type="select" sortOrder="60" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Disable Guest Checkout For Partial Payment Orders</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <depends>
+                        <field id="enable">1</field>
+                    </depends>
+                </field>
+                <field id="creditlimit" translate="label" type="text" sortOrder="62" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Maximum Partial Payment Credit Limit</label>
+                    <comment>Customer can avail Partial Payment facility only with the maximum credit limit stated here.</comment>
+                    <depends>
+                        <field id="enable">1</field>
+                        <field id="disable_guest">1</field>
+                    </depends>
+                </field>
+                <field id="creditlimiterror" translate="label" type="text" sortOrder="64" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Credit Limit Overreach Error Message</label>
+                    <depends>
+                        <field id="enable">1</field>
+                        <field id="disable_guest">1</field>
+                    </depends>
+                </field>
+                <field id="payall" translate="label comment" type="select" sortOrder="70" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Pay All Installments Checkbox</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Show Pay All Installments Checkbox In My Account Section</comment>
+                    <depends>
+                        <field id="enable">1</field>
+                    </depends>
+                </field>
+                <field id="autocapture" translate="label comment" type="select" sortOrder="80" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Auto Capture Installment Payments</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Available Only For PayPal and Authorize.net Payment Methods. </comment>
+                    <depends>
+                        <field id="enable">1</field>
+                    </depends>
+                </field>
+            </group>
+            <group id="calculation" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1"
+                   showInStore="1">
+                <label>Payment Calculation Settings</label>
+                <field id="payment_type" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Partial Payment Plan</label>
+                    <source_model>Meetanshi\Partialpro\Model\Config\Source\Paymenttype</source_model>
+                </field>
+                <field id="no_installment" translate="label" type="text" sortOrder="15" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Number Of Installments</label>
+                    <validate>validate-not-negative-number validate-greater-than-zero validate-number required-entry</validate>
+                </field>
+                <field id="frequency" translate="label" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Payment Frequency</label>
+                    <source_model>Meetanshi\Partialpro\Model\Config\Source\Frequency</source_model>
+                </field>
+                <field id="frequency_days" translate="label comment" type="text" sortOrder="30" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Number of Days</label>
+                    <validate>validate-not-negative-number validate-greater-than-zero validate-number required-entry</validate>
+                    <depends>
+                        <field id="frequency">0</field>
+                    </depends>
+                </field>
+                <field id="down_payment_text" translate="label comment" type="text" sortOrder="40" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Down Payment Label</label>
+                    <depends>
+                        <field id="enable">1</field>
+                    </depends>
+                </field>
+                <field id="down_payment_calculation" translate="label" type="select" sortOrder="42" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Calculate Down Payment in</label>
+                    <source_model>Meetanshi\Partialpro\Model\Config\Source\InstallmentFeeCalculation</source_model>
+                </field>
+                <field id="down_payment" translate="label" type="text" sortOrder="44" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Down Payment Amount</label>
+                    <validate>validate-not-negative-number validate-greater-than-zero validate-number required-entry</validate>
+                </field>
+
+                <field id="pay_later_text" translate="label comment" type="text" sortOrder="50" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Remaining Payment Label</label>
+                    <depends>
+                        <field id="enable">1</field>
+                    </depends>
+                </field>
+
+                <field id="installment_fee_apply_on" translate="label" type="select" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Charge Partial Payment Fee</label>
+                    <source_model>Meetanshi\Partialpro\Model\Config\Source\InstallmentFeeApply</source_model>
+                </field>
+                <field id="installment_fee_label" translate="label" type="text" sortOrder="70" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Partial Payment Fee Label</label>
+                    <depends>
+                        <field id="installment_fee_apply_on" separator="|">1|2</field>
+                    </depends>
+                </field>
+                <field id="installment_calculation_fee_on" translate="label" type="select" sortOrder="80" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Calculate Partial Payment Fee in</label>
+                    <source_model>Meetanshi\Partialpro\Model\Config\Source\InstallmentFeeCalculation</source_model>
+                    <depends>
+                        <field id="installment_fee_apply_on" separator="|">1|2</field>
+                    </depends>
+                </field>
+                <field id="installment_fee" translate="label" type="text" sortOrder="90" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Fee Amount</label>
+                    <validate>validate-not-negative-number validate-greater-than-zero validate-number required-entry</validate>
+                    <depends>
+                        <field id="installment_fee_apply_on" separator="|">1|2</field>
+                    </depends>
+                </field>
+            </group>
+            <group id="productpage" translate="label" type="text" sortOrder="32" showInDefault="1" showInWebsite="1"
+                   showInStore="1">
+                <label>Payment Calculation Box Settings</label>
+                <field id="pagelabel" translate="label comment" type="text" sortOrder="10" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Partial Payment Availability Message</label>
+                </field>
+                <field id="description" translate="label comment" type="editor" sortOrder="20" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label><![CDATA[Partial Payment Terms & Conditions]]></label>
+                    <frontend_model>Meetanshi\Partialpro\Block\Adminhtml\System\Config\Editor</frontend_model>
+                    <comment><![CDATA[Partial Payment Terms & Conditions will be shown below the Payment Calculation Box on the Product Page.]]></comment>
+                </field>
+            </group>
+            <group id="email" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1"
+                   showInStore="1">
+                <label>Email Settings</label>
+                <group id="schedule" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1"
+                       showInStore="1">
+                    <label>Installment Schedule Email Settings</label>
+                    <field id="template" translate="label" sortOrder="10" type="select" showInDefault="1"
+                           showInWebsite="1" showInStore="1">
+                        <label>Email Template</label>
+                        <source_model>Magento\Config\Model\Config\Source\Email\Template</source_model>
+                    </field>
+                    <field id="identity" translate="label" sortOrder="20" type="select" showInDefault="1"
+                           showInWebsite="1" showInStore="1">
+                        <label>Email Sender</label>
+                        <source_model>Magento\Config\Model\Config\Source\Email\Identity</source_model>
+                    </field>
+                    <field id="copy" translate="label" sortOrder="30" type="text" showInDefault="1"
+                           showInWebsite="1" showInStore="1">
+                        <label>Email CC To</label>
+                    </field>
+                </group>
+                <group id="payment" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1"
+                       showInStore="1">
+                    <label>Installment Payment Confirmation Email Settings</label>
+                    <field id="template" translate="label" sortOrder="40" type="select" showInDefault="1"
+                           showInWebsite="1" showInStore="1">
+                        <label>Email Template</label>
+                        <source_model>Magento\Config\Model\Config\Source\Email\Template</source_model>
+                    </field>
+                    <field id="identity" translate="label" sortOrder="50" type="select" showInDefault="1"
+                           showInWebsite="1" showInStore="1">
+                        <label>Email Sender</label>
+                        <source_model>Magento\Config\Model\Config\Source\Email\Identity</source_model>
+                    </field>
+                    <field id="copy" translate="label" sortOrder="60" type="text" showInDefault="1"
+                           showInWebsite="1" showInStore="1">
+                        <label>Email CC To</label>
+                    </field>
+                </group>
+                <group id="approve" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1"
+                       showInStore="1">
+                    <label>Installment Approval Email Settings</label>
+                    <field id="template" translate="label" sortOrder="70" type="select" showInDefault="1"
+                           showInWebsite="1" showInStore="1">
+                        <label>Email Template</label>
+                        <source_model>Magento\Config\Model\Config\Source\Email\Template</source_model>
+                    </field>
+                    <field id="identity" translate="label" sortOrder="80" type="select" showInDefault="1"
+                           showInWebsite="1" showInStore="1">
+                        <label>Email Sender</label>
+                        <source_model>Magento\Config\Model\Config\Source\Email\Identity</source_model>
+                    </field>
+                    <field id="copy" translate="label" sortOrder="90" type="text" showInDefault="1"
+                           showInWebsite="1" showInStore="1">
+                        <label>Email CC To</label>
+                    </field>
+                </group>
+                <group id="disapprove" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1"
+                       showInStore="1">
+                    <label>Installment Disapproval Email Settings</label>
+                    <field id="template" translate="label" sortOrder="100" type="select" showInDefault="1"
+                           showInWebsite="1" showInStore="1">
+                        <label>Email Template</label>
+                        <source_model>Magento\Config\Model\Config\Source\Email\Template</source_model>
+                    </field>
+                    <field id="identity" translate="label" sortOrder="110" type="select" showInDefault="1"
+                           showInWebsite="1" showInStore="1">
+                        <label>Email Sender</label>
+                        <source_model>Magento\Config\Model\Config\Source\Email\Identity</source_model>
+                    </field>
+                    <field id="copy" translate="label" sortOrder="120" type="text" showInDefault="1"
+                           showInWebsite="1" showInStore="1">
+                        <label>Email CC To</label>
+                    </field>
+                </group>
+                <group id="overdue" translate="label" type="text" sortOrder="50" showInDefault="1" showInWebsite="1"
+                       showInStore="1">
+                    <label>Installment Overdue Notice Email Settings</label>
+                    <field id="template" translate="label" sortOrder="130" type="select" showInDefault="1"
+                           showInWebsite="1" showInStore="1">
+                        <label>Email Template</label>
+                        <source_model>Magento\Config\Model\Config\Source\Email\Template</source_model>
+                    </field>
+                    <field id="identity" translate="label" sortOrder="140" type="select" showInDefault="1"
+                           showInWebsite="1" showInStore="1">
+                        <label>Email Sender</label>
+                        <source_model>Magento\Config\Model\Config\Source\Email\Identity</source_model>
+                    </field>
+                    <field id="copy" translate="label" sortOrder="150" type="text" showInDefault="1"
+                           showInWebsite="1" showInStore="1">
+                        <label>Email CC To</label>
+                    </field>
+                </group>
+                <group id="failure" translate="label" type="text" sortOrder="60" showInDefault="1" showInWebsite="1"
+                       showInStore="1">
+                    <label>Installment Failure Email Settings</label>
+                    <field id="template" translate="label" sortOrder="130" type="select" showInDefault="1"
+                           showInWebsite="1" showInStore="1">
+                        <label>Email Template</label>
+                        <source_model>Magento\Config\Model\Config\Source\Email\Template</source_model>
+                    </field>
+                    <field id="identity" translate="label" sortOrder="140" type="select" showInDefault="1"
+                           showInWebsite="1" showInStore="1">
+                        <label>Email Sender</label>
+                        <source_model>Magento\Config\Model\Config\Source\Email\Identity</source_model>
+                    </field>
+                    <field id="copy" translate="label" sortOrder="150" type="text" showInDefault="1"
+                           showInWebsite="1" showInStore="1">
+                        <label>Email CC To</label>
+                    </field>
+                </group>
+                <group id="reminder" translate="label" type="text" sortOrder="70" showInDefault="1" showInWebsite="1"
+                       showInStore="1">
+                    <label>Installment Reminder Email Settings</label>
+                    <field id="template" translate="label" sortOrder="130" type="select" showInDefault="1"
+                           showInWebsite="1" showInStore="1">
+                        <label>Email Template</label>
+                        <source_model>Magento\Config\Model\Config\Source\Email\Template</source_model>
+                    </field>
+                    <field id="identity" translate="label" sortOrder="140" type="select" showInDefault="1"
+                           showInWebsite="1" showInStore="1">
+                        <label>Email Sender</label>
+                        <source_model>Magento\Config\Model\Config\Source\Email\Identity</source_model>
+                    </field>
+                    <field id="copy" translate="label" sortOrder="150" type="text" showInDefault="1"
+                           showInWebsite="1" showInStore="1">
+                        <label>Email CC To</label>
+                    </field>
+                    <field id="days" translate="label" sortOrder="160" type="text" showInDefault="1"
+                           showInWebsite="1" showInStore="1">
+                        <label>Send Email Before X Days</label>
+                    </field>
+                </group>
+                <group id="autocapture" translate="label" type="text" sortOrder="80" showInDefault="1" showInWebsite="1"
+                       showInStore="1">
+                    <label>Installment Auto Capture Reminder Email Settings</label>
+                    <field id="template" translate="label" sortOrder="130" type="select" showInDefault="1"
+                           showInWebsite="1" showInStore="1">
+                        <label>Email Template</label>
+                        <source_model>Magento\Config\Model\Config\Source\Email\Template</source_model>
+                    </field>
+                    <field id="identity" translate="label" sortOrder="140" type="select" showInDefault="1"
+                           showInWebsite="1" showInStore="1">
+                        <label>Email Sender</label>
+                        <source_model>Magento\Config\Model\Config\Source\Email\Identity</source_model>
+                    </field>
+                    <field id="copy" translate="label" sortOrder="150" type="text" showInDefault="1"
+                           showInWebsite="1" showInStore="1">
+                        <label>Email CC To</label>
+                    </field>
+                    <field id="days" translate="label" sortOrder="160" type="text" showInDefault="1"
+                           showInWebsite="1" showInStore="1">
+                        <label>Send Email Before X Days</label>
+                    </field>
+                </group>
+            </group>
+        </section>
+    </system>
+</config>

@@ -1,0 +1,23 @@
+<!-- ko if: isDisplayInstallmentFee() -->
+<tr class="totals carttot installmentfee excl" >
+    <th class="mark" colspan="1" scope="row" data-bind="text: getPartialInstallmentFeeLabel()"></th>
+    <td class="amount">
+        <span class="price" data-bind="text: getInstallmentFee()"></span>
+    </td>
+</tr>
+<!-- /ko -->
+<!-- ko if: isDisplayed() -->
+<tr class="totals carttot partialpaynow excl" >
+    <th class="mark" colspan="1" scope="row" data-bind="text: getAmtPayNowLabel()"></th>
+    <td class="amount">
+        <span class="price" data-bind="text: getAmtPayNowPrice()"></span>
+    </td>
+</tr>
+<tr class="totals carttot partialpaylater excl" >
+    <th class="mark" colspan="1" scope="row" data-bind="text: getAmtPayLaterLabel()"></th>
+    <td class="amount">
+        <span class="price" data-bind="text: getAmtPayLaterPrice()"></span>
+    </td>
+</tr>
+<!-- /ko -->
+

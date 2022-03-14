@@ -1,0 +1,52 @@
+<?php /**
+ * Plumrocket Inc.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End-user License Agreement
+ * that is available through the world-wide-web at this URL:
+ * http://wiki.plumrocket.net/wiki/EULA
+ * If you are unable to obtain it through the world-wide-web, please
+ * send an email to support@plumrocket.com so we can send you a copy immediately.
+ *
+ * @package     Plumrocket_Affiliate
+ * @copyright   Copyright (c) 2016 Plumrocket Inc. (http://www.plumrocket.com)
+ * @license     http://wiki.plumrocket.net/wiki/EULA  End-user License Agreement
+ */
+?>
+
+<?php $types = $this->getTypes(); ?>
+
+
+<form id="edit_form" action="<?php echo $block->getUrl('*/*/edit'); ?>" method="get">
+
+	<fieldset class="fieldset admin__fieldset " id="affiliate_base_fieldset">
+
+		<legend class="admin__legend legend">
+			<span><?php echo __('Add New Affiliate Program'); ?></span>
+		</legend><br>
+
+		<div class="admin__field">
+			<label class="label admin__field-label" for="block_title" data-ui-id="cms-block-edit-form-fieldset-element-text-title-label"></label>
+
+			<div class="admin__field-control control">
+				<?php foreach ($types as $type) { ?>
+					<div class="affilate-item">
+						<input type="radio" id="affiliate_type<?php echo $type->getId(); ?>" name="type_id" value="<?php echo $type->getId() ?>" />
+						<label for="affiliate_type<?php echo $type->getId(); ?>">
+							<?php if ($type->getKey() === 'tradedoubler') { ?>
+								<img src="<?php echo $block->getViewFileUrl('Plumrocket_Affiliate::images/' . strtolower($type->getKey()) . 'logo.png'); ?>" />
+							<?php } elseif ($type->getKey() !== 'custom') { ?>
+								<img src="<?php echo $block->getViewFileUrl('Plumrocket_Affiliate::images/' . strtolower($type->getKey()) . '.png'); ?>" />
+							<?php } else { ?>
+								<span>Custom</span>
+							<?php } ?>
+						</label>
+					</div>
+				<?php } ?>
+			</div>
+		</div>
+
+	</fieldset>
+
+</form>

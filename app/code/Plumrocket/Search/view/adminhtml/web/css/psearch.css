@@ -1,0 +1,111 @@
+/**
+ * Plumrocket Inc.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End-user License Agreement
+ * that is available through the world-wide-web at this URL:
+ * http://wiki.plumrocket.net/wiki/EULA
+ * If you are unable to obtain it through the world-wide-web, please
+ * send an email to support@plumrocket.com so we can send you a copy immediately.
+ *
+ * @package     Plumrocket Search Autocomplete & Suggest
+ * @copyright   Copyright (c) 2019 Plumrocket Inc. (http://www.plumrocket.com)
+ * @license     http://wiki.plumrocket.net/wiki/EULA  End-user License Agreement
+ */
+#prsearch_search_product_attributes .psearch-form-wrapper{
+  padding-right: 4rem;
+}
+ .psearch-form{
+  display: flex;
+  justify-content: space-between;
+}
+.psearch-form-inner{
+  width: calc(50% - 10px);
+}
+ .psearch-form-inner ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  float: left;
+  padding: 0px;
+  box-sizing: border-box;
+  overflow-x: hidden;
+  overflow-y: auto;
+  border: 1px solid #adadad;
+  width: 100%;
+  max-height: 350px;
+}
+
+.psearch-form-inner ul li {
+  line-height: 20px;
+  border-bottom: 1px solid #adadad;
+  font-size: 12px;
+  margin: 0;
+  padding: 5px;
+}
+
+.psearch-form-inner-right.psearch-form-inner ul  li.ui-sortable-placeholder {
+  background-color: #999999;
+  border: 1px solid #999999;
+  visibility: visible!important;
+}
+
+.psearch-form-inner ul li:hover {
+  background: #F6F6F6;
+  cursor: pointer;
+}
+
+.psearch-form-title {
+  font-weight: bold;
+}
+
+.psearch-form {clear:left;}
+
+.div-attributes {
+  margin: 0 10px 0 5px;
+}
+
+#row_prsearch_search_product_attributes_comment .scope-label {
+  display: none;
+}
+
+#row_prsearch_search_product_attributes_comment td {
+  padding-top: 0px !important;
+}
+
+#prsearch_general_additional_tab_general_additional table {
+  border-collapse: collapse;
+  width: 650px;
+}
+
+#prsearch_general_additional_tab_general_additional table tr td {
+  border: 1px solid #adadad;
+  padding: 3px 8px;
+  vertical-align: middle;
+}
+
+#prsearch_search_general_additional_tab_general_additional table tr td.psearch-info-path {
+  text-align: center;
+}
+
+#prsearch_search_general_additional_tab_general_additional table td {
+  padding: 10px;
+  vertical-align: middle;
+  border: 1px solid #e1e1e1;
+}
+
+.psearch.message-system-inner{
+  padding: 1.5rem 1.5rem 1.5rem 3rem;
+  border-width: 0.1rem;
+}
+
+.psearch-form-wrapper #sortable-searchable,
+.psearch-form-wrapper #sortable-attributes {
+  height: 300px;
+  overflow-y: auto;
+}
+
+.psearch-form-wrapper .psearch-form-title {
+  white-space: nowrap;
+}

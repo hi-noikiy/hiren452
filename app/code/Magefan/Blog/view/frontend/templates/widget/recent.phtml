@@ -1,0 +1,122 @@
+<?php
+/**
+ * Copyright © Magefan (support@magefan.com). All rights reserved.
+ * Please visit Magefan.com for license details (https://magefan.com/end-user-license-agreement).
+ *
+ * Glory to Ukraine! Glory to the heroes!
+ */
+?>
+<?php
+/**
+ * Blog recent posts widget
+ *
+ * @var $block \Magefan\Blog\Block\Widget\Recent
+ */
+?>
+
+<?php
+    $_postCollection = $block->getPostCollection();
+?>
+<?php if ($_postCollection->count()) { ?>
+<div class="latest-blog" style="background-color: #f7f7f7;padding-bottom: 45px;">
+  <div class="container">
+    <h2 class="filterproduct-title" style="margin-top:40px;padding-bottom: 5px;"><span class="content"><strong><?= $block->escapeHtml($block->getTitle()) ?></strong></span></h2>
+    <div id="latest_news" class="owl-top-narrow">
+        
+          <div class="recent-posts">
+            <div class="owl-carousel">
+              <?php foreach ($_postCollection as $_post) { ?>
+            <?php
+                $_postUrl = $block->escapeUrl($_post->getPostUrl());
+                $_postName = $block->escapeHtml($_post->getTitle());
+            ?>
+              <div class="item">
+                <div class="recent-inner">
+                  <div class="recent__inner">
+                    <div class="blog-image">
+                      <div class="post-image">
+                        <?php $featuredImage = $_post->getFeaturedListImage() ?: $_post->getFeaturedImage(); ?>
+                        <?php if ($featuredImage) { ?>
+                            <?php
+                                $featuredImgAlt = $_post->getData('featured_list_img_alt') ?: $_post->getData('featured_img_alt');
+                                if (!$featuredImgAlt) {
+                                    $featuredImgAlt = $_postName;
+                                }
+                            ?>
+                                
+                                    <img src="<?= $block->escapeHtml($featuredImage) ?>"
+                                         alt="<?= $block->escapeHtml($featuredImgAlt) ?>" />
+                                
+                            
+                        <?php } ?>
+                        <div class="post-date">
+                          <?php if ($_post->isPublishDateEnabled()) { ?>
+                            <div class="item post-posed-date">
+                                <span class="day"><?= $block->escapeHtml($_post->getPublishDate('d')) ?></span>
+                                <span class="month"><?= $block->escapeHtml($_post->getPublishDate('F')) ?></span>
+
+                            </div>
+                        <?php } ?>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="blog-details">
+                      <div class="postTitle">
+                        <h2><a href="<?= /*@noEscape*/ $_postUrl ?>"><?= /*@noEscape*/ $_postName ?></a></h2>
+                      </div>
+                      <div class="postContent"><p><?php
+                            $desccount = strlen($block->getShorContent($_post));
+                            $desc = $block->getShorContent($_post); 
+                            if($desccount >= 95){
+                               echo  substr($desc,0,65)."....";
+                            } else {
+                            echo $desc; 
+                            }
+                            ?></p></div>
+                      <a class="readmore btn btn-default" href="<?= /*@noEscape*/ $_postUrl ?>">Read more</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <?php } ?>
+            </div>
+          </div>
+        
+    </div>
+  </div>
+</div>
+
+</div>
+<?php } ?>
+
+<script type="text/javascript">
+  require([
+    'jquery',
+    'owl.carousel/owl.carousel.min'
+  ], function ($) {
+    $("#latest_news .owl-carousel").owlCarousel({
+      loop: true,
+      autoplay:true,
+      nav: true,
+      navText: ["<em class='porto-icon-left-open-huge'></em>","<em class='porto-icon-right-open-huge'></em>"],
+      dots: false,
+      responsive: {
+        0: {
+          items:1
+        },
+        640: {
+          items:2
+        },
+        768: {
+          items:3
+        },
+        992: {
+          items:4
+        },
+        1200: {
+          items:4
+        }
+      }
+    });
+  });
+</script>

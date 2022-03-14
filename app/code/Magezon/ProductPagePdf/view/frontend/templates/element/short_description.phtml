@@ -1,0 +1,34 @@
+<?php
+$shortDescription 	= $this->getProduct()->getShortDescription();
+$element            = $this->getElement();
+$breakPage          = $element->getData('break_page');
+$enableTitle        = $element->getData('enable_title');
+$headTitle       	= $element->getData('head_title');
+$titleFontSize      = $element->getData('title_font_size');
+$titleColor         = $element->getData('title_color');
+$enableBorderBottom = $element->getData('enable_border_bottom');
+$borderTitleWidth   = $element->getData('border_title_width');
+$borderTitleColor   = $element->getData('border_title_color');
+?>
+<?= $breakPage ? "<pagebreak />" : "" ?>
+<div class="ppbd-product-short-description">
+	<?php if ($enableTitle) { ?>
+		<h2 class="head-title" style="font-size:<?= $titleFontSize ?: "initial" ?>; color: <?= $titleColor ?: "initial" ?>;" ><?= $headTitle ?></h2>
+	<?php } ?>
+	<div class="content_short_description">
+		<?= $shortDescription ?>
+	<div>
+	<style>
+	.ppbd-product-short-description {
+		display: block;
+	}
+	.ppbd-product-short-description .head-title {
+		margin-bottom: 10px;
+		padding-bottom: 5px;
+		<?php if ($enableBorderBottom) { ?>
+		border-bottom: <?= $borderTitleWidth ?: '0' ?>px solid;	
+		border-color: <?= $borderTitleColor ?: '#ffffff' ?>;
+		<?php } ?>
+	}
+	</style>
+</div>

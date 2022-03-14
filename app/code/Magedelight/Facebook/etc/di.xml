@@ -1,0 +1,96 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Magedelight
+ * Copyright (C) 2019 Magedelight <info@magedelight.com>
+ *
+ * @category Magedelight
+ * @package Magedelight_Facebook
+ * @copyright Copyright (c) 2019 Mage Delight (http://www.magedelight.com/)
+ * @license http://opensource.org/licenses/gpl-3.0.html GNU General Public License,version 3 (GPL-3.0)
+ * @author Magedelight <info@magedelight.com>
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+   <preference for="Magedelight\Facebook\Api\Data\AttributemapInterface" type="Magedelight\Facebook\Model\Attributemap" />
+   <preference for="Magedelight\Facebook\Api\AttributemapRepositoryInterface" type="Magedelight\Facebook\Model\AttributemapRepository" />
+   <preference for="Magedelight\Facebook\Api\Data\AttributemapSearchResultsInterface" type="Magento\Framework\Api\SearchResults" />
+    <type name="Magento\Framework\Model\Entity\RepositoryFactory">
+        <arguments>
+            <argument name="entities" xsi:type="array">
+                <item name="Magedelight\Facebook\Api\Data\AttributemapInterface" xsi:type="string">Magedelight\Facebook\Api\AttributemapRepositoryInterface</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Magento\Framework\EntityManager\MetadataPool">
+        <arguments>
+            <argument name="metadata" xsi:type="array">
+                <item name="Magedelight\Facebook\Api\Data\AttributemapInterface" xsi:type="array">
+                    <item name="entityTableName" xsi:type="string">md_attribute_mapping</item>
+                    <item name="identifierField" xsi:type="string">mapping_id</item>
+                </item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Magento\Framework\EntityManager\HydratorPool">
+        <arguments>
+            <argument name="hydrators" xsi:type="array">
+                <item name="Magedelight\Facebook\Api\Data\AttributemapInterface" xsi:type="string">Magento\Framework\EntityManager\AbstractModelHydrator</item>
+            </argument>
+        </arguments>
+    </type>
+    <!-- Cron History Grid -->
+    <virtualType name="CronHistoryGridDataProvider" type="Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider">
+        <arguments>
+            <argument name="collection" xsi:type="object" shared="false">Magedelight\Facebook\Model\ResourceModel\Cronhistory\Collection</argument>
+            <argument name="filterPool" xsi:type="object" shared="false">CronHistoryGridFilterPool</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="CronHistoryGridFilterPool" type="Magento\Framework\View\Element\UiComponent\DataProvider\FilterPool">
+        <arguments>
+            <argument name="appliers" xsi:type="array">
+                <item name="regular" xsi:type="object">Magento\Framework\View\Element\UiComponent\DataProvider\RegularFilter</item>
+                <item name="fulltext" xsi:type="object">Magento\Framework\View\Element\UiComponent\DataProvider\FulltextFilter</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <type name="Magedelight\Facebook\Model\ResourceModel\Cronhistory\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">md_cron_schedule_history</argument>
+            <argument name="eventPrefix" xsi:type="string">md_facebook_cron_grid_collection</argument>
+            <argument name="eventObject" xsi:type="string">md_facebook_cron_history_grid_collection</argument>
+            <argument name="resourceModel" xsi:type="string">Magedelight\Facebook\Model\ResourceModel\Cronhistory</argument>
+        </arguments>
+    </type>
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="facebook_cronhistory_listing_data_source" xsi:type="string">Magedelight\Facebook\Model\ResourceModel\Cronhistory\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type> 
+    <!-- End Cron History Grid -->
+    <!-- Logger logic start --> 
+    <type name="Magedelight\Facebook\Logger\Handler">
+        <arguments>
+            <argument name="filesystem" xsi:type="object">Magento\Framework\Filesystem\Driver\File</argument>
+        </arguments>
+    </type>
+    <type name="Magedelight\Facebook\Logger\Logger">
+        <arguments>
+            <argument name="name" xsi:type="string">FacebookLogger</argument>
+            <argument name="handlers"  xsi:type="array">
+                <item name="system" xsi:type="object">Magedelight\Facebook\Logger\Handler</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Magedelight\Facebook\Ui\Component\MassAction\Facebook\Options">
+    <arguments>
+        <argument name="data" xsi:type="array">
+            <item name="urlPath" xsi:type="string">md_facebook/assignfeed/massOptions</item>
+            <item name="paramName" xsi:type="string">feed</item>
+        </argument>
+        </arguments>
+    </type>
+   <!-- End Logger logic start -->
+</config>

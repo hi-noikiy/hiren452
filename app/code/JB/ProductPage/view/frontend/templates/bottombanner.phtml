@@ -1,0 +1,24 @@
+<?php
+
+$_config = $this->helper('JB\ProductPage\Helper\Data');
+$isDisplay = $_config->getBottomBanner('showbottombanner');
+
+
+$bottombanner = $_config->getBottomBanner('jbbottom_banner');
+$folderName = \JB\AumikaFramework\Model\Config\Backend\Image\ItemImage::UPLOAD_DIR;
+$path = $folderName . '/' . $bottombanner;
+$bottombannerImg = $_config->getBaseUrl() . $path;
+
+
+
+
+?>
+<?php if($isDisplay == '1') : ?>
+
+<div class="jb_bottombanner">
+      <div class="bottombannerInner">     
+      <img class="jbbottombanner" src="<?php echo $bottombannerImg; ?>" alt="">
+      </div>      
+</div>
+
+<?php endif; ?>

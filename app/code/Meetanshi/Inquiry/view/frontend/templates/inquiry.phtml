@@ -1,0 +1,242 @@
+<?php
+$helper = $block->getHelper();
+$fields = $helper->getSelectedFields();
+$fields = explode(",", $fields);
+$countryList = $block->getCountries();
+$regionList = $block->getRegion();
+?>
+<form data-mage-init='{"validation": {}}' id="inquiry_form" class="form-horizontal" method="post"
+      enctype="multipart/form-data" action="<?php echo $this->getFormAction(); ?>">
+    <fieldset class="fieldset">
+        <legend class="legend"><span><?php echo $helper->getHeading(); ?></span></legend>
+        <div class="field note no-label"><?php echo $helper->getDescription(); ?></div>
+        <div class="field name required">
+            <label class="label" for="firstname"><span><?php echo $helper->getFirstName(); ?></span></label>
+            <div class="control">
+                <input name="firstname" id="firstname" class="input-text required" type="text"/>
+            </div>
+        </div>
+        <div class="field name required">
+            <label class="label" for="lastname"><span><?php echo $helper->getLastName(); ?></span></label>
+            <div class="control">
+                <input name="lastname" id="lastname" class="input-text required" type="text"/>
+            </div>
+        </div>
+        <div class="field email required">
+            <label class="label" for="email"><span><?php echo $helper->getEmail(); ?></span></label>
+            <div class="control">
+                <input name="email" id="email" class="input-text required email2" type="email"/>
+            </div>
+        </div>
+        <div class="field name required">
+            <label class="label" for="companyname"><span><?php echo $helper->getCompanyName(); ?></span></label>
+            <div class="control">
+                <input name="companyname" id="companyname" class="input-text required" type="text"/>
+            </div>
+        </div>
+        <?php if (in_array(1, $fields)): ?>
+            <div class="field">
+                <label class="label" for="taxvatnumber"><span><?php echo $helper->getTaxVatNumber(); ?></span></label>
+                <div class="control">
+                    <input name="taxvatnumber" id="taxvatnumber" class="input-text" type="text"/>
+                </div>
+            </div>
+        <?php endif; ?>
+        <?php if (in_array(2, $fields)): ?>
+            <div class="field comment required">
+                <label class="label" for="address"><span><?php echo $helper->getStreetAddress(); ?></span></label>
+                <div class="control">
+                    <textarea name="address" id="address" class="input-text required" cols="5" rows="3"></textarea>
+                </div>
+            </div>
+        <?php endif; ?>
+        <div class="field required">
+            <label class="label" for="city"><span><?php echo $helper->getCity(); ?></span></label>
+            <div class="control">
+                <input name="city" id="city" class="input-text required" type="text"/>
+            </div>
+        </div>
+        <div class="field required">
+            <label class="label" for="zippostalcode"><span><?php echo $helper->getZipPostalCode(); ?></span></label>
+            <div class="control">
+                <input name="zippostalcode" id="zippostalcode" class="input-text required" type="text"/>
+            </div>
+        </div>
+        <div class="field country required">
+            <label class="label" for="country"><span><?php echo $helper->getCountry() ?></span></label>
+            <div class="control">
+                <select name="country_id" id="country" class="">
+                    <?php foreach ($countryList as $country): ?>
+                        <option value="<?php echo $country['value'] ?>">
+                            <?php echo $country['label'] ?>
+                        </option>
+                    <?php endforeach; ?>
+                </select>
+            </div>
+        </div>
+        <div class="field region required">
+            <label class="label" for="state"><span><?php echo $helper->getState() ?></span></label>
+            <div class="control">
+                <?php echo $regionList ?>
+            </div>
+        </div>
+        <div class="field states required" style="display:none">
+            <label class="label" for="states"><span><?php echo $helper->getState() ?></span></label>
+            <div class="control">
+                <input name="state" id="states" title="<?php echo $helper->getState() ?>" class="input-text required" type="text"/>
+            </div>
+        </div>
+        <div class="field telephone required">
+            <label class="label" for="telephone"><span><?php echo $helper->getContactNumber(); ?></span></label>
+            <div class="control">
+                <input name="telephone" id="telephone"
+                       class="input-text required validate-digits"
+                       type="text"/>
+            </div>
+        </div>
+        <?php if (in_array(3, $fields)): ?>
+            <div class="field">
+                <label class="label" for="website"><span><?php echo $helper->getWebsite(); ?></span></label>
+                <div class="control">
+                    <input name="website" id="website" class="input-text validate-url" type="text"/>
+                </div>
+            </div>
+        <?php endif; ?>
+        <div class="field comment required">
+            <label class="label" for="businessdescription"><span><?php echo $helper->getBusinessDescription(); ?></span></label>
+            <div class="control">
+                <textarea name="businessdescription" id="businessdescription" class="input-text required" cols="5" rows="3"></textarea>
+            </div>
+        </div>
+        <?php if (in_array(4, $fields)): ?>
+            <div class="field">
+                <label class="label" for="datetime"><span><?php echo $helper->getDateTime(); ?></span></label>
+                <div class="control">
+                    <input type="text" id="datetime" name="datetime" class="input-text" placeholder="DD-MM-YYYY HH:MM">
+                </div>
+            </div>
+            <script>
+                require([
+                    "jquery",
+                    "mage/calendar"
+                ], function ($) {
+                    $("#datetime").calendar({
+                        showsTime: true,
+                        dateFormat: "dd-mm-yyyy"
+                    });
+                });
+            </script>
+        <?php endif; ?>
+        <?php if (in_array(5, $fields)): ?>
+            <div class="field image">
+                <label class="label" for="uploadfiles"><span><?php echo $helper->getUploadFiles(); ?></span></label>
+                <div class="control">
+                    <input name="uploadfiles[]" id="uploadfiles" class="input-text" type="file" multiple=""/>
+                    <a id="clearfile" href="javascript:;"><img
+                                src="<?php echo $block->escapeUrl($block->getViewFileUrl('Meetanshi_Inquiry::images/remove.png')); ?> "
+                                alt="Remove Files"></a>
+                </div>
+            </div>
+        <?php endif; ?>
+        <?php if (in_array(6, $fields)): ?>
+            <div class="field">
+                <label class="label" for="extrafield1"><span><?php echo $helper->getExtraField1(); ?></span></label>
+                <div class="control">
+                    <input name="extrafield1" id="extrafield1" class="input-text" type="text"/>
+                </div>
+            </div>
+        <?php endif; ?>
+        <?php if (in_array(7, $fields)): ?>
+            <div class="field">
+                <label class="label" for="extrafield2"><span><?php echo $helper->getExtraField2(); ?></span></label>
+                <div class="control">
+                    <input name="extrafield2" id="extrafield2" class="input-text" type="text"/>
+                </div>
+            </div>
+        <?php endif; ?>
+        <?php if (in_array(8, $fields)): ?>
+            <div class="field">
+                <label class="label" for="extrafield3"><span><?php echo $helper->getExtraField3(); ?></span></label>
+                <div class="control">
+                    <input name="extrafield3" id="extrafield3" class="input-text" type="text"/>
+                </div>
+            </div>
+        <?php endif; ?>
+        <?php if ($helper->getEnableTerm()): ?>
+            <div class="field choice">
+                <input class="required checkbox" id="privacy_policy" name="confirmation" type="checkbox"/>
+                <label for="privacy_policy" class="label"><span><?php echo $helper->getTermContent() ?></span></label>
+            </div>
+        <?php endif; ?>
+        <?php if ($helper->getRecaptchaEnable()): ?>
+            <input type="hidden" id="g-recaptcha-response" name="g-recaptcha-response" value="">
+        <?php endif; ?>
+    </fieldset>
+    <div class="actions-toolbar">
+        <div class="primary">
+            <input type="hidden" name="hideit" id="hideit" value=""/>
+            <button type="submit" id="add" title="" class="action submit primary">
+                <span><?php echo $helper->getSubmitButtonLabel(); ?></span>
+            </button>
+        </div>
+    </div>
+</form>
+<script type="text/javascript">
+    require(['jquery'], function ($) {
+        $(document).ready(function () {
+            $("#clearfile").click(function () {
+                $("#uploadfiles").val('')
+            });
+            $("#uploadfiles").change(function () {
+                var allowedFileExtension = '<?php echo $helper->getAllowedFileTypes()?>';
+                allowedFileExtension = allowedFileExtension.split(",");
+                var uploadExtension;
+                for (var i = 0; i < $(this).get(0).files.length; i++) {
+                    uploadExtension = $(this).get(0).files[i].name.split(".").pop();
+                    if ($.inArray(uploadExtension, allowedFileExtension) === -1) {
+                        $("#uploadfiles").val('');
+                        alert(uploadExtension + " file type not allowed.");
+                    }
+                }
+            });
+        });
+    });
+</script>
+<?php if ($helper->getRecaptchaEnable()): ?>
+    <script src='https://www.google.com/recaptcha/api.js?render=<?php echo $helper->getSiteKey(); ?>'></script>
+    <script>
+        grecaptcha.ready(function () {
+            grecaptcha.execute('<?php echo $helper->getSiteKey();?>', {action: 'review'})
+                .then(function (token) {
+                    document.getElementById('g-recaptcha-response').value = token;
+                });
+        });
+    </script>
+<?php endif; ?>
+<script>
+    require(['jquery'], function ($) {
+        $(document).on('change', '#country', function () {
+            var param = 'country=' + $('#country').val();
+            $.ajax({
+                showLoader: true,
+                url: '<?php /* @escapeNotVerified */ echo $block->getCountryAction(); ?>',
+                data: param,
+                type: "GET",
+                dataType: 'json'
+            }).done(function (data) {
+                $('#state').empty();
+                if (data.value == '') {
+                    $('.field.states.required').show();
+                    $('.field.region.required').hide();
+                }
+                else {
+                    $('#state').append(data.value);
+                    $('.field.states.required').hide();
+                    $('.field.region.required').show();
+                }
+            });
+        });
+    });
+</script>
+
+

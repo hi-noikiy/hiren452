@@ -1,0 +1,10 @@
+body.adminhtml-auth-login header.login-header {
+    text-align: center;
+}
+body .menu-wrapper._fixed a.logo {
+    background: #fff;
+    border: 2px solid #373330;
+}
+body .menu-wrapper._fixed a.logo img {
+    width: 71%;
+}

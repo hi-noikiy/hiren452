@@ -1,0 +1,259 @@
+<?php
+$element            = $this->getElement();
+$collection         = $this->getCollection();
+$breakPage          = $element->getData('break_page');
+$enableTitle        = $element->getData('enable_title');
+$headTitle       	= $element->getData('head_title');
+$titleFontSize      = $element->getData('title_font_size');
+$titleColor         = $element->getData('title_color');
+$enableBorderBottom = $element->getData('enable_border_bottom');
+$borderTitleWidth   = $element->getData('border_title_width');
+$borderTitleColor   = $element->getData('border_title_color');
+$max                = $element->getData('max_review_count');
+?>
+<?= $breakPage ? "<pagebreak />" : "" ?>
+<div class="ppbd-product ppbd-product-reviews">
+    <?php if ($enableTitle) { ?>
+        <h2 class="head-title" style="font-size:<?= $titleFontSize ?: "initial" ?>; color: <?= $titleColor ?: "initial" ?>;" ><?= $headTitle ?></h2>
+    <?php } ?>
+    <div class="review-rating-count">
+        <h3 class="title-product"><?= $this->getProduct()->getName() ?></h3>
+        <div class="review-summary">
+            <span class="icon-review"><img src="<?= $this->helper('\Magezon\ProductPagePdf\Helper\Data')->getRootPath()  ?>\app\code\Magezon\ProductPagePdf\view\frontend\web\images\100.png" /></span>
+            <span class="text"><?= $this->getReviewsCount() . __(' Reviews') ?></span>
+        </div>
+    </div>
+    <div class="items review-items">
+        <div class="label">
+            <?= __('Rating') ?>
+        </div>
+        <?php $stt = 0 ?>
+        <?php foreach ($collection as $review) { ?>
+            <?php if ($stt < $max) { ?>
+                <?php  if ($element->getData('display_type') == 'type1') { ?>
+                    <div class="item review-item type1">
+                        <div class="review-ratings">
+                            <div class="rating-summary">
+                                <?php $votes = $review->getRatingVotes() ?>
+                                <?php if (count($votes)) { ?>
+                                    <?php foreach ($votes as $vote) { ?>
+                                        <div class="rating-result" title="<?= $vote->getPercent() ?>%">
+                                            <span class="ratingValue" style="width:<?= $vote->getPercent() ?>%">
+                                                <img src="<?= $this->getVoteSrc($vote) ?>" style="width: 60px;" />
+                                            </span>
+                                        </div>
+                                    <?php } ?>
+                                <?php } ?>
+                            </div>
+                        </div>
+                        <div class="review-content">
+                            <div class="review-details">
+                                <?= $review->getDetail() ?>
+                            </div>
+                        </div>
+                        <div class="review-date-author">
+                            <div class="review-title">
+                                <?= $review->getNickname() ?>
+                            </div>
+                            <p class="review-date"><?= $this->formatReviewCreatDate($review->getCreatedAt()) ?></p>
+                        </div>
+                    </div>
+                <?php } else if ($element->getData('display_type') == 'type2') { ?>
+                    <div class="item review-item type2 <?= $stt % 2 == 0 ? 'type-left' : 'type-right' ?>">
+                        <div class="review-head-left">
+                            <div class="review-date-author">
+                                <div class="review-title">
+                                    <?= $review->getNickname() ?>
+                                </div>
+                                <p class="review-date"><?= $this->formatReviewCreatDate($review->getCreatedAt()) ?></p>
+                            </div>
+                            <div class="review-ratings">
+                                <div class="rating-summary">
+                                    <?php $votes = $review->getRatingVotes() ?>
+                                    <?php if (count($votes)) { ?>
+                                        <?php foreach ($votes as $vote) { ?>
+                                            <div class="rating-result" title="<?= $vote->getPercent() ?>%">
+                                                <span class="ratingValue" style="width:<?= $vote->getPercent() ?>%">
+                                                    <img src="<?= $this->getVoteSrc($vote) ?>" style="width: 60px;" />
+                                                </span>
+                                            </div>
+                                        <?php } ?>
+                                    <?php } ?>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="review-content">
+                            <div class="review-details">
+                                <?= $review->getDetail() ?>
+                            </div>
+                        </div>
+                    </div>
+                <?php } ?>
+            <?php } ?>
+        <?php $stt++ ?>
+        <?php } ?>
+    </div>
+    <style>
+		.ppbd-product-reviews {
+			display: block;
+		}
+		.ppbd-product-reviews .head-title {
+			margin-bottom:10px;
+			padding-bottom: 5px;
+			<?php if ($enableBorderBottom) { ?>
+			border-bottom: <?= $borderTitleWidth ?: '0' ?>px solid;	
+			border-color: <?= $borderTitleColor ?: '#ffffff' ?>;
+			<?php } ?>
+        }
+        .ppbd-product-reviews {
+            background-color: transparent;
+            display: block;
+        }
+        <?php  if ($element->getData('display_type') == 'type1') { ?>
+            .ppbd-product-reviews {
+            color: <?= $element->getData('color_style') ?: '#454545' ?>;
+            font-size: <?= $element->getData('content_font_size') ?: '14' ?>px;
+        }
+        .ppbd-product-reviews .review-rating-count {
+            margin: 15px 0 20px;
+        }
+        .ppbd-product-reviews .review-rating-count .title-product {
+            font-size: 20px;
+            font-weight: 600;
+        }
+        .ppbd-product-reviews .review-rating-count .review-summary {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+        .ppbd-product-reviews .review-rating-count .review-summary .icon-review {
+            margin-top: 20px;
+            display: inline-block;
+        }
+        .ppbd-product-reviews .review-rating-count .review-summary .text {
+            line-height: 30px;
+            margin-bottom: 5px;
+            padding-left: 10px;
+        }
+        .ppbd-product-reviews .review-items {
+            margin: 0;
+            padding: 0;
+            list-style: none none;
+        }
+        .ppbd-product-reviews .review-items .label {
+            padding-bottom: 10px;
+        }
+        .ppbd-product-reviews .review-items .review-item {
+            padding: 15px 0;
+            margin: 0;
+            overflow: hidden;
+            position: relative;
+            border-top: 1px solid #f1f1f1;
+            box-sizing: border-box;
+        }
+        .ppbd-product-reviews .review-items .review-ratings {
+            width: 150px;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+        .ppbd-product-reviews .review-items .review-ratings .rating-summary {
+            display: flex;
+        }
+        .ppbd-product-reviews .review-items .review-content {
+            width: 100%;
+            padding-left: 150px;
+        }
+        .ppbd-product-reviews .review-items .review-date-author {
+            width: 100%;
+            padding-left: 150px;
+        }
+        .ppbd-product-reviews .review-items .review-content .review-details {
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+        .ppbd-product-reviews .review-items .review-date-author .review-title {
+            font-weight: bold;
+            padding: 5px 0 0;
+            margin: 8px 0 2px;
+        }
+        .ppbd-product-reviews .review-items .review-date-author .review-date {
+            font-size: 11px;
+        }
+        <?php } ?>
+        <?php  if ($element->getData('display_type') == 'type2') { ?>
+        .ppbd-product-reviews {
+            color: <?= $element->getData('color_style') ?: '#454545' ?>;
+            font-size: <?= $element->getData('content_font_size') ?: '14' ?>px;
+        }
+        .ppbd-product-reviews .review-rating-count {
+            margin: 15px 0 20px;
+        }
+        .ppbd-product-reviews .review-rating-count .title-product {
+            font-size: 20px;
+            font-weight: 600;
+        }
+        .ppbd-product-reviews .review-rating-count .review-summary {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+        .ppbd-product-reviews .review-rating-count .review-summary .icon-review {
+            margin-top: 20px;
+            display: inline-block;
+        }
+        .ppbd-product-reviews .review-rating-count .review-summary .text {
+            line-height: 30px;
+            margin-bottom: 5px;
+            padding-left: 10px;
+        }
+        .ppbd-product-reviews .review-items {
+            margin: 0;
+            padding: 0;
+            max-width: 750px;
+            list-style: none none;
+        }
+        .ppbd-product-reviews .review-items .label {
+            padding-bottom: 10px;
+        }
+        .ppbd-product-reviews .review-items .review-item {
+            padding: 15px 0;
+            overflow: hidden;
+            position: relative;
+            box-sizing: border-box;
+            background-image: url('<?= $this->getViewFileUrl('Magezon_ProductPagePdf::images/bg-review-left.png') ?>');
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: contain;
+            margin-bottom: 50px;
+            max-width: 750px;
+            min-height: 165px;
+        }
+        .ppbd-product-reviews .review-items .type-left {
+            background-image: url('<?= $this->getViewFileUrl('Magezon_ProductPagePdf::images/bg-review-left.png') ?>');
+        }
+        .ppbd-product-reviews .review-items .type-right {
+            background-image: url('<?= $this->getViewFileUrl('Magezon_ProductPagePdf::images/bg-review-right.png') ?>');
+        }
+        .ppbd-product-reviews .review-items .type-left .review-head-left {
+            width: 150px;
+        }
+        .ppbd-product-reviews .review-items .type-left .review-content {
+            padding-left: 165px;
+            margin-top: -60px;
+        }
+
+        .ppbd-product-reviews .review-items .type-right .review-head-left {
+            width: 150px;
+            float: right;
+            text-align: right;
+        }
+        .ppbd-product-reviews .review-items .type-right .review-content {
+            padding-right: 0;
+            padding-left: 0;
+            float: left;
+            text-align: right;
+        }
+        <?php } ?>
+    </style>
+</div>

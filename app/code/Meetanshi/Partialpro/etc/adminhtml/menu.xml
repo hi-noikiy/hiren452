@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Meetanshi_Partialpro::partialpayment" resource="Meetanshi_Partialpro::partialpayment"
+             module="Meetanshi_Partialpro" title="Partial Payment" sortOrder="20"/>
+        <add id="Meetanshi_Partialpro::managepartialpayment" resource="Meetanshi_Partialpro::managepartialpayment"
+             module="Meetanshi_Partialpro" title="Manage Partial Payment Orders" sortOrder="30"
+             action="partialpayment/manage/index" parent="Meetanshi_Partialpro::partialpayment"/>
+        <add id="Meetanshi_Partialpro::revanuepartialpayment" resource="Meetanshi_Partialpro::managepartialpayment"
+             module="Meetanshi_Partialpro" title="Revenue Report" sortOrder="35"
+             action="partialpayment/reports/revenue" parent="Meetanshi_Partialpro::partialpayment"/>
+        <add id="Meetanshi_Partialpro::configpartialpayment" resource="Meetanshi_Partialpro::configpartialpayment"
+             module="Meetanshi_Partialpro" title="Configuration" sortOrder="40"
+             action="adminhtml/system_config/edit/section/partialpro" parent="Meetanshi_Partialpro::partialpayment"/>
+    </menu>
+</config>

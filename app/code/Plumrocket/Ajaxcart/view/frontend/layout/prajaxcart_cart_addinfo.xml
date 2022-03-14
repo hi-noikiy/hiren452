@@ -1,0 +1,38 @@
+<?xml version="1.0" ?>
+<!--
+
+ * Plumrocket Inc.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End-user License Agreement
+ * that is available through the world-wide-web at this URL:
+ * http://wiki.plumrocket.net/wiki/EULA
+ * If you are unable to obtain it through the world-wide-web, please
+ * send an email to support@plumrocket.com so we can send you a copy immediately.
+ *
+ * @package     Plumrocket Ajaxcart v2.x.x
+ * @copyright   Copyright (c) 2018 Plumrocket Inc. (http://www.plumrocket.com)
+ * @license     http://wiki.plumrocket.net/wiki/EULA  End-user License Agreement
+ -->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <update handle="prajaxcart_ajax_default"/>
+    <update handle="checkout_item_price_renderers"/>
+    <body>
+        <container name="content">
+            <block class="Plumrocket\Ajaxcart\Block\AddInfo" name="product.info" template="Plumrocket_Ajaxcart::addinfo.phtml" >
+                <block class="Plumrocket\Ajaxcart\Block\Catalog\Product\ProductList\Related" name="pac.catalog.product.related" as="pac_related_products" template="Plumrocket_Ajaxcart::product/list/related.phtml" />
+                <block class="Plumrocket\Ajaxcart\Block\AddInfo\Crosssell" name="pac.checkout.cart.crosssell" as="crosssell" template="Plumrocket_Ajaxcart::addinfo/crosssell.phtml">
+                    <arguments>
+                        <argument name="module_name" xsi:type="string">Magento_Checkout</argument>
+                    </arguments>
+                </block>
+            </block>
+            <referenceBlock name="checkout.cart.item.renderers">
+                <block class="Magento\Checkout\Block\Cart\Item\Renderer"  as="default" template="Plumrocket_Ajaxcart::addinfo/cart/item/default.phtml" />
+                <block class="Magento\Checkout\Block\Cart\Item\Renderer"  as="simple" template="Plumrocket_Ajaxcart::addinfo/cart/item/default.phtml" />
+                <block class="Magento\ConfigurableProduct\Block\Cart\Item\Renderer\Configurable" as="configurable" template="Plumrocket_Ajaxcart::addinfo/cart/item/default.phtml" />
+            </referenceBlock>
+        </container>
+    </body>
+</page>

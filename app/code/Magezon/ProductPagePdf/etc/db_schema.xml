@@ -1,0 +1,75 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Magezon
+ *
+ * This source file is subject to the Magezon Software License, which is available at https://www.magezon.com/license
+ * Do not edit or add to this file if you wish to upgrade the to newer versions in the future.
+ * If you wish to customize this module for your needs.
+ * Please refer to https://www.magezon.com for more information.
+ *
+ * @category  Magezon
+ * @package   Magezon_ProductPagePdf
+ * @copyright Copyright (C) 2020 Magezon (https://www.magezon.com)
+ */
+-->
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="mgz_productpagepdf_profile" resource="default" engine="innodb" comment="Product Page PDF">
+        <column xsi:type="smallint" name="profile_id" padding="6" unsigned="false" nullable="false" identity="true" comment="Profile ID"/>
+        <column xsi:type="varchar" name="name" length="255" nullable="false" comment="Name"/>
+        <column xsi:type="text" name="profile" nullable="true" comment="Profile"/>
+        <column xsi:type="boolean" name="is_active" nullable="false" comment="Is Profile Active"/>
+        <column xsi:type="timestamp" name="from_date" nullable="true" comment="From Time"/>
+        <column xsi:type="timestamp" name="to_date" nullable="true" comment="To Time"/>
+        <column xsi:type="timestamp" name="creation_time" on_update="false" nullable="false" default="CURRENT_TIMESTAMP" comment="Profile Create"/>
+        <column xsi:type="timestamp" name="update_time" on_update="true" nullable="false" default="CURRENT_TIMESTAMP" comment="Profile Update"/>
+        <column xsi:type="boolean" name="auto_download" nullable="false" comment="Is auto download"/>
+        <column xsi:type="int" name="button_type" nullable="false" comment="Fontend Display Button Type" />
+        <column xsi:type="int" name="button_position" nullable="false" comment="Fontend Button Position" />
+        <column xsi:type="int" name="priority" nullable="false" comment="Display Priority" />
+        <column xsi:type="mediumtext" name="conditions_serialized" nullable="true" comment="Conditions Serialized"/>
+        <column xsi:type="text" name="product_types" nullable="true" comment="Product Types"/>
+        <column xsi:type="text" name="pdf_orientation" nullable="true" comment="PDF Orientation"/>
+        <column xsi:type="text" name="pdf_page_size" nullable="true" comment="PDF Page Size"/>
+        <column xsi:type="text" name="pdf_margin_top" nullable="true" comment="PDF Margin Top"/>
+        <column xsi:type="text" name="pdf_margin_right" nullable="true" comment="PDF Margin Right"/>
+        <column xsi:type="text" name="pdf_margin_bottom" nullable="true" comment="PDF Margin Bottom"/>
+        <column xsi:type="text" name="pdf_margin_left" nullable="true" comment="PDF Margin Left"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="profile_id"/>
+        </constraint>
+        <index referenceId="PRODUCT_PAGE_PDF_PROFILE_ID" indexType="btree">
+            <column name="profile_id"/>
+        </index>
+    </table>
+    <table name="mgz_productpagepdf_profile_store" resource="default" engine="innodb" comment="Profile and Store">
+        <column xsi:type="smallint" name="profile_id" padding="6" unsigned="false" nullable="false" identity="false" comment="Profile ID"/>
+        <column xsi:type="smallint" name="store_id" padding="5" nullable="false" unsigned="true" comment="Store ID"/>
+        <constraint xsi:type="foreign" referenceId="MGZ_PRODUCTPAGEPDF_STORE_PROFILE_PROFILE_ID" table="mgz_productpagepdf_profile_store"
+                    column="profile_id" referenceTable="mgz_productpagepdf_profile" referenceColumn="profile_id" onDelete="CASCADE"/>
+        <constraint xsi:type="foreign" referenceId="MGZ_PRODUCTPAGEPDF_STORE_PROFILE_STORE_ID" table="mgz_productpagepdf_profile_store"
+                    column="store_id" referenceTable="store" referenceColumn="store_id" onDelete="CASCADE"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="profile_id"/>
+            <column name="store_id"/>
+        </constraint>
+    </table>
+    <table name="mgz_productpagepdf_profile_product" resource="default" engine="innodb" comment="Product and Profile">
+        <column xsi:type="smallint" name="profile_id" padding="6" unsigned="false" nullable="false" identity="false" comment="Profile ID"/>
+        <column xsi:type="smallint" name="store_id" padding="5" nullable="false" unsigned="true" comment="Store ID"/>
+        <column xsi:type="int" name="product_id" padding="10" unsigned="true" nullable="false" identity="false"
+                comment="Product ID"/>
+        <constraint xsi:type="foreign" referenceId="MGZ_PRODUCTPAGEPDF_PROFILE_ID" table="mgz_productpagepdf_profile_product"
+                    column="profile_id" referenceTable="mgz_productpagepdf_profile" referenceColumn="profile_id" onDelete="CASCADE"/>
+        <constraint xsi:type="foreign" referenceId="MGZ_PRODUCTPAGEPDF_STORE_PRODUCT_ID" table="mgz_productpagepdf_profile_product"
+                    column="store_id" referenceTable="store" referenceColumn="store_id" onDelete="CASCADE"/>
+        <constraint xsi:type="foreign" referenceId="MGZ_PRODUCTPAGEPDF_CATALOG_PRODUCT_ID" table="mgz_productpagepdf_profile_product"
+                    column="product_id" referenceTable="catalog_product_entity" referenceColumn="entity_id" onDelete="CASCADE"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="profile_id"/>
+            <column name="store_id"/>
+            <column name="product_id"/>
+        </constraint>
+    </table>
+</schema>

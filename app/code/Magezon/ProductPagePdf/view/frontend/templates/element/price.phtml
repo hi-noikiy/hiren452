@@ -1,0 +1,36 @@
+<?php
+$element         = $this->getElement();
+$price           = $this->getProductPrice($this->getProduct());
+$breakPage       = $element->getData('break_page');
+$isEnableLabel   = $element->getData('diplay_label');
+$priceFontZise   = $element->getData('price_font_size');
+$priceLineHeight = $element->getData('price_line_height');
+$priceColor      = $element->getData('price_color');
+$labelFontZise   = $element->getData('label_font_size');
+$labelColor      = $element->getData('label_color');
+?>
+<?= $breakPage ? "<pagebreak />" : "" ?>
+<div class="ppbd-product-price">
+    <div class="wap"><?= $price ?></div>
+    <style>
+        .ppbd-product-price .wap {
+            width: 100%;
+            position: relative;
+            overflow: hidden;
+            display: block;
+        }
+        .ppbd-product-price .wap .price-label {
+            display: <?= $isEnableLabel ? 'inline-block' : 'none' ?>;
+            font-size: <?= $labelFontZise ?>px;
+            color: <?= $labelColor ?>;
+        }
+        .ppbd-product-price .old-price {
+            display: none;
+        }
+        .ppbd-product-price .wap .price-wrapper {
+            font-size: <?= $priceFontZise ?>px;
+            line-height: <?= $priceLineHeight ?>px;
+            color: <?= $priceColor ?>;
+        }
+    </style>
+</div>

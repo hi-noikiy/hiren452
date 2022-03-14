@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * Plumrocket Inc.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End-user License Agreement
+ * that is available through the world-wide-web at this URL:
+ * http://wiki.plumrocket.net/wiki/EULA
+ * If you are unable to obtain it through the world-wide-web, please
+ * send an email to support@plumrocket.com so we can send you a copy immediately.
+ *
+ * @package     Plumrocket SMTP
+ * @copyright   Copyright (c) 2019 Plumrocket Inc. (http://www.plumrocket.com)
+ * @license     http://wiki.plumrocket.net/wiki/EULA  End-user License Agreement
+ */
+ -->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../lib/internal/Magento/Framework/ObjectManager/etc/config.xsd">
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="prsmtp_log_grid_data_source" xsi:type="string">Plumrocket\Smtp\Model\ResourceModel\Log\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+    <virtualType name="Plumrocket\Smtp\Model\ResourceModel\Log\Grid\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">plumrocket_smtp_email_log</argument>
+            <argument name="resourceModel" xsi:type="string">Plumrocket\Smtp\Model\ResourceModel\Log</argument>
+        </arguments>
+    </virtualType>
+
+    <type name="Magento\Framework\Mail\TransportInterface">
+        <plugin name="prsmtp_mailtransport" type="Plumrocket\Smtp\Plugin\Framework\Mail\TransportPlugin" sortOrder="1" disabled="false"/>
+    </type>
+    <type name="Magento\Framework\Mail\Template\TransportBuilder">
+        <plugin name="prsmtp_mailtransport_builder" type="Plumrocket\Smtp\Plugin\Framework\Mail\Template\TransportBuilderPlugin" sortOrder="1" disabled="false"/>
+    </type>
+</config>

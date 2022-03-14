@@ -1,0 +1,126 @@
+@import 'module/_spinner.less';
+
+.productpagepdf-tab {
+	.productpagepdf-tab-nav {
+		background: #f1f1f1;
+		padding-left: 10px;
+		margin-bottom: 20px;
+	}
+
+	.productpagepdf-tab-nav-item {
+		display: inline-block;
+
+		&.active {
+			border-top: 4px solid #eb5202;
+			background: #FFF;
+		}
+
+		&:not(.active) {
+			&:hover {
+				border-top: 4px solid #e3e3e3;
+				background: #e3e3e3;
+			}
+		}
+
+		a {
+			color: #333;
+			text-decoration: none;
+			cursor: pointer;
+			display: block;
+			padding: 20px;
+			color: #333;
+		}
+	}
+
+	.pdf-preview {
+		iframe {
+			border: 0;
+		}
+	}
+
+	table {
+		width: 100%;
+	}
+
+	table thead th,
+	table tbody td{
+		padding: 5px 10px;
+	}
+
+	.pdf-field-content {
+		display: block;
+	}
+
+	.pdf-form-container {
+		margin-bottom: 15px;
+
+		.admin__control-text {
+			width: 300px;
+		}
+	}
+
+	.pdf-form-control {
+		position: relative;
+	}
+
+	.pdf-form-dropdown-wrapper {
+		-webkit-box-shadow: 0 0 4px rgba(0,0,0,.14), 0 4px 8px rgba(0,0,0,.28);
+		-moz-box-shadow: 0 0 4px rgba(0,0,0,.14),0 4px 8px rgba(0,0,0,.28);
+		box-shadow: 0 0 4px rgba(0,0,0,.14), 0 4px 8px rgba(0,0,0,.28);
+		overflow: hidden;
+		position: absolute;
+		z-index: 20;
+		background: #fff;
+		width: 100%;
+	}
+
+	.pdf-form-dropdown {
+		list-style: none;
+		padding: 0;
+		margin: 0;
+		background: #fff;
+		border: 1px solid #c2c2c2;
+		border-top: 0;
+		float: left;
+		max-height: 500px;
+		overflow: scroll;
+		border: 0;
+		width: 100%;
+
+		li {
+			margin: 0;
+			padding: 8px 10px 8px 15px;
+			display: block;
+			cursor: pointer;
+			text-align: left;
+			font-weight: 400;
+			font-style: normal;
+			color: #333;
+
+			&:hover {
+				text-decoration: none;
+				background: #f0f0f0;
+			}
+		}
+	}
+
+	.pdf-form-container {
+		.mgzFlex();
+
+		> * {
+			margin-right: 5px;
+		}
+	}
+
+	.pdf-empty-message {
+		padding: 8px 10px 8px 15px;
+	}
+}
+
+.mgz-element-pdf_items {
+	thead {
+		th {
+			background: #edebeb
+		}
+	}
+}

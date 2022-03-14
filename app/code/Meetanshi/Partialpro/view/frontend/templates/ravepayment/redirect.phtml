@@ -1,0 +1,80 @@
+<?php
+$data = $this->getAllData();
+
+?>
+
+<script>
+    require([
+        'jquery',
+        'domReady!'
+    ], function ($) {
+
+        var currency = '<?php echo $data["order_currency"]?>';
+        var txref = '<?php echo $data["txref"]?>';
+        var amount = '<?php echo $data["amount"]?>';
+        var custom_description = '<?php echo $data["custom_description"]?>';
+        var custom_logo = '<?php echo $data["custom_logo"]?>';
+        var custom_title = '<?php echo $data["custom_title"]?>';
+        var customer_email = '<?php echo $data["customer_email"]?>';
+        var PBFPubKey = '<?php echo $data["PBFPubKey"]?>';
+        var redirect_url = '<?php echo $data["redirect_url"]?>';
+        var cancel_url = '<?php echo $data["cancel_url"]?>';
+        var test = '<?php echo $data["test"]?>';
+
+        function buildConfig() {
+            var rave_country;
+            switch (currency) {
+                case 'GHS':
+                    rave_country = 'GH';
+                    break;
+                case 'KES':
+                    rave_country = 'KE';
+                    break;
+                case 'ZAR':
+                    rave_country = 'ZA';
+                    break;
+                default:
+                    rave_country = 'NG';
+                    break;
+            }
+
+            return {
+                amount: amount,
+                currency: currency,
+                country: rave_country,
+                custom_description: custom_description,
+                custom_logo: custom_logo,
+                custom_title: custom_title,
+                customer_email: customer_email,
+                redirect_url: redirect_url,
+                PBFPubKey: PBFPubKey,
+                txref: txref,
+                callback: callback(this),
+                onclose: function () {
+                    location.href = cancel_url;
+                }
+            };
+        }
+
+        function callback(res) {
+        }
+
+        var script = document.createElement('script');
+
+        if (test) {
+            script.src = '//ravesandboxapi.flutterwave.com/flwv3-pug/getpaidx/api/flwpbf-inline.js';
+        } else {
+            script.src = '//api.ravepay.co/flwv3-pug/getpaidx/api/flwpbf-inline.js';
+        }
+
+        script.src_type = 'url';
+        document.getElementsByTagName('head')[0].appendChild(script);
+
+        $(document).ready(function () {
+            setTimeout(function () {
+                getpaidSetup(buildConfig());
+            }, 2000);
+        });
+
+    });
+</script>

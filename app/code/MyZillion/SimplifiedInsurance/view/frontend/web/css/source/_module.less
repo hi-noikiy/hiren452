@@ -1,0 +1,168 @@
+//
+//  Common
+//  _____________________________________________
+
+.define-bar-if-not-defined() {@color-gray_light: #cccccc;}
+.define-bar-if-not-defined();
+
+& when (@media-common = true) {
+
+    .myzillion__modal-add-insurance {
+
+            .modal-inner-wrap {
+                border-radius: 5px;
+                max-width: 640px;
+            }
+            .modal-title {
+                color: @color-black;
+                font-weight: @font-weight__semibold;
+                font-size: 18px !important;
+            }
+            ul {
+                margin-bottom: 0;
+                margin-top: 2.5rem;
+                li {
+                    color: @color-black;
+                    font-size: 14px;
+                }
+            }
+
+            .modal-footer {
+                text-align: center;
+                min-height: 30px;
+                .lib-vendor-prefix-display(flex);
+                flex-direction: column;
+                flex-wrap: wrap;
+                align-items: center;
+                justify-content: center;
+                button {
+                    font-size: 14px;
+                    &.action-accept {
+                        display: inline-block;
+                        margin-bottom: 10px;
+                    }
+                    &.action-dismiss {
+                        display: inline-block;
+                    }
+                }
+            }
+    }
+    .myzillion__checkout {
+        &-panel {
+            background-color: @color-white;
+            border: 1px solid #d8d8d8;
+            padding: 20px 15px;
+            &-heading {
+                .lib-vendor-prefix-display(flex);
+                justify-content: space-between;
+                margin-bottom: 10px;
+                .checkbox.styled-checkbox {
+                    margin-top: 26px;
+                }
+            }
+            .agree-legend {
+                font-size: 12px;
+                color: @color-black;
+                margin-left: 20px;
+            }
+            ul {
+                margin-top: 30px;
+                list-style: disc;
+                color: @color-black;
+                padding: 0 20px;
+                li {
+                    color: @color-black;
+                    padding-left: 10px;
+                    small {
+                      font-size: 10px;
+                    }
+                }
+            }
+            &-footer {
+                text-align: right;
+            }
+        }
+        &-axa-logo {
+            margin-left: 10px;
+            height: 30px;
+        }
+        &-label-text {
+            color: @color-black;
+            font-size: 22px;
+            font-weight: 700;
+            margin-top: 0;
+            width: 100%;
+            padding-top: 22px;
+            margin-bottom: 7px;
+
+            &.quote {
+              font-size: 21px;
+            }
+        }
+        &-zillion-logo {
+            height: 50px;
+        }
+    }
+
+    .zillion__paypal-workflow {
+        .zillion-box-container {
+            .lib-css(background, @color-white);
+            border-top: 1px solid @color-gray_light;
+        }
+        .myzillion__checkout-panel {
+            padding-top: 20px;
+            padding-bottom: 20px;
+        }
+    }
+
+} //Common
+
+//
+//  Mobile
+//  _____________________________________________
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
+    .myzillion__checkout {
+        &-panel-heading {
+            position: relative;
+            padding-top: 55px;
+        }
+        &-zillion-logo {
+            height: 50px;
+            left: 50%;
+            position: absolute;
+            top: 0;
+            transform: translatex(-50%);
+        }
+        &-panel-footer {
+            text-align: right;
+            margin-top: 20px;
+        }
+        &-panel .agree-legend {
+            margin-left: 0;
+        }
+    }
+    .myzillion__modal-add-insurance ul {
+        padding-left: 20px;
+    }
+
+}
+
+//
+//  Desktop
+//  _____________________________________________
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+    .zillion__paypal-workflow {
+
+        .myzillion__checkout-panel {
+            max-width: 70%;
+            padding-top: 30px;
+            padding-bottom: 30px;
+        }
+    }
+
+    .myzillion__checkout-label-text {
+        .br-for-mobile {
+            display: none;
+        }
+    }
+}

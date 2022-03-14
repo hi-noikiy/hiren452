@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../lib/internal/Magento/Framework/View/Layout/etc/page_configuration.xsd">
+	<head>
+         <css src="FME_Mediaappearance::css/finaltilesgallery.css"/>
+        <css src="FME_Mediaappearance::css/lightbox2.css"/>
+        <css src="FME_Mediaappearance::css/magnific-popup.css" media="all"/>
+        <css src="FME_Mediaappearance::css/photogallery/cubeportfoliocss.css"/>
+         <css src="https://unpkg.com/nanogallery2@2.4.2/dist/css/nanogallery2.min.css"  src_type="url" rel="stylesheet" type="text/css"  />
+    
+    </head>
+    <body>
+
+    <referenceBlock name="top.links">
+            <block class="FME\Mediaappearance\Block\Link" name="mediaappearance-url-link" ifconfig="mediaappearance/general/enable_module">
+               <arguments>
+                    <argument name="label" xsi:type="string">Mediagallery</argument>
+                </arguments>
+            </block>
+        </referenceBlock>
+        <move element="mediaappearance-url-link" destination="header.links" before="-"/>
+
+        <referenceBlock name="mediaappearance-url-link" remove="1"/>
+
+    
+        <!--<referenceBlock name="header.links">
+            <block class="FME\Mediaappearance\Block\Link" name="mediaappearance-url-link" ifconfig="mediaappearance/general/enable_module">
+                <arguments>
+                    <argument name="label" xsi:type="string">Media Gallery</argument>
+                </arguments>
+            </block>
+        </referenceBlock>
+       -->
+    </body>
+</page>

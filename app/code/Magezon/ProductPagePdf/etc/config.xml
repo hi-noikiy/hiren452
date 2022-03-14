@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Magezon
+ *
+ * This source file is subject to the Magezon Software License, which is available at https://www.magezon.com/license
+ * Do not edit or add to this file if you wish to upgrade the to newer versions in the future.
+ * If you wish to customize this module for your needs.
+ * Please refer to https://www.magezon.com for more information.
+ *
+ * @category  Magezon
+ * @package   Magezon_ProductPagePdf
+ * @copyright Copyright (C) 2020 Magezon (https://www.magezon.com)
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+	<default>
+        <productpagepdf>
+            <footer>
+                <enable_numbering>1</enable_numbering>
+                <enable_current_date>1</enable_current_date>
+                <enable_text_foot>1</enable_text_foot>
+                <text_footer>© Copyright 2020 by Magezon. All rights reserved.</text_footer>
+            </footer>
+            <button>
+                <title_font_size>14</title_font_size>
+                <title_font_weight>400</title_font_weight>
+            </button>
+        </productpagepdf>
+	</default>
+</config>

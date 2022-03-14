@@ -1,0 +1,58 @@
+.inquiry-index-index .columns .column.main {
+	width: 100%;
+}
+.inquiry-index-index .form-horizontal .fieldset {
+	display: flex;
+	flex-wrap: wrap;
+	margin: 0 -10px;
+}
+.inquiry-index-index .form-horizontal .fieldset .field {
+	width: ~"calc(33.33% - 20px)";
+	margin: 0 10px 20px 10px;
+}
+.inquiry-index-index .form-horizontal .fieldset .field.note {
+	width: 100%;
+}
+.inquiry-index-index .form-horizontal .fieldset .field input {
+	height: 35px;
+	line-height: 35px;
+	border: 1px solid #000;
+}
+.inquiry-index-index .form-horizontal .fieldset .field select,
+.inquiry-index-index .form-horizontal .fieldset .field textarea {
+	height: 35px;
+	border: 1px solid #000;	
+}
+.inquiry-index-index .form-horizontal .fieldset .field input:hover,
+.inquiry-index-index .form-horizontal .fieldset .field input:focus,
+.inquiry-index-index .form-horizontal .fieldset .field select:hover,
+.inquiry-index-index .form-horizontal .fieldset .field textarea:hover,
+.inquiry-index-index .form-horizontal .fieldset .field select:focus,
+.inquiry-index-index .form-horizontal .fieldset .field textarea:focus {
+	box-shadow: none;
+}
+.inquiry-index-index .form-horizontal .fieldset .field.image input {
+	border: none;
+}
+.inquiry-index-index .form-horizontal .fieldset .field.choice {
+	width: 100%;
+}
+.inquiry-index-index .form-horizontal .fieldset .field.choice input {
+	height: 20px;
+	line-height: 20px;
+}
+.inquiry-index-index .form-horizontal .fieldset legend {
+	margin-left: 10px;
+}
+@media (max-width:  767px) {
+	.inquiry-index-index .form-horizontal .fieldset {
+		margin: 0;
+	}
+	.inquiry-index-index .form-horizontal .fieldset .field {
+		width: 100%;
+		margin: 0 0 20px 0;
+	}
+	.inquiry-index-index .form-horizontal .fieldset legend {
+		margin-left: 0;
+	}	
+}

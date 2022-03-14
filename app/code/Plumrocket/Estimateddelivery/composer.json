@@ -1,0 +1,16 @@
+{
+    "name": "plumrocket/module-estimateddelivery",
+    "description": "N/A",
+    "require": {
+        "php": ">=7.0",
+        "plumrocket/module-plumbase": ">=2.1"
+    },
+    "type": "magento2-module",
+    "version": "2.1.11",
+    "autoload": {
+        "files": [ "registration.php" ],
+        "psr-4": {
+            "Plumrocket\\Estimateddelivery\\": ""
+        }
+    }
+}

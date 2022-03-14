@@ -1,0 +1,41 @@
+<?xml version="1.0" ?>
+<!--
+ * Plumrocket Inc.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End-user License Agreement
+ * that is available through the world-wide-web at this URL:
+ * http://wiki.plumrocket.net/wiki/EULA
+ * If you are unable to obtain it through the world-wide-web, please
+ * send an email to support@plumrocket.com so we can send you a copy immediately.
+ *
+ * @package     Plumrocket Ajaxcart v2.x.x
+ * @copyright   Copyright (c) 2018 Plumrocket Inc. (http://www.plumrocket.com)
+ * @license     http://wiki.plumrocket.net/wiki/EULA  End-user License Agreement
+ -->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <update handle="catalog_product_view" />
+    <update handle="prajaxcart_ajax_default"/>
+    <body>
+        <referenceBlock name="product.info" template="Plumrocket_Ajaxcart::product/view.phtml">
+            <block class="Magento\Catalog\Block\Product\View\Gallery" name="pac.media.image" template="Plumrocket_Ajaxcart::product/view/gallery.phtml">
+                <arguments>
+                    <argument name="module_name" xsi:type="string">Plumrocket_Ajaxcart</argument>
+                </arguments>
+                <block class="Magento\ProductVideo\Block\Product\View\Gallery" name="product.info.media.video" template="Magento_ProductVideo::product/view/gallery.phtml"/>
+            </block>
+            <block class="Plumrocket\Ajaxcart\Block\Catalog\Product\ProductList\Related" name="pac.catalog.product.related" as="pac_related_products" template="Plumrocket_Ajaxcart::product/list/related.phtml" />
+            <block class="Plumrocket\Ajaxcart\Block\AddInfo\Crosssell" name="pac.checkout.cart.crosssell" as="crosssell" template="Plumrocket_Ajaxcart::addinfo/crosssell.phtml">
+                <arguments>
+                    <argument name="module_name" xsi:type="string">Magento_Checkout</argument>
+                </arguments>
+            </block>
+            <referenceBlock name="product.info.addtocart.additional">
+                <action method="setTemplate" ifconfig="prajaxcart/general/enabled">
+                    <argument name="template" xsi:type="string">Plumrocket_Ajaxcart::product/view/addtocart.phtml</argument>
+                </action>
+            </referenceBlock>
+        </referenceBlock>
+    </body>
+</page>

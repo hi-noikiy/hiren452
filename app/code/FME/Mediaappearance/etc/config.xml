@@ -1,0 +1,193 @@
+<?xml version="1.0"?>
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../Store/etc/config.xsd">
+    <default>
+        <mediaappearance>
+            <general>
+                <enable_module>1</enable_module>   
+            </general>
+            <medialist>
+                <page_title>Media Gallery</page_title>   
+                <meta_keywords>Meta Keywords</meta_keywords>
+                <meta_desp>Meta Keywords</meta_desp> 
+                <gallerytype>fme_gallery</gallerytype>
+            </medialist>
+           <seo>
+                <seo_url_identifier>media</seo_url_identifier>
+                <seo_url_suffix>.html</seo_url_suffix>
+           </seo>
+           <cmsview>
+                <enablecms>1</enablecms>
+                <mediaview>slider</mediaview>
+                <view>striper</view>
+           </cmsview>
+           <categoryview>
+                <enablecat>1</enablecat>
+                <mediaview>carousel</mediaview>
+                <view>striper</view>
+           </categoryview>
+           <compactview>
+                <enablepro>1</enablepro>
+                <mediaview>mplayer</mediaview>
+                <view>striper</view>
+           </compactview>
+
+            <thumbsetting>
+                <thumb_width>100</thumb_width>
+                <thumb_height>100</thumb_height>
+                <thumb_border_effect>1</thumb_border_effect>
+                <thumb_border_width>5</thumb_border_width>
+                <thumb_border_color>#000000</thumb_border_color>
+                <thumb_over_border_width>5</thumb_over_border_width>
+                <thumb_over_border_color>#4d0b08</thumb_over_border_color>
+                <thumb_selected_border_width>5</thumb_selected_border_width>
+                <thumb_selected_border_color>#fc0505</thumb_selected_border_color>
+                <thumb_round_corners_radius>70</thumb_round_corners_radius>
+                <thumb_color_overlay_effect>1</thumb_color_overlay_effect>
+                <thumb_overlay_color>#f2fa00</thumb_overlay_color>
+                <thumb_overlay_opacity>0.4</thumb_overlay_opacity>
+                <thumb_overlay_reverse>1</thumb_overlay_reverse>
+                <thumb_image_overlay_effect>0</thumb_image_overlay_effect>
+                <thumb_image_overlay_type>sepia</thumb_image_overlay_type>
+                <thumb_transition_duration>200</thumb_transition_duration>
+               
+            </thumbsetting>
+            <stripepaneloptions>
+                <strippanel_padding_top>10</strippanel_padding_top>
+                <strippanel_padding_bottom>10</strippanel_padding_bottom>
+                <strippanel_padding_left>10</strippanel_padding_left>
+                <strippanel_padding_right>10</strippanel_padding_right>
+                <strippanel_background_color>#06324a</strippanel_background_color>
+                <strip_thumbs_align>top</strip_thumbs_align>
+                <strip_space_between_thumbs>20</strip_space_between_thumbs>
+                <strip_scroll_to_thumb_duration>1000</strip_scroll_to_thumb_duration>
+            </stripepaneloptions>
+            <gridpaneloptions>
+                <gridpanel_vertical_scroll>1</gridpanel_vertical_scroll>
+                <gridpanel_grid_align>left</gridpanel_grid_align>
+                <gridpanel_background_color>#063961</gridpanel_background_color>
+                <grid_num_cols>2</grid_num_cols>
+                <grid_space_between_cols>10</grid_space_between_cols>
+                <grid_space_between_rows>10</grid_space_between_rows>
+                <grid_transition_duration>1000</grid_transition_duration>
+                <grid_carousel>1</grid_carousel>
+            </gridpaneloptions>
+            <slideoptions>
+                <slider_transition>fade</slider_transition>
+                <slider_transition_speed>1000</slider_transition_speed>
+                <slider_control_swipe>1</slider_control_swipe>
+                <slider_enable_bullets1>1</slider_enable_bullets1>
+                <slider_bullets_align_hor>center</slider_bullets_align_hor>
+                <slider_bullets_align_vert>top</slider_bullets_align_vert>
+                <slider_enable_arrows>1</slider_enable_arrows>
+                <slider_enable_progress_indicator>1</slider_enable_progress_indicator>
+                <slider_progress_indicator_type>pie2</slider_progress_indicator_type>
+                <slider_progress_indicator_align_vert>middle</slider_progress_indicator_align_vert>
+                <slider_progressbar_color>#0e8f28</slider_progressbar_color>
+                <slider_progressbar_opacity>0.4</slider_progressbar_opacity>
+                <slider_progressbar_line_width>5</slider_progressbar_line_width>
+                <slider_progresspie_type_fill>1</slider_progresspie_type_fill>
+                <slider_progresspie_color1>#d62000</slider_progresspie_color1>
+                <slider_progresspie_color2>#0e5912</slider_progresspie_color2>
+                <slider_progresspie_stroke_width>1000</slider_progresspie_stroke_width>
+                <slider_progresspie_width>50</slider_progresspie_width>
+                <slider_progresspie_height>50</slider_progresspie_height>
+                <slider_enable_play_button>1</slider_enable_play_button>
+                <slider_play_button_align_hor>left</slider_play_button_align_hor>
+                <slider_play_button_align_vert>top</slider_play_button_align_vert>
+                <slider_enable_fullscreen_button>1</slider_enable_fullscreen_button>
+                <slider_fullscreen_button_align_hor>left</slider_fullscreen_button_align_hor>
+                <slider_fullscreen_button_align_vert>top</slider_fullscreen_button_align_vert>
+                <slider_controls_always_on>0</slider_controls_always_on>
+                <slider_controls_appear_duration>1000</slider_controls_appear_duration>
+                <slider_enable_text_panel>0</slider_enable_text_panel>
+                <slider_textpanel_bg_color>#66082e</slider_textpanel_bg_color>
+                <slider_textpanel_bg_opacity>0.4</slider_textpanel_bg_opacity>
+            
+            </slideoptions>
+            <mediagallerytilesettings>
+                <caption>1</caption>
+                <caption_position>caption-middle</caption_position>
+                <caption_animation>caption-slide-from-top</caption_animation>
+                <caption_align>caption-center</caption_align>
+                <caption_colorscheme>caption-color-dark</caption_colorscheme>
+                <icons>1</icons>
+                <icons_list>fa fa-heart</icons_list>
+                <zoom>1</zoom>
+                <zoom_effect>effect-zoom-in</zoom_effect>
+                <zoom_speed>effect-speed-very-slow</zoom_speed>
+                <margin>1</margin>
+                <margin_list>20</margin_list>
+                <social_media>1</social_media>
+                <social_media_icon_pos>social-icons-right</social_media_icon_pos>
+                <social_media_icon_style>social-icons-circle</social_media_icon_style>
+            </mediagallerytilesettings>
+            <photogallerypopusetting>
+                <enablepopupgallery>1</enablepopupgallery>
+                <enablepopupgalleryclick>1</enablepopupgalleryclick>
+                <popuptime>1000</popuptime>
+            </photogallerypopusetting>
+            
+            <nanogalllerySetting>
+                <enable_module>thumb</enable_module>
+                <inbulitlayouts>cl</inbulitlayouts>
+                <gallerylayout>
+                    <layouts>mosaic</layouts>
+                    <width>300</width>
+                    <height>300</height>
+                    <justheight>400</justheight>
+                    <cascadingwidth>400</cascadingwidth>
+                    <mosaicwidth>300</mosaicwidth>
+                    <mosaicheight>300</mosaicheight>
+                    <mosaictextarea>[ { "c": 1, "r": 1, "w": 2, "h": 2 }, 
+                    { "c": 3, "r": 1, "w": 1, "h": 1 }, 
+                    { "c": 3, "r": 2, "w": 1, "h": 1 },
+                    { "c": 4, "r": 1, "w": 1, "h": 1 },
+                    { "c": 4, "r": 2, "w": 1, "h": 1 },
+                    { "c": 5, "r": 1, "w": 2, "h": 2 }
+                    ]
+                    </mosaictextarea>
+                    <thumbnailBorderHorizontal>2</thumbnailBorderHorizontal>
+                    <thumbnailBorderVertical>2</thumbnailBorderVertical>
+                    <bg_color>#00022e</bg_color>
+                    <thumbnailGutterWidth>0</thumbnailGutterWidth>
+                    <thumbnailGutterHeight>0</thumbnailGutterHeight>
+                    <thumnsallign>right</thumnsallign>
+                    <thumbnailDisplayInterval>500</thumbnailDisplayInterval>
+                    <thumbnailDisplayTransition>slideRight</thumbnailDisplayTransition>
+                    <thumbnailDisplayTransitionDuration>1000</thumbnailDisplayTransitionDuration>
+                </gallerylayout>
+                <paginitionsettings>
+                    <paginitionType>pbtoon</paginitionType>
+                    <galleryLastRowFull>1</galleryLastRowFull>
+                    <allowgalleryMaxRows>1</allowgalleryMaxRows>
+                    <galleryMaxRows>1</galleryMaxRows>
+                    <galleryDisplayMoreStep>3</galleryDisplayMoreStep>
+                    <dotgalleryMaxRows>3</dotgalleryMaxRows>
+                    <numgalleryMaxRows>3</numgalleryMaxRows>
+                    <rectgalleryMaxRows>3</rectgalleryMaxRows>
+                </paginitionsettings>
+                <labelSetting>
+                    <position>overImageOnMiddle</position>
+                    <align>right</align>
+                    <display>1</display>
+                </labelSetting>
+                <thumbnailtools>
+                    <topLeft>download,cart</topLeft>
+                    <topRight></topRight>
+                    <bottomLeft></bottomLeft>
+                    <bottomRight></bottomRight>
+                </thumbnailtools>
+                <hovereffect>
+                    <thumbnailHoverEffect2>'thumbnail_translateZ_0px_100px_easeOutQuad_400 | thumbnail_rotateX_0deg_10deg_easeOutBack_200 | thumbnail_rotateX_10deg_0deg_delay250_keyframe_hoverin_easeOutBack_400'</thumbnailHoverEffect2>
+                </hovereffect>
+                <lightBox>
+                    <topLeft>label</topLeft>
+                    <topRight>playPauseButton, zoomButton, fullscreenButton, closeButton</topRight>
+                    <viewerToolbarstandard>minimizeButton, label, shareButton, fullscreenButton</viewerToolbarstandard>
+                    <viewerToolbarminimize>minimizeButton, label, fullscreenButton, downloadButton, infoButton</viewerToolbarminimize>
+                </lightBox>
+            </nanogalllerySetting>
+        </mediaappearance>
+    </default>
+</config>

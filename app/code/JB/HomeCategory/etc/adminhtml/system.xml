@@ -1,0 +1,429 @@
+<?xml version="1.0"?>
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+
+        <section id="jb_homecategory" translate="label" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>Aumika Homepage Category</label>
+            <tab>jitesh</tab>
+            <resource>JB_HomeCategory::system_config</resource>
+            
+            <group id="jbhomecategory" translate="label" type="text" sortOrder="1" showInDefault="1" showInStore="1"
+                   showInWebsite="1">
+                <label>Homepage Category Section</label>
+                <field id="showcat" translate="label" type="select" sortOrder="3" showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Display Category</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="jbcat_name1" translate="label" type="text" sortOrder="10" showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Category Name1</label>
+                     <depends>
+                         <field id="showcat">1</field>
+                    </depends>
+                </field>
+                <field id="jbcat_link1" translate="label" type="text" sortOrder="20" showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Redirect URL</label>
+                     <depends>
+                         <field id="showcat">1</field>
+                    </depends>
+                </field>
+                <field id="jbcat_img1" translate="label" type="image" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Category Image</label>
+                    <comment>Allowed file types:PNG, GIF, JPG, JPEG, SVG.</comment>
+                    <backend_model>JB\AumikaFramework\Model\Config\Backend\Image\ItemImage</backend_model>
+                    <base_url type="media" scope_info="1">aumika/item_image</base_url>
+                    <depends>
+                         <field id="showcat">1</field>
+                    </depends>
+                </field>
+                <field id="jbcat_desc1" translate="label" type="textarea" sortOrder="40" showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Description</label>
+                     <depends>
+                         <field id="showcat">1</field>
+                    </depends>
+                </field>
+
+                <field id="jbcat_name2" translate="label" type="text" sortOrder="50" showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Category Name2</label>
+                     <depends>
+                         <field id="showcat">1</field>
+                    </depends>
+                </field>
+                <field id="jbcat_link2" translate="label" type="text" sortOrder="60" showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Redirect URL</label>
+                     <depends>
+                         <field id="showcat">1</field>
+                    </depends>
+                </field>
+                <field id="jbcat_img2" translate="label" type="image" sortOrder="70" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Category Image</label>
+                    <comment>Allowed file types:PNG, GIF, JPG, JPEG, SVG.</comment>
+                    <backend_model>JB\AumikaFramework\Model\Config\Backend\Image\ItemImage</backend_model>
+                    <base_url type="media" scope_info="1">aumika/item_image</base_url>
+                    <depends>
+                         <field id="showcat">1</field>
+                    </depends>
+                </field>
+                <field id="jbcat_desc2" translate="label" type="textarea" sortOrder="80" showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Description</label>
+                     <depends>
+                         <field id="showcat">1</field>
+                    </depends>
+                </field>
+                <field id="jbcat_name3" translate="label" type="text" sortOrder="90" showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Category Name3</label>
+                     <depends>
+                         <field id="showcat">1</field>
+                    </depends>
+                </field>
+                <field id="jbcat_link3" translate="label" type="text" sortOrder="100" showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Redirect URL</label>
+                     <depends>
+                         <field id="showcat">1</field>
+                    </depends>
+                </field>
+                <field id="jbcat_img3" translate="label" type="image" sortOrder="110" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Category Image</label>
+                    <comment>Allowed file types:PNG, GIF, JPG, JPEG, SVG.</comment>
+                    <backend_model>JB\AumikaFramework\Model\Config\Backend\Image\ItemImage</backend_model>
+                    <base_url type="media" scope_info="1">aumika/item_image</base_url>
+                    <depends>
+                         <field id="showcat">1</field>
+                    </depends>
+                </field>
+                <field id="jbcat_desc3" translate="label" type="textarea" sortOrder="120" showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Description</label>
+                     <depends>
+                         <field id="showcat">1</field>
+                    </depends>
+                </field>
+                <field id="jbcat_name4" translate="label" type="text" sortOrder="130" showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Category Name4</label>
+                     <depends>
+                         <field id="showcat">1</field>
+                    </depends>
+                </field>
+                <field id="jbcat_link4" translate="label" type="text" sortOrder="140" showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Redirect URL</label>
+                     <depends>
+                         <field id="showcat">1</field>
+                    </depends>
+                </field>
+                <field id="jbcat_img4" translate="label" type="image" sortOrder="150" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Category Image</label>
+                    <comment>Allowed file types:PNG, GIF, JPG, JPEG, SVG.</comment>
+                    <backend_model>JB\AumikaFramework\Model\Config\Backend\Image\ItemImage</backend_model>
+                    <base_url type="media" scope_info="1">aumika/item_image</base_url>
+                    <depends>
+                         <field id="showcat">1</field>
+                    </depends>
+                </field>
+                <field id="jbcat_desc4" translate="label" type="textarea" sortOrder="160" showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Description</label>
+                     <depends>
+                         <field id="showcat">1</field>
+                    </depends>
+                </field>
+                <field id="jbcat_name5" translate="label" type="text" sortOrder="170" showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Category Name5</label>
+                     <depends>
+                         <field id="showcat">1</field>
+                    </depends>
+                </field>
+                <field id="jbcat_link5" translate="label" type="text" sortOrder="180" showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Redirect URL</label>
+                     <depends>
+                         <field id="showcat">1</field>
+                    </depends>
+                </field>
+                <field id="jbcat_img5" translate="label" type="image" sortOrder="190" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Category Image</label>
+                    <comment>Allowed file types:PNG, GIF, JPG, JPEG, SVG.</comment>
+                    <backend_model>JB\AumikaFramework\Model\Config\Backend\Image\ItemImage</backend_model>
+                    <base_url type="media" scope_info="1">aumika/item_image</base_url>
+                    <depends>
+                         <field id="showcat">1</field>
+                    </depends>
+                </field>
+                <field id="jbcat_desc5" translate="label" type="textarea" sortOrder="200" showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Description</label>
+                     <depends>
+                         <field id="showcat">1</field>
+                    </depends>
+                </field>
+                <field id="jbcat_name6" translate="label" type="text" sortOrder="210" showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Category Name6</label>
+                     <depends>
+                         <field id="showcat">1</field>
+                    </depends>
+                </field>
+                <field id="jbcat_link6" translate="label" type="text" sortOrder="220" showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Redirect URL</label>
+                     <depends>
+                         <field id="showcat">1</field>
+                    </depends>
+                </field>
+                <field id="jbcat_img6" translate="label" type="image" sortOrder="230" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Category Image</label>
+                    <comment>Allowed file types:PNG, GIF, JPG, JPEG, SVG.</comment>
+                    <backend_model>JB\AumikaFramework\Model\Config\Backend\Image\ItemImage</backend_model>
+                    <base_url type="media" scope_info="1">aumika/item_image</base_url>
+                    <depends>
+                         <field id="showcat">1</field>
+                    </depends>
+                </field>
+                <field id="jbcat_desc6" translate="label" type="textarea" sortOrder="240" showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Description</label>
+                     <depends>
+                         <field id="showcat">1</field>
+                    </depends>
+                </field>
+                <field id="jbcat_name7" translate="label" type="text" sortOrder="250" showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Category Name7</label>
+                     <depends>
+                         <field id="showcat">1</field>
+                    </depends>
+                </field>
+                <field id="jbcat_link7" translate="label" type="text" sortOrder="260" showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Redirect URL</label>
+                     <depends>
+                         <field id="showcat">1</field>
+                    </depends>
+                </field>
+                <field id="jbcat_img7" translate="label" type="image" sortOrder="270" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Category Image</label>
+                    <comment>Allowed file types:PNG, GIF, JPG, JPEG, SVG.</comment>
+                    <backend_model>JB\AumikaFramework\Model\Config\Backend\Image\ItemImage</backend_model>
+                    <base_url type="media" scope_info="1">aumika/item_image</base_url>
+                    <depends>
+                         <field id="showcat">1</field>
+                    </depends>
+                </field>
+                <field id="jbcat_desc7" translate="label" type="textarea" sortOrder="280" showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Description</label>
+                     <depends>
+                         <field id="showcat">1</field>
+                    </depends>
+                </field>
+                <field id="jbcat_name8" translate="label" type="text" sortOrder="290" showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Category Name8</label>
+                     <depends>
+                         <field id="showcat">1</field>
+                    </depends>
+                </field>
+                <field id="jbcat_link8" translate="label" type="text" sortOrder="300" showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Redirect URL</label>
+                     <depends>
+                         <field id="showcat">1</field>
+                    </depends>
+                </field>
+                <field id="jbcat_img8" translate="label" type="image" sortOrder="320" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Category Image</label>
+                    <comment>Allowed file types:PNG, GIF, JPG, JPEG, SVG.</comment>
+                    <backend_model>JB\AumikaFramework\Model\Config\Backend\Image\ItemImage</backend_model>
+                    <base_url type="media" scope_info="1">aumika/item_image</base_url>
+                    <depends>
+                         <field id="showcat">1</field>
+                    </depends>
+                </field>
+                <field id="jbcat_desc8" translate="label" type="textarea" sortOrder="330" showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Description</label>
+                     <depends>
+                         <field id="showcat">1</field>
+                    </depends>
+                </field>
+                <field id="jbcat_name9" translate="label" type="text" sortOrder="340" showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Category Name9</label>
+                     <depends>
+                         <field id="showcat">1</field>
+                    </depends>
+                </field>
+                <field id="jbcat_link9" translate="label" type="text" sortOrder="350" showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Redirect URL</label>
+                     <depends>
+                         <field id="showcat">1</field>
+                    </depends>
+                </field>
+                <field id="jbcat_img9" translate="label" type="image" sortOrder="360" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Category Image</label>
+                    <comment>Allowed file types:PNG, GIF, JPG, JPEG, SVG.</comment>
+                    <backend_model>JB\AumikaFramework\Model\Config\Backend\Image\ItemImage</backend_model>
+                    <base_url type="media" scope_info="1">aumika/item_image</base_url>
+                    <depends>
+                         <field id="showcat">1</field>
+                    </depends>
+                </field>
+                <field id="jbcat_desc9" translate="label" type="textarea" sortOrder="370" showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Description</label>
+                     <depends>
+                         <field id="showcat">1</field>
+                    </depends>
+                </field>
+                <field id="jbcat_name10" translate="label" type="text" sortOrder="380" showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Category Name10</label>
+                     <depends>
+                         <field id="showcat">1</field>
+                    </depends>
+                </field>
+                <field id="jbcat_link10" translate="label" type="text" sortOrder="390" showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Redirect URL</label>
+                     <depends>
+                         <field id="showcat">1</field>
+                    </depends>
+                </field>
+                <field id="jbcat_img10" translate="label" type="image" sortOrder="400" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Category Image</label>
+                    <comment>Allowed file types:PNG, GIF, JPG, JPEG, SVG.</comment>
+                    <backend_model>JB\AumikaFramework\Model\Config\Backend\Image\ItemImage</backend_model>
+                    <base_url type="media" scope_info="1">aumika/item_image</base_url>
+                    <depends>
+                         <field id="showcat">1</field>
+                    </depends>
+                </field>
+                <field id="jbcat_desc10" translate="label" type="textarea" sortOrder="410" showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Description</label>
+                     <depends>
+                         <field id="showcat">1</field>
+                    </depends>
+                </field>
+                <field id="jbcat_name11" translate="label" type="text" sortOrder="420" showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Category Name11</label>
+                     <depends>
+                         <field id="showcat">1</field>
+                    </depends>
+                </field>
+                <field id="jbcat_link11" translate="label" type="text" sortOrder="430" showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Redirect URL</label>
+                     <depends>
+                         <field id="showcat">1</field>
+                    </depends>
+                </field>
+                <field id="jbcat_img11" translate="label" type="image" sortOrder="440" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Category Image</label>
+                    <comment>Allowed file types:PNG, GIF, JPG, JPEG, SVG.</comment>
+                    <backend_model>JB\AumikaFramework\Model\Config\Backend\Image\ItemImage</backend_model>
+                    <base_url type="media" scope_info="1">aumika/item_image</base_url>
+                    <depends>
+                         <field id="showcat">1</field>
+                    </depends>
+                </field>
+                <field id="jbcat_desc11" translate="label" type="textarea" sortOrder="450" showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Description</label>
+                     <depends>
+                         <field id="showcat">1</field>
+                    </depends>
+                </field>
+                <field id="jbcat_name12" translate="label" type="text" sortOrder="460" showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Category Name12</label>
+                     <depends>
+                         <field id="showcat">1</field>
+                    </depends>
+                </field>
+                <field id="jbcat_link12" translate="label" type="text" sortOrder="470" showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Redirect URL</label>
+                     <depends>
+                         <field id="showcat">1</field>
+                    </depends>
+                </field>
+                <field id="jbcat_img12" translate="label" type="image" sortOrder="480" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Category Image</label>
+                    <comment>Allowed file types:PNG, GIF, JPG, JPEG, SVG.</comment>
+                    <backend_model>JB\AumikaFramework\Model\Config\Backend\Image\ItemImage</backend_model>
+                    <base_url type="media" scope_info="1">aumika/item_image</base_url>
+                    <depends>
+                         <field id="showcat">1</field>
+                    </depends>
+                </field>
+                <field id="jbcat_desc12" translate="label" type="textarea" sortOrder="490" showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Description</label>
+                     <depends>
+                         <field id="showcat">1</field>
+                    </depends>
+                </field>
+                <field id="jbcat_name13" translate="label" type="text" sortOrder="500" showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Category Name13</label>
+                     <depends>
+                         <field id="showcat">1</field>
+                    </depends>
+                </field>
+                <field id="jbcat_link13" translate="label" type="text" sortOrder="510" showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Redirect URL</label>
+                     <depends>
+                         <field id="showcat">1</field>
+                    </depends>
+                </field>
+                <field id="jbcat_img13" translate="label" type="image" sortOrder="520" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Category Image</label>
+                    <comment>Allowed file types:PNG, GIF, JPG, JPEG, SVG.</comment>
+                    <backend_model>JB\AumikaFramework\Model\Config\Backend\Image\ItemImage</backend_model>
+                    <base_url type="media" scope_info="1">aumika/item_image</base_url>
+                    <depends>
+                         <field id="showcat">1</field>
+                    </depends>
+                </field>
+                <field id="jbcat_desc13" translate="label" type="textarea" sortOrder="530" showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Description</label>
+                     <depends>
+                         <field id="showcat">1</field>
+                    </depends>
+                </field>
+                <field id="jbcat_name14" translate="label" type="text" sortOrder="540" showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Category Name14</label>
+                     <depends>
+                         <field id="showcat">1</field>
+                    </depends>
+                </field>
+                <field id="jbcat_link14" translate="label" type="text" sortOrder="550" showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Redirect URL</label>
+                     <depends>
+                         <field id="showcat">1</field>
+                    </depends>
+                </field>
+                <field id="jbcat_img14" translate="label" type="image" sortOrder="560" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Category Image</label>
+                    <comment>Allowed file types:PNG, GIF, JPG, JPEG, SVG.</comment>
+                    <backend_model>JB\AumikaFramework\Model\Config\Backend\Image\ItemImage</backend_model>
+                    <base_url type="media" scope_info="1">aumika/item_image</base_url>
+                    <depends>
+                         <field id="showcat">1</field>
+                    </depends>
+                </field>
+                <field id="jbcat_desc14" translate="label" type="textarea" sortOrder="570" showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Description</label>
+                     <depends>
+                         <field id="showcat">1</field>
+                    </depends>
+                </field>
+                <field id="jbcat_name15" translate="label" type="text" sortOrder="580" showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Category Name15</label>
+                     <depends>
+                         <field id="showcat">1</field>
+                    </depends>
+                </field>
+                <field id="jbcat_link15" translate="label" type="text" sortOrder="590" showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Redirect URL</label>
+                     <depends>
+                         <field id="showcat">1</field>
+                    </depends>
+                </field>
+                <field id="jbcat_img15" translate="label" type="image" sortOrder="600" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Category Image</label>
+                    <comment>Allowed file types:PNG, GIF, JPG, JPEG, SVG.</comment>
+                    <backend_model>JB\AumikaFramework\Model\Config\Backend\Image\ItemImage</backend_model>
+                    <base_url type="media" scope_info="1">aumika/item_image</base_url>
+                    <depends>
+                         <field id="showcat">1</field>
+                    </depends>
+                </field>
+                <field id="jbcat_desc15" translate="label" type="textarea" sortOrder="610" showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Description</label>
+                     <depends>
+                         <field id="showcat">1</field>
+                    </depends>
+                </field>
+            </group>
+
+        </section>
+    </system>
+</config>

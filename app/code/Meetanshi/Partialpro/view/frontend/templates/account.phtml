@@ -1,0 +1,69 @@
+<?php if ($block->getPagerHtml()): ?>
+    <div class="order-products-toolbar toolbar bottom"><?php echo $block->getPagerHtml(); ?></div>
+<?php endif ?>
+<?php $gridrecords = $block->getOrderCollection(); ?>
+<?php if ($gridrecords && $gridrecords->count()): ?>
+    <div class="table-wrapper orders-history">
+        <table class="data table table-order-items history" id="my-orders-table">
+            <caption class="table-caption"><?php echo __('Grid Record') ?></caption>
+            <thead>
+            <tr>
+                <th scope="col" class="col id"><?php echo __('Order #') ?></th>
+                <th scope="col" class="col paidinstallment"><?php echo __('Paid Installments') ?></th>
+                <th scope="col" class="col dueinstallment"><?php echo __('Due Installments') ?></th>
+                <th scope="col" class="col orderamount"><?php echo __('Order Amount') ?></th>
+                <th scope="col" class="col paidamount"><?php echo __('Paid Amount') ?></th>
+                <th scope="col" class="col remamount"><?php echo __('Remaining Amount') ?></th>
+                <th scope="col" class="col status"><?php echo __('Payment Status') ?></th>
+                <th scope="col" class="col action"><?php echo __('Action') ?></th>
+            </tr>
+            </thead>
+            <tbody>
+            <?php
+            foreach ($gridrecords as $gridrecord): ?>
+                <?php $currencyCode = $gridrecord->getCurrencyCode() ?>
+                <tr>
+                    <td data-th="<?= $block->escapeHtml(__('Order ID')) ?>" class="col id">
+                        <?php echo $gridrecord->getOrderId() ?>
+                    </td>
+                    <td data-th="<?= $block->escapeHtml(__('Paid Installments')) ?>" class="col paidinstallment">
+                        <?php echo $gridrecord->getPaidInstallments(); ?>
+                    </td>
+                    <td data-th="<?= $block->escapeHtml(__('Due Installments')) ?>" class="col dueinstallment">
+                        <?php echo $gridrecord->getRemainingInstallments(); ?>
+                    </td>
+                    <td data-th="<?= $block->escapeHtml(__('Order Amount')) ?>" class="col orderamount">
+                        <?php echo $block->getFormattedPrice($currencyCode, $gridrecord->getOrderAmount()) ?>
+                    </td>
+                    <td data-th="<?= $block->escapeHtml(__('Paid Amount')) ?>" class="col paidamount">
+                        <?php echo $block->getFormattedPrice($currencyCode, $gridrecord->getPaidAmount()) ?>
+                    </td>
+                    <td data-th="<?= $block->escapeHtml(__('Remaining Amount')) ?>" class="col remamount">
+                        <?php echo $block->getFormattedPrice($currencyCode, $gridrecord->getRemainingAmount()) ?>
+                    </td>
+                    <td data-th="<?= $block->escapeHtml(__('Payment Status')) ?>" class="col status">
+                        <?php if ($gridrecord->getPaymentStatus() == 1) {
+                            echo '<div style="text-align:center;width: 110px !important;padding: 5px 0; color:#FFF;background:#86cae4;border-radius:8px;width:100%">Processing</div>';
+                        } else if ($gridrecord->getPaymentStatus() == 2) {
+                            echo '<div style="text-align:center;width: 110px !important;padding: 5px 0; color:#FFF;background:#f7944b;border-radius:8px;width:100%">Paid</div>';
+                        } else {
+                            echo '<div style="text-align:center;width: 110px !important;padding: 5px 0; color:#FFF;background:#434a56;border-radius:8px;width:100%">Pending</div>';
+                        } ?>
+
+                    </td>
+                    <td data-th="<?= $block->escapeHtml(__('Action')) ?>" class="col action">
+                        <a href="<?php echo $block->getUrl('partialpayment/account/view/') . 'profile/' . $gridrecord->getPartialPaymentId() ?>">
+                            <?php echo __('View Order'); ?>
+                        </a>
+                    </td>
+                </tr>
+            <?php endforeach; ?>
+            </tbody>
+        </table>
+    </div>
+    <?php if ($block->getPagerHtml()): ?>
+        <div class="order-products-toolbar toolbar bottom"><?php echo $block->getPagerHtml(); ?></div>
+    <?php endif ?>
+<?php else: ?>
+    <div class="message info empty"><span><?php echo __('No record found.'); ?></span></div>
+<?php endif ?>

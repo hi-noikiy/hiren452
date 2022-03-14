@@ -1,0 +1,77 @@
+<?php
+
+$_config = $this->helper('JB\AumikaFramework\Helper\Data');
+$isDisplay = $_config->getItemCollection('colshow');
+
+$col1Main = $_config->getItemCollection('col1_main');
+$col1btn = $_config->getItemCollection('col1_btn');
+$col1url = $_config->getItemCollection('col1_url');
+$col1sub = $_config->getItemCollection('col1_sub');
+
+$logo1_src = $_config->getItemCollection('col1_img');
+$folderName = \JB\AumikaFramework\Model\Config\Backend\Image\ItemImage::UPLOAD_DIR;
+$path = $folderName . '/' . $logo1_src;
+$col1image = $_config->getBaseUrl() . $path;
+
+$col2Main = $_config->getItemCollection('col2_main');
+$col2btn = $_config->getItemCollection('col2_btn');
+$col2url = $_config->getItemCollection('col2_url');
+$col2sub = $_config->getItemCollection('col2_sub');
+
+$logo2_src = $_config->getItemCollection('col2_img');
+$path2 = $folderName . '/' . $logo2_src;
+$col2image = $_config->getBaseUrl() . $path2;
+
+$col3Main = $_config->getItemCollection('col3_main');
+$col3btn = $_config->getItemCollection('col3_btn');
+$col3url = $_config->getItemCollection('col3_url');
+$col3sub = $_config->getItemCollection('col3_sub');
+
+$logo3_src = $_config->getItemCollection('col3_img');
+$path3 = $folderName . '/' . $logo3_src;
+$col3image = $_config->getBaseUrl() . $path3;
+
+
+?>
+<?php if($isDisplay == '1') : ?>
+
+<div class="single-images" style="padding: 45px 0;background: #f7f7f7;">
+  <div class="container">
+    <div class="row">
+      <div id="homepage_service">
+      <div class="jbitem col-md-4 col-12" style="padding-left: 10px; padding-right: 10px; padding-top: 0px;">
+      <div class="shopnow_products">
+        <img class="shop_pro_img" src="<?php echo $col2image; ?>" alt="">
+      <div class="shop_con_main">
+        <div class="shop_pro_name"><?php echo $col2Main; ?></div>
+          <div class="shop_pro_desc"><?php echo $col2sub; ?></div>
+            <a class="shopnow-link" href="<?php echo $col2url; ?>"><?php echo $col2btn; ?></a>
+          </div>
+        </div>
+      </div>
+      <div class="jbitem col-md-4 col-12" style="padding-left: 10px; padding-right: 10px; padding-top: 0px;">
+        <div class="shopnow_products">
+          <img class="shop_pro_img" src="<?php echo $col3image; ?>" alt="">
+        <div class="shop_con_main">
+        <div class="shop_pro_name"><?php echo $col3Main; ?></div>
+        <div class="shop_pro_desc"><?php echo $col3sub; ?></div>
+        <a class="shopnow-link" href="<?php echo $col3url; ?>"><?php echo $col2btn; ?></a></div>
+        </div>
+      </div>
+      <div class="jbitem col-md-4 col-12" style="padding-left: 10px; padding-right: 10px; padding-top: 0px;">
+        <div class="shopnow_products">
+            <img class="shop_pro_img" src="<?php echo $col1image; ?>" alt="">
+            <div class="shop_con_main">
+              <div class="shop_pro_name"><?php echo $col1Main; ?></div>
+              <div class="shop_pro_desc"><?php echo $col1sub; ?></div>
+              <a class="shopnow-link" href="<?php echo $col1url; ?>"><?php echo $col1btn; ?></a>
+            </div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+</div>
+
+
+<?php endif; ?>

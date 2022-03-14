@@ -1,0 +1,318 @@
+<?php
+$isWhole = $block->getApplyPartialPaymentToWhole();
+$isFlexyLaywayPlan = $block->getIsFlexyLaywayPlan();
+$display = 'block';
+$check = '';
+
+$userChooseInstallment = 'none';
+if ($isFlexyLaywayPlan) {
+    $userChooseInstallment = 'block';
+}
+
+$installmentCount = $block->getInstallmentCount();
+?>
+<?php if ($block->getIsPartialPayment() && $block->getAllowedForCustomerGrp() && (!$isWhole)) { ?>
+    <fieldset class="fieldset">
+        <div class="field ispartialpayment">
+            <div class="control " style="display:none;">
+                <input name="ispartialpayment" id="ispartialpayment"
+                       title="<?= $block->escapeHtmlAttr(__('Partial Payment')) ?>" class="input-text checkbox"
+                       type="checkbox" <?php if ($isWhole) {
+                    echo 'checked="checked"';
+                } ?>/>
+                <label class="label"
+                       for="ispartialpayment">
+                    <span><?= $block->escapeHtml(__('Partial Payment')) ?></span>
+                </label>
+            </div>
+
+            <div class="partial-desc-div">
+                <h3 class="main-title-partial"><?= $block->escapeHtml(__($block->getProductpageLabel())) ?></h3>
+
+                <div class="switch-main-div" style="display: <?php echo $display ?>">
+                    <span class="left-toglle active">
+                        <?= $block->escapeHtml(__('FULL PAYMENT')) ?>
+                    </span>
+                    <span class="right-toglle">
+                        <?= $block->escapeHtml(__('INSTALLMENTS')) ?>
+                    </span>
+                </div>
+
+                <div style="display: <?php echo $userChooseInstallment; ?>">
+                    <div class="select-installment" style="display: none;">
+                        <select class="installment-number" id="installment-number" name="installment_number">
+                            <option value=""><?= $block->escapeHtml(__('Select Installment')) ?></option>
+                            <?php
+                            for ($i = 2; $i <= $installmentCount; $i++) {
+                                if ($i == $installmentCount) {
+                                    echo "<option selected value='$i'>$i Installment</option>";
+                                } else {
+                                    echo "<option value='$i'>$i Installment</option>";
+                                }
+                            }
+                            ?>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="part-desc" style="display:none;">
+                    <?php echo $block->getInstallmentTable(); ?>
+                    <div class="desc-backend">
+                        <?php echo $block->getProductpageDescrition() ?>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </fieldset>
+    <style>
+        .select-installment {
+            margin-bottom: 15px;
+            float: left;
+            width: 100%;
+        }
+
+        .part-desc {
+            width: calc(100% - 20px);
+            background-color: #ebebeb;
+            padding: 10px;
+            border-radius: 10px;
+            float: left;
+        }
+
+        .installment-summary {
+            width: 100%;
+            display: block;
+            float: left;
+        }
+
+        .installment-first-line {
+            width: 100%;
+            float: left;
+        }
+
+        .installment-totle-item {
+            width: 100%;
+            float: left;
+        }
+
+        .installment-downpayment-item {
+            width: 100%;
+            float: left;
+            background-color: #164163;
+            color: #fff;
+            border-radius: 10px;
+            margin-bottom: 1px;
+        }
+
+        .installment-paidlater-item {
+            width: 100%;
+            float: left;
+            background-color: #164163;
+            color: #fff;
+            border-radius: 10px;
+            margin-bottom: 1px;
+        }
+
+        .desc-backend {
+            width: 100%;
+            float: left;
+            margin-top: 10px;
+        }
+
+        p.note-data {
+            float: left;
+            width: 100%;
+            padding-left: 15px;
+            position: relative;
+        }
+
+        .installment-first-line span {
+            width: calc(33.33% - 1px);
+            display: inline-block;
+            float: left;
+            text-align: center;
+            color: #164163;
+            font-weight: bold;
+            font-size: 15px;
+            line-height: 40px;
+            border-bottom: 1px solid #434957;
+            border-left: 1px solid #434957;
+        }
+
+        .installment-line-item {
+            width: 100%;
+            float: left;
+        }
+
+        .installment-line-item span {
+            width: calc(33.33% - 1px);
+            float: left;
+            text-align: center;
+            line-height: 25px;
+            border-bottom: 1px solid;
+            border-left: 1px solid #434957;
+        }
+
+        .installment-downpayment-item span {
+            width: calc(33.33% - 1px);
+            float: left;
+            text-align: center;
+            line-height: 30px;
+            border-left: 1px solid #fff;
+        }
+
+        .installment-downpayment-item span:first-child {
+            border-left: none;
+            width: calc(66.66% - 26px);
+            font-size: 15px;
+            text-align: right;
+            padding-right: 25px;
+        }
+
+        .installment-paidlater-item span {
+            width: calc(33.33% - 1px);
+            float: left;
+            text-align: center;
+            line-height: 30px;
+            border-left: 1px solid #fff;
+        }
+
+        .installment-paidlater-item span:first-child {
+            border-left: none;
+            width: calc(66.66% - 26px);
+            font-size: 15px;
+            text-align: right;
+            padding-right: 25px;
+        }
+
+        .installment-line-item span:first-child {
+            border-left: none;
+        }
+
+        .installment-first-line span:first-child {
+            border-left: none;
+        }
+
+        .installment-totle-item span {
+            width: calc(33.33% - 1px);
+            float: left;
+            text-align: center;
+            line-height: 30px;
+            border-left: 1px solid #434957;
+        }
+
+        .installment-totle-item span:first-child {
+            border-left: none;
+            width: calc(66.66% - 26px);
+            font-size: 15px;
+            text-align: right;
+            padding-right: 25px;
+        }
+
+        .switch-main-div {
+            height: 45px;
+            margin: 15px 0;
+            width: 100%;
+            border: 2px solid;
+            border-radius: 30px;
+        }
+
+        span.left-toglle, span.right-toglle {
+            width: calc(50% - 3px);
+            display: inline-block;
+            text-align: center;
+            line-height: 43px;
+            margin-top: 1px;
+            cursor: pointer;
+            margin-left: 1px;
+            border-radius: 30px;
+            font-weight: bold;
+            font-size: 17px;
+            position: relative;
+        }
+
+        span.left-toglle.active, span.right-toglle.active {
+            background-color: #164163;
+            color: #fff;
+        }
+
+        span.left-toglle.active:before, span.right-toglle.active:before {
+            font-size: 24px;
+            line-height: 28px;
+            color: #fff;
+            content: '\e60e';
+            font-family: 'luma-icons';
+            margin: -12px 0 0;
+            vertical-align: middle;
+            display: inline-block;
+            font-weight: normal;
+            overflow: hidden;
+            speak: none;
+            left: 20px;
+            top: 22px;
+            width: 25px;
+            position: absolute;
+            text-align: center;
+        }
+        @media only screen and (max-width: 1200px) {
+            span.left-toglle.active:before, span.right-toglle.active:before {
+                font-size: 19px;
+                left: 0px;
+                top: 20px;
+            }
+            span.left-toglle, span.right-toglle {
+                font-size: 13px;
+            }
+
+            .installment-paidlater-item span:first-child {
+                font-size: 12px;
+            }
+            .installment-downpayment-item span:first-child {
+                font-size: 12px;
+            }
+        }
+    </style>
+    <script type="text/javascript">
+        require(['jquery', 'jquery/ui'], function ($) {
+            jQuery('.left-toglle').click(function () {
+                jQuery('.right-toglle').removeClass('active');
+                jQuery('.left-toglle').addClass('active');
+                jQuery('.part-desc').hide();
+                jQuery('.select-installment').hide();
+                $('#ispartialpayment').prop('checked', false);
+            });
+            jQuery('.right-toglle').click(function () {
+                jQuery('.left-toglle').removeClass('active');
+                jQuery('.right-toglle').addClass('active');
+                jQuery('.part-desc').show();
+                jQuery('.select-installment').show();
+                $('#ispartialpayment').prop('checked', true);
+            });
+
+            $('.installment-number').on('change', function (e) {
+                var valueSelected = this.value;
+                url = "<?php echo $block->getUrl('partialpayment/installment/gettabledata'); ?>";
+                productId = <?php echo $block->getProductId(); ?>;
+                if (valueSelected > 0) {
+                    postParams = {
+                        "productId": productId,
+                        "numOfInstallment": valueSelected
+                    };
+
+                    jQuery.ajax({
+                        url: url,
+                        type: 'Post',
+                        dataType: 'json',
+                        showLoader: true,
+                        data: postParams
+                    }).done(function (transport) {
+                        jQuery('.installment-summary').html(transport.html);
+                    });
+                }
+            });
+        });
+    </script>
+<?php } ?>
+
+

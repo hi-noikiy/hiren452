@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2015 Magento. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<!--<page layout="1column" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../lib/internal/Magento/Framework/View/Layout/etc/page_configuration.xsd">
+    <head>
+        <css src="FME_Mediaappearance::css/mediaappearance/media.css"/>
+        <css src="FME_Mediaappearance::css/mediaappearance/component.css"/>
+        <css src="FME_Mediaappearance::css/mediaappearance/demo.css"/>
+        <css src="FME_Mediaappearance::css/mediaappearance/jquery.fancybox.css"/>
+        <css src="FME_Mediaappearance::css/mediaappearance/owl.carousel.css"/>
+    </head>
+    <body>
+        <referenceContainer name="content">
+              <referenceBlock name="product.info">
+                 <referenceBlock name="product.info.additional">
+                   <block name="jsfunctions" class="FME\Mediaappearance\Block\Jsfunctions" template="FME_Mediaappearance::jsfunctions.phtml" before="-"/>
+                        <block name="productview.media" class="FME\Mediaappearance\Block\Productvideos" template="FME_Mediaappearance::productview.phtml" before="-" />
+                 </referenceBlock>
+              </referenceBlock>
+           </referenceContainer>
+    </body>
+</page>
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../lib/internal/Magento/Framework/View/Layout/etc/page_configuration.xsd">
+    <head>
+    <css src="FME_Mediaappearance::css/style1.css" />
+        <css src="FME_Mediaappearance::css/upgrade/unite-gallery.css" />
+        <css src="FME_Mediaappearance::css/upgrade/video/skin-right-no-thumb.css" />
+        <css src="FME_Mediaappearance::css/upgrade/video/skin-right-thumb.css" />
+     <css src="FME_Mediaappearance::css/upgrade/video/skin-right-title-only.css" />
+     <css src="FME_Mediaappearance::css/upgrade/video/skin-bottom-text.css" />
+     
+
+     
+    </head>
+    <body>
+        <referenceBlock name="product.info.details">
+            <block class="FME\Mediaappearance\Block\Productvideos" name="productview.media" after="-" as="productvideos" template="FME_Mediaappearance::newproductvideos.phtml" group="detailed_info" ifconfig="mediaappearance/general/enable_module">
+              <arguments>
+                <argument name="title" translate="true" xsi:type="string">Product Media</argument>
+            </arguments>
+            </block>
+        </referenceBlock>
+        
+    </body>
+</page>

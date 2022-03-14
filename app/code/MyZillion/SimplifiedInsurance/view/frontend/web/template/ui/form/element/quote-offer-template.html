@@ -1,0 +1,71 @@
+<!-- ko if: isVisible() -->
+<div class="myzillion__checkout-panel">
+  <div class="myzillion__checkout-panel-heading">
+    <input
+      id="inputmodal"
+      type="checkbox"
+      class="checkbox styled-checkbox"
+      aria-label="Checkbox"
+      data-bind="
+        checked: checkVal,
+        hasFocus: focused"
+    />
+    <h2 class="myzillion__checkout-label-text quote">
+      Email me a No Obligation Jewelry Insurance Quote
+    </h2>
+
+    <img
+      data-bind="attr: { src: window.checkoutConfig.zillionImagesPath.zillion_logo, alt: $t('MyZillion Logo Image') }"
+      class="myzillion__checkout-zillion-logo"
+    />
+  </div>
+
+  <div class="myzillion__checkout-panel-content">
+    <span class="agree-legend">
+      I agree to Zillion's
+      <a
+        title="Terms of use"
+        class="mz-link"
+        target="_blank"
+        href="//www.myzillion.com/terms?utm_source=magento&utm_medium=site&utm_campaign=cart&utm_content=site-cart-v1"
+        >terms of use</a>
+      ,
+      <a
+        title="Privacy Policy"
+        class="mz-link"
+        target="_blank"
+        href="//www.myzillion.com/privacy?utm_source=magento&utm_medium=site&utm_campaign=cart&utm_content=site-cart-v1">
+        privacy policy
+      </a>
+      &
+      <a
+        title="Disclosures"
+        class="mz-link"
+        target="_blank"
+        href="//myzillion.com/disclosures?utm_source=magento&utm_medium=site&utm_campaign=cart&utm_content=site-cart-v1">
+        disclosures
+      </a>& authorize the sending of my order information to Zillion.</span>
+    <ul>
+      <li>Worldwide jewelry coverage against loss, theft, accidental damage, & disappearance.</li>
+      <li>Better rates, starting as low as ~$2/mo. <small> (billed annually)</small></li>
+      <li>No paperwork & no forms to fill out - automatically email upon shipment.</li>
+    </ul>
+    <a title="Learn More" href="https://www.myzillion.com/?utm_source=magento&utm_medium=site&utm_campaign=cart&utm_content=site-cart-v1" target="_blank">Learn More</a>
+  </div>
+
+  <div class="myzillion__checkout-panel-footer">
+    backed by AXA XL, <b>rated A+ Superior</b> by A.M. Best
+    <img
+      data-bind="attr: { src: window.checkoutConfig.zillionImagesPath.axaLogo2x, alt: $t('AXA Logo') }"
+      class="myzillion__checkout-axa-logo"
+    />
+  </div>
+</div>
+
+<!-- ko if: notice -->
+<div class="field-note" data-bind="attr: {id: noticeId}">
+  <span data-bind="text: notice"></span>
+</div>
+<!-- /ko -->
+
+<!-- /ko -->

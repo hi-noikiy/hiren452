@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Plumrocket Inc.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End-user License Agreement
+ * that is available through the world-wide-web at this URL:
+ * http://wiki.plumrocket.net/wiki/EULA
+ * If you are unable to obtain it through the world-wide-web, please
+ * send an email to support@plumrocket.com so we can send you a copy immediately.
+ *
+ * @package     Plumrocket Search Autocomplete & Suggest
+ * @copyright   Copyright (c) 2019 Plumrocket Inc. (http://www.plumrocket.com)
+ * @license     http://wiki.plumrocket.net/wiki/EULA  End-user License Agreement
+ */
+ -->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Plumrocket_Search::prsearch" title="Search Autocomplete &amp; Suggest" translate="title" module="Plumrocket_Search" parent="Plumrocket_Base::elements" sortOrder="11152094" resource="Plumrocket_Search::prsearch"/>
+        <add id="Plumrocket_Search::prsearch_configuration" title="Configuration" translate="title" module="Plumrocket_Search" parent="Plumrocket_Search::prsearch" sortOrder="20" action="adminhtml/system_config/edit/section/prsearch" resource="Plumrocket_Search::config_prsearch"/>
+    </menu>
+</config>

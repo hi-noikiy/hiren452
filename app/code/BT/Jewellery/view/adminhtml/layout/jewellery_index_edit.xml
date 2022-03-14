@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @copyright Copyright (c) 2016 www.magebuzz.com
+ */
+-->
+<page layout="admin-2columns-left" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <update handle="editor"/>
+    <body>
+        <referenceContainer name="left">
+            <block class="BT\Jewellery\Block\Adminhtml\Jewellery\Edit\Tabs" name="bt_jewellery_jewellery_edit_tabs">
+                <block class="BT\Jewellery\Block\Adminhtml\Jewellery\Edit\Tab\Main" name="bt_jewellery_jewellery_edit_tab_main"/>
+                <action method="addTab">
+                    <argument name="name" xsi:type="string">main_section</argument>
+                    <argument name="block" xsi:type="string">bt_jewellery_jewellery_edit_tab_main</argument>
+                </action>
+            </block>
+        </referenceContainer>
+        <referenceContainer name="content">
+            <block class="BT\Jewellery\Block\Adminhtml\Jewellery\Edit" name="test_items_edit"/>
+        </referenceContainer>
+    </body>
+</page>

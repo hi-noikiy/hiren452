@@ -1,0 +1,332 @@
+<?php
+/**
+ * Magedelight
+ * Copyright (C) 2019 Magedelight <info@magedelight.com>
+ *
+ * @category Magedelight
+ * @package Magedelight_Facebook
+ * @copyright Copyright (c) 2019 Mage Delight (http://www.magedelight.com/)
+ * @license http://opensource.org/licenses/gpl-3.0.html GNU General Public License,version 3 (GPL-3.0)
+ * @author Magedelight <info@magedelight.com>
+ */
+?>
+<div class="page-main-actions">
+    <div class="page-actions-placeholder" style=""></div>
+    <div class="page-actions" data-ui-id="page-actions-toolbar-content-header">
+        <div class="page-actions-inner">
+            <div class="page-actions-buttons">
+                <div title="Save" class="actions-split save primary">
+                    <?php  echo $block->getAttributeMapSaveButtonHtml(); ?>
+                </div>
+                <div title="Import CSV" class="actions-split import primary">
+                    <?php  echo $block->getAttributeMapImportButtonHtml(); ?>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="messages">
+    <div class="message message-warning">
+        <?php echo __("Please Map required field one of (gtin, mpn, brand). Otherwise facebook will reject request."); ?> 
+    </div>
+</div>
+<div class="admin__control-table-wrapper">
+    <form data-mage-init='{"validation":{}}' id="fb_attributemap_form" action="<?php echo $block->getUrl('md_facebook/attributemapper/save'); ?>">
+        <input type="hidden" id="totalcount" name="totalcount" value=""/>
+        <table cellspacing="0" class="data border data-table admin__control-table" id="fb_attributemap_table">
+            <colgroup>
+                <col>
+                <col>
+                <col>
+                <col width="1">
+            </colgroup>
+            <thead>
+                <tr class="headings">
+                    <th><?php echo __("Facebook Attribute"); ?></th>
+                    <th><?php echo __("Magento Attribute"); ?></th>
+                    <th>&nbsp;</th>
+                </tr>
+            </thead>
+            <tbody id="fb_attributemap_container">
+                
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="4" class="a-right">
+                        <?php  echo $block->getAttributeMapAddButtonHtml(); ?>
+                    </td>
+                </tr>
+            </tfoot>
+        </table>
+    </form>
+</div>
+<script id="attributemap-template" type="text/x-magento-template">
+   <tr>
+        <td>
+            <select class="admin__control-select fb-attribute required-entry" onfocus="storePreVal(this)" onchange="updateOptions(this)" name="attributemap[<%- data.id %>][fb_attribute]" id="attributemap_<%- data.id %>_fb_attribute"><%- data.fboption %></select>
+        </td>
+        <td>
+            <select class="admin__control-select mage-attribute required-entry" onfocus="storePreMgVal(this)" onchange="updateMgOptions(this)" name="attributemap[<%- data.id %>][mage_attribute]" id="attributemap_<%- data.id %>_mage_attribute"><%- data.mgoption %></select>
+        </td>
+        <td>
+           <?php  echo $block->getAttributeMapDeleteButtonHtml(); ?>
+        </td>
+    </tr>
+</script>
+<script type="text/javascript">
+var dynamicAttr = <?php echo json_encode($block->getDynamicAttr()); ?>;    
+var magattribute = <?php echo json_encode($block->getAttributes()); ?>;    
+var attributemap = <?php echo json_encode($block->getAttributeMap()); ?>;
+var fbattribute = <?php  echo json_encode($block->getFbAttributes()); ?>;
+var noeditablefb = <?php  echo json_encode($block->getNoEditableAttributeMap()); ?>;
+var optionalarray = <?php echo json_encode($block->getOptionalVal()); ?>;
+var fbselected = {};
+var mgselected = {};
+var prevValue = '';
+var prevMgValue = '';
+require([
+    'jquery',
+    'mage/template'
+    ], function ($, template) {
+         this.index = 0;
+         this.fbattrb = '';
+         this.mgattrb = '';
+         this.fboption = '';
+         this.mgoption = '';
+         ref = this;
+         function addItem()
+         {
+            updateSelectedFb() 
+            updateSelectedMg() 
+            getFbOptions(this.fbattrb);
+            getMgOptions(this.mgattrb);
+            var attributemapTemplate = template('#attributemap-template');
+            var attributemap = attributemapTemplate({
+                                    data: {
+                                        id: this.index,
+                                        fbattrb: this.fbattrb,
+                                        mgattrb: this.mgattrb
+                                    }
+                                });
+             $('#fb_attributemap_container').append(attributemap);
+             $('#attributemap_'+this.index+'_fb_attribute').append(this.fboption);
+             $('#attributemap_'+this.index+'_mage_attribute').append(this.mgoption);
+             for(var att in noeditablefb)
+             {
+                if(noeditablefb[att].fb_attribute==this.fbattrb){
+                    $('#attributemap_'+this.index+'_fb_attribute').attr('disabled','disabled');
+                    $('#attributemap_'+this.index+'_mage_attribute').attr('disabled','disabled');
+                    var tdparent = $('#attributemap_'+this.index+'_mage_attribute').parent().parent();
+                    tdparent.find('.attribute-del').attr('disabled','disabled');
+                    tdparent.find('.attribute-del').css('display','none');
+                    break;
+                }
+             }
+            this.index++;
+            this.fbattrb = '';
+            this.mgattrb = '';
+            this.fboption = '';
+            this.mgoption = '';
+        }
+        function updateSelectedFb()
+        {
+            $('.fb-attribute').each(function() {
+                fbselected[jQuery(this).val()] = jQuery(this).val();
+                var optionflag = false;
+                for(var optionval in optionalarray){
+                    if(optionalarray[optionval]==jQuery(this).val()){
+                        optionflag = true;
+                    }
+                }
+                if(optionflag){
+                    for(var optionval in optionalarray){
+                       fbselected[optionalarray[optionval]] = optionalarray[optionval]; 
+                    }
+                }
+            });
+        }
+        function updateSelectedMg()
+        {
+            $('.mage-attribute').each(function() {
+                mgselected[jQuery(this).val()] = jQuery(this).val();
+            });
+        }
+        function getFbOptions(fbattrb)
+        { 
+            ref.fboption = '<option value=""><?php echo __("Select FB Attribute"); ?></option>';
+            $.each(fbattribute, function(index,val) {
+                var addOption = true;
+                for (var index in fbselected) {
+                    if(fbselected[index] == val.fb_attribute_code){
+                        addOption = false;
+                        break;
+                    }
+                }
+                if(addOption){
+                    if(fbattrb==val.fb_attribute_code){
+                        ref.fboption += '<option value="'+val.fb_attribute_code+'" selected="selected">'+val.fb_attribute_label+'</option>';
+                    }
+                    else{
+                        ref.fboption += '<option value="'+val.fb_attribute_code+'">'+val.fb_attribute_label+'</option>';
+                    }
+                }
+            });
+        }
+        function getMgOptions(mgattrb)
+        { 
+            ref.mgoption = '<option value=""><?php echo __("Select Store Attribute"); ?></option>';
+ 
+            $.each(magattribute, function(index,val) {
+                
+                var addOption = true;
+                for (var index in mgselected) {
+                    if(mgselected[index] == val.attribute_code){
+                        addOption = false;
+                        break;
+                    }
+                }
+                
+                if(addOption){
+                    if(mgattrb==val.attribute_code){
+                        ref.mgoption += '<option value="'+val.attribute_code+'" selected="selected">'+val.frontend_label+'</option>';
+                    }
+                    else{
+                       var hasAttr = false;
+                       for (var index in dynamicAttr) {
+                            if(dynamicAttr[index] == mgattrb){
+                                hasAttr = true;
+                                break;
+                            }
+                       }
+                        if(hasAttr==true){
+                             ref.mgoption += '<option selected="selected" value="'+val.attribute_code+'">Dynamic</option>';
+                        }
+                        else{
+                             ref.mgoption += '<option value="'+val.attribute_code+'">'+val.frontend_label+'</option>';
+                        }
+                    }
+                }
+            });
+            
+        }
+        function deleteItem(ref)
+        {
+            var tdparent = $(ref).parent().parent();
+            var fbattvalue = tdparent.find('.fb-attribute').val();
+            var optionflag = false;
+            for(var optionval in optionalarray){
+                if(optionalarray[optionval]==fbattvalue){
+                    optionflag = true;
+                }
+            }
+            if(optionflag){
+                for(var optionval in optionalarray){
+                  delete fbselected[optionalarray[optionval]]; 
+                }
+            }
+            else{
+                delete fbselected[fbattvalue];
+            }
+            
+            delete mgselected[tdparent.find('.mage-attribute').val()];
+           // updateOptions(tdparent.find('.fb-attribute'));
+            tdparent.remove();
+        }
+        
+        function saveAttrMap()
+        {
+           if($("#fb_attributemap_form").valid()){
+               $("#fb_attributemap_form").submit();
+           } 
+        }
+        function importCsv()
+        {
+            window.location.replace("<?php echo $block->getUrl('md_facebook/attributemapper/importrequest'); ?>");
+        }
+        function storePreVal(preref)
+        {
+            prevValue = jQuery(preref).val();
+        }
+        
+        function storePreMgVal(preref)
+        {
+            prevMgValue = jQuery(preref).val();
+        }
+        
+        function updateOptions(refselect)
+        {
+            var optionflag = false;
+            for(var optionval in optionalarray){
+                if(optionalarray[optionval]==prevValue){
+                    optionflag = true;
+                }
+            }
+            if(optionflag){
+                for(var optionval in optionalarray){
+                  delete fbselected[optionalarray[optionval]]; 
+                }
+            }
+            else{
+                delete fbselected[prevValue];
+            }
+            updateSelectedFb();
+            var currentselVal = {};
+            $('.fb-attribute').each(function() {
+                var replaceFlag = false;
+                for(val in currentselVal){
+                    if(jQuery(this).val()==currentselVal[val]){
+                        replaceFlag = true;
+                    }
+                }
+                if(jQuery(this).val()=='' || replaceFlag==true){
+                    getFbOptions(jQuery(this).val());
+                    $(this).html(ref.fboption);
+                }
+                else{
+                    currentselVal[jQuery(this).val()] = jQuery(this).val();
+                }
+            });
+        }
+        function updateMgOptions(refselect)
+        {
+            delete mgselected[prevMgValue];
+            updateSelectedMg();
+            var currentselVal = {};
+            $('.mage-attribute').each(function() {
+                var replaceFlag = false;
+                for(val in currentselVal){
+                    if(jQuery(this).val()==currentselVal[val]){
+                        replaceFlag = true;
+                    }
+                }
+                if(jQuery(this).val()=='' || replaceFlag==true){
+                    getMgOptions(jQuery(this).val());
+                    $(this).html(ref.mgoption);
+                }
+                else{
+                    currentselVal[jQuery(this).val()] = jQuery(this).val();
+                }
+            });
+        }
+        window.addItem = addItem;
+        window.deleteItem = deleteItem;
+        window.saveAttrMap = saveAttrMap;
+        window.updateOptions = updateOptions;
+        window.storePreVal = storePreVal;
+        window.storePreMgVal = storePreMgVal;
+        window.updateMgOptions = updateMgOptions;
+        window.importCsv = importCsv;
+        $.each(attributemap, function(index,val) {
+            ref.fbattrb = val.fb_attribute;
+            ref.mgattrb = val.mage_attribute;
+            addItem();
+        });
+        this.minvalue = '';
+        this.qty = '';
+    });
+</script>
+<style type="text/css">
+    .page-actions .actions-split .action-default{
+        margin-right: 0px;
+    }   
+</style>

@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Email:etc/email_templates.xsd">
+    <template id="partialpro_email_schedule_template" label="Installments Schedule Email Template" file="schedule.html" type="html" area="frontend" module="Meetanshi_Partialpro"/>
+    <template id="partialpro_email_payment_template" label="Installments Payment Email Template" file="payment.html" type="html" area="frontend" module="Meetanshi_Partialpro"/>
+    <template id="partialpro_email_approve_template" label="Installments Approve Email Template" file="approve.html" type="html" area="frontend" module="Meetanshi_Partialpro"/>
+    <template id="partialpro_email_disapprove_template" label="Installments Disapprove Email Template" file="disapprove.html" type="html" area="frontend" module="Meetanshi_Partialpro"/>
+    <template id="partialpro_email_overdue_template" label="Installment Over Due Notice Email Template" file="overdue.html" type="html" area="frontend" module="Meetanshi_Partialpro"/>
+    <template id="partialpro_email_failure_template" label="Installment Failure Email Settings" file="failure.html" type="html" area="frontend" module="Meetanshi_Partialpro"/>
+    <template id="partialpro_email_reminder_template" label="Installment Reminder Email Settings" file="reminder.html" type="html" area="frontend" module="Meetanshi_Partialpro"/>
+    <template id="partialpro_email_autocapture_template" label="Installment Auto Capture Email Settings" file="autocapturereminder.html" type="html" area="frontend" module="Meetanshi_Partialpro"/>
+</config>

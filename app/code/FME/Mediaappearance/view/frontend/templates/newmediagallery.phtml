@@ -1,0 +1,143 @@
+<?php if ($this->_helper->getModuleEnable()): ?>
+    <?php if ($this->_helper->getGalleryType()=="fme_gallery"): ?>
+        <style>
+        .white-popup {    position: relative;   
+            /*background: #000;  */ 
+            padding: 20px;    
+            width: 746px;   
+            margin: 20px auto;}
+        </style>
+        <script type="text/javascript" >
+        require(['jquery','finaltilesgallery','finalmagpop'], function($){
+            $('.open-popup-link').magnificPopup({
+        type:'inline',
+        midClick: true,
+        });
+        });
+
+        </script>
+        <script>
+            player= new MediaElementPlayer('player1', {
+                    features: ['playpause', 'current', 'progress', 'duration', 'volume', 'fullscreen', 'airplay'],
+                });
+                //player.play();
+        </script>
+        <select id ="mediadrop"style="width: 10%;">
+        <option id="all" value="all">All</option>
+        <option id="vid"  value="video">Video</option>
+        <option id="images" value="images">Images</option>
+        </select>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">        
+        <?php
+        $mediatype=0;//all
+        $parameter=$this->getParameters();
+        if($parameter=="video")
+        {
+            $mediatype=1;
+
+        } elseif($parameter=="images") {
+            $mediatype=2;
+        }
+        $collection=$this->getMediaappearance($mediatype);
+        echo $this->mediagalleryHtml($collection->getData(),$parameter);
+
+        ?>
+
+        <script type="text/javascript" >
+        
+        require(['jquery','finaltilesgallery','finalmagpop'], function($){
+
+        <?php 
+        $parameter = $this->getParameters();
+        ?>
+            <?php if($parameter =="images"): ?>
+                $("#images").attr("Selected", "Selected");
+            <?php endif; ?>
+            <?php if($parameter =="video"): ?>
+                $("#vid").attr("Selected", "Selected");
+            <?php endif; ?>
+            <?php if($parameter =="all"): ?>
+                $("#all").attr("Selected", "Selected");
+            <?php endif; ?>
+            $('#mediadrop').on('change', function () {
+                    url=  window.location.href;
+                    url = url.split('?')[0];
+                    //alert(url);
+                    url=  url+'?id='+$(this).val();
+                    window.location = url; // redirect
+                    
+                    
+
+            });
+
+                $("#gallery").finalTilesGallery({
+                            <?php if ($this->_helper->enableMargin()): ?>
+                                margin: parseInt("<?= /* @escapeNotVerified */ $this->_helper->getMarginSize() ?>"),
+                            <?php endif; ?>
+                            <?php if ($this->_helper->enableThumbsInColuumn()=="col"): ?>
+                                layout: 'columns',
+                            <?php endif; ?>
+                            <?php if ($this->_helper->enableThumbsInColuumn()=="final"): ?>
+                                layout: 'final',
+                            <?php endif; ?>
+
+                });
+                $('#gallery').magnificPopup({
+                            
+                            type: 'image',
+                            
+                            delegate: '.tile:not(.ftg-hidden) .tile-inner',
+                        
+                            gallery: {
+                                //enablegalonPopUp
+                            <?php if ($this->_helper->enablegalonPopUp()): ?>
+                            enabled: true,
+                            <?php else: ?>
+                            enabled: false,
+                            <?php endif; ?>	
+
+                            preload: [0,2],	
+                            <?php if ($this->_helper->enablePopupNavOnCLick()): ?>
+                            navigateByImgClick: true,
+                            <?php else: ?>
+                            navigateByImgClick: false,
+                            <?php endif; ?>	
+                            },
+                            zoom: {
+                                //getPopupTime()
+                                enabled: true,
+                                duration: parseInt("<?= /* @escapeNotVerified */ $this->_helper->getPopupTime() ?>"),
+                                easing: 'ease-in-out',
+                                opener: function(openerElement) {
+                                return openerElement.is('img') ? openerElement : openerElement.find('img');
+                                }
+                            },
+                            image: {
+                            titleSrc: function(item) {
+                                return item.el.parents('.tile').find('h4').html() +   item.el.parents('.tile').find('h5').html();
+                                }
+                        },
+                            fixedContentPos: true,
+                    });
+                    $('.pop-video').magnificPopup({
+                        type: 'iframe',
+                    });
+                
+
+                
+        
+        });
+        </script>
+    <?php endif; ?>	
+    <?php if ($this->_helper->getGalleryType()=="nanogallery"): ?>
+        <?php
+            echo $this->getLayout()->createBlock("FME\Mediaappearance\Block\Mediaappearance")->setTemplate("FME_Mediaappearance::newmediagallery1.phtml")->toHtml();
+        ?>
+    <?php endif; ?>
+    <?php if ($this->_helper->getGalleryType()=="tdgallery"): ?>
+        <?php
+            echo $this->getLayout()->createBlock("FME\Mediaappearance\Block\Mediaappearance")->setTemplate("FME_Mediaappearance::newmediagallery2.phtml")->toHtml();
+        ?>
+    <?php endif; ?>
+   
+<?php endif; ?>	

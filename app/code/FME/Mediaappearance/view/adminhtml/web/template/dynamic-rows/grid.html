@@ -1,0 +1,120 @@
+<!--
+/**
+ * Copyright © 2016 Magento. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<!-- <style>
+
+.tab {
+    overflow: hidden;
+    display:inline;
+    border: 1px solid #ccc;
+    background-color: #f1f1f1;
+}
+
+.tab button {
+    background-color: inherit;
+    float: left;
+    border: auto;
+    outline: auto;
+    cursor: pointer;
+    padding: 14px 16px;
+    transition: 0.3s;
+    font-size: 12px;
+    
+    color: black;
+}
+
+.tab button:hover {
+    background-color: #ddd;
+}
+
+.tab button.active {
+    background-color: #ccc;
+}
+
+.tabcontent {
+    display: none;
+    padding: 6px 12px;
+    border: 1px solid #ccc;
+    border-top: none;
+}
+</style>-->
+
+<div if="element.addButton">
+    
+    <div class="admin__field-complex-elements">
+        <render args="fallbackResetTpl" if="$data.showFallbackReset && $data.isDifferedFromDefault"/>
+<div class="tab">
+        <p attr="{disabled: disabled}"
+                class="action-secondary"
+                type="button"
+                class="tablinks"
+                click="processingAddChild.bind($data, false, false, false)"
+                >
+            <span text="addButtonLabel"/>
+        </p>
+    </div>
+ </div>
+    
+</div>
+
+<div 
+     visible="visible"
+     disabled="disabled"
+     css="element.setClasses(element)"
+     attr="'data-index': index">
+    <label if="element.label" class="admin__field-label" attr="for: element.uid">
+        <span text="element.label"/>
+    </label>
+
+    
+    <div data-role="grid-wrapper">
+        <div>
+            <div>
+            </div>
+        </div>
+        <div>
+            <table class="admin__dynamic-rows data-grid" data-role="grid">
+                <thead if="element.columnsHeader">
+                    <tr>
+                        <th if="$data.dndConfig.enabled"
+                            class="data-grid-draggable-row-cell"/>
+
+                        <th repeat="foreach: labels, item: '$label'"
+                            class="data-grid-th"
+                            text="$label().label"
+                            visible="$label().visible"
+                            disable="$label().disabled"
+                            css="setClasses($label())">
+                        </th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr repeat="foreach: elems, item: '$record'"
+                        class="data-row"
+                        css="'_odd-row': $index % 2">
+                        <td if="dndConfig.enabled"
+                            class="data-grid-draggable-row-cell"
+                            template="name: dndConfig.template, data: dnd"/>
+
+                        <!-- ko foreach: { data: $record().elems(), as: 'elem'}  -->
+                        <td if="elem.template"
+                            visible="elem.visible"
+                            disable="elem.disabled"
+                            css="$parent.setClasses(elem)"
+                            template="elem.template"
+                            attr="'data-index': index"/>
+                        <!-- /ko -->
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<hr />
+
+

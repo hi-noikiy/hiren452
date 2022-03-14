@@ -1,0 +1,145 @@
+<?php
+$profile              = $this->getProfile();
+$dataHelper           = $this->helper('\Magezon\ProductPagePdf\Helper\Data');
+$title                = $dataHelper->getButtonTitle();
+$type                 = $profile->getButtonType();
+$iconSrc              = $dataHelper->getIconSrc();
+$displayType          = $dataHelper->getButtonDisplayType();
+$titleFontSize        = $dataHelper->getConfig('button/title');
+$titleFontSize        = $dataHelper->getConfig('button/title_font_size');
+$titleFontWeight      = $dataHelper->getConfig('button/title_font_weight');
+$textColor            = $dataHelper->getConfig('button/text_color');
+$textColorHover       = $dataHelper->getConfig('button/text_color_hover');
+$backgroundColor      = $dataHelper->getConfig('button/background_color');
+$backgroundColorHover = $dataHelper->getConfig('button/background_color_hover');
+$boxShadow            = $dataHelper->getConfig('button/box_shadow');
+$boxShadowHover       = $dataHelper->getConfig('button/box_shadow_hover');
+$gradientBgLeft       = $dataHelper->getConfig('button/gradient_bg_left');
+$gradientBgRight      = $dataHelper->getConfig('button/gradient_bg_right');
+$borderSize           = $dataHelper->getConfig('button/border_size');
+$borderStyle          = $dataHelper->getConfig('button/border_style');
+$borderColor          = $dataHelper->getConfig('button/border_color');
+$borderRadius         = $dataHelper->getConfig('button/border_radius');
+?>
+<div class="product-pdflink-download">
+    <a href="<?= $this->getPrintUrl() ?>" class="productpagepdf-print" target="_blank">
+        <?php if ($type == 2) { ?>
+            <span class="icon"><img src="<?= $iconSrc ?>" /></span>
+        <?php } else if ($type == 3) { ?>
+            <span class="text"><?= $title ?></span>
+        <?php } else { ?>
+            <span class="icon"><img src="<?= $iconSrc ?>" /></span>
+            <span class="text"><?= $title ?></span>
+        <?php } ?>    
+    </a>
+    <style class="mgz-style">
+        .product-pdflink-download { display: table; position: relative; }
+        .product-pdflink-download .productpagepdf-print { 
+            padding: 3px 10px; 
+            transition: all ease .2s; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            color: <?= $textColor ?: 'inherit' ?>;
+            font-size: <?= $titleFontSize ? $titleFontSize.'px' : 'inherit' ?>;
+            font-weight: <?= $titleFontWeight ?: 'inherit' ?>;
+            cursor: pointer; 
+            text-decoration: none;
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+        }
+        .product-pdflink-download .productpagepdf-print:hover { color: <?= $textColorHover ?: '' ?>; }
+        .product-pdflink-download .productpagepdf-print .icon { margin-right: 5px; display: flex; align-items: center; }
+        .product-pdflink-download .productpagepdf-print .icon img { max-height: 25px; }
+        <?php if ($displayType == 0) { ?>
+            .product-pdflink-download .productpagepdf-print { 
+                background-color: transparent; 
+                border: none;
+            }
+        <?php } ?>
+        <?php if ($displayType == 1) { ?>
+            .product-pdflink-download .productpagepdf-print { 
+                box-shadow: inset 0 1px 0 0 #ffffff, inset 0 -1px 0 0 rgba(204, 204, 204, 0.3); 
+                border-radius: <?= $borderRadius ?: '3' ?>px; 
+                background: <?= $backgroundColor ?: '#f1f1f1' ?>; 
+                color: <?= $textColor ?: '#333333' ?>;
+                border: 1px solid #eeeeee; 
+            }
+            .product-pdflink-download .productpagepdf-print:hover { 
+                box-shadow: none; 
+                background: <?= $backgroundColorHover ?: '#333333' ?>;
+                color: <?= $textColor ?: '#ffffff' ?>;
+            }
+        <?php } ?>
+        <?php if ($displayType == 2) { ?>
+            .product-pdflink-download .productpagepdf-print { 
+                color: <?= $textColor ?: '#ffffff' ?>;
+                border-radius: <?= $borderRadius ?: '3' ?>px;
+                background-color: <?= $backgroundColor ?: '#555555' ?>;
+                background-image: -webkit-linear-gradient(top,rgba(255,255,255,0.2) 0,rgba(255,255,255,0.01) 100%);
+                background-image: -o-linear-gradient(top,rgba(255,255,255,0.2) 0,rgba(255,255,255,0.01) 100%);
+                background-image: linear-gradient(to bottom,rgba(255,255,255,0.2) 0,rgba(255,255,255,0.01) 100%);
+                background-repeat: repeat-x;
+            }
+            .product-pdflink-download .productpagepdf-print:hover { 
+                background-color: <?= $backgroundColorHover ?: '#464646' ?>;
+                color: <?= $textColorHover ?: '#ffffff' ?>;
+            }
+        <?php } ?>
+        <?php if ($displayType == 3) { ?>
+            .product-pdflink-download .productpagepdf-print { 
+                color: <?= $textColor ?: '#ffffff' ?>;
+                background-color: <?= $backgroundColor ?: '#4267b2' ?>;
+                border-radius: <?= $borderRadius ?: '3' ?>px;
+            }
+            .product-pdflink-download .productpagepdf-print:hover { 
+                background-color: <?= $backgroundColorHover ?: '#375695' ?>;
+                color: <?= $textColorHover ?: '#ffffff' ?>;
+                box-shadow: none;
+            }
+        <?php } ?>
+        <?php if ($displayType == 4) { ?>
+            .product-pdflink-download .productpagepdf-print { 
+                color: <?= $textColor ?: '#ffffff' ?>;
+                background-color: <?= $backgroundColor ?: '#5472d2' ?>;
+                border-radius: <?= $borderRadius ?: '3' ?>px;
+                box-shadow: 0 5px 0 <?= $boxShadow ?: '#3658c9' ?>;
+            }
+            .product-pdflink-download .productpagepdf-print:hover { 
+                transform: translateY(2px);
+                box-shadow: 0 2px 0 <?= $boxShadowHover ?: '#3658c9' ?>;
+                background-color: <?= $backgroundColorHover ?: '#4267b2' ?>;
+            }
+        <?php } ?>
+        <?php if ($displayType == 5) { ?>
+            .product-pdflink-download .productpagepdf-print { 
+                background-color: <?= $gradientBgLeft ?: '#e32d76' ?>;
+                background-image: linear-gradient(to right,<?= $gradientBgLeft ?: '#e32d76' ?> 0,<?= $gradientBgRight ?: '#648fe6' ?> 50%, <?= $gradientBgLeft ?: '#e32d76' ?> 100%);
+                background-size: 200% 100%;
+                color: <?= $textColor ?: '#ffffff' ?>;
+                border-radius: <?= $borderRadius ?: '3' ?>px;
+            }
+            .product-pdflink-download .productpagepdf-print:hover { 
+                background-position: 100% 0;
+                color: <?= $textColorHover ?: '#ffffff' ?>;
+            }
+        <?php } ?>
+        <?php if ($displayType == 6) { ?>
+            .product-pdflink-download .productpagepdf-print { 
+                background-color: <?= $backgroundColor ?: '#ffffff' ?>;
+                color: <?= $textColor ?: '#4267b2' ?>;
+                border-radius: <?= $borderRadius ?: '3' ?>px;
+                border-width: <?= $borderSize ?: '1' ?>px;
+                border-style: <?= $borderStyle ?: 'solid' ?>;
+                border-color: <?= $borderColor ?: '#4267b2' ?>;
+            }
+            .product-pdflink-download .productpagepdf-print:hover { 
+                background-color: <?= $backgroundColorHover ?: '#4267b2' ?>;
+                color: <?= $textColorHover ?: '#ffffff' ?>;
+                border-color: <?= $backgroundColorHover ?: '#4267b2' ?>;
+            }
+        <?php } ?>
+        <?= $dataHelper->getButtonStyle() ?>
+    </style>
+</div>

@@ -1,0 +1,77 @@
+<?php
+$dataHelper 	    = $this->helper('\Magezon\ProductPagePdf\Helper\Data');
+$images             = $this->getMediaGalleryImages();
+$imagesChild        = $this->getImagesConfigurable();
+$element            = $this->getElement();
+$breakPage          = $element->getData('break_page');
+$navPosition        = $element->getGalleryNavposition();
+$borderImgWidth     = $element->getData('border_img_width');
+$borderImgColor     = $element->getData('border_img_color');
+$enableChildImg     = $element->getData('enable_child_img');
+$countImage         = $element->getData('count_image');
+$enableTitle        = $element->getData('enable_title');
+$headTitle          = $element->getData('head_title');
+$titleFontSize      = $element->getData('title_font_size');
+$titleColor         = $element->getData('title_color');
+$enableBorder       = $element->getData('enable_img_border');
+$enableBorderBottom = $element->getData('enable_border_bottom');
+$borderTitleWidth   = $element->getData('border_title_width');
+$borderTitleColor   = $element->getData('border_title_color');
+?>
+<?= $breakPage ? "<pagebreak />" : "" ?>
+<div class="ppbd-product-gallerys">
+    <?php if ($enableTitle) { ?>
+        <h2 class="head-title" style="font-size:<?= $titleFontSize ?: "initial" ?>; color: <?= $titleColor ?: "initial" ?>;" ><?= $headTitle ?></h2>
+	<?php } ?>
+    <div class="customer_gallery <?= $navPosition ?>">
+    <?php foreach ($images as $key => $image) { ?>
+        <?php if ($image['position'] <= $countImage) {
+                $path = $image->getPath();
+                $position = $image->getPosition();
+                if ($position == 1) { ?>
+                    <div class="element main">
+                        <div class="imgc">
+                            <img src="<?= $path ?>"/>
+                        </div>
+                    </div>
+                <?php } else { ?>
+                    <div class="element">
+                        <div class="imgc">
+                            <img src="<?= $path ?>"/>
+                        </div>
+                    </div>
+                <?php }
+            }
+        }
+        if ($enableChildImg && $imagesChild) {
+            foreach ($imagesChild as $key => $imagepath) {
+                if (count($images) + $key  < $countImage) { ?>
+                    <div class="element">
+                        <div class="imgc">
+                            <img src="<?= $imagepath ?>"/>
+                        </div>
+                    </div>
+                <?php }
+            }
+    } ?>
+    </div>
+    <style>
+        .ppbd-product-gallerys .customer_gallery .element .imgc, .ppbd-product-gallerys .customer_gallery .element.main .imgc,
+        {
+            <?php if ($enableBorder) { ?>
+                border: <?= $borderImgWidth ?: 0 ?>px solid <?= $borderImgColor ?: "#dddddd" ?>;
+            <?php } ?>
+        }
+		.ppbd-product-gallerys {
+			display: block;
+		}
+		.ppbd-product-gallerys .head-title {
+			margin-bottom:10px;
+			padding-bottom: 5px;
+			<?php if ($enableBorderBottom) { ?>
+			border-bottom: <?= $borderTitleWidth ?: '0' ?>px solid;	
+			border-color: <?= $borderTitleColor ?: '#ffffff' ?>;
+			<?php } ?>
+		}
+		</style>
+</div>

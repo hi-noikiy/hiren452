@@ -1,0 +1,59 @@
+<div class="productpagepdf-tab">
+    <div class="productpagepdf-tab-nav">
+        <div class="productpagepdf-tab-nav-item" css="{active: currentTab()=='builder'}"><a href="#" click="function(){activeTab('builder')}"><span data-bind="i18n: 'PDF Builder'"></span></a></div>
+        <div class="productpagepdf-tab-nav-item" css="{active: currentTab()=='preview'}"><a href="#" click="function(){activeTab('preview')}"><span data-bind="i18n: 'Preview'"></span></a></div>
+    </div>
+    <div class="productpagepdf-tab-content">
+        <div class="pdf-builder" visible="currentTab()=='builder'" data-bind="html: $data.content"></div>
+        <div class="pdf-preview" visible="currentTab()=='preview'">
+            <form id="pdf-form" target="pdf-iframe" method="post" data-bind="attr:{action: previewUrl}" afterRender="onFormRender">
+                <div class="pdf-form-container">
+                    <div class="pdf-form-control" data-bind="outerClick: outerClick.bind($data)">
+                        <input type="text" class="admin__control-text pdf-form-id" name="search_product" data-bind="textInput: search,attr:{placeholder: 'Search ' + selectedType() + ' by name'}" />
+                        <div class="pdf-form-dropdown-wrapper" data-bind="visible: listVisible">
+                            <ul class="pdf-form-dropdown" if="options().length">
+                                <!-- ko foreach: { data: options, as: 'option'}  -->
+                                <li data-bind="click: function(data, event){$parent.toggleOptionSelected($data)}">
+                                    <span data-bind="text: option.label"></span>
+                                </li>
+                                <!-- /ko -->
+                            </ul>
+                            <div if="showEmptyMessage" data-bind="i18n: 'We couldn\'t find any items.'" class="pdf-empty-message"></div>
+                        </div>
+                    </div>
+                    <div class="pdf__spinner" if="showSpinner">
+                        <div class="spinner-item spinner-item-1"></div>
+                        <div class="spinner-item spinner-item-2"></div>
+                        <div class="spinner-item spinner-item-3"></div>
+                        <div class="spinner-item spinner-item-4"></div>
+                        <div class="spinner-item spinner-item-5"></div>
+                        <div class="spinner-item spinner-item-6"></div>
+                        <div class="spinner-item spinner-item-7"></div>
+                        <div class="spinner-item spinner-item-8"></div>
+                    </div>
+                </div>
+                <input name="form_key" type="hidden" data-bind="attr:{value: formKey()}"/>
+                <input name="id" type="hidden" data-bind="value: entityId"/>
+                <input name="type" type="hidden" data-bind="value: selectedType"/>
+                <input name="pdf_orientation" type="hidden" data-bind="value: orientation"/>
+                <input name="pdf_page_size" type="hidden" data-bind="value: pageSize"/>
+                <input name="pdf_margin_top" type="hidden" data-bind="value: marginTop"/>
+                <input name="pdf_margin_right" type="hidden" data-bind="value: marginRight"/>
+                <input name="pdf_margin_bottom" type="hidden" data-bind="value: marginBottom"/>
+                <input name="pdf_margin_left" type="hidden" data-bind="value: marginLeft"/>
+                <textarea class="admin__control-textarea mgz-hidden" data-bind="
+                    value: value,
+                    valueUpdate: valueUpdate,
+                    hasFocus: focused,
+                    attr: {
+                    name: inputName,
+                    'aria-describedby': noticeId,
+                    placeholder: placeholder,
+                    id: htmlId,
+                    disabled: disabled
+                }"/>
+            </form>
+            <iframe id="pdf-iframe" name="pdf-iframe" width="100%" height="1250"></iframe>
+        </div>
+    </div>
+</div>

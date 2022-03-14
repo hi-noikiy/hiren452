@@ -1,0 +1,178 @@
+<?xml version="1.0" ?>
+<!--
+/**
+* Copyright (c) 2020, Zillion Insurance Services, Inc.
+* All rights reserved.
+* Redistribution and use in source and binary forms, with or without modification,
+* are permitted provided that the following conditions are met:
+*   * Redistributions of source code must retain the above copyright notice,
+*     this list of conditions and the following disclaimer.
+*   * Redistributions in binary form must reproduce the above copyright notice,
+*     this list of conditions and the following disclaimer in the documentation
+*     and/or other materials provided with the distribution.
+*   * Neither the name of Zend Technologies USA, Inc. nor the names of its
+*     contributors may be used to endorse or promote products derived from this
+*     software without specific prior written permission.
+* THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+* ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+* WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+* DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR
+* ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+* (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+* LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
+* ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+* (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+* SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+*/
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="myzillion" sortOrder="999" translate="label">
+            <label>Zillion</label>
+        </tab>
+        <section id="myzillion_api" showInDefault="1" showInStore="0" showInWebsite="1" sortOrder="10" translate="label">
+            <label>API</label>
+            <tab>myzillion</tab>
+            <resource>MyZillion_SimplifiedInsurance::config_myzillion_insurance</resource>
+            <group id="settings" showInDefault="1" showInStore="0" showInWebsite="1" sortOrder="10" translate="label">
+                <label>Settings</label>
+                <field id="version" translate="label" showInDefault="1" showInStore="0" showInWebsite="1" canRestore="1" type="label">
+                    <label>Version</label>
+                    <frontend_model>MyZillion\SimplifiedInsurance\Block\Adminhtml\System\Config\CurrentVersion</frontend_model>
+                </field>
+                <field id="enabled" showInDefault="1" showInStore="0" showInWebsite="1" canRestore="1" sortOrder="10" translate="label" type="select">
+                    <label>Enabled</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="api_key" showInDefault="1" showInStore="0" showInWebsite="1" sortOrder="30" translate="label" type="obscure">
+                    <label>Api key *</label>
+                    <validate>required-entry</validate>
+                    <backend_model>Magento\Config\Model\Config\Backend\Encrypted</backend_model>
+                    <depends>
+                        <field id="myzillion_api/settings/enabled">1</field>
+                    </depends>
+                </field>
+                <field id="test_mode" showInDefault="1" showInStore="0" showInWebsite="1" canRestore="1" sortOrder="50" translate="label" type="select">
+                    <label>Test Mode</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <depends>
+                        <field id="myzillion_api/settings/enabled">1</field>
+                    </depends>
+                </field>
+                <field id="test_credentials" translate="label" type="button" sortOrder="70" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Test Credentials</label>
+                    <frontend_model>MyZillion\SimplifiedInsurance\Block\Adminhtml\System\Config\TestCredentials</frontend_model>
+                    <depends>
+                        <field id="myzillion_api/settings/enabled">1</field>
+                    </depends>
+                </field>
+                <field id="offer_type" showInDefault="1" showInStore="0" showInWebsite="1" canRestore="1" sortOrder="90" translate="label" type="radios">
+                    <label>Zillion Offer Type * </label>
+                    <source_model>MyZillion\SimplifiedInsurance\Model\Config\Source\OfferType</source_model>
+                    <depends>
+                        <field id="myzillion_api/settings/enabled">1</field>
+                    </depends>
+                </field>
+            </group>
+            <group id="attribute_mapping" showInDefault="1" showInStore="0" showInWebsite="1" sortOrder="10" translate="label">
+                <label>Mapping</label>
+                <depends>
+                    <field id="myzillion_api/settings/enabled">1</field>
+                </depends>
+                <field id="product_sku" showInDefault="1" showInStore="0" showInWebsite="1" canRestore="0" sortOrder="1" translate="label" type="select">
+                    <label>Product SKU</label>
+                    <comment>Reference, unique identifier of the product</comment>
+                    <source_model>MyZillion\SimplifiedInsurance\Model\Config\Source\SelectDefault</source_model>
+                    <depends>
+                        <field id="myzillion_api/settings/enabled">1</field>
+                    </depends>
+                    <frontend_model>MyZillion\SimplifiedInsurance\Block\Adminhtml\System\Config\Form\DisabledDefault</frontend_model>
+                </field>
+                <field id="product_source_type" showInDefault="1" showInStore="0" showInWebsite="1" canRestore="0" sortOrder="9" translate="label" type="radios">
+                    <label>Zillion Product Type Source *</label>
+                    <comment>The source when the extension will be reading the product type</comment>
+                    <validate>validate-select</validate>
+                    <depends>
+                        <field id="myzillion_api/settings/enabled">1</field>
+                    </depends>
+                    <source_model>MyZillion\SimplifiedInsurance\Model\Config\Source\TypeSourceAttributes</source_model>
+                </field>
+                <field id="product_type" showInDefault="1" showInStore="0" showInWebsite="1" canRestore="0" sortOrder="10" translate="label" type="select">
+                    <label>Zillion Product Type Attribute *</label>
+                    <comment>Attribute to be used as Zillion product type (usually 'Category', 'Type', etc.)</comment>
+                    <validate>myzilion-product_type</validate>
+                    <source_model>MyZillion\SimplifiedInsurance\Model\Config\Source\ProductAttributes</source_model>
+                    <depends>
+                        <field id="myzillion_api/settings/enabled">1</field>
+                        <field id="myzillion_api/attribute_mapping/product_source_type">productAttribute</field>
+                    </depends>
+                </field>
+                <field id="description_map" showInDefault="1" showInStore="0" showInWebsite="1" canRestore="0" sortOrder="30" translate="label" type="select">
+                    <label>Description</label>
+                    <comment>Used as Zillion description in the Post Order request. If is not set Description attribute will be used.</comment>
+                    <validate>myzilion-product_type</validate>
+                    <source_model>MyZillion\SimplifiedInsurance\Model\Config\Source\ProductAttributes</source_model>
+                    <depends>
+                        <field id="myzillion_api/settings/enabled">1</field>
+                    </depends>
+                </field>
+                <field id="description_full_map" showInDefault="1" showInStore="0" showInWebsite="1" canRestore="0" sortOrder="50" translate="label" type="select">
+                    <label>Description Full</label>
+                    <comment>Used as Zillion description_full in the Post Order request. If is not set Description attribute will be used.</comment>
+                    <source_model>MyZillion\SimplifiedInsurance\Model\Config\Source\ProductAttributes</source_model>
+                    <depends>
+                        <field id="myzillion_api/settings/enabled">1</field>
+                    </depends>
+                </field>
+                <field id="description_short_map" showInDefault="1" showInStore="0" showInWebsite="1" canRestore="0" sortOrder="70" translate="label" type="select">
+                    <label>Description Short</label>
+                    <comment>Used as Zillion description_short in the Post Order request. If is not set Description attribute will be used.</comment>
+                    <source_model>MyZillion\SimplifiedInsurance\Model\Config\Source\ProductAttributes</source_model>
+                    <depends>
+                        <field id="myzillion_api/settings/enabled">1</field>
+                    </depends>
+                </field>
+                <field id="certification_type_map" showInDefault="1" showInStore="0" showInWebsite="1" canRestore="0" sortOrder="90" translate="label" type="select">
+                    <label>Certification Type</label>
+                    <comment>Used as Zillion lab type (i.e. GIA, IGI, etc.)</comment>
+                    <source_model>MyZillion\SimplifiedInsurance\Model\Config\Source\ProductAttributes</source_model>
+                    <depends>
+                        <field id="myzillion_api/settings/enabled">1</field>
+                    </depends>
+                </field>
+                <field id="certification_number_map" showInDefault="1" showInStore="0" showInWebsite="1" canRestore="0" sortOrder="110" translate="label" type="select">
+                    <label>Certification Number</label>
+                    <comment>Used as Zillion lab number (i.e. 1234567890)</comment>
+                    <source_model>MyZillion\SimplifiedInsurance\Model\Config\Source\ProductAttributes</source_model>
+                    <depends>
+                        <field id="myzillion_api/settings/enabled">1</field>
+                    </depends>
+                </field>
+                <field id="serial_number_map" showInDefault="1" showInStore="0" showInWebsite="1" canRestore="0" sortOrder="130" translate="label" type="select">
+                    <label>Serial Number</label>
+                    <comment>Used as Zillion serial_number in the Post Order request.</comment>
+                    <source_model>MyZillion\SimplifiedInsurance\Model\Config\Source\ProductAttributes</source_model>
+                    <depends>
+                        <field id="myzillion_api/settings/enabled">1</field>
+                    </depends>
+                </field>
+                <field id="model_number_map" showInDefault="1" showInStore="0" showInWebsite="1" canRestore="0" sortOrder="150" translate="label" type="select">
+                    <label>Model Number</label>
+                    <comment>Used as Zillion model_number in the Post Order request.</comment>
+                    <source_model>MyZillion\SimplifiedInsurance\Model\Config\Source\ProductAttributes</source_model>
+                    <depends>
+                        <field id="myzillion_api/settings/enabled">1</field>
+                    </depends>
+                </field>
+            </group>
+            <group id="debug" showInDefault="1" showInStore="0" showInWebsite="1" sortOrder="10" translate="label">
+                <label>Debug</label>
+                <field id="enabled" showInDefault="1" showInStore="0" showInWebsite="1" canRestore="1" sortOrder="10" translate="label" type="select">
+                    <label>Enable Debug</label>
+                    <comment>Zillion log will be saved into var/log/zillion-requests.log</comment>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

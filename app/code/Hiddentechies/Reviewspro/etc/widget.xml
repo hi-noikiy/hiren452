@@ -1,0 +1,63 @@
+<?xml version="1.0" ?>
+<widgets xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Widget:etc/widget.xsd">
+    <widget class="Hiddentechies\Reviewspro\Block\Widget\Reviewswidget" id="hiddentechies_reviews_widget">
+        <label>Hiddentechies Reviews Widget</label>
+        <description></description>
+        <parameters>
+            <parameter name="title" sort_order="10" visible="true" xsi:type="text">
+                <label>Title</label>
+            </parameter>
+            <parameter name="reviews_count" sort_order="15" visible="true" xsi:type="text">
+                <label>Reviews Count</label>
+            </parameter>
+            <parameter name="display_date" sort_order="16" xsi:type="select" visible="true" source_model="Magento\Config\Model\Config\Source\Yesno">
+                <label translate="true">Display Review Date ?</label>
+            </parameter>
+            <parameter name="display_ratings" sort_order="17" xsi:type="select" visible="true" source_model="Magento\Config\Model\Config\Source\Yesno">
+                <label translate="true">Display Review Ratings ?</label>
+            </parameter>
+            <parameter name="display_product" sort_order="18" xsi:type="select" visible="true" source_model="Magento\Config\Model\Config\Source\Yesno">
+                <label translate="true">Display Product Name ?</label>
+            </parameter>
+            <parameter name="enable_slider" sort_order="20" xsi:type="select" visible="true" source_model="Magento\Config\Model\Config\Source\Yesno">
+                <label translate="true">Enable Slider ?</label>
+            </parameter>
+            <parameter name="show_navigation" sort_order="25" xsi:type="select" visible="true" source_model="Magento\Config\Model\Config\Source\Yesno">
+                <label translate="true">Show Navigation Buttons ?</label>
+                <depends>
+                    <parameter name="enable_slider" value="1" />
+                </depends>
+            </parameter>
+            <parameter name="show_pagination" sort_order="30" xsi:type="select" visible="true" source_model="Magento\Config\Model\Config\Source\Yesno">
+                <label translate="true">Show Pagination(Dots) ?</label>
+                <depends>
+                    <parameter name="enable_slider" value="1" />
+                </depends>
+            </parameter>
+            <parameter name="enable_autoplay" sort_order="35" xsi:type="select" visible="true" source_model="Magento\Config\Model\Config\Source\Yesno">
+                <label translate="true">Autoplay ?</label>
+                <depends>
+                    <parameter name="enable_slider" value="1" />
+                </depends>
+            </parameter>
+            <parameter name="item_desktop" sort_order="40" visible="true" xsi:type="text">
+                <label>Items (1200px - Above)</label>
+            </parameter>
+            <parameter name="item_small_desktop" sort_order="45" visible="true" xsi:type="text">
+                <label>Items (992px - 1199px)</label>
+            </parameter>
+            <parameter name="item_tablet" sort_order="50" visible="true" xsi:type="text">
+                <label>Items (768px - 991px)</label>
+            </parameter>
+            <parameter name="item_small_tablet" sort_order="55" visible="true" xsi:type="text">
+                <label>Items (639px - 767px)</label>
+            </parameter>
+            <parameter name="item_mobile" sort_order="60" visible="true" xsi:type="text">
+                <label>Items (480px - 640px)</label>
+            </parameter>
+            <parameter name="item_small_mobile" sort_order="65" visible="true" xsi:type="text">
+                <label>Items (479px - Below)</label>
+            </parameter>
+        </parameters>
+    </widget>
+</widgets>

@@ -1,0 +1,74 @@
+<script type="text/javascript">
+    require(['jquery'], function($) {
+        changePosition();
+        isAllowChoseDefault();
+
+        $("#productpagepdf_footer_numbering_position").change(function() {
+            changePosition();
+        });
+
+        $("#productpagepdf_footer_current_date_position").change(function() {
+            changePosition();
+        });
+
+        $("#productpagepdf_footer_enable_numbering").change(function() {
+            if ($(this).val() == 0) {
+                $('#productpagepdf_footer_current_date_position').children("option").removeAttr('disabled');
+            } else {
+                var positionDate = $('#productpagepdf_footer_current_date_position').children("option:selected").val();
+                var positionNumbering = $('#productpagepdf_footer_numbering_position').children("option:selected").val();
+            
+                if (positionDate == positionNumbering) {
+                    positionNumbering = $('#productpagepdf_footer_numbering_position').children("option:not([disabled='disabled'])").val();
+                    $('#productpagepdf_footer_numbering_position').val(positionNumbering);
+                } else {
+                    changePosition();
+                }
+            }
+        });
+        
+        $("#productpagepdf_footer_enable_current_date").change(function() {
+            if ($(this).val() == 0) {
+                $('#productpagepdf_footer_numbering_position').children("option").removeAttr('disabled');
+            } else {
+                var positionDate = $('#productpagepdf_footer_current_date_position').children("option:selected").val();
+                var positionNumbering = $('#productpagepdf_footer_numbering_position').children("option:selected").val();
+            
+                if (positionDate == positionNumbering) {
+                    positionDate = $('#productpagepdf_footer_current_date_position').children("option:not([disabled='disabled'])").val();
+                    $('#productpagepdf_footer_current_date_position').val(positionDate);
+                } else {
+                    changePosition();
+                }
+            }
+        });
+
+        function changePosition () {
+            var positionDate = $('#productpagepdf_footer_current_date_position').children("option:selected").val();
+            var positionNumbering = $('#productpagepdf_footer_numbering_position').children("option:selected").val();
+            
+            $('#productpagepdf_footer_numbering_position').children("option").removeAttr('disabled');
+            $('#productpagepdf_footer_numbering_position').children("option[value='" + positionDate + "']").attr('disabled', 'disabled');
+            $('#productpagepdf_footer_current_date_position').children("option").removeAttr('disabled');
+            $('#productpagepdf_footer_current_date_position').children("option[value='" + positionNumbering + "']").attr('disabled', 'disabled');
+        }
+
+        function isAllowChoseDefault() {
+            $getOption = $("#productpagepdf_general_default_profile").find('option');
+            if ($getOption.length == 1) {
+                $("#row_productpagepdf_general_default_profile").remove();
+            }
+        }
+
+        $('#productpagepdf_general_enabled').change(function(){
+            if($(this).val() == 0) {
+                $('.section-config').css('border-color', 'transparent');
+            } else {
+                $('.section-config').css('border-color', '#ccc');
+            }
+        });
+        if($('#productpagepdf_general_enabled').val() == 0) {
+            $('.section-config').css('border-color', 'transparent');
+        }
+    })
+</script>

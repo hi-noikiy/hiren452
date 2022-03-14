@@ -1,0 +1,70 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../Store/etc/config.xsd">
+    <default>
+        
+        <csp>
+            <mode>
+                <storefront>
+                    <report_only>0</report_only>
+                </storefront>
+                <admin>
+                    <report_only>0</report_only>
+                </admin>
+            </mode>
+        </csp>
+
+        <jb_settings>
+            <general>
+                <seviceshow>1</seviceshow>
+                
+                <sevice1_main>FREE SHIPPING &amp; RETURN</sevice1_main>
+                <sevice1_sub>Free shipping on all orders over $99.</sevice1_sub>
+                
+                <sevice2_main>MONEY BACK GUARANTEE</sevice2_main>
+                <sevice2_sub>100% money back guarantee.</sevice2_sub>
+                
+                <sevice3_main>ONLINE SUPPORT 24/7</sevice3_main>
+                <sevice3_sub>Lorem ipsum dolor sit amet.</sevice3_sub>
+            </general>
+
+            <custsupport>
+                <supportshow>1</supportshow>
+                
+                <support1_main>CUSTOMER SUPPORT</support1_main>
+                <support1_sub>You Won't Be Alone</support1_sub>
+                <support1_desc>We really care about you and your website as much as you do. Purchasing Porto or any other theme from us you get 100% free support.</support1_desc>
+
+                <support2_main>SECURED PAYMENT</support2_main>
+                <support2_sub>Safe &amp; Fast</support2_sub>
+                <support2_desc>With Porto you can customize the layout, colors and styles within only a few minutes. Start creating an amazing website right now!</support2_desc>
+
+                <support3_main>RETURNS</support3_main>
+                <support3_sub>Easy &amp; Free</support3_sub>
+                <support3_desc>Porto has very powerful admin features to help customer to build their own shop in minutes without any special skills in web development.</support3_desc>
+            </custsupport>
+
+            <popularcollection>
+                <colshow>1</colshow>
+                
+                <col1_main>Customize Engagement Rings</col1_main>
+                <col1_btn>Shop Now</col1_btn>
+                <col1_url>https://aumika.com/engagemnt-rings.html</col1_url>
+                <col1_sub></col1_sub>
+
+                <col2_main>100% Natural Diamonds</col2_main>
+                <col2_btn>Shop Now</col2_btn>
+                <col2_url>https://aumika.com/engagemnt-rings.html</col2_url>
+                <col2_sub>Ethically Sourced &amp; Carefully Selected</col2_sub>
+
+                <col3_main>Made in America</col3_main>
+                <col3_btn>Shop Now</col3_btn>
+                <col3_url>https://aumika.com/engagemnt-rings.html</col3_url>
+                <col3_sub></col3_sub>
+
+
+            </popularcollection>
+        </jb_settings>
+        
+    </default>
+
+</config>

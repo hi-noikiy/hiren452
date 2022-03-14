@@ -1,0 +1,99 @@
+<?php
+/**
+ * Magedelight
+ * Copyright (C) 2019 Magedelight <info@magedelight.com>
+ *
+ * @category Magedelight
+ * @package Magedelight_Facebook
+ * @copyright Copyright (c) 2019 Mage Delight (http://www.magedelight.com/)
+ * @license http://opensource.org/licenses/gpl-3.0.html GNU General Public License,version 3 (GPL-3.0)
+ * @author Magedelight <info@magedelight.com>
+ */
+?>
+<?php $storeId = $block->getStoreParam();  
+      if(!$storeId):
+        $storeId = $block->getDefaultStoreId();
+     endif; ?>
+<div class="page-main-actions">
+    <?php  // echo $this->getChildHtml('store_switcher') ?>
+    <div class="page-actions-placeholder" style=""></div>
+    <div class="page-actions" data-ui-id="page-actions-toolbar-content-header">
+        <div class="page-actions-inner">
+            <div class="page-actions-buttons">
+                <div title="Generate Feed" class="actions-split save primary">
+                    <?php  echo $block->getFeedActionButtonHtml(); ?>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<fieldset class="admin__fieldset">
+    <div class="admin__field required _required">
+        <label class="admin__field-label">
+            <span><?php echo __("Facebook Feed Url:"); ?></span>
+        </label>
+        <div class="admin__field-control">
+            <input id="feed_url" onclick="{this.select();document.execCommand('copy')}" value="<?php echo $block->getFeedUrl(); ?>" readonly="1" name="importfile" class="admin__control-text" type="text">
+            <div class="admin__field-note">
+                <span><?php echo __("Above url only valid after generate atleast one feed, it might be from cron or manual."); ?></span>
+            </div>
+        </div>
+        <div class="tooltip">
+            <span class="help">
+                <span></span>
+            </span>
+            <div class="tooltip-content"><?php echo __("Click the input box for copy Url and Paste it into Facebook Data Feed Url");?></div></div>
+    </div>
+</fieldset>
+<?php echo $this->getChildHtml('facebook.feedprogress') ?>
+
+ <script type="text/javascript">
+ function generateFeed()
+ {
+    jQuery('#progress-main-container').css("display","block"); 
+    initProgress();
+    jQuery.ajax({
+        method:'get',
+        url: '<?php echo $block->getUrl('md_facebook/feedaction/generateFeed',array('store'=>$storeId)); ?>',
+        showLoader: false,
+        success:function(response){
+                if(response.error){
+                    window.location.reload();
+                }
+            },
+        error: function (error) {
+            console.log(error);
+        }
+    });
+ }
+ 
+ function initProgress()
+ {
+     jQuery('#progress').progressBar({'url':'<?php echo $block->getProgressUrl(); ?>','waitLabel':'<?php echo __('Feed Generated Successfully.') ?>'}); 
+     jQuery('#link').html('<?php echo __('Wait Feed is generating.'); ?>');
+ }
+     
+     
+function catFeedRequest(assign){
+    var valueObj = {};
+    if(jQuery('#product_categories').val() != ''){
+        var storeId = '<?php echo $storeId ?>';
+        if(jQuery('#store_switcher') != undefined){
+            storeId = (jQuery('#store_switcher').val() == '') ? <?php echo $storeId ?>: jQuery('#store_switcher').val();
+        }
+        var urlString = "store/"+storeId+'/assign/'+assign;
+        var url = '<?php echo $block->getUrl('md_facebook/assignfeed/catfeedrequest'); ?>'+urlString+'/category/'+jQuery('#product_categories').val();
+        window.location.replace(url);
+        
+    }
+    else{
+        alert("Please Select Categories for Assign or Unassign.");
+        return false;
+    }
+}
+</script>
+<style type="text/css">
+    .page-actions .actions-split .action-default{
+        margin-right: 0px;
+    }   
+</style>

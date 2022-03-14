@@ -1,0 +1,16 @@
+<if args="initialValue">
+    <img attr="src: initialValue, id: elementId+'_img'" class="small-image-preview v-middle" width="75" />
+</if>
+<input class="admin__control-text" type="hidden" data-bind="
+        event: {change: userChanges},
+        value: value,
+        hasFocus: focused,
+        valueUpdate: valueUpdate,
+        attr: {
+            name: inputName,
+            placeholder: placeholder,
+            'aria-describedby': noticeId,
+            id: elementId,
+            disabled: disabled
+    }" />
+    <input type="file" name="pic" accept="image/*">

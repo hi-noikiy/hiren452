@@ -1,0 +1,131 @@
+<!--@subject New Dealer Inquiry Received @-->
+
+<body style="background:#F6F6F6; font-family:Verdana, Arial, Helvetica, sans-serif; font-size:12px; margin:0; padding:0;">
+<div style="background:#F6F6F6; font-family:Verdana, Arial, Helvetica, sans-serif; font-size:12px; margin:0; padding:0;">
+    <table cellspacing="0" cellpadding="0" border="0" height="100%" width="100%">
+        <tr>
+            <td align="center" valign="top" style="padding:20px 0 20px 0">
+
+                <table bgcolor="FFFFFF" cellspacing="0" cellpadding="10" border="0" width="650" style="border:1px solid #E0E0E0;">
+
+                    <tr>
+                        <td valign="top" colspan="5">
+                            <h1 style="font-size:22px; font-weight:normal; line-height:22px; margin:0 0 11px 0;">Hello Admin,</h1>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td valign="top" colspan="5">
+                            <p style="border:1px solid #E0E0E0; font-size:12px; line-height:16px; margin:0; padding:13px 18px; background:#F9F9F9;">{{trans "You have received a new dealer inquiry with below details."}}<p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td valign="top" colspan="5">
+                            <p style="border:1px solid #E0E0E0; font-size:12px; line-height:16px; margin:0; padding:13px 18px; background:#F9F9F9;">{{trans "First Name:"}} <strong>{{var data.firstname}}</strong></td>
+                    </tr>
+
+                    <tr>
+                        <td valign="top" colspan="5">
+                            <p style="border:1px solid #E0E0E0; font-size:12px; line-height:16px; margin:0; padding:13px 18px; background:#F9F9F9;">{{trans "Last Name:"}} <strong>{{var data.lastname}}</strong></td>
+                    </tr>
+
+                    <tr>
+                        <td valign="top" colspan="5">
+                            <p style="border:1px solid #E0E0E0; font-size:12px; line-height:16px; margin:0; padding:13px 18px; background:#F9F9F9;">{{trans "Email:"}} <strong>{{var data.email}}</strong></td>
+                    </tr>
+
+                    <tr>
+                        <td valign="top" colspan="5">
+                            <p style="border:1px solid #E0E0E0; font-size:12px; line-height:16px; margin:0; padding:13px 18px; background:#F9F9F9;">{{trans "Company Name:"}} <strong>{{var data.companyname}}</strong></td>
+                    </tr>
+
+                    {{if data.taxvatnumber}}
+                    <tr>
+                        <td valign="top" colspan="5">
+                            <p style="border:1px solid #E0E0E0; font-size:12px; line-height:16px; margin:0; padding:13px 18px; background:#F9F9F9;">{{trans "Tax/VAT Number:"}} <strong>{{var data.taxvatnumber}}</strong></td>
+                    </tr>
+                    {{/if}}
+
+                    {{if data.address}}
+                    <tr>
+                        <td valign="top" colspan="5">
+                            <p style="border:1px solid #E0E0E0; font-size:12px; line-height:16px; margin:0; padding:13px 18px; background:#F9F9F9;">{{trans "Address:"}} <strong>{{var data.address}}</strong></td>
+                    </tr>
+                    {{/if}}
+
+                    <tr>
+                        <td valign="top" colspan="5">
+                            <p style="border:1px solid #E0E0E0; font-size:12px; line-height:16px; margin:0; padding:13px 18px; background:#F9F9F9;">{{trans "City:"}} <strong>{{var data.city}}</strong></td>
+                    </tr>
+
+                    <tr>
+                        <td valign="top" colspan="5">
+                            <p style="border:1px solid #E0E0E0; font-size:12px; line-height:16px; margin:0; padding:13px 18px; background:#F9F9F9;">{{trans "Zip/Postal Code:"}} <strong>{{var data.zippostalcode}}</strong></td>
+                    </tr>
+
+                    <tr>
+                        <td valign="top" colspan="5">
+                            <p style="border:1px solid #E0E0E0; font-size:12px; line-height:16px; margin:0; padding:13px 18px; background:#F9F9F9;">{{trans "State/Province:"}} <strong>{{var data.region}}</strong></td>
+                    </tr>
+
+                    <tr>
+                        <td valign="top" colspan="5">
+                            <p style="border:1px solid #E0E0E0; font-size:12px; line-height:16px; margin:0; padding:13px 18px; background:#F9F9F9;">{{trans "Country:"}} <strong>{{var data.country}}</strong></td>
+                    </tr>
+
+                    <tr>
+                        <td valign="top" colspan="5">
+                            <p style="border:1px solid #E0E0E0; font-size:12px; line-height:16px; margin:0; padding:13px 18px; background:#F9F9F9;">{{trans "Contact Number:"}} <strong>{{var data.telephone}}</strong></td>
+                    </tr>
+
+                    {{if data.website}}
+                    <tr>
+                        <td valign="top" colspan="5">
+                            <p style="border:1px solid #E0E0E0; font-size:12px; line-height:16px; margin:0; padding:13px 18px; background:#F9F9F9;">{{trans "Website:"}} <strong>{{var data.website}}</strong></td>
+                    </tr>
+                    {{/if}}
+
+                    <tr>
+                        <td valign="top" colspan="5">
+                            <p style="border:1px solid #E0E0E0; font-size:12px; line-height:16px; margin:0; padding:13px 18px; background:#F9F9F9;">{{trans "Business Description:"}} <strong>{{var data.businessdescription}}</strong></td>
+                    </tr>
+
+                    {{if data.extrafield1}}
+                    <tr>
+                        <td valign="top" colspan="5">
+                            <p style="border:1px solid #E0E0E0; font-size:12px; line-height:16px; margin:0; padding:13px 18px; background:#F9F9F9;">{{trans "Extra Field 1:"}} <strong>{{var data.extrafield1}}</strong></td>
+                    </tr>
+                    {{/if}}
+
+                    {{if data.extrafield2}}
+                    <tr>
+                        <td valign="top" colspan="5">
+                            <p style="border:1px solid #E0E0E0; font-size:12px; line-height:16px; margin:0; padding:13px 18px; background:#F9F9F9;">{{trans "Extra Field 2:"}} <strong>{{var data.extrafield2}}</strong></td>
+                    </tr>
+                    {{/if}}
+
+                    {{if data.extrafield3}}
+                    <tr>
+                        <td valign="top" colspan="5">
+                            <p style="border:1px solid #E0E0E0; font-size:12px; line-height:16px; margin:0; padding:13px 18px; background:#F9F9F9;">{{trans "Extra Field 3:"}} <strong>{{var data.extrafield3}}</strong></td>
+                    </tr>
+                    {{/if}}
+
+                    {{if data.uploadfiles}}
+                    <tr>
+                        <td valign="top" colspan="5">
+                            <p style="border:1px solid #E0E0E0; font-size:12px; line-height:16px; margin:0; padding:13px 18px; background:#F9F9F9;">{{trans "Uploaded Files:"}} <strong>{{var data.uploadfiles}}</strong></td>
+                    </tr>
+                    {{/if}}
+
+                    <tr>
+                        <td valign="top" colspan="5">
+                            <p style="border:1px solid #E0E0E0; font-size:12px; line-height:16px; margin:0; padding:13px 18px; background:#F9F9F9; text-align:center;"><strong>Thank you again</strong></td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+</div>
+</body>
+
+

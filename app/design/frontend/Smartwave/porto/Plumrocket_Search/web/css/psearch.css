@@ -1,0 +1,608 @@
+/**
+ * Plumrocket Inc.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End-user License Agreement
+ * that is available through the world-wide-web at this URL:
+ * http://wiki.plumrocket.net/wiki/EULA
+ * If you are unable to obtain it through the world-wide-web, please
+ * send an email to support@plumrocket.com so we can send you a copy immediately.
+ *
+ * @package     Plumrocket Search Autocomplete & Suggest
+ * @copyright   Copyright (c) 2019 Plumrocket Inc. (http://www.plumrocket.com)
+ * @license     http://wiki.plumrocket.net/wiki/EULA  End-user License Agreement
+ */
+
+@media only screen and (min-width: 771px){
+  #header #header-search{
+    min-width: 320px;
+    width: 33%;
+  }
+}
+.pas-overley{
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, .5);
+  z-index: 10;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  visibility: hidden;
+  transition: all .3s;
+}
+.pas-overley.show{
+  opacity: 1;
+  visibility: visible;
+}
+#pas-mini-form {
+  position: relative;
+  display: inline-block;
+  float: left;
+  max-width: 465px;
+  width: 80%;
+  z-index: 20;
+}
+
+#pas-mini-form * {
+  box-sizing: border-box;
+}
+
+#pas-mini-form .pas-clear:before,
+#pas-mini-form .pas-clear:after {
+  display: block;
+  clear: both;
+  content: "";
+}
+
+#pas-mini-form a {
+  color: #1e7ec8;
+  text-decoration: underline;
+}
+
+#pas-mini-form a:hover {
+  text-decoration: none;
+}
+
+#pas-mini-form .pas-nav-left,
+#pas-mini-form .pas-nav-center,
+#pas-mini-form .pas-nav-right {
+  position: relative;
+  height: 35px;
+  line-height: 35px;
+  display: inline-block;
+}
+
+#pas-mini-form .pas-nav-center {
+  display: block;
+}
+
+
+/* Left block */
+#pas-mini-form .pas-nav-left {
+  float: left;
+}
+
+#pas-mini-form .pas-nav-left .pas-search-facade {
+  background-color: #f3f3f3;
+  background-image: none;
+  border-left: 1px solid #cdcdcd;
+  border-top: 1px solid #cdcdcd;
+  border-bottom: 1px solid #cdcdcd;
+  border-radius: 3px  0 0 3px;
+  position: relative;
+  float: left;
+  height: 35px;
+  margin: 0;
+  padding-left: 5px;
+  overflow: hidden;
+}
+
+#pas-mini-form .pas-nav-left .pas-search-facade:hover {
+  cursor: pointer;
+  background-color: #E9E9E9;
+}
+
+#pas-mini-form .pas-nav-left .pas-search-label {
+  display: block;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  color: #777;
+  font-size: 11px;
+  line-height: 33px;
+  margin-right: 21px;
+  margin-left: 5px;
+}
+
+#pas-mini-form .pas-nav-left .pas-search-icon {
+  position: absolute;
+  top: 14px;
+  right: 8px;
+  border-style: solid;
+  border-width: 4px;
+  border-color: transparent;
+  border-top: 4px solid #a0a0a0;
+  border-bottom-width: 0;
+  width: 0;
+  height: 0;
+  font-size: 0;
+  line-height: 0;
+}
+
+#pas-mini-form .pas-nav-left .pas-search-dropdown {
+  position: absolute;
+  display: block;
+  top: -1px;
+  left: 0;
+  height: 35px;
+  width: auto;
+  outline: 0;
+  margin: 0;
+  padding: 0 7px;
+  outline: 0;
+  cursor: pointer;
+  opacity: 0;
+  filter: alpha(opacity=0);
+  visibility: visible;
+  font-size: 13px;
+
+}
+
+
+/* button */
+#pas-mini-form .pas-nav-right {
+  position: relative;
+  float: right;
+  width: auto;
+  display: inline-block;
+}
+
+#pas-mini-form .pas-nav-right .pas-button {
+  padding: 0;
+  background-color: #1979c3;
+  color: #fff;
+  border: 0px;
+  line-height: 35px;
+  width: 45px;
+  height: 35px;
+  font-size: 0;
+  float: left;
+  border-radius: 0 3px 3px 0;
+  box-shadow: none;
+}
+
+#pas-mini-form .pas-nav-right .pas-button:hover {
+  background: #006bb4;
+  cursor: pointer;
+}
+
+#pas-mini-form .pas-nav-right .pas-button svg{
+  width: 20px;
+  height: auto;
+  fill: #fff;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* search input */
+#pas-mini-form .pas-nav-center {
+  overflow: hidden;
+}
+
+#pas-mini-form .pas-nav-center .pas-search-field {
+  position: relative;
+  height: 35px;
+  background: #fff;
+  border-top: 1px solid #bdbdbd;
+  border-bottom: 1px solid #cdcdcd;
+}
+
+
+#pas-mini-form .pas-nav-center #pas-input {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: block;
+  width: 100%;
+  line-height: 34px;
+  padding: 0px 34px 0px 0;
+  margin: 0;
+  border: 0;
+  border-radius: 0px;
+  height: 33px;
+  font-family: arial,sans-serif;
+  font-size: 15px;
+  background: 0 0;
+  color: #111;
+  outline: 0;
+  -webkit-appearance: none;
+  box-shadow: none;
+  text-indent: 8px;
+  border-left: 1px solid #cdcdcd;
+}
+
+#pas-mini-form .pas-nav-center .pas-loader {
+  position: absolute;
+  right: 6px;
+  top: 50%;
+  margin-top: -11px;
+  visibility: hidden;
+}
+
+/*=== tooltip ===*/
+#pas-mini-form #pas-tooltip {
+  position: absolute;
+  width: calc(100% - 45px);
+  border: 1px solid #cdcdcd;
+  border-top: 0px;
+  -webkit-box-shadow: 0 1px 3px 0 #E8E8E8;
+  -moz-box-shadow: 0 1px 3px 0 #E8E8E8;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .5);
+  z-index: 5000;
+  background-color: #fff;
+  padding: 0;
+  transform: scaleY(0);
+  -webkit-transform-origin: top;
+  -moz-transform-origin: top;
+  -ms-transform-origin: top;
+  -o-transform-origin: top;
+  transform-origin: top;
+  overflow: hidden;
+  visibility: hidden;
+  opacity: 0;
+  transition: all .2s;
+  display: block;
+  border-radius: 0 0 3px 3px;
+
+}
+#pas-mini-form.pas-active #pas-tooltip {
+  transform: scaleY(1);
+  height: auto;
+  visibility: visible;
+  opacity: 1;
+}
+
+.pac-tooltip-right{
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+#pas-mini-form #pas-tooltip .psearch-tips {
+  font-weight: bold;
+}
+
+#pas-mini-form #pas-tooltip .pas-tooltip-pr-item {
+  border-top: 1px solid #E8E8E8;
+  padding: 0px;
+  position: relative;
+  transition: background-color .25s;
+}
+
+#pas-mini-form #pas-tooltip .pas-tooltip-pr-item.no-photo.no-rating.no-description {
+  min-height: 0;
+}
+
+#pac-psearch-all-results:hover,
+#pas-mini-form #pas-tooltip .pas-tooltip-pr-item:hover {
+  background-color: #f5f5f5;
+}
+
+#pas-mini-form #pas-tooltip .pas-tooltip-pr-item:before,
+#pas-mini-form #pas-tooltip .pas-tooltip-pr-item:after {
+  clear: both;
+  display: block;
+  content: "";
+}
+
+#pas-mini-form #pas-tooltip .pas-tooltip-pr-item:first-child {
+  border: 0px;
+}
+
+#pas-mini-form #pas-tooltip .pas-tooltip-pr-item > a {
+  display: block;
+  text-decoration: none;
+  padding: 10px 8px;
+}
+
+#pas-mini-form #pas-tooltip .pas-tooltip-pr-item .pac-tooltip-image {
+  width: 50px;
+  height: 50px;
+  float: left;
+  overflow: hidden;
+  margin-right: 7px;
+}
+
+#pas-mini-form #pas-tooltip .pas-tooltip-pr-item .pac-tooltip-image img {
+  width: 100%;
+}
+
+#pas-mini-form #pas-tooltip .old-price{
+  text-decoration: line-through;
+}
+#pas-mini-form #pas-tooltip .pas-tooltip-pr-item .pac-tooltip-price-block .pac-price-val .price-box .old-price .price{
+ font-size: .95em;
+}
+/* no photo */
+#pas-mini-form #pas-tooltip .pas-tooltip-pr-item.no-photo .pac-tooltip-descr { padding-left: 0;}
+#pas-mini-form #pas-tooltip .pas-tooltip-pr-item.no-photo .pac-tooltip-image { display: none; }
+
+/* no price no rating */
+#pas-mini-form #pas-tooltip .pas-tooltip-pr-item.no-price.no-rating .pac-tooltip-descr { padding-right: 0;}
+#pas-mini-form #pas-tooltip .pas-tooltip-pr-item.no-price.no-rating .pac-tooltip-price-block { display: none; }
+#pas-mini-form #pas-tooltip .pas-tooltip-pr-item.no-price.no-rating .pac-tooltip-descr {margin-right: 0 }
+
+/* no price */
+#pas-mini-form #pas-tooltip .pas-tooltip-pr-item.no-price .pac-price-val { display: none; }
+
+/* no rating */
+#pas-mini-form #pas-tooltip .pas-tooltip-pr-item.no-rating .pac-tooltip-price-block { font-size: 0; }
+#pas-mini-form #pas-tooltip .pas-tooltip-pr-item.no-rating .pac-rating-box { display: none; }
+
+/* no description */
+#pas-mini-form #pas-tooltip .pas-tooltip-pr-item.no-description .pac-tooltip-short-des { display: none; }
+
+/* no description */
+#pas-mini-form #pas-tooltip .pas-tooltip-pr-item.no-description .pac-tooltip-short-des { display: none; }
+#pas-mini-form #pas-tooltip .pas-tooltip-pr-item.no-photo.no-description.no-rating .pac-tooltip-name { margin-top: 0px; }
+#pas-mini-form #pas-tooltip .pas-tooltip-pr-item.no-photo.no-description .pac-tooltip-name { margin-top: 0px; }
+#pas-mini-form #pas-tooltip .pas-tooltip-pr-item.no-description .pac-tooltip-name { margin-top: 15px; }
+#pas-mini-form #pas-tooltip .pas-tooltip-pr-item.no-description.no-photo.no-price .pac-tooltip-name { margin-top: 0px; }
+
+
+#pas-mini-form #pas-tooltip .pas-tooltip-pr-item .pac-tooltip-descr {
+  padding: 0;
+  text-align: left;
+}
+
+#pas-mini-form #pas-tooltip .pas-tooltip-pr-item .pac-tooltip-descr .pac-tooltip-name {
+  color: #333;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  font-size: 14px;
+  line-height: 16px;
+  padding-bottom: 2px;
+}
+
+#pas-mini-form #pas-tooltip .pas-tooltip-pr-item:hover .pac-tooltip-descr .pac-tooltip-name {
+  text-decoration: underline;
+}
+
+#pas-mini-form #pas-tooltip .pas-tooltip-pr-item .pac-tooltip-descr .pac-tooltip-short-des {
+  color: #333333;
+  font-size: 11px;
+  line-height: 13px;
+}
+
+#pas-mini-form #pas-tooltip .pas-tooltip-pr-item .pac-tooltip-price-block {
+  font-size: 11px;
+  text-align: left;
+  margin-top: 2px;
+  display: flex;
+  align-items: center;
+}
+
+#pas-mini-form #pas-tooltip .pas-tooltip-pr-item.no-rating.no-description .pac-tooltip-price-block {
+  top: 13px;
+}
+#pas-mini-form #pas-tooltip .pas-tooltip-pr-item.no-photo.no-rating.no-description .pac-tooltip-price-block {
+  top: 0px;
+}
+
+
+#pas-mini-form #pas-tooltip .pas-tooltip-pr-item .pac-tooltip-price-block .pac-price-val {
+  color: #333;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 21px;
+}
+
+#pas-mini-form #pas-tooltip .pas-tooltip-pr-item .pac-tooltip-price-block .pac-price-val .price-box {
+  margin: 0;
+  max-height: 35px;
+}
+
+#pas-mini-form #pas-tooltip .pas-tooltip-pr-item .pac-tooltip-price-block.no-photo .pac-price-val .price-box {
+  margin: 0;
+}
+
+#pas-mini-form #pas-tooltip .pas-tooltip-pr-item .pac-tooltip-price-block .pac-price-val .price-box * {
+  font-size: 13px;
+}
+
+#pas-mini-form #pas-tooltip .pas-tooltip-pr-item.no-rating .pac-tooltip-price-block .pac-price-val .price-box {
+  margin-top: 10px;
+}
+
+#pas-mini-form #pas-tooltip .pas-tooltip-pr-item.no-rating .pac-tooltip-price-block .pac-price-val .price-box .special-price {
+  margin-top: 7px;
+}
+
+#pas-mini-form #pas-tooltip .pas-tooltip-pr-item.no-rating .pac-tooltip-price-block .pac-price-val .price-box .minimal-price {
+  position: relative;
+  top: 7px;
+}
+
+#pas-mini-form #pas-tooltip .pas-tooltip-pr-item.no-photo.no-description .pac-tooltip-price-block .pac-price-val .price-box {
+  top: 0;
+  margin: 0;
+  max-height: 35px;
+}
+
+#pas-mini-form #pas-tooltip .pas-tooltip-pr-item .pac-tooltip-price-block .pac-price-val .price-label {
+  display: none;
+}
+
+#pas-mini-form #pas-tooltip .pas-tooltip-pr-item .pac-tooltip-price-block p {
+  padding: 0;
+}
+
+#pas-mini-form #pas-tooltip .pas-tooltip-pr-item .pac-tooltip-price-block p.price-to {
+  margin-top: -7px;
+}
+
+#pas-mini-form #pas-tooltip .pas-tooltip-pr-item .pac-tooltip-price-block p.old-price {
+  display: none;
+}
+
+#pas-mini-form #pas-tooltip .pas-tooltip-pr-item .pac-tooltip-price-block p.price-to span,
+#pas-mini-form #pas-tooltip .pas-tooltip-pr-item .pac-tooltip-price-block p.price-from span,
+#pas-mini-form #pas-tooltip .pas-tooltip-pr-item .pac-tooltip-price-block p.old-price span,
+#pas-mini-form #pas-tooltip .pas-tooltip-pr-item .pac-tooltip-price-block p.special-price span {
+  font-size: 14px;
+}
+
+#pas-mini-form #pas-tooltip .pas-tooltip-pr-item .pac-tooltip-price-block .pac-rating-box {
+  width: 65px;
+  height: 13px;
+  background-repeat: repeat-x;
+  background-position: 0 -17px;
+  overflow: hidden;
+  background-image: url(../images/prsearch-stars.svg);
+  background-size: 65px;
+  margin-top: 2px;
+  margin-right: 3px;
+  white-space: nowrap;
+  margin-left: auto;
+}
+
+#pas-mini-form #pas-tooltip .pas-tooltip-pr-item .pac-tooltip-price-block .pac-rating-box .pac-rating {
+  float: left;
+  height: 13px;
+  background-repeat: repeat-x;
+  background-position: 0 0px;
+  background-size: 65px;
+  background-image: url(../images/prsearch-stars.svg);
+}
+
+/* categories */
+#pas-mini-form #pas-tooltip #pac-psearch-categories {
+  border-top: 1px solid #cdcdcd;
+  padding: 5px 0;
+  text-align: left;
+  font-size: 12px;
+}
+
+#pas-mini-form #pas-tooltip #pac-psearch-categories .pac-ps-category {
+  margin: 0;
+}
+
+#pas-mini-form #pas-tooltip #pac-psearch-categories .pac-ps-category a {
+  display: block;
+  padding: 3px 8px;
+  text-decoration: none;
+  color: #333333;
+}
+
+#pas-mini-form #pas-tooltip #pac-psearch-categories .pac-ps-category a span {
+  text-decoration: underline;
+  color: #006bb4;
+}
+#pas-mini-form #pas-tooltip #pac-psearch-categories .pac-ps-category a:hover span {
+  text-decoration: none;
+}
+
+/* terms */
+#pas-mini-form #pas-tooltip #pac-psearch-terms {
+  border-top: 1px solid #cdcdcd;
+  padding: 10px 8px;
+  text-align: left;
+  font-size: 12px;
+}
+
+#pas-mini-form #pas-tooltip #pac-psearch-terms a {
+  display: block;
+  text-decoration: none;
+  color: #333333;
+}
+
+#pas-mini-form #pas-tooltip #pac-psearch-terms a span {
+  color: #006bb4;
+  text-decoration: underline;
+}
+
+#pas-mini-form #pas-tooltip #pac-psearch-terms a:hover span {
+  text-decoration: none;
+}
+
+/* all results */
+#pas-mini-form #pac-psearch-all-results {
+  color: black;
+  border-top: 1px solid #cdcdcd;
+  text-align: center;
+  font-size: 13px;
+}
+
+#pas-mini-form #pac-psearch-all-results a {
+  display: block;
+  color: #1e7ec8;
+  padding: 10px 8px;
+  text-align: right;
+}
+
+#pas-mini-form #pac-psearch-all-results span {
+  position: relative;
+  padding-right: 12px;
+}
+
+#pas-mini-form #pac-psearch-all-results p.pac-no-results {padding: 8px 0; color: #B5B5B5;}
+
+.header.content .pas-search-btn {
+  display: none;
+}
+
+@media (max-width: 767px){
+  #pas-mini-form .pas-nav-left{
+    display: none;
+  }
+  #pas-mini-form .pas-nav-center .pas-search-field{
+    -webkit-border-radius: 3px 0 0 3px;
+    -moz-border-radius: 3px 0 0 3px;
+    border-radius: 3px 0 0 3px;
+  }
+  #pas-mini-form{
+    margin: 15px 0;
+  }
+  #pas-mini-form #pas-tooltip{
+    width: 100%;
+  }
+
+  #pas-mini-form {
+    display: none;
+    position: fixed;
+    width: 300px;
+    top: 50px;
+    left: 50%;
+    transform: translatex(-50%);
+  }
+  
+  #pas-mini-form.show-form {
+    display: block;
+  }
+  
+  .header.content .pas-search-btn {
+    float: right;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 15px;
+    padding: 0 7px;
+    background: transparent;
+    border: none;
+  }
+}
+
+/*RWD*/
+@media only screen and (min-width: 771px){
+  #header-search {width: 40%;}
+}
+
+
+@media only screen and (max-width: 768px) {
+  #pas-mini-form { max-width: 100%; }
+}

@@ -1,0 +1,12 @@
+<?php
+$element        = $this->getElement();
+$product        = $this->getProduct();
+$size           = $element->getData('size') ? (float) $element->getData('size'): 1;
+$url            = $element->getData('qrcode_data');
+$breakPage      = $element->getData('break_page');
+$enableBorder   = $element->getData('enable_border');
+?>
+<?= $breakPage ? "<pagebreak />" : "" ?>
+<div class="ppbd-product-qrcode" style="position: fixed; right: 0mm; bottom: 0mm; rotate: -90;">
+    <barcode style="<?= $enableBorder ? "border: 2px solid #1a1a1a; padding: 3px; display: inline-block; box-sizing: border-box;" : "" ?>" code="<?= $url ?>" type="QR" size="<?= $size ?>" error="M" disableborder="1"></barcode>
+</div>

@@ -1,0 +1,188 @@
+<?php
+/*
+*
+*@author JiteshBaagul
+*@module Create file for call custum atributes
+*/
+
+$_product = $block->getProduct();
+
+$tab1 = $_product->getResource()->getAttribute('tab1');
+$tab2 = $_product->getResource()->getAttribute('tab2');
+$tab3 = $_product->getResource()->getAttribute('tab3');
+$tab4 = $_product->getResource()->getAttribute('tab4');
+$tab5 = $_product->getResource()->getAttribute('tab5');
+$productAdvertisement = $_product->getResource()->getAttribute('product_advertisement');
+
+
+?>
+
+<?php if($productAdvertisement->getFrontend()->getValue($_product) == true) :?>
+<div class="jb-product-advertisement" style="margin-bottom: 40px;">
+
+<?php echo $productAdvertisement->getFrontend()->getValue($_product); ?>
+
+</div>
+<?php endif; ?>
+
+<div class="jb-product-collateral">
+    <?php if( $tab1->getFrontend()->getValue($_product) == true || $tab2->getFrontend()->getValue($_product) == true ||
+            $tab3->getFrontend()->getValue($_product) == true || $tab4->getFrontend()->getValue($_product) == true || $tab5->getFrontend()->getValue($_product) == true ) : ?>
+
+    <div class="jb-block-title">        
+    <h2 class="h3 collateral-title uppercase">More About This Product</h2>
+    </div>
+
+    <?php endif; ?>        
+    <div class="box-collateral row">
+        <div class="additional-info-tabs clearfix col-lg-10 col-md-12">
+            
+            <?php if($tab1->getFrontend()->getValue($_product) == true) : ?>
+            <div id="<?php echo $tab1->getAttributeCode(); ?>" class="tab-title active"><?php echo $tab1->getFrontendLabel(); ?></div>
+            <div data-id="<?php echo $tab1->getAttributeCode(); ?>" class="tab-content add-content-styles"><?php echo $tab1->getFrontend()->getValue($_product); ?></div>
+            <?php endif; ?>
+
+            <?php if($tab2->getFrontend()->getValue($_product) == true) : ?>
+            <div id="<?php echo $tab2->getAttributeCode(); ?>" class="tab-title"><?php echo $tab2->getFrontendLabel(); ?></div>
+            <div data-id="<?php echo $tab2->getAttributeCode(); ?>" class="tab-content add-content-styles"><?php echo $tab2->getFrontend()->getValue($_product); ?></div>
+            <?php endif; ?>
+
+            <?php if($tab3->getFrontend()->getValue($_product) == true) : ?>
+            <div id="<?php echo $tab3->getAttributeCode(); ?>" class="tab-title"><?php echo $tab3->getFrontendLabel(); ?></div>
+            <div data-id="<?php echo $tab3->getAttributeCode(); ?>" class="tab-content add-content-styles"><?php echo $tab3->getFrontend()->getValue($_product); ?></div>
+            <?php endif; ?>
+            
+            <?php if($tab4->getFrontend()->getValue($_product) == true) : ?>
+            <div id="<?php echo $tab4->getAttributeCode(); ?>" class="tab-title"><?php echo $tab4->getFrontendLabel(); ?></div>
+            <div data-id="<?php echo $tab4->getAttributeCode(); ?>" class="tab-content add-content-styles"><?php echo $tab4->getFrontend()->getValue($_product); ?></div>
+            <?php endif; ?>
+            
+            <?php if($tab5->getFrontend()->getValue($_product) == true) : ?>
+            <div id="<?php echo $tab5->getAttributeCode(); ?>" class="tab-title"><?php echo $tab5->getStoreLabel(); ?></div>
+            <div data-id="<?php echo $tab5->getAttributeCode(); ?>" class="tab-content add-content-styles"><?php echo $tab5->getFrontend()->getValue($_product); ?></div>
+        	<?php endif; ?>
+
+            <?php if( $tab1->getFrontend()->getValue($_product) == true || $tab2->getFrontend()->getValue($_product) == true ||
+            $tab3->getFrontend()->getValue($_product) == true || $tab4->getFrontend()->getValue($_product) == true || $tab5->getFrontend()->getValue($_product) == true ) : ?>
+            <div id="desktop-tab-contents" class="desktop-tab-contents add-content-styles">
+            	<?php 
+
+            	if($tab1->getFrontend()->getValue($_product) == true){
+            		echo $tab1->getFrontend()->getValue($_product);
+            	}
+            	elseif($tab2->getFrontend()->getValue($_product) == true){
+            		echo $tab2->getFrontend()->getValue($_product);
+            	}
+            	elseif($tab3->getFrontend()->getValue($_product) == true){
+            		echo $tab3->getFrontend()->getValue($_product);
+            	}
+            	elseif($tab4->getFrontend()->getValue($_product) == true){
+            		echo $tab4->getFrontend()->getValue($_product);
+            	}
+            	else{
+            		echo $tab5->getFrontend()->getValue($_product);
+            	} 
+
+            	?>
+            </div>
+
+            <?php endif; ?>
+        </div>    
+    </div>            
+</div>
+
+<script>
+
+require(["jquery"], function($) {
+
+    var tabContentContainer = $('.desktop-tab-contents');
+    $('.additional-info-tabs').on('click', '.tab-title', function() {
+        var that = $(this),
+            tabContent = $('.tab-content[data-id="' + that.attr('id') + '"]');
+        if (!that.hasClass('active')) {
+            tabContentContainer.html(tabContent.html());
+            that.addClass('active').siblings('.active').removeClass('active');
+        }
+    });
+
+    $(window).on('resize load', function() {
+        var productNameContainer = $('.jb-product-title');
+        if (window.innerWidth >= 767) {
+            productNameContainer.prependTo('.product-info-main');
+        } else {
+            productNameContainer.prependTo('.product.media');
+        }
+    });
+    
+    // var height1 = $('.page-header').outerHeight(true);
+    // var height2 = $('.breadcrumbs').outerHeight(true);
+    // var height = height1 + height2;
+
+    // setTimeout(function() {
+    //       if ($('.product.media').length) {
+    //         $('.product.media').css('top', height + 10);
+    //       }
+    //     }, 2000);
+
+});	
+
+</script>
+
+<style type="text/css">
+    
+
+body.catalog-product-view .owl-nav > div{
+    position: absolute;
+    top: calc(50% - 15px);
+}
+
+html.history{margin:0; }
+
+body.catalog-product-view .additional-attributes-wrapper.table-wrapper {
+    background: #f9f9f9;
+    padding: 10px;
+    border: 1px solid #f2f2f2;
+    margin-bottom: 0;
+    margin-top:20px;
+}
+
+body.catalog-product-view .additional-attributes-wrapper.table-wrapper caption.table-caption{
+    width: 100%;
+    height: auto;
+    overflow: visible;
+    margin: 0;
+    position: static;
+    float: left;
+    text-align: left;
+    font-size: 18px;
+    line-height: 21px;
+    font-weight: 700;
+    margin: 8px 0 14px;
+}
+
+body.catalog-product-view .additional-attributes-wrapper.table-wrapper .table > tbody > tr > th, 
+body.catalog-product-view .additional-attributes-wrapper.table-wrapper .table > tbody > tr > td{
+    width: 50%;
+}
+body.catalog-product-view .additional-attributes-wrapper.table-wrapper .table > tbody > tr > td{ text-align: right; }
+
+@media (min-width: 767px){
+
+body.catalog-product-view .owl-nav div.owl-prev{ left: -5%;  }
+body.catalog-product-view .owl-nav div.owl-next{ right: -5%; } 
+body.catalog-product-view{overflow-x: unset;}
+body.catalog-product-view .product.media{ top: 60px; min-height: auto; }
+}
+
+@media (max-width: 767px){
+
+body.catalog-product-view .owl-nav > div{top: unset; position: static;}
+body.catalog-product-view .owl-nav div.owl-prev{ float: left;  }
+body.catalog-product-view .owl-nav div.owl-next{ float: right; } 
+body.catalog-product-view .additional-attributes-wrapper.table-wrapper .table > tbody > tr > td{ text-align: left; width: 100%; }
+
+
+}
+
+
+</style>

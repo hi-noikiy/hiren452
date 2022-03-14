@@ -1,0 +1,85 @@
+<?php
+
+$_config = $this->helper('JB\ProductPage\Helper\Data');
+$isDisplay = $_config->getDifference('showdiff');
+
+$diff1Main = $_config->getDifference('jbdiff1_main');
+$diff1desc = $_config->getDifference('jbdiff1_desc');
+
+$diff2Main = $_config->getDifference('jbdiff2_main');
+$diff2desc = $_config->getDifference('jbdiff2_desc');
+
+$diff3Main = $_config->getDifference('jbdiff3_main');
+$diff3desc = $_config->getDifference('jbdiff3_desc');
+
+$diff4Main = $_config->getDifference('jbdiff4_main');
+$diff4desc = $_config->getDifference('jbdiff4_desc');
+
+?>
+<?php if($isDisplay == '1') : ?>
+
+<div class="jb_difference">
+    <div class="jbdiffTitle"><h2>Aumika Difference</h2></div>
+    <div class="jbowl owl-carousel">
+      <div class="diff-item">
+        <i class="porto-icon-truck jbicon" style="line-height:58px;font-size:40px;"></i>
+        <div class="content">
+          <div class="h2"><strong><?php echo $diff1Main; ?></strong></div>
+          <p><?php echo $diff1desc; ?></p>
+        </div>
+      </div>
+      <div class="diff-item">
+        <i class="porto-icon-dollar jbicon" style="line-height:58px;font-size:40px;"></i>
+        <div class="content">
+          <div class="h2"><strong><?php echo $diff2Main; ?></strong></div>
+          <p><?php echo $diff2desc; ?></p>
+        </div>
+      </div>
+      <div class="diff-item">
+        <i class="porto-icon-lifebuoy jbicon" style="line-height:58px;font-size:40px;"></i>
+        <div class="content">
+          <div class="h2"><strong><?php echo $diff3Main; ?></strong></div>
+          <p><?php echo $diff3desc; ?></p>
+        </div>
+      </div>
+      <div class="diff-item">
+        <i class="porto-icon-credit-card jbicon" style="line-height:58px;font-size:40px;"></i>
+        <div class="content">
+          <div class="h2"><strong><?php echo $diff4Main; ?></strong></div>
+          <p><?php echo $diff4desc; ?></p>
+        </div>
+      </div>
+    </div>
+</div>
+
+<?php endif; ?>
+
+<script type="text/javascript">
+    require([
+      'jquery',
+      'owl.carousel/owl.carousel.min'
+    ], function ($) {
+      $(".jbowl").owlCarousel({
+        margin: 0,
+        nav: true,
+        navText: ["<em class='porto-icon-left-open-huge'></em>","<em class='porto-icon-right-open-huge'></em>"],
+        dots: false,
+        loop:true,
+        autoplay:true,
+        responsive: {
+          0: {
+            items:1
+          },
+          768: {
+            items:2
+          },
+          992: {
+            items:3
+          },
+          1200: {
+            items:3
+          }
+        }
+      });
+    });
+</script>

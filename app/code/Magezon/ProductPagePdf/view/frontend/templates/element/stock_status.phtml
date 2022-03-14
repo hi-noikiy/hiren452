@@ -1,0 +1,21 @@
+<?php
+$element    = $this->getElement();
+$stockItem  = $this->getStockItem();
+$breakPage  = $element->getData('break_page');
+$fontSize   = $element->getData('font_size');
+$lineHeight = $element->getData('line_height');
+$titleColor = $element->getData('title_stock_color');
+?>
+<?= $breakPage ? "<pagebreak />" : "" ?>
+<div class="ppbd-product-stock">
+	<span class="stock">
+		<?= $stockItem->getIsInStock() ? __('In Stock') : __('Out of Stock') ?>
+	</span>
+	<style>
+	.ppbd-product-stock .stock {
+		color: <?= $titleColor ?>;
+		font-size: <?= $fontSize ?>px;
+		line-height: <?= $lineHeight ?>px;
+	}
+	</style>
+</div>

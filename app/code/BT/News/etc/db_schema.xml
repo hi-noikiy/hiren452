@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="aumika_news" resource="default" engine="innodb" comment="Aumika News">
+        <column xsi:type="smallint" name="id" unsigned="true" nullable="false" identity="true"
+                comment="News ID"/>
+        <column xsi:type="text" name="link" nullable="false" comment="Link Redirection"/>
+        <column xsi:type="text" name="description" nullable="false" comment="Description"/>
+        <column xsi:type="text" name="imageupload" nullable="false" comment="Image-Upload"/>
+        <column xsi:type="text" name="sortorder" nullable="false" comment="Sort Order"/>
+        <column xsi:type="text" name="status" nullable="false" comment="Status"/>
+        <column xsi:type="timestamp" name="created_at" on_update="false" nullable="false" default="CURRENT_TIMESTAMP" comment="Creation Time"/>
+        <column xsi:type="timestamp" name="updated_at" on_update="true" nullable="false" default="CURRENT_TIMESTAMP" comment="Update Time"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="id"/>
+        </constraint>
+    </table>
+</schema>

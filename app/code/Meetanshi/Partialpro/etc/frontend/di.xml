@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Magento\Checkout\Model\CompositeConfigProvider">
+        <arguments>
+            <argument name="configProviders" xsi:type="array">
+                <item name="checkout_partial_block" xsi:type="object">Meetanshi\Partialpro\Model\PartialConfigProvider</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Magento\Checkout\Controller\Index\Index">
+        <plugin name="restrictpartial" type="Meetanshi\Partialpro\Plugin\Checkout\Controller\Loginrequired"/>
+    </type>
+    <preference for="Magento\Authorizenet\Model\Directpost" type="Meetanshi\Partialpro\Model\Directpost" />
+    <preference for="Magento\Authorizenet\Model\Directpost\Request" type="Meetanshi\Partialpro\Model\Directpost\Request" />
+</config>

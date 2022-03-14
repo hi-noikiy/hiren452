@@ -1,0 +1,287 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Magezon
+ *
+ * This source file is subject to the Magezon Software License, which is available at https://www.magezon.com/license
+ * Do not edit or add to this file if you wish to upgrade the to newer versions in the future.
+ * If you wish to customize this module for your needs.
+ * Please refer to https://www.magezon.com for more information.
+ *
+ * @category  Magezon
+ * @package   Magezon_ProductPagePdf
+ * @copyright Copyright (C) 2020 Magezon (https://www.magezon.com)
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Magezon\Builder\Data\Groups">
+        <arguments>
+            <argument name="groups" xsi:type="array">
+                <item name="product_pdf" xsi:type="array">
+                    <item name="name" xsi:type="string" translate="true">Product</item>
+                    <item name="sortOrder" xsi:type="number">40</item>
+                </item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Magezon\ProductPagePdf\Model\CompositeConfigProvider">
+        <arguments>
+            <argument name="configProviders" xsi:type="array">
+                <item name="default" xsi:type="object">Magezon\ProductPagePdf\Model\DefaultConfigProvider</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Magezon\SimpleBuilder\Data\Elements">
+        <arguments>
+            <argument name="elements" xsi:type="array">
+                <item name="product_gallery" xsi:type="array">
+                    <item name="name" xsi:type="string" translate="true">Product Gallery</item>
+                    <item name="class" xsi:type="string">Magezon\ProductPagePdf\Data\Element\Gallery</item>
+                    <item name="block" xsi:type="string">Magezon\ProductPagePdf\Block\Product\Element\Gallery</item>
+                    <item name="template" xsi:type="string">Magezon_ProductPagePdf::element/gallery.phtml</item>
+                    <item name="sortOrder" xsi:type="number">525</item>
+                    <item name="icon" xsi:type="string">mgz-icon mgz-icon-product</item>
+                    <item name="group" xsi:type="string">product_pdf</item>
+                    <item name="icon_styles" xsi:type="array">
+                        <item name="background-color" xsi:type="string">#ff9900</item>
+                    </item>
+                    <item name="area" xsi:type="string">product_pdf</item>
+                </item>
+                <item name="product_name" xsi:type="array">
+                    <item name="name" xsi:type="string" translate="true">Product Name</item>
+                    <item name="class" xsi:type="string">Magezon\ProductPagePdf\Data\Element\Name</item>
+                    <item name="template" xsi:type="string">Magezon_ProductPagePdf::element/name.phtml</item>
+                    <item name="block" xsi:type="string">Magezon\ProductPagePdf\Block\Product\Element\Name</item>
+                    <item name="sortOrder" xsi:type="number">526</item>
+                    <item name="icon" xsi:type="string">mgz-icon mgz-icon-product</item>
+                    <item name="icon_styles" xsi:type="array">
+                        <item name="background-color" xsi:type="string">#ff9900</item>
+                    </item>
+                    <item name="group" xsi:type="string">product_pdf</item>
+                    <item name="builder_description" xsi:type="string">{{ element.heading_type ? 'Heading Type: ' + element.heading_type : '' }}</item>
+                    <item name="area" xsi:type="string">product_pdf</item>
+                </item>
+                <item name="product_reviews_summary" xsi:type="array">
+                    <item name="name" xsi:type="string" translate="true">Product Reviews Summary</item>
+                    <item name="class" xsi:type="string">Magezon\ProductPagePdf\Data\Element</item>
+                    <item name="template" xsi:type="string">Magezon_ProductPagePdf::element/reviews_summary.phtml</item>
+                    <item name="block" xsi:type="string">Magezon\ProductPagePdf\Block\Product\Element\ReviewsSummary</item>
+                    <item name="sortOrder" xsi:type="number">527</item>
+                    <item name="icon" xsi:type="string">mgz-icon mgz-icon-product</item>
+                    <item name="icon_styles" xsi:type="array">
+                        <item name="background-color" xsi:type="string">#ff9900</item>
+                    </item>
+                    <item name="group" xsi:type="string">product_pdf</item>
+                    <item name="area" xsi:type="string">product_pdf</item>
+                </item>
+                <item name="product_price" xsi:type="array">
+                    <item name="name" xsi:type="string" translate="true">Product Price</item>
+                    <item name="class" xsi:type="string">Magezon\ProductPagePdf\Data\Element\Price</item>
+                    <item name="template" xsi:type="string">Magezon_ProductPagePdf::element/price.phtml</item>
+                    <item name="block" xsi:type="string">Magezon\ProductPagePdf\Block\Product\Element\Price</item>
+                    <item name="sortOrder" xsi:type="number">528</item>
+                    <item name="icon" xsi:type="string">mgz-icon mgz-icon-product</item>
+                    <item name="icon_styles" xsi:type="array">
+                        <item name="background-color" xsi:type="string">#ff9900</item>
+                    </item>
+                    <item name="group" xsi:type="string">product_pdf</item>
+                    <item name="area" xsi:type="string">product_pdf</item>
+                </item>
+                <item name="product_sku" xsi:type="array">
+                    <item name="name" xsi:type="string" translate="true">Product SKU</item>
+                    <item name="class" xsi:type="string">Magezon\ProductPagePdf\Data\Element\Sku</item>
+                    <item name="template" xsi:type="string">Magezon_ProductPagePdf::element/sku.phtml</item>
+                    <item name="block" xsi:type="string">Magezon\ProductPagePdf\Block\Product\Element</item>
+                    <item name="sortOrder" xsi:type="number">529</item>
+                    <item name="icon" xsi:type="string">mgz-icon mgz-icon-product</item>
+                    <item name="group" xsi:type="string">product_pdf</item>
+                    <item name="icon_styles" xsi:type="array">
+                        <item name="background-color" xsi:type="string">#ff9900</item>
+                    </item>
+                    <item name="area" xsi:type="string">product_pdf</item>
+                </item>
+                <item name="product_stock_status" xsi:type="array">
+                    <item name="name" xsi:type="string" translate="true">Stock Status</item>
+                    <item name="class" xsi:type="string">Magezon\ProductPagePdf\Data\Element\StockStatus</item>
+                    <item name="template" xsi:type="string">Magezon_ProductPagePdf::element/stock_status.phtml</item>
+                    <item name="block" xsi:type="string">Magezon\ProductPagePdf\Block\Product\Element\StockStatus</item>
+                    <item name="sortOrder" xsi:type="number">530</item>
+                    <item name="icon" xsi:type="string">mgz-icon mgz-icon-product</item>
+                    <item name="group" xsi:type="string">product_pdf</item>
+                    <item name="icon_styles" xsi:type="array">
+                        <item name="background-color" xsi:type="string">#ff9900</item>
+                    </item>
+                    <item name="area" xsi:type="string">product_pdf</item>
+                </item>
+                <item name="product_categories" xsi:type="array">
+                    <item name="name" xsi:type="string" translate="true">Product Categories</item>
+                    <item name="class" xsi:type="string">Magezon\ProductPagePdf\Data\Element</item>
+                    <item name="template" xsi:type="string">Magezon_ProductPagePdf::element/categories.phtml</item>
+                    <item name="block" xsi:type="string">Magezon\ProductPagePdf\Block\Product\Element\Categories</item>
+                    <item name="sortOrder" xsi:type="number">532</item>
+                    <item name="icon" xsi:type="string">mgz-icon mgz-icon-product</item>
+                    <item name="group" xsi:type="string">product_pdf</item>
+                    <item name="icon_styles" xsi:type="array">
+                        <item name="background-color" xsi:type="string">#ff9900</item>
+                    </item>
+                    <item name="area" xsi:type="string">product_pdf</item>
+                </item>
+                <item name="product_short_description" xsi:type="array">
+                    <item name="name" xsi:type="string" translate="true">Short Description</item>
+                    <item name="class" xsi:type="string">Magezon\ProductPagePdf\Data\Element\ShortDescription</item>
+                    <item name="template" xsi:type="string">Magezon_ProductPagePdf::element/short_description.phtml</item>
+                    <item name="block" xsi:type="string">Magezon\ProductPagePdf\Block\Product\Element\ShortDescription</item>
+                    <item name="sortOrder" xsi:type="number">533</item>
+                    <item name="icon" xsi:type="string">mgz-icon mgz-icon-product</item>
+                    <item name="group" xsi:type="string">product_pdf</item>
+                    <item name="icon_styles" xsi:type="array">
+                        <item name="background-color" xsi:type="string">#ff9900</item>
+                    </item>
+                    <item name="area" xsi:type="string">product_pdf</item>
+                </item>
+                <item name="product_description" xsi:type="array">
+                    <item name="name" xsi:type="string" translate="true">Product Description</item>
+                    <item name="class" xsi:type="string">Magezon\ProductPagePdf\Data\Element\Description</item>
+                    <item name="template" xsi:type="string">Magezon_ProductPagePdf::element/description.phtml</item>
+                    <item name="block" xsi:type="string">Magezon\ProductPagePdf\Block\Product\Element\Description</item>
+                    <item name="sortOrder" xsi:type="number">534</item>
+                    <item name="icon" xsi:type="string">mgz-icon mgz-icon-product</item>
+                    <item name="icon_styles" xsi:type="array">
+                        <item name="background-color" xsi:type="string">#ff9900</item>
+                    </item>
+                    <item name="group" xsi:type="string">product_pdf</item>
+                    <item name="area" xsi:type="string">product_pdf</item>
+                </item>
+                <item name="product_additional_information" xsi:type="array">
+                    <item name="name" xsi:type="string" translate="true">Additional Information</item>
+                    <item name="class" xsi:type="string">Magezon\ProductPagePdf\Data\Element\AdditionalInfor</item>
+                    <item name="template" xsi:type="string">Magezon_ProductPagePdf::element/additional_information.phtml</item>
+                    <item name="block" xsi:type="string">Magezon\ProductPagePdf\Block\Product\Element\AdditionalInfor</item>
+                    <item name="sortOrder" xsi:type="number">535</item>
+                    <item name="icon" xsi:type="string">mgz-icon mgz-icon-product</item>
+                    <item name="icon_styles" xsi:type="array">
+                        <item name="background-color" xsi:type="string">#ff9900</item>
+                    </item>
+                    <item name="group" xsi:type="string">product_pdf</item>
+                    <item name="area" xsi:type="string">product_pdf</item>
+                </item>
+                <item name="product_review" xsi:type="array">
+                    <item name="name" xsi:type="string" translate="true">Review</item>
+                    <item name="class" xsi:type="string">Magezon\ProductPagePdf\Data\Element\Review</item>
+                    <item name="template" xsi:type="string">Magezon_ProductPagePdf::element/review.phtml</item>
+                    <item name="block" xsi:type="string">Magezon\ProductPagePdf\Block\Product\Element\Review</item>
+                    <item name="sortOrder" xsi:type="number">536</item>
+                    <item name="icon" xsi:type="string">mgz-icon mgz-icon-product</item>
+                    <item name="icon_styles" xsi:type="array">
+                        <item name="background-color" xsi:type="string">#ff9900</item>
+                    </item>
+                    <item name="group" xsi:type="string">product_pdf</item>
+                    <item name="builder_description" xsi:type="string">{{ element.display_counter ? 'Display Counter: Yes' : 'Display Counter: No' }}</item>
+                    <item name="area" xsi:type="string">product_pdf</item>
+                </item>
+                <item name="product_attribute" xsi:type="array">
+                    <item name="name" xsi:type="string" translate="true">Product Attribute</item>
+                    <item name="class" xsi:type="string">Magezon\ProductPagePdf\Data\Element\Attribute</item>
+                    <item name="template" xsi:type="string">Magezon_ProductPagePdf::element/attribute.phtml</item>
+                    <item name="block" xsi:type="string">Magezon\ProductPagePdf\Block\Product\Element\Attribute</item>
+                    <item name="sortOrder" xsi:type="number">537</item>
+                    <item name="icon" xsi:type="string">mgz-icon mgz-icon-product</item>
+                    <item name="group" xsi:type="string">product_pdf</item>
+                    <item name="icon_styles" xsi:type="array">
+                        <item name="background-color" xsi:type="string">#ff9900</item>
+                    </item>
+                    <item name="builder_description" xsi:type="string">{{ element.attribute ? 'Attribute: ' + element.attribute : '' }}</item>
+                    <item name="area" xsi:type="string">product_pdf</item>
+                </item>
+                <item name="bundle_product_options" xsi:type="array">
+                    <item name="name" xsi:type="string" translate="true">Bundle Product Options</item>
+                    <item name="class" xsi:type="string">Magezon\ProductPagePdf\Data\Element\BundleOptions</item>
+                    <item name="template" xsi:type="string">Magezon_ProductPagePdf::element/bundle_options.phtml</item>
+                    <item name="block" xsi:type="string">Magezon\ProductPagePdf\Block\Product\Element\BundleOptions</item>
+                    <item name="sortOrder" xsi:type="number">538</item>
+                    <item name="icon" xsi:type="string">mgz-icon mgz-icon-product</item>
+                    <item name="group" xsi:type="string">product_pdf</item>
+                    <item name="icon_styles" xsi:type="array">
+                        <item name="background-color" xsi:type="string">#ff9900</item>
+                    </item>
+                    <item name="area" xsi:type="string">product_pdf</item>
+                </item>
+                <item name="product_price_tier" xsi:type="array">
+                    <item name="name" xsi:type="string" translate="true">Tier Price</item>
+                    <item name="class" xsi:type="string">Magezon\ProductPagePdf\Data\Element\TierPrice</item>
+                    <item name="block" xsi:type="string">Magezon\ProductPagePdf\Block\Product\Element\TierPrice</item>
+                    <item name="template" xsi:type="string">Magezon_ProductPagePdf::element/product_tier_price.phtml</item>
+                    <item name="sortOrder" xsi:type="number">539</item>
+                    <item name="icon" xsi:type="string">mgz-icon mgz-icon-product</item>
+                    <item name="icon_styles" xsi:type="array">
+                        <item name="background-color" xsi:type="string">#ff9900</item>
+                    </item>
+                    <item name="group" xsi:type="string">product_pdf</item>
+                    <item name="area" xsi:type="string">product_pdf</item>
+                </item>
+                <item name="product_qrcode" xsi:type="array">
+                    <item name="name" xsi:type="string" translate="true">QR Code</item>
+                    <item name="class" xsi:type="string">Magezon\ProductPagePdf\Data\Element\QrCode</item>
+                    <item name="template" xsi:type="string">Magezon_ProductPagePdf::element/qrcode.phtml</item>
+                    <item name="templateUrl" xsi:type="string">Magezon_ProductPagePdf/js/templates/builder/element/qrcode.html</item>
+                    <item name="block" xsi:type="string">Magezon\ProductPagePdf\Block\Product\Element\QrCode</item>
+                    <item name="sortOrder" xsi:type="number">540</item>
+                    <item name="icon" xsi:type="string">mgz-icon mgz-icon-product</item>
+                    <item name="icon_styles" xsi:type="array">
+                        <item name="background-color" xsi:type="string">#ff9900</item>
+                    </item>
+                    <item name="group" xsi:type="string">product_pdf</item>
+                    <item name="area" xsi:type="string">product_pdf</item>
+                </item>
+                <item name="break_page" xsi:type="array">
+                    <item name="name" xsi:type="string" translate="true">Break Page</item>
+                    <item name="class" xsi:type="string">Magezon\ProductPagePdf\Data\Element</item>
+                    <item name="template" xsi:type="string">Magezon_ProductPagePdf::element/breakpage.phtml</item>
+                    <item name="block" xsi:type="string">Magezon\ProductPagePdf\Block\Product\Element</item>
+                    <item name="sortOrder" xsi:type="number">541</item>
+                    <item name="icon" xsi:type="string">mgz-icon mgz-icon-product</item>
+                    <item name="icon_styles" xsi:type="array">
+                        <item name="background-color" xsi:type="string">#ff9900</item>
+                    </item>
+                    <item name="group" xsi:type="string">product_pdf</item>
+                    <item name="builder_description" xsi:type="string">{{ element.display_counter ? 'Display Counter: Yes' : 'Display Counter: No' }}</item>
+                    <item name="area" xsi:type="string">product_pdf</item>
+                </item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Magento\Framework\EntityManager\HydratorPool">
+        <arguments>
+            <argument name="hydrators" xsi:type="array">
+                <item name="Magezon\ProductPagePdf\Api\Data\ProfileInterface" xsi:type="string">Magento\Framework\EntityManager\AbstractModelHydrator</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Magento\Framework\EntityManager\Operation\ExtensionPool">
+        <arguments>
+            <argument name="extensionActions" xsi:type="array">
+                <item name="Magezon\ProductPagePdf\Api\Data\ProfileInterface" xsi:type="array">
+                    <item name="read" xsi:type="array">
+                        <item name="store" xsi:type="string">Magezon\ProductPagePdf\Model\ResourceModel\Profile\Relation\Store\ReadHandler</item>
+                    </item>
+                    <item name="create" xsi:type="array">
+                        <item name="store" xsi:type="string">Magezon\ProductPagePdf\Model\ResourceModel\Profile\Relation\Store\SaveHandler</item>
+                    </item>
+                    <item name="update" xsi:type="array">
+                        <item name="store" xsi:type="string">Magezon\ProductPagePdf\Model\ResourceModel\Profile\Relation\Store\SaveHandler</item>
+                    </item>
+                </item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Magento\Framework\EntityManager\MetadataPool">
+        <arguments>
+            <argument name="metadata" xsi:type="array">
+                <item name="Magezon\ProductPagePdf\Api\Data\ProfileInterface" xsi:type="array">
+                    <item name="entityTableName" xsi:type="string">mgz_productpagepdf_profile</item>
+                    <item name="identifierField" xsi:type="string">profile_id</item>
+                </item>
+            </argument>
+        </arguments>
+    </type>
+</config>

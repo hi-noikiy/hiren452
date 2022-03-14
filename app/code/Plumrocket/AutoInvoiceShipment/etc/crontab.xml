@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Plumrocket Inc.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End-user License Agreement
+ * that is available through the world-wide-web at this URL:
+ * http://wiki.plumrocket.net/wiki/EULA
+ * If you are unable to obtain it through the world-wide-web, please
+ * send an email to support@plumrocket.com so we can send you a copy immediately.
+ *
+ * @package     Plumrocket_AutoInvoiceShipment
+ * @copyright   Copyright (c) 2017 Plumrocket Inc. (http://www.plumrocket.com)
+ * @license     http://wiki.plumrocket.net/wiki/EULA  End-user License Agreement
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Cron:etc/crontab.xsd">
+    <group id="default">
+        <job name="plumrocket_autoinvoiceshipment_auto_invoice" instance="Plumrocket\AutoInvoiceShipment\Cron\AutoInvoice" method="execute">
+            <schedule>0,5,10,15,20,25,30,35,40,45,50,55 * * * *</schedule>
+        </job>
+        <job name="plumrocket_autoinvoiceshipment_auto_shipment" instance="Plumrocket\AutoInvoiceShipment\Cron\AutoShipment" method="execute">
+            <schedule>0,5,10,15,20,25,30,35,40,45,50,55 * * * *</schedule>
+        </job>
+    </group>
+</config>

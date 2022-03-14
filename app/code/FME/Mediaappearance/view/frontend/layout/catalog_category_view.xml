@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2015 Magento. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="2columns-left" xsi:noNamespaceSchemaLocation="../../../../../../../lib/internal/Magento/Framework/View/Layout/etc/page_configuration.xsd">
+    <head>
+         <css src="FME_Mediaappearance::css/upgrade/unite-gallery.css" />
+        <css src="FME_Mediaappearance::css/upgrade/video/skin-right-no-thumb.css" />
+        <css src="FME_Mediaappearance::css/upgrade/video/skin-right-thumb.css" />
+     <css src="FME_Mediaappearance::css/upgrade/video/skin-right-title-only.css" />
+     <css src="FME_Mediaappearance::css/upgrade/video/skin-bottom-text.css" />
+     </head>
+    <body>
+<referenceContainer name="columns.top">
+            <referenceContainer name="category.view.container" >
+               <block name="mediaappearance" class="FME\Mediaappearance\Block\Productvideos" template="FME_Mediaappearance::category.phtml" before="-" />    
+            
+            </referenceContainer>
+        </referenceContainer>
+       
+    </body>
+</page>

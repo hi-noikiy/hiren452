@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2016 Magento. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+     
+    <virtualType name="FMEMediaappearancePool" type="Magento\Ui\DataProvider\Modifier\Pool">
+        <arguments>
+            <argument name="modifiers" xsi:type="array">
+                <item name="custom_fieldset" xsi:type="array">
+                    <item name="class" xsi:type="string">FME\Mediaappearance\Ui\DataProvider\Product\Form\Modifier\CompositeAttachments</item>
+                    <item name="sortOrder" xsi:type="number">125</item>
+                </item>
+            </argument>
+        </arguments>
+    </virtualType>
+<type name="FME\Mediaappearance\Model\Mediaappearance\DataProvider">
+        <arguments>
+            <argument name="pool" xsi:type="object">FMEMediaappearancePool</argument>
+    </arguments>
+</type>
+<type name="Magento\Framework\File\Uploader">
+        <plugin name="fme-mediaappearance-video-upload" type="FME\Mediaappearance\Plugin\UploadPlugin" sortOrder="11" />
+</type>    
+</config>

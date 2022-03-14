@@ -1,0 +1,19 @@
+<div class="container">
+    <h2 class="filterproduct-title"><span class="content"><strong>Aumika In News</strong></span></h2>
+</div>
+<!-- page-title-wrapper -->
+<div class="news-section-main">
+	<?php foreach ($block->getNewsCollection() as $key => $value):?>
+		<div class="news-section-wrap">
+			<div class="news-logo">
+				<img src="<?= $value->getImageupload(); ?>">
+			</div>
+			<div class="news-description">
+				<div>
+					<?php $description = $value->getDescription().'... <a target="_blank" href='.$value->getLink().'>Read More</a>' ?>
+					<?= $description ?>
+				</div>
+			</div>
+		</div>
+	<?php endforeach; ?>
+</div>

@@ -1,0 +1,353 @@
+<?php
+
+$_config = $this->helper('JB\HomeCategory\Helper\Data');
+$isDisplay = $_config->getHomeCat('showcat');
+
+$catimg1 = $_config->getCatImg1('jbcat_img1');
+$cattitle1 = $_config->getHomeCat('jbcat_name1');
+$catlink1 = $_config->getHomeCat('jbcat_link1');
+$catdesc1 = $_config->getHomeCat('jbcat_desc1');
+
+$catimg2 = $_config->getCatImg2('jbcat_img2');
+$cattitle2 = $_config->getHomeCat('jbcat_name2');
+$catlink2 = $_config->getHomeCat('jbcat_link2');
+$catdesc2 = $_config->getHomeCat('jbcat_desc2');
+
+$catimg3 = $_config->getCatImg3('jbcat_img3');
+$cattitle3 = $_config->getHomeCat('jbcat_name3');
+$catlink3 = $_config->getHomeCat('jbcat_link3');
+$catdesc3 = $_config->getHomeCat('jbcat_desc3');
+
+$catimg4 = $_config->getCatImg4('jbcat_img4');
+$cattitle4 = $_config->getHomeCat('jbcat_name4');
+$catlink4 = $_config->getHomeCat('jbcat_link4');
+$catdesc4 = $_config->getHomeCat('jbcat_desc4');
+
+$catimg5 = $_config->getCatImg5('jbcat_img5');
+$cattitle5 = $_config->getHomeCat('jbcat_name5');
+$catlink5 = $_config->getHomeCat('jbcat_link5');
+$catdesc5 = $_config->getHomeCat('jbcat_desc5');
+
+$catimg6 = $_config->getCatImg6('jbcat_img6');
+$cattitle6 = $_config->getHomeCat('jbcat_name6');
+$catlink6 = $_config->getHomeCat('jbcat_link6');
+$catdesc6 = $_config->getHomeCat('jbcat_desc6');
+
+$catimg7 = $_config->getCatImg7('jbcat_img7');
+$cattitle7 = $_config->getHomeCat('jbcat_name7');
+$catlink7 = $_config->getHomeCat('jbcat_link7');
+$catdesc7 = $_config->getHomeCat('jbcat_desc7');
+
+$catimg8 = $_config->getCatImg8('jbcat_img8');
+$cattitle8 = $_config->getHomeCat('jbcat_name8');
+$catlink8 = $_config->getHomeCat('jbcat_link8');
+$catdesc8 = $_config->getHomeCat('jbcat_desc8');
+
+$catimg9 = $_config->getCatImg9('jbcat_img9');
+$cattitle9 = $_config->getHomeCat('jbcat_name9');
+$catlink9 = $_config->getHomeCat('jbcat_link9');
+$catdesc9 = $_config->getHomeCat('jbcat_desc9');
+
+$catimg10 = $_config->getCatImg10('jbcat_img10');
+$cattitle10 = $_config->getHomeCat('jbcat_name10');
+$catlink10 = $_config->getHomeCat('jbcat_link10');
+$catdesc10 = $_config->getHomeCat('jbcat_desc10');
+
+$catimg11 = $_config->getCatImg11('jbcat_img11');
+$cattitle11 = $_config->getHomeCat('jbcat_name11');
+$catlink11 = $_config->getHomeCat('jbcat_link11');
+$catdesc11 = $_config->getHomeCat('jbcat_desc11');
+
+$catimg12 = $_config->getCatImg12('jbcat_img12');
+$cattitle12 = $_config->getHomeCat('jbcat_name12');
+$catlink12 = $_config->getHomeCat('jbcat_link12');
+$catdesc12 = $_config->getHomeCat('jbcat_desc12');
+
+$catimg13 = $_config->getCatImg13('jbcat_img13');
+$cattitle13 = $_config->getHomeCat('jbcat_name13');
+$catlink13 = $_config->getHomeCat('jbcat_link13');
+$catdesc13 = $_config->getHomeCat('jbcat_desc13');
+
+$catimg14 = $_config->getCatImg14('jbcat_img14');
+$cattitle14 = $_config->getHomeCat('jbcat_name14');
+$catlink14 = $_config->getHomeCat('jbcat_link14');
+$catdesc14 = $_config->getHomeCat('jbcat_desc14');
+
+$catimg15 = $_config->getCatImg15('jbcat_img15');
+$cattitle15 = $_config->getHomeCat('jbcat_name15');
+$catlink15 = $_config->getHomeCat('jbcat_link15');
+$catdesc15 = $_config->getHomeCat('jbcat_desc15');
+
+
+
+?>
+<?php if($isDisplay == '1') : ?>
+
+<div class="jb_homepageCategory">
+    <div class="container"> 
+        <h2 class="filterproduct-title"><span class="content"><strong>Shop by Category</strong></span></h2>
+    	<div id="homepage_category" class="owl-carousel">
+    			
+    			<?php if(!$cattitle1 == NULL) : ?>
+    			<div class="item">
+    				<div class="catImage">
+    					<a href="<?php echo $catlink1; ?>">
+    						<img class="jbimage" src="<?php echo $catimg1; ?>" alt="<?php echo $cattitle1; ?>">
+    					</a>	
+    				</div>
+                    <div class="cartDetails">
+        				<div class="catTitle"><a href="<?php echo $catlink1; ?>"><?php echo $cattitle1; ?></a></div>
+                        <div class="catDesc"><?php echo $catdesc1; ?></div>
+                        <div class="cartBtn">
+                            <a class="btn btn-default" style="font-weight: 400;" href="<?php echo $catlink1; ?>">Browse</a>
+                        </div>
+                    </div>
+    			</div>
+    			<?php endif; ?>
+
+    			<?php if(!$cattitle2 == NULL) : ?>
+    			<div class="item">
+    				<div class="catImage">
+    					<a href="<?php echo $catlink2; ?>">
+    						<img class="jbimage" src="<?php echo $catimg2; ?>" alt="<?php echo $cattitle2; ?>">
+    					</a>	
+    				</div>
+                    <div class="cartDetails">
+    				<div class="catTitle"><a href="<?php echo $catlink2; ?>"><?php echo $cattitle2; ?></a></div>
+                    <div class="catDesc"><?php echo $catdesc2; ?></div>
+                    <div class="cartBtn">
+                        <a class="btn btn-default" style="font-weight: 400;" href="<?php echo $catlink2; ?>">Browse</a>
+                    </div>
+                </div>
+    			</div>
+    			<?php endif;?>
+
+    			<?php if(!$cattitle3 == NULL) : ?>
+    			<div class="item">
+    				<div class="catImage">
+    					<a href="<?php echo $catlink3; ?>">
+    						<img class="jbimage" src="<?php echo $catimg3; ?>" alt="<?php echo $cattitle3; ?>">
+    					</a>	
+    				</div>
+                    <div class="cartDetails">
+    				<div class="catTitle"><a href="<?php echo $catlink3; ?>"><?php echo $cattitle3; ?></a></div>
+                    <div class="catDesc"><?php echo $catdesc3; ?></div>
+                    <div class="cartBtn">
+                        <a class="btn btn-default" style="font-weight: 400;" href="<?php echo $catlink3; ?>">Browse</a>
+                    </div>
+                </div>
+    			</div>
+    			<?php endif;?>
+
+    			<?php if(!$cattitle4 == NULL) : ?>
+    			<div class="item">
+    				<div class="catImage">
+    					<a href="<?php echo $catlink4; ?>">
+    						<img class="jbimage" src="<?php echo $catimg4; ?>" alt="<?php echo $cattitle4; ?>">
+    					</a>	
+    				</div>
+                    <div class="cartDetails">
+    				<div class="catTitle"><a href="<?php echo $catlink4; ?>"><?php echo $cattitle4; ?></a></div>
+                    <div class="catDesc"><?php echo $catdesc4; ?></div>
+                    <div class="cartBtn">
+                        <a class="btn btn-default" style="font-weight: 400;" href="<?php echo $catlink4; ?>">Browse</a>
+                    </div>
+                </div>
+    			</div>
+    			<?php endif;?>
+
+    			<?php if(!$cattitle5 == NULL) : ?>
+    			<div class="item">
+    				<div class="catImage">
+    					<a href="<?php echo $catlink5; ?>">
+    						<img class="jbimage" src="<?php echo $catimg5; ?>" alt="<?php echo $cattitle5; ?>">
+    					</a>	
+    				</div>
+                    <div class="cartDetails">
+    				<div class="catTitle"><a href="<?php echo $catlink5; ?>"><?php echo $cattitle5; ?></a></div>
+                    <div class="catDesc"><?php echo $catdesc5; ?></div>
+                    <div class="cartBtn">
+                        <a class="btn btn-default" style="font-weight: 400;" href="<?php echo $catlink5; ?>">Browse</a>
+                    </div>
+                </div>
+    			</div>
+    			<?php endif;?>
+
+    			<?php if(!$cattitle6 == NULL) : ?>
+    			<div class="item">
+    				<div class="catImage">
+    					<a href="<?php echo $catlink6; ?>">
+    						<img class="jbimage" src="<?php echo $catimg6; ?>" alt="<?php echo $cattitle6; ?>">
+    					</a>	
+    				</div>
+                    <div class="cartDetails">
+    				<div class="catTitle"><a href="<?php echo $catlink6; ?>"><?php echo $cattitle6; ?></a></div>
+                    <div class="catDesc"><?php echo $catdesc6; ?></div>
+                    <div class="cartBtn">
+                        <a class="btn btn-default" style="font-weight: 400;" href="<?php echo $catlink6; ?>">Browse</a>
+                    </div>
+                </div>
+    			</div>
+    			<?php endif;?>
+
+    			<?php if(!$cattitle7 == NULL) : ?>
+    			<div class="item">
+    				<div class="catImage">
+    					<a href="<?php echo $catlink7; ?>">
+    						<img class="jbimage" src="<?php echo $catimg7; ?>" alt="<?php echo $cattitle7; ?>">
+    					</a>	
+    				</div>
+                    <div class="cartDetails">
+    				<div class="catTitle"><a href="<?php echo $catlink7; ?>"><?php echo $cattitle7; ?></a></div>
+                    <div class="catDesc"><?php echo $catdesc7; ?></div>
+                    <div class="cartBtn">
+                        <a class="btn btn-default" style="font-weight: 400;" href="<?php echo $catlink7; ?>">Browse</a>
+                    </div>
+                </div>
+    			</div>
+    			<?php endif;?>
+
+    			<?php if(!$cattitle8 == NULL) : ?>
+    			<div class="item">
+    				<div class="catImage">
+    					<a href="<?php echo $catlink8; ?>">
+    						<img class="jbimage" src="<?php echo $catimg8; ?>" alt="<?php echo $cattitle8; ?>">
+    					</a>	
+    				</div>
+                    <div class="cartDetails">
+    				<div class="catTitle"><a href="<?php echo $catlink8; ?>"><?php echo $cattitle8; ?></a></div>
+                    <div class="catDesc"><?php echo $catdesc8; ?></div>
+                    <div class="cartBtn">
+                        <a class="btn btn-default" style="font-weight: 400;" href="<?php echo $catlink8; ?>">Browse</a>
+                    </div>
+                </div>
+    			</div>
+    			<?php endif;?>
+
+    			<?php if(!$cattitle9 == NULL) : ?>
+    			<div class="item">
+    				<div class="catImage">
+    					<a href="<?php echo $catlink9; ?>">
+    						<img class="jbimage" src="<?php echo $catimg9; ?>" alt="<?php echo $cattitle9; ?>">
+    					</a>	
+    				</div>
+                    <div class="cartDetails">
+    				<div class="catTitle"><a href="<?php echo $catlink9; ?>"><?php echo $cattitle9; ?></a></div>
+                    <div class="catDesc"><?php echo $catdesc9; ?></div>
+                    <div class="cartBtn">
+                        <a class="btn btn-default" style="font-weight: 400;" href="<?php echo $catlink9; ?>">Browse</a>
+                    </div>
+                </div>
+    			</div>
+    			<?php endif;?>
+
+    			<?php if(!$cattitle10 == NULL) : ?>
+    			<div class="item">
+    				<div class="catImage">
+    					<a href="<?php echo $catlink10; ?>">
+    						<img class="jbimage" src="<?php echo $catimg10; ?>" alt="<?php echo $cattitle10; ?>">
+    					</a>	
+    				</div>
+                    <div class="cartDetails">
+    				<div class="catTitle"><a href="<?php echo $catlink10; ?>"><?php echo $cattitle10; ?></a></div>
+                    <div class="catDesc"><?php echo $catdesc10; ?></div>
+                    <div class="cartBtn">
+                        <a class="btn btn-default" style="font-weight: 400;" href="<?php echo $catlink10; ?>">Browse</a>
+                    </div>
+                </div>
+    			</div>
+    			<?php endif;?>
+
+
+    			<?php if(!$cattitle11 == NULL) : ?>
+    			<div class="item">
+    				<div class="catImage">
+    					<a href="<?php echo $catlink11; ?>">
+    						<img class="jbimage" src="<?php echo $catimg11; ?>" alt="<?php echo $cattitle11; ?>">
+    					</a>	
+    				</div>
+                    <div class="cartDetails">
+    				<div class="catTitle"><a href="<?php echo $catlink11; ?>"><?php echo $cattitle11; ?></a></div>
+                    <div class="catDesc"><?php echo $catdesc11; ?></div>
+                    <div class="cartBtn">
+                        <a class="btn btn-default" style="font-weight: 400;" href="<?php echo $catlink11; ?>">Browse</a>
+                    </div>
+                </div>
+    			</div>
+    			<?php endif;?>
+
+    			<?php if(!$cattitle12 == NULL) : ?>
+    			<div class="item">
+    				<div class="catImage">
+    					<a href="<?php echo $catlink12; ?>">
+    						<img class="jbimage" src="<?php echo $catimg12; ?>" alt="<?php echo $cattitle12; ?>">
+    					</a>	
+    				</div>
+                    <div class="cartDetails">
+    				<div class="catTitle"><a href="<?php echo $catlink12; ?>"><?php echo $cattitle12; ?></a></div>
+                    <div class="catDesc"><?php echo $catdesc12; ?></div>
+                    <div class="cartBtn">
+                        <a class="btn btn-default" style="font-weight: 400;" href="<?php echo $catlink12; ?>">Browse</a>
+                    </div>
+                </div>
+    			</div>
+    			<?php endif;?>
+
+    		    <?php if(!$cattitle13 == NULL) : ?>
+    			<div class="item">
+    				<div class="catImage">
+    					<a href="<?php echo $catlink13; ?>">
+    						<img class="jbimage" src="<?php echo $catimg13; ?>" alt="<?php echo $cattitle13; ?>">
+    					</a>	
+    				</div>
+                    <div class="cartDetails">
+    				<div class="catTitle"><a href="<?php echo $catlink13; ?>"><?php echo $cattitle13; ?></a></div>
+                    <div class="catDesc"><?php echo $catdesc13; ?></div>
+                    <div class="cartBtn">
+                        <a class="btn btn-default" style="font-weight: 400;" href="<?php echo $catlink13; ?>">Browse</a>
+                    </div>
+                </div>
+    			</div>
+    			<?php endif;?>
+
+    		    <?php if(!$cattitle14 == NULL) : ?>
+    			<div class="item">
+    				<div class="catImage">
+    					<a href="<?php echo $catlink14; ?>">
+    						<img class="jbimage" src="<?php echo $catimg14; ?>" alt="<?php echo $cattitle14; ?>">
+    					</a>	
+    				</div>
+                    <div class="cartDetails">
+        				<div class="catTitle"><a href="<?php echo $catlink14; ?>"><?php echo $cattitle14; ?></a></div>
+                        <div class="catDesc"><?php echo $catdesc14; ?></div>
+                        <div class="cartBtn">
+                            <a class="btn btn-default" style="font-weight: 400;" href="<?php echo $catlink14; ?>">Browse</a>
+                        </div>
+                    </div>
+    			</div>
+    			<?php endif;?>
+
+
+    		    <?php if(!$cattitle15 == NULL) : ?>
+    			<div class="item">
+    				<div class="catImage">
+    					<a href="<?php echo $catlink15; ?>">
+    						<img class="jbimage" src="<?php echo $catimg15; ?>" alt="<?php echo $cattitle15; ?>">
+    					</a>	
+    				</div>
+                    <div class="cartDetails">
+        				<div class="catTitle"><a href="<?php echo $catlink15; ?>"><?php echo $cattitle15; ?></a></div>
+                        <div class="catDesc"><?php echo $catdesc15; ?></div>
+                        <div class="cartBtn">
+                            <a class="btn btn-default" style="font-weight: 400;" href="<?php echo $catlink15; ?>">Browse</a>
+                        </div>
+                    </div>
+    			</div>
+    			<?php endif;?>
+    			
+    	</div>	
+    </div>  
+</div>
+
+
+<?php endif; ?>

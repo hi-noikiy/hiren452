@@ -1,0 +1,16 @@
+{
+  "name": "Unific Magento 2 Connector",
+  "homepage": "https://magento2connector.unific.com",
+  "repositories": [
+    { "type": "vcs", "url": "git@github.com:unificdotcom/magento2-extension.git" }
+  ],
+  "require": {
+   "unific/connector": "dev-master|^1.0"
+  },
+  "archive": {
+    "directory": "dist",
+    "format": "tar",
+    "prefix-url": "https://magento2connector.unific.com",
+    "skip-dev": true
+  }
+}

@@ -1,0 +1,110 @@
+<?xml version="1.0"?>
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+
+        <section id="jb_productpage" translate="label" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>Aumika Product View</label>
+            <tab>jitesh</tab>
+            <resource>JB_ProductPage::system_config</resource>
+            <group id="jbtopbanner" translate="label" type="text" sortOrder="1" showInDefault="1" showInStore="1"
+                   showInWebsite="1">
+                <label>Top Banner</label>
+                <field id="showtopbanner" translate="label" type="select" sortOrder="3" showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Display Top Banner</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="jbtop_banner" translate="label" type="image" sortOrder="4" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Upload Image</label>
+                    <comment>Allowed file types:PNG, GIF, JPG, JPEG, SVG.</comment>
+                    <backend_model>JB\AumikaFramework\Model\Config\Backend\Image\ItemImage</backend_model>
+                    <base_url type="media" scope_info="1">aumika/item_image</base_url>
+                    <depends>
+                         <field id="showtopbanner">1</field>
+                    </depends>
+                </field>
+            </group>
+
+            <group id="jbbottombanner" translate="label" type="text" sortOrder="1" showInDefault="1" showInStore="1"
+                   showInWebsite="1">
+                <label>Bottom Banner</label>
+                <field id="showbottombanner" translate="label" type="select" sortOrder="3" showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Display Bottom Banner</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="jbbottom_banner" translate="label" type="image" sortOrder="4" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Upload Image</label>
+                    <comment>Allowed file types:PNG, GIF, JPG, JPEG, SVG.</comment>
+                    <backend_model>JB\AumikaFramework\Model\Config\Backend\Image\ItemImage</backend_model>
+                    <base_url type="media" scope_info="1">aumika/item_image</base_url>
+                    <depends>
+                         <field id="showbottombanner">1</field>
+                    </depends>
+                </field>
+            </group> 
+
+            <group id="jbdiff" translate="label" type="text" sortOrder="1" showInDefault="1" showInStore="1"
+                   showInWebsite="1">
+                <label>Aumika Difference</label>
+                <field id="showdiff" translate="label" type="select" sortOrder="30" showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Display Difference</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+
+                <field id="jbdiff1_main" translate="label" type="text" sortOrder="40" showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Difference 1</label>
+                     <depends>
+                         <field id="showdiff">1</field>
+                    </depends>
+                </field>
+                <field id="jbdiff1_desc" translate="label" type="textarea" sortOrder="50" showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Description</label>
+                     <depends>
+                         <field id="showdiff">1</field>
+                    </depends>
+                </field>
+
+                <field id="jbdiff2_main" translate="label" type="text" sortOrder="60" showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Difference 2</label>
+                     <depends>
+                         <field id="showdiff">1</field>
+                    </depends>
+                </field>
+                <field id="jbdiff2_desc" translate="label" type="textarea" sortOrder="70" showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Description</label>
+                     <depends>
+                         <field id="showdiff">1</field>
+                    </depends>
+                </field>
+
+                <field id="jbdiff3_main" translate="label" type="text" sortOrder="80" showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Difference 3</label>
+                     <depends>
+                         <field id="showdiff">1</field>
+                    </depends>
+                </field>
+                <field id="jbdiff3_desc" translate="label" type="textarea" sortOrder="90" showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Description</label>
+                     <depends>
+                         <field id="showdiff">1</field>
+                    </depends>
+                </field>
+
+                <field id="jbdiff4_main" translate="label" type="text" sortOrder="100" showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Difference 4</label>
+                     <depends>
+                         <field id="showdiff">1</field>
+                    </depends>
+                </field>
+                <field id="jbdiff4_desc" translate="label" type="textarea" sortOrder="110" showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Description</label>
+                     <depends>
+                         <field id="showdiff">1</field>
+                    </depends>
+                </field>
+            </group>       
+
+        </section>
+    </system>
+</config>

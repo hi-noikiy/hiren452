@@ -1,0 +1,4 @@
+fb_attribute,mage_attribute,action
+gtin,manufacturer,add
+mpn,material,add
+pattern,pattern,remove

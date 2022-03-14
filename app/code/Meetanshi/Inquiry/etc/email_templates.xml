@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../Email/etc/email_templates.xsd">
+    <template id="dealer_inquiry_owner_template_owner_email_template" label="Dealer Inquiry Admin Submit Form" file="dealer_inquiry_admin_template.html" type="html" module="Meetanshi_Inquiry" area="frontend"/>
+    <template id="dealer_inquiry_customer_template_customer_email_template" label="Dealer Inquiry Customer Submit Form" file="dealer_inquiry_customer_template.html" type="html" module="Meetanshi_Inquiry" area="frontend"/>
+    <template id="dealer_inquiry_create_customer_template_create_customer_email_template" label="Dealer Inquiry Create Customer" file="dealer_inquiry_create_customer_template.html" type="html" module="Meetanshi_Inquiry" area="adminhtml"/>
+</config>

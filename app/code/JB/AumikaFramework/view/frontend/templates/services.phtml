@@ -1,0 +1,35 @@
+<?php
+
+$_config = $this->helper('JB\AumikaFramework\Helper\Data');
+$isDisplay = $_config->getServices('seviceshow');
+
+$service1Main = $_config->getServices('sevice1_main');
+$service1Sub = $_config->getServices('sevice1_sub');
+
+$service2Main = $_config->getServices('sevice2_main');
+$service2Sub = $_config->getServices('sevice2_sub');
+
+$service3Main = $_config->getServices('sevice3_main');
+$service3Sub = $_config->getServices('sevice3_sub');
+
+
+?>
+<?php if($isDisplay == '1') : ?>
+
+<div class="homepage-bar">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-4 col-md-4" style="text-align:center;">
+        <i class="porto-icon-shipping" style="font-size:35px;"></i><div class="text-area"><h3><?php echo $service1Main; ?></h3><p><?php echo $service1Sub; ?></p></div>
+      </div>
+      <div class="col-lg-4 col-md-4" style="text-align:center;">
+        <i class="porto-icon-us-dollar" style="font-size:37px;"></i><div class="text-area"><h3><?php echo $service2Main; ?></h3><p><?php echo $service2Sub; ?></p></div>
+      </div>
+      <div class="col-lg-4 col-md-4" style="text-align:center;">
+        <i class="porto-icon-support" style="font-size:37px;"></i><div class="text-area"><h3><?php echo $service3Main; ?></h3><p><?php echo $service3Sub; ?></p></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<?php endif; ?>

@@ -1,0 +1,144 @@
+<?xml version="1.0" ?>
+<!--
+/**
+ * Plumrocket Inc.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End-user License Agreement
+ * that is available through the world-wide-web at this URL:
+ * http://wiki.plumrocket.net/wiki/EULA
+ * If you are unable to obtain it through the world-wide-web, please
+ * send an email to support@plumrocket.com so we can send you a copy immediately.
+ *
+ * @package     Plumrocket_ShippingTracking
+ * @copyright   Copyright (c) 2018 Plumrocket Inc. (http://www.plumrocket.com)
+ * @license     http://wiki.plumrocket.net/wiki/EULA  End-user License Agreement
+ */
+-->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <section id="prshippingtracking" translate="label" type="text" sortOrder="8980849" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>Order Status &amp; Shipping Tracking</label>
+            <tab>plumrocket</tab>
+            <resource>Plumrocket_ShippingTracking::configuration</resource>
+
+            <!-- Begin of GENERAL group  -->
+            <group id="general" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>General</label>
+                <attribute type="expanded">1</attribute>
+                <field id="version" translate="label comment" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <frontend_model>Plumrocket\ShippingTracking\Block\Adminhtml\System\Config\Form\Version</frontend_model>
+                </field>
+                <field id="enabled" translate="label" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable Extension</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+            </group>
+            <!-- End GENERAL -->
+
+            <!-- Begin of services group  -->
+            <group id="services" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Shipping Services</label>
+                <attribute type="expanded">1</attribute>
+
+                <!-- Begin of UPS Tracking API group  -->
+                <group id="ups_api" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>UPS Tracking API</label>
+                    <field id="enabled" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Enable</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    </field>
+                    <field id="icon_ups" translate="label comment" type="image" sortOrder="15" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Icon</label>
+                        <backend_model>Plumrocket\ShippingTracking\Model\System\Config\Image</backend_model>
+                        <frontend_model>Plumrocket\ShippingTracking\Block\Adminhtml\System\Config\Image</frontend_model>
+                        <base_url type="media" scope_info="1">prshippingtracking/icons</base_url>
+                    </field>
+                    <field id="user_id" translate="label" type="password" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>User ID</label>
+                    </field>
+                    <field id="password" translate="label" type="password" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Password</label>
+                    </field>
+                    <field id="api_key" translate="label" type="password" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>API Access Key</label>
+                        <comment><![CDATA["UPS API Access Key" also referred as "Access License Number"]]></comment>
+                    </field>
+                    <field id="sandbox_mode" translate="label" type="select" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Sandbox Mode</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    </field>
+                    <field id="connection_test" translate="button_label" type="button" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <button_label>Test Connection</button_label>
+                        <frontend_model>Plumrocket\ShippingTracking\Block\Adminhtml\System\Config\Connection\Ups</frontend_model>
+                    </field>
+                </group>
+                <!-- End UPS Tracking API -->
+
+                <!-- Begin of FedEx Tracking API group  -->
+                <group id="fedex_api" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>FedEx Tracking API</label>
+                    <field id="enabled" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Enable</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    </field>
+                    <field id="icon_fedex" translate="label comment" type="image" sortOrder="15" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Icon</label>
+                        <backend_model>Plumrocket\ShippingTracking\Model\System\Config\Image</backend_model>
+                        <frontend_model>Plumrocket\ShippingTracking\Block\Adminhtml\System\Config\Image</frontend_model>
+                        <base_url type="media" scope_info="1">prshippingtracking/icons</base_url>
+                    </field>
+                    <field id="account_number" translate="label" type="password" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Account Number</label>
+                    </field>
+                    <field id="meter_number" translate="label" type="password" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Meter Number</label>
+                    </field>
+                    <field id="key" translate="label" type="password" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Key</label>
+                    </field>
+                    <field id="password" translate="label" type="password" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Password</label>
+                    </field>
+                    <field id="sandbox_mode" translate="label" type="select" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Sandbox Mode</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    </field>
+                    <field id="connection_test" translate="button_label" type="button" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <button_label>Test Connection</button_label>
+                        <frontend_model>Plumrocket\ShippingTracking\Block\Adminhtml\System\Config\Connection\Fedex</frontend_model>
+                    </field>
+                </group>
+                <!-- End FedEx Tracking API -->
+
+                <!-- Begin of USPS Tracking API group  -->
+                <group id="usps_api" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>USPS Tracking API</label>
+                    <field id="enabled" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Enable</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    </field>
+                    <field id="icon_usps" translate="label comment" type="image" sortOrder="15" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Icon</label>
+                        <backend_model>Plumrocket\ShippingTracking\Model\System\Config\Image</backend_model>
+                        <frontend_model>Plumrocket\ShippingTracking\Block\Adminhtml\System\Config\Image</frontend_model>
+                        <base_url type="media" scope_info="1">prshippingtracking/icons</base_url>
+                    </field>
+                    <field id="user_id" translate="label" type="password" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>User ID</label>
+                    </field>
+                    <field id="connection_test" translate="button_label" type="button" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <button_label>Test Connection</button_label>
+                        <frontend_model>Plumrocket\ShippingTracking\Block\Adminhtml\System\Config\Connection\Usps</frontend_model>
+                    </field>
+                </group>
+                <!-- End USPS Tracking API -->
+
+            </group>
+            <!-- End services -->
+
+        </section>
+    </system>
+</config>

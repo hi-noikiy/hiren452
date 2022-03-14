@@ -1,0 +1,24 @@
+<?php if (count($block->getReviewFeedback())) { ?>
+    <div class="review-attachments">
+        <div class="review-media-value">
+            <?php
+            foreach ($block->getReviewFeedback() as $feed) {
+                ?>
+                <div class="feedback-wrapper">
+                    <span class="positive-cls">
+                        <label><?php echo __('Positive'); ?></label>
+                        <span><?php echo $feed->getReviewPositive(); ?></span>
+                    </span>
+                    <span class="negative-cls">
+                        <label><?php echo __('Negative'); ?></label>
+                        <span><?php echo $feed->getReviewNegative(); ?></span>
+                    </span>
+                </div>
+                <?php
+            }
+            ?>
+        </div>
+    </div>
+<?php } else { ?>
+    <?php echo $block->escapeHtml(__("Review feedback not available.")) ?>
+<?php } ?>

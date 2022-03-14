@@ -1,0 +1,60 @@
+<?php $helper = $this->helper("BT\Jewellery\Helper\Data"); ?>
+<?php $designCollection = $helper->getGemestoneJewelleryCollection(); ?>
+
+<div class="container">
+    <h2 class="filterproduct-title"><span class="content"><strong>Learn about Gemstone</strong></span></h2>
+</div>
+<!-- page-title-wrapper -->
+<div class="news-section-main">
+    <?php $count = 0; ?>
+    <?php foreach ($designCollection as $key => $value):?>
+        <div class="news-section-wrap <?= (++$count%2 ? "":"img-right") ?>">
+            <div class="news-logo">
+                <img src="<?= $value->getImageupload(); ?>">
+            </div>
+            <div class="news-description">
+                <div>
+                    <?php $description = $value->getDescription() ?>
+                    <?= $description.'<a href="javascript:void(0)" id="readmoregemestone">ReadMore</a>' ?>
+                    <div style="display:none;" class="popup-section-hide">
+                        <div class="news-logo">
+                            <img src="<?= $value->getImageupload(); ?>">
+                        </div>
+                        <div class="news-description">
+                            <div>
+                                <?php $description = $value->getDescription() ?>
+                                <?= $description ?>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <?php endforeach; ?>
+</div>
+<div id="popup-modal-gemstone">
+</div>
+<script type="text/javascript">
+require(["jquery","Magento_Ui/js/modal/modal" ,"jquery/ui"], function($,modal){
+  $(document).ready( function() {
+     var options = {
+        type: 'popup',
+        responsive: true,
+        innerScroll: true,
+        modalClass: 'gemstones-popup',
+        buttons: [{
+            text: $.mage.__('Cancel'),
+            click: function () {
+                this.closeModal();
+            }
+        }]
+    };
+    var popup = modal(options, $('#popup-modal-gemstone'));
+    $(document).on('click', '#readmoregemestone', function(){
+        var tempHtmlgemestone = $(this).next().html();
+        $('#popup-modal-gemstone').html(tempHtmlgemestone);
+        $('#popup-modal-gemstone').modal('openModal');
+    });
+  });
+});
+</script>

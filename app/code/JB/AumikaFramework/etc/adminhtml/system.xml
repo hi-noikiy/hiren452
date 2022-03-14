@@ -1,0 +1,242 @@
+<?xml version="1.0"?>
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="jitesh" translate="label" sortOrder="200">
+            <label>Aumika Framework</label>
+        </tab>
+        <section id="jb_settings" translate="label" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>Aumika Desing Configuration</label>
+            <tab>jitesh</tab>
+            <resource>JB_AumikaFramework::system_config</resource>
+            <group id="general" translate="label" type="text" sortOrder="1" showInDefault="1" showInStore="1"
+                   showInWebsite="1">
+                <label>Customer Service Section</label>
+                <field id="seviceshow" translate="label" type="select" sortOrder="3" showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Display Service's</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="sevice1_main" translate="label" type="text" sortOrder="3" showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Main text Service 1</label>
+                     <depends>
+                         <field id="seviceshow">1</field>
+                    </depends>
+                </field>
+                <field id="sevice1_sub" translate="label" type="textarea" sortOrder="3" showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Sub text Service 1</label>
+                     <depends>
+                         <field id="seviceshow">1</field>
+                    </depends>
+                </field>
+
+                <field id="sevice2_main" translate="label" type="text" sortOrder="3" showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Main text Service 2</label>
+                     <depends>
+                         <field id="seviceshow">1</field>
+                    </depends>
+                </field>
+                <field id="sevice2_sub" translate="label" type="textarea" sortOrder="3" showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Sub text Service 2</label>
+                     <depends>
+                         <field id="seviceshow">1</field>
+                    </depends>
+                </field>
+
+                <field id="sevice3_main" translate="label" type="text" sortOrder="3" showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Main text Service 3</label>
+                     <depends>
+                         <field id="seviceshow">1</field>
+                    </depends>
+                </field>
+                <field id="sevice3_sub" translate="label" type="textarea" sortOrder="3" showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Sub text Service 3</label>
+                     <depends>
+                         <field id="seviceshow">1</field>
+                    </depends>
+                </field>
+            </group>
+
+            <group id="custsupport" translate="label" type="text" sortOrder="1" showInDefault="1" showInStore="1"
+                   showInWebsite="1">
+                <label>Customer Support Section</label>
+                <field id="supportshow" translate="label" type="select" sortOrder="3" showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Display Support</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="support1_main" translate="label" type="text" sortOrder="3" showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Main text Support 1</label>
+                     <depends>
+                         <field id="supportshow">1</field>
+                    </depends>
+                </field>
+                <field id="support1_sub" translate="label" type="text" sortOrder="3" showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Sub text Support 1</label>
+                     <depends>
+                         <field id="supportshow">1</field>
+                    </depends>
+                </field>
+                <field id="support1_desc" translate="label" type="textarea" sortOrder="3" showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Descripation Support 1</label>
+                     <depends>
+                         <field id="supportshow">1</field>
+                    </depends>
+                </field>
+
+                <field id="support2_main" translate="label" type="text" sortOrder="3" showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Main text Support 2</label>
+                     <depends>
+                         <field id="supportshow">1</field>
+                    </depends>
+                </field>
+                <field id="support2_sub" translate="label" type="text" sortOrder="3" showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Sub text Support 2</label>
+                     <depends>
+                         <field id="supportshow">1</field>
+                    </depends>
+                </field>
+                <field id="support2_desc" translate="label" type="textarea" sortOrder="3" showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Descripation Support 2</label>
+                     <depends>
+                         <field id="supportshow">1</field>
+                    </depends>
+                </field>
+
+                <field id="support3_main" translate="label" type="text" sortOrder="3" showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Main text Support 3</label>
+                     <depends>
+                         <field id="supportshow">1</field>
+                    </depends>
+                </field>
+                <field id="support3_sub" translate="label" type="text" sortOrder="3" showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Sub text Support 3</label>
+                     <depends>
+                         <field id="supportshow">1</field>
+                    </depends>
+                </field>
+                <field id="support3_desc" translate="label" type="textarea" sortOrder="3" showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Descripation Support 3</label>
+                     <depends>
+                         <field id="supportshow">1</field>
+                    </depends>
+                </field>
+            </group>
+
+            <group id="popularcollection" translate="label" type="text" sortOrder="1" showInDefault="1" showInStore="1"
+                   showInWebsite="1">
+                <label>Popular Product Collection</label>
+                <field id="colshow" translate="label" type="select" sortOrder="3" showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Show Collection</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+
+                <field id="col1_main" translate="label" type="text" sortOrder="3" showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Item Name1</label>
+                     <depends>
+                         <field id="colshow">1</field>
+                    </depends>
+                </field>
+                <field id="col1_btn" translate="label" type="text" sortOrder="3" showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Button Text1</label>
+                     <depends>
+                         <field id="colshow">1</field>
+                    </depends>
+                </field>
+                <field id="col1_url" translate="label" type="text" sortOrder="3" showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Button Url1</label>
+                    <comment><![CDATA[Enter full URL here.]]></comment>
+                     <depends>
+                         <field id="colshow">1</field>
+                    </depends>
+                </field>
+                <field id="col1_img" translate="label" type="image" sortOrder="3" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Item Image1</label>
+                    <comment>Allowed file types:PNG, GIF, JPG, JPEG, SVG.</comment>
+                    <backend_model>JB\AumikaFramework\Model\Config\Backend\Image\ItemImage</backend_model>
+                    <base_url type="media" scope_info="1">aumika/item_image</base_url>
+                    <depends>
+                         <field id="colshow">1</field>
+                    </depends>
+                </field>
+                <field id="col1_sub" translate="label" type="textarea" sortOrder="3" showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Item Short Descriptions1</label>
+                     <depends>
+                         <field id="colshow">1</field>
+                    </depends>
+                </field>
+
+                <field id="col2_main" translate="label" type="text" sortOrder="4" showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Item Name2</label>
+                     <depends>
+                         <field id="colshow">1</field>
+                    </depends>
+                </field>
+                <field id="col2_btn" translate="label" type="text" sortOrder="4" showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Button Text2</label>
+                     <depends>
+                         <field id="colshow">1</field>
+                    </depends>
+                </field>
+                <field id="col2_url" translate="label" type="text" sortOrder="4" showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Button Url2</label>
+                    <comment><![CDATA[Enter full URL here.]]></comment>
+                     <depends>
+                         <field id="colshow">1</field>
+                    </depends>
+                </field>
+                <field id="col2_img" translate="label" type="image" sortOrder="4" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Item Image2</label>
+                    <comment>Allowed file types:PNG, GIF, JPG, JPEG, SVG.</comment>
+                    <backend_model>JB\AumikaFramework\Model\Config\Backend\Image\ItemImage</backend_model>
+                    <base_url type="media" scope_info="1">aumika/item_image</base_url>
+                    <depends>
+                         <field id="colshow">1</field>
+                    </depends>
+                </field>
+                <field id="col2_sub" translate="label" type="textarea" sortOrder="4" showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Item Short Descriptions2</label>
+                     <depends>
+                         <field id="colshow">1</field>
+                    </depends>
+                </field>
+
+                <field id="col3_main" translate="label" type="text" sortOrder="5" showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Item Name3</label>
+                     <depends>
+                         <field id="colshow">1</field>
+                    </depends>
+                </field>
+                <field id="col3_btn" translate="label" type="text" sortOrder="5" showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Button Text3</label>
+                     <depends>
+                         <field id="colshow">1</field>
+                    </depends>
+                </field>
+                <field id="col3_url" translate="label" type="text" sortOrder="5" showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Button Url3</label>
+                    <comment><![CDATA[Enter full URL here.]]></comment>
+                     <depends>
+                         <field id="colshow">1</field>
+                    </depends>
+                </field>
+                <field id="col3_img" translate="label" type="image" sortOrder="5" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Item Image3</label>
+                    <comment>Allowed file types:PNG, GIF, JPG, JPEG, SVG.</comment>
+                    <backend_model>JB\AumikaFramework\Model\Config\Backend\Image\ItemImage</backend_model>
+                    <base_url type="media" scope_info="1">aumika/item_image</base_url>
+                    <depends>
+                         <field id="colshow">1</field>
+                    </depends>
+                </field>
+                <field id="col3_sub" translate="label" type="textarea" sortOrder="5" showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Item Short Descriptions3</label>
+                     <depends>
+                         <field id="colshow">1</field>
+                    </depends>
+                </field>
+
+            </group>
+
+        </section>
+    </system>
+</config>

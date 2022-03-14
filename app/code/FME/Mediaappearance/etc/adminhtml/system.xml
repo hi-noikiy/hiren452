@@ -1,0 +1,976 @@
+<?xml version="1.0"?>
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../Config/etc/system_file.xsd">
+    <system>
+        <tab id="fmeextensions" translate="label" sortOrder="2001">
+            <label>FME Extensions</label>
+        </tab>
+      <section id="mediaappearance" translate="label" sortOrder="124" showInDefault="1" showInWebsite="1" showInStore="1">
+         <label>Media Gallery</label>
+         <tab>fmeextensions</tab>
+         <resource>FME_Mediaappearance::config_mediaappearance</resource>
+        <group id="general" type="text" sortOrder="0" showInDefault="1" showInWebsite="1" showInStore="1">
+         <label>General Settings</label>
+             <field id="enable_module" translate="label" type="select" sortOrder="0" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Enable/Disable Media Gallery</label>
+                <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+             </field>
+        </group>
+        <group id="medialist" type="text" sortOrder="0" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>MediaGallery Page Settings</label>
+            <field id="page_title" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Page Title</label>
+            </field>
+            <field id="meta_keywords" type="textarea" sortOrder="4" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>META Keywords</label>
+            </field>
+            <field id="meta_desp" type="textarea" sortOrder="5" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>META Description</label>
+            </field>
+            <field id="gallerytype" translate="label" type="select" sortOrder="6.5" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Gallery Type</label>
+                <source_model>FME\Mediaappearance\Model\Config\Gallerytype</source_model>
+            </field>
+        </group>
+        
+       
+        
+        
+       
+
+        <group id="seo" type="text" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>Search Engine Optimizations</label>
+             <field id="seo_url_identifier" translate="label" type="text" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>SEO Url Identifier</label>
+            </field>
+            <field id="seo_url_suffix" type="text" sortOrder="3" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>SEO Url Suffix</label>
+            </field>
+        </group>
+        <group id="cmsview" type="text" sortOrder="0" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>CMS Media Settings </label>
+            <field id="enablecms" translate="label" type="select" sortOrder="5" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Enable CMS Media</label>
+                <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+             </field>
+            <field id="mediaview" translate="label" type="select" sortOrder="5" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Media View</label>
+                <source_model>FME\Mediaappearance\Model\Config\Productmedia\Mediaview</source_model>
+                <depends>
+                    <field id="enablecms">1</field>
+                    
+                </depends>
+            </field>
+            <field id="view" translate="label" type="select" sortOrder="5" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Media Player</label>
+                <source_model>FME\Mediaappearance\Model\Config\Productmedia\Mediaplayertype</source_model>
+                <depends>
+                    <field id="enablecms">1</field>
+                    <field id="mediaview">mplayer</field>
+                </depends>
+            </field> 
+        </group>
+        <group id="categoryview" type="text" sortOrder="0" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>Category Media Settings </label>
+            <field id="enablecat" translate="label" type="select" sortOrder="5" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Enable Category Media</label>
+                <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+            </field>
+            <field id="mediaview" translate="label" type="select" sortOrder="5" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Media View</label>
+                <source_model>FME\Mediaappearance\Model\Config\Productmedia\Mediaview</source_model>
+                 <depends>
+
+                    <field id="enablecat">1</field>
+                </depends>
+            </field>
+            <field id="view" translate="label" type="select" sortOrder="5" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Media Player</label>
+                <source_model>FME\Mediaappearance\Model\Config\Productmedia\Mediaplayertype</source_model>
+                <depends>
+                 <field id="enablecat">1</field>
+                    <field id="mediaview">mplayer</field>
+                </depends>
+            </field>  
+        </group>
+        <group id="compactview" type="text" sortOrder="0" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>Product Media Settings </label>
+             <field id="enablepro" translate="label" type="select" sortOrder="5" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Enable Product Media</label>
+                <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+            </field>
+            <field id="mediaview" translate="label" type="select" sortOrder="5" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Media View</label>
+                <source_model>FME\Mediaappearance\Model\Config\Productmedia\Mediaview</source_model>
+                <depends>
+                        <field id="enablepro">1</field>
+            </depends>
+            </field>
+
+
+            <field id="view" translate="label" type="select" sortOrder="5" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Media Player</label>
+                <source_model>FME\Mediaappearance\Model\Config\Productmedia\Mediaplayertype</source_model>
+                <depends>
+                   <field id="enablepro">1</field>
+                        <field id="mediaview">mplayer</field>
+            </depends>
+            </field>
+            
+        </group>
+
+
+        <group id="thumbsetting" type="text" sortOrder="0" showInDefault="1" showInWebsite="1" showInStore="1">
+            
+            
+            <label>Thumbs Setting (Compact And Grid )</label>
+
+
+            <field id="thumb_width" translate="label" type="text" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Thumb Width</label>
+            </field>
+            <field id="thumb_height" translate="label" type="text" sortOrder="3" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Thumb Height</label>
+            </field>
+            <field id="thumb_border_effect" translate="label" type="select" sortOrder="4" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Thumb Border Effect</label>
+                <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+            </field>
+            <field id="thumb_border_width" translate="label" type="text" sortOrder="5" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Thumb Border Width</label>
+                 <depends>
+                        <field id="thumb_border_effect">1</field>
+                    </depends>
+            </field>
+            <field id="thumb_border_color" translate="label" type="text" sortOrder="6" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Thumb Border Color</label>
+                <frontend_model>FME\Mediaappearance\Block\Color</frontend_model> <!-- Our block for attaching color picker to text box -->
+                <depends>
+                        <field id="thumb_border_effect">1</field>
+                    </depends>
+            </field>
+            <field id="thumb_over_border_width" translate="label" type="text" sortOrder="7" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Thumb Over Border Width</label>
+                <depends>
+                        <field id="thumb_border_effect">1</field>
+                    </depends>
+            </field>
+            <field id="thumb_over_border_color" translate="label" type="text" sortOrder="8" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Thumb Over Border Color</label>
+                <frontend_model>FME\Mediaappearance\Block\Color</frontend_model> <!-- Our block for attaching color picker to text box -->
+                <depends>
+                        <field id="thumb_border_effect">1</field>
+                    </depends>
+            </field>
+            <field id="thumb_selected_border_width" translate="label" type="text" sortOrder="9" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Thumb Selected Border Width</label>
+                <depends>
+                        <field id="thumb_border_effect">1</field>
+                    </depends>
+            </field>
+            <field id="thumb_selected_border_color" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Thumb Selected Border Color</label>
+                <frontend_model>FME\Mediaappearance\Block\Color</frontend_model> <!-- Our block for attaching color picker to text box -->
+                <depends>
+                        <field id="thumb_border_effect">1</field>
+                    </depends>
+            </field>
+
+
+            <field id="thumb_round_corners_radius" translate="label" type="text" sortOrder="11" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Thumb Round Corners Radius</label>
+            </field>
+
+
+            <field id="thumb_color_overlay_effect" translate="label" type="select" sortOrder="12" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Thumb Color Overlay Effect</label>
+                <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+            </field>
+            <field id="thumb_overlay_color" translate="label" type="text" sortOrder="13" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Thumb Overlay Color</label>
+                <frontend_model>FME\Mediaappearance\Block\Color</frontend_model> <!-- Our block for attaching color picker to text box -->
+                <depends>
+                        <field id="thumb_color_overlay_effect">1</field>
+                    </depends>
+            </field>
+            <field id="thumb_overlay_opacity" translate="label" type="select" sortOrder="14" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Thumb Overlay Opacity</label>
+                <source_model>FME\Mediaappearance\Model\Config\Thumb\Opacity</source_model>
+                <depends>
+                        <field id="thumb_color_overlay_effect">1</field>
+                    </depends>
+            </field>
+            <field id="thumb_overlay_reverse" translate="label" type="select" sortOrder="15" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Thumb Overlay Reverse</label>
+                <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+            </field>
+            <field id="thumb_image_overlay_effect" translate="label" type="select" sortOrder="16" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Thumb Image Overlay Effect</label>
+                <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+            </field>
+            <field id="thumb_image_overlay_type" translate="label" type="select" sortOrder="17" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Thumb Image Overlay Type</label>
+                <source_model>FME\Mediaappearance\Model\Config\Thumb\Overlaytype</source_model>
+                <depends>
+                        <field id="thumb_image_overlay_effect">1</field>
+                    </depends>
+            </field>
+            <field id="thumb_transition_duration" translate="label" type="text" sortOrder="18" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Thumb Transition Duration</label>
+            </field>
+            
+            <!-->
+            <field id="thumb_show_loader" translate="label" type="select" sortOrder="19" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Thumb Show Loader</label>
+                <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+            </field>
+            <field id="thumb_loader_type" translate="label" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Thumb Loader Type</label>
+                <source_model>FME\Mediaappearance\Model\Config\Thumb\Ltype</source_model>
+            </field>
+            -->
+        </group>
+        <group id="stripepaneloptions" type="text" sortOrder="0" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>Strip Thumbs Panel Options</label>
+            <field id="strippanel_padding_top" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Strip Panel Padding Top</label>
+            </field>
+            <field id="strippanel_padding_bottom" translate="label" type="text" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Strip Panel Padding Bottom</label>
+            </field>
+            <field id="strippanel_padding_left" translate="label" type="text" sortOrder="3" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Strip Panel Padding Left</label>
+            </field>
+            <field id="strippanel_padding_right" translate="label" type="text" sortOrder="4" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Strip Panel Padding Right</label>
+            </field>
+            <!--
+            <field id="strippanel_enable_buttons" translate="label" type="select" sortOrder="5" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Strip Panel Enable Buttons</label>
+                <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+            </field>
+            <field id="strippanel_padding_buttons" translate="label" type="text" sortOrder="6" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Strip Panel Padding Buttons</label>
+            </field>
+            -->
+            <!--
+            <field id="strippanel_buttons_role" translate="label" type="select" sortOrder="7" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Strip Panel Button Role</label>
+                <source_model>FME\Mediaappearance\Model\Config\Strip\Role</source_model>
+            </field>
+
+
+            <field id="strippanel_enable_handle" translate="label" type="select" sortOrder="8" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Strip Panel Enable handle</label>
+                <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+            </field>
+            <field id="strippanel_handle_align" translate="label" type="select" sortOrder="9" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Strip Panel Handle Align</label>
+                <source_model>FME\Mediaappearance\Model\Config\Strip\Align</source_model>
+            </field>
+            <field id="strippanel_handle_offset" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Strip Panel Handle Offset</label>
+            </field>
+            -->
+            <field id="strippanel_background_color" translate="label" type="text" sortOrder="11" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Strip Panel Background Color</label>
+                <frontend_model>FME\Mediaappearance\Block\Color</frontend_model> <!-- Our block for attaching color picker to text box -->
+            </field>
+
+            <field id="strip_thumbs_align" translate="label" type="select" sortOrder="12" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Strip Thumbs Align</label>
+                <source_model>FME\Mediaappearance\Model\Config\Strip\Align</source_model>
+                <comment>top,bottom and Center For LEFT and RIGHT, While left,right,middle For TOP and BOTTOM</comment>
+            </field>
+            <field id="strip_space_between_thumbs" translate="label" type="text" sortOrder="13" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Strip Space Between Thumbs</label>
+            </field>
+            <!--<field id="strip_thumb_touch_sensetivity" translate="label" type="text" sortOrder="14" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Strip Thumbs Touch Sensetivity</label>
+            </field>
+            -->
+            <field id="strip_scroll_to_thumb_duration" translate="label" type="text" sortOrder="15" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Strip Scroll to Thumb Duration</label>
+            </field>
+            <!-->
+            <field id="strip_control_avia" translate="label" type="select" sortOrder="16" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Strip Control Avia</label>
+                <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+            </field>
+            <field id="strip_control_touch" translate="label" type="select" sortOrder="17" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Strip Control Touch</label>
+                <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+            </field>
+            -->
+            
+
+        </group>
+        <group id="gridpaneloptions" type="text" sortOrder="0" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>Grid Panel Options</label>
+            <field id="gridpanel_vertical_scroll" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Grid Panel Vertical Scroll</label>
+                <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+            </field>
+            <field id="gridpanel_grid_align" translate="label" type="select" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Grid Panel Grid Align</label>
+                <source_model>FME\Mediaappearance\Model\Config\Strip\Align</source_model>
+                <comment>top,bottom and Center For LEFT and RIGHT While left,right,middle for TOP and BOTTOM</comment>
+            </field>
+
+            <!--
+            <field id="gridpanel_padding_border_top" translate="label" type="text" sortOrder="3" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>GridPanel Padding BOrder Top</label>
+            </field>
+            <field id="gridpanel_padding_border_bottom" translate="label" type="text" sortOrder="4" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>GridPanel Padding BOrder Bottom</label>
+            </field>
+            <field id="gridpanel_padding_border_left" translate="label" type="text" sortOrder="5" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>GridPanel Padding BOrder Left</label>
+            </field>
+            <field id="gridpanel_padding_border_right" translate="label" type="text" sortOrder="6" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>GridPanel Padding BOrder Right</label>
+            </field>
+
+            <field id="gridpanel_arrows_align_vert" translate="label" type="select" sortOrder="7" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>GridPanel Arrow Align Vertically</label>
+                <source_model>FME\Mediaappearance\Model\Config\Grid\Gridalign</source_model>
+            </field>
+            <field id="gridpanel_arrows_padding_vert" translate="label" type="text" sortOrder="8" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>GridPanel Arrows Padding Vertically</label>
+            </field>
+            <field id="gridpanel_arrows_align_hor" translate="label" type="select" sortOrder="9" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>GridPanel Arrow Align Horizonatally</label>
+                <source_model>FME\Mediaappearance\Model\Config\Grid\Gridalign1</source_model>
+            </field>
+            <field id="gridpanel_arrows_padding_hor" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>GridPanel Arrow Padding Horizonatally</label>
+            </field>
+
+            <field id="gridpanel_space_between_arrows" translate="label" type="text" sortOrder="11" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>GridPanel Space Between Arrows</label>
+            </field>
+            <field id="gridpanel_arrows_always_on" translate="label" type="select" sortOrder="12" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>GridPanel Arrows Always On</label>
+                <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+            </field>
+
+            <field id="gridpanel_enable_handle" translate="label" type="select" sortOrder="13" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>GridPanel Enable Handle</label>
+                <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+            </field>
+            <field id="gridpanel_handle_align" translate="label" type="select" sortOrder="13" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>GridPanel Handle Align</label>
+                <source_model>FME\Mediaappearance\Model\Config\Strip\Align</source_model>
+            </field>
+            <field id="gridpanel_handle_offset" translate="label" type="text" sortOrder="15" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>GridPanel Handle Offset</label>
+            </field>
+            -->
+            <field id="gridpanel_background_color" translate="label" type="text" sortOrder="16" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Grid Panel Background Color</label>
+                <frontend_model>FME\Mediaappearance\Block\Color</frontend_model> <!-- Our block for attaching color picker to text box -->
+            </field>
+<!-->
+            <field id="grid_panes_direction" translate="label" type="select" sortOrder="17" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Grid Panes Direction</label>
+                <source_model>FME\Mediaappearance\Model\Config\Grid\Gridpanes</source_model>
+            </field>
+            -->
+            <field id="grid_num_cols" translate="label" type="text" sortOrder="18" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Grid Num Columns</label>
+                 <comment> For Left and Right Grid </comment>
+            
+            </field>
+            <field id="grid_space_between_cols" translate="label" type="text" sortOrder="19" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Grid Space Between Columns</label>
+            </field>
+            <field id="grid_space_between_rows" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Grid Space Between Rows</label>
+            </field>
+            <field id="grid_transition_duration" translate="label" type="text" sortOrder="21" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Grid Transition Duration</label>
+            </field>
+             <field id="grid_carousel" translate="label" type="select" sortOrder="22" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Grid Carousel</label>
+                <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+            </field>
+
+
+
+        </group>
+        <group id="slideoptions" type="text" sortOrder="0" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>Slider Options</label>
+            <field id="slider_transition" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Slider Transition</label>
+                <source_model>FME\Mediaappearance\Model\Config\Slide\Effects</source_model>
+            </field>
+            <field id="slider_transition_speed" translate="label" type="text" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Slider Transition Speed</label>
+            </field>
+            <field id="slider_control_swipe" translate="label" type="select" sortOrder="3" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Slider Control Swipe</label>
+                <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+            </field>
+            <!-->
+            <field id="slider_control_zoom" translate="label" type="select" sortOrder="4" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Slider Control Zoom</label>
+                <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+            </field>
+            <field id="slider_loader_type" translate="label" type="select" sortOrder="5" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Slider Control Zoom</label>
+                <source_model>FME\Mediaappearance\Model\Config\Slide\Stype</source_model>
+            </field>
+           
+            <field id="slider_loader_color" translate="label" type="select" sortOrder="6" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Slider Loader Color</label>
+                <source_model>FME\Mediaappearance\Model\Config\Slide\Lcolor</source_model> 
+            </field>
+            _-->
+
+            <field id="slider_enable_bullets1" translate="label" type="select" sortOrder="7" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Slider Enable Bullets</label>
+                <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+            </field>
+            <field id="slider_bullets_align_hor" translate="label" type="select" sortOrder="8" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Slider Bullets Align Horizontal</label>
+                <source_model>FME\Mediaappearance\Model\Config\Slide\Halign</source_model>
+            </field>
+            <field id="slider_bullets_align_vert" translate="label" type="select" sortOrder="9" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Slider Bullets Align Vertical</label>
+                <source_model>FME\Mediaappearance\Model\Config\Slide\Valign</source_model>
+            </field>
+             <field id="slider_enable_arrows" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Slider Enable Arrows</label>
+                <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+            </field>
+             <field id="slider_enable_progress_indicator" translate="label" type="select" sortOrder="11" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Slider Enable Progress Indicator</label>
+                <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+            </field>
+            
+            <field id="slider_progress_indicator_type" translate="label" type="select" sortOrder="12" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Slider Progress Indicator Type</label>
+                <source_model>FME\Mediaappearance\Model\Config\Slide\Progresstype</source_model>
+            </field>
+             <field id="slider_progress_indicator_align_vert" translate="label" type="select" sortOrder="13" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Slider Progress Indicator Align Vertical</label>
+                <source_model>FME\Mediaappearance\Model\Config\Slide\Valign</source_model>
+            </field>
+            <field id="slider_progressbar_color" translate="label" type="text" sortOrder="14" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Progress Bar Color</label>
+                <frontend_model>FME\Mediaappearance\Block\Color</frontend_model> <!-- Our block for attaching color picker to text box -->
+            </field>
+            <field id="slider_progressbar_opacity" translate="label" type="select" sortOrder="15" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Progress Bar Opacity</label>
+                <source_model>FME\Mediaappearance\Model\Config\Thumb\Opacity</source_model>
+            </field>
+            <field id="slider_progressbar_line_width" translate="label" type="text" sortOrder="16" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Progress Bar Line Width</label>
+            </field>
+            <field id="slider_progresspie_type_fill" translate="label" type="select" sortOrder="17" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Progress Pie Type Fill</label>
+                <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+            </field>
+            <field id="slider_progresspie_color1" translate="label" type="text" sortOrder="18" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Progress Pie Color 1</label>
+                <frontend_model>FME\Mediaappearance\Block\Color</frontend_model> <!-- Our block for attaching color picker to text box -->
+            </field>
+            <field id="slider_progresspie_color2" translate="label" type="text" sortOrder="19" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Progress Pie Color 2</label>
+                <frontend_model>FME\Mediaappearance\Block\Color</frontend_model> <!-- Our block for attaching color picker to text box -->
+            </field>
+            <field id="slider_progresspie_stroke_width" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Progress Pie Stroke Width</label>
+                 <depends>
+                        <field id="slider_progresspie_type_fill">0</field>
+                    </depends>
+            </field>
+            <field id="slider_progresspie_width" translate="label" type="text" sortOrder="21" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Progress Pie  Width</label>
+            </field>
+            <field id="slider_progresspie_height" translate="label" type="text" sortOrder="22" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Progress Pie Height</label>
+            </field>
+            <field id="slider_enable_play_button" translate="label" type="select" sortOrder="23" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Slider Enable Play button</label>
+                <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+            </field>
+            <field id="slider_play_button_align_hor" translate="label" type="select" sortOrder="24" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Slider Play button Align Horizontal</label>
+                <source_model>FME\Mediaappearance\Model\Config\Slide\Halign</source_model>
+            </field>
+            <field id="slider_play_button_align_vert" translate="label" type="select" sortOrder="25" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Slider Play button Align Vertical</label>
+                <source_model>FME\Mediaappearance\Model\Config\Slide\Valign</source_model>
+            </field>
+            <field id="slider_enable_fullscreen_button" translate="label" type="select" sortOrder="26" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Slider Enable FullScreen button</label>
+                <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+            </field>
+            <field id="slider_fullscreen_button_align_hor" translate="label" type="select" sortOrder="27" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>FullScreen button Align Horizontal</label>
+                <source_model>FME\Mediaappearance\Model\Config\Slide\Halign</source_model>
+            </field>
+            <field id="slider_fullscreen_button_align_vert" translate="label" type="select" sortOrder="28" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>FullScreen button Align Vertical</label>
+                <source_model>FME\Mediaappearance\Model\Config\Slide\Valign</source_model>
+            </field>
+
+            <field id="slider_controls_always_on" translate="label" type="select" sortOrder="29" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Slider Controls Always On</label>
+                <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+            </field>
+            <!-->
+            <field id="slider_controls_appear_ontap" translate="label" type="select" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Slider Controls Appear Ontap</label>
+                <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+            </field>
+            -->
+            <field id="slider_controls_appear_duration" translate="label" type="text" sortOrder="31" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Slider Controls Appear Duration</label>
+            </field>
+            <field id="slider_enable_text_panel" translate="label" type="select" sortOrder="32" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Slider Enable Text panel</label>
+                <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+            </field>
+            <field id="slider_textpanel_bg_color" translate="label" type="text" sortOrder="33" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Slider TextPanel Background Color</label>
+                <frontend_model>FME\Mediaappearance\Block\Color</frontend_model> <!-- Our block for attaching color picker to text box -->
+            </field>
+            <field id="slider_textpanel_bg_opacity" translate="label" type="select" sortOrder="34" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Slider TextPanel Background Opacity</label>
+                <source_model>FME\Mediaappearance\Model\Config\Thumb\Opacity</source_model>
+            </field>
+
+        </group>
+         <group id="mediagallerytilesettings" type="text" sortOrder="16" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>Media Gallery Tile Settings-(FME GALLERY)</label>
+            <field id="caption" translate="label" type="select" sortOrder="8" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Enable Caption</label>
+                <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+            </field>
+
+            <!-->  Caption Option   -->
+
+            <field id="caption_position" translate="label" type="select" sortOrder="9" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Caption Position</label> 
+                    <source_model>FME\Mediaappearance\Model\Config\Caption\Captionposition</source_model>
+                    <depends>
+                        <field id="caption">1</field>
+                    </depends>
+            </field>
+            <field id="caption_animation" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Caption Animation</label> 
+                    <source_model>FME\Mediaappearance\Model\Config\Caption\Captionanimation</source_model>
+                    <depends>
+                        <field id="caption">1</field>
+                    </depends>
+            </field>
+            <field id="caption_align" translate="label" type="select" sortOrder="11" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Caption Alignment</label> 
+                    <source_model>FME\Mediaappearance\Model\Config\Caption\Captionalingment</source_model>
+                    <depends>
+                        <field id="caption">1</field>
+                    </depends>
+            </field>
+            <field id="caption_colorscheme" translate="label" type="select" sortOrder="12" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Caption Color Scheme</label> 
+                    <source_model>FME\Mediaappearance\Model\Config\Caption\Colorscheme</source_model>
+                    <depends>
+                        <field id="caption">1</field>
+                    </depends>
+            </field>
+            <field id="icons" translate="label" type="select" sortOrder="12.5" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Enable Icons</label>
+                <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                 <depends>
+                        <field id="caption">1</field>
+                    </depends>
+            </field>
+            <field id="icons_list" translate="label" type="text" sortOrder="12.6" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Icons Font Awesome Class Class</label> 
+                    <depends>
+                        <field id="caption">1</field>
+                        <field id="icons">1</field>
+                    </depends>
+                <comment>Like (fa fa-heart) Link : https://fontawesome.com/icons</comment>
+            </field>
+            <field id="zoom" translate="label" type="select" sortOrder="13" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Enable Zoom</label>
+                <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+            </field>
+            <!-->  Filter Option End   -->
+            <field id="zoom_effect" translate="label" type="select" sortOrder="14" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Zoom Effect</label> 
+                    <source_model>FME\Mediaappearance\Model\Config\Zoom\Zoomeffect</source_model>
+                    <depends>
+                        <field id="zoom">1</field>
+                    </depends>
+            </field>
+            <field id="zoom_speed" translate="label" type="select" sortOrder="15" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Zoom Speed</label> 
+                    <source_model>FME\Mediaappearance\Model\Config\Zoom\Zoomspeed</source_model>
+                    <depends>
+                        <field id="zoom">1</field>
+                    </depends>
+            </field>
+            <!-->  Icons Option   -->
+            
+            <!-->  margin Option   -->
+            <field id="margin" translate="label" type="select" sortOrder="18" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Enable margin</label>
+                <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+            </field>
+            <field id="margin_list" translate="label" type="text" sortOrder="19" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Margin Between Thumbs</label> 
+                <comment>margin is in Pixel (i-e 20,40)</comment>
+                    <depends>
+                        <field id="margin">1</field>
+                    </depends>
+            </field>
+            <field id="social_media" translate="label" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Enable Social Media Icons</label>
+                <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+            </field>
+            <field id="social_media_icon_pos" translate="label" type="select" sortOrder="21" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Social Media Icons Position</label>
+                <source_model>FME\Mediaappearance\Model\Config\Socialmedia\Iconposition</source_model>
+                <depends>
+                        <field id="social_media">1</field>
+                </depends>
+            </field>
+            <field id="social_media_icon_style" translate="label" type="select" sortOrder="22" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Social Media Icons Style</label>
+                <source_model>FME\Mediaappearance\Model\Config\Socialmedia\Iconstyle</source_model>
+                <depends>
+                        <field id="social_media">1</field>
+                </depends>
+            </field>
+            <field id="enable_Column" translate="label" type="select" sortOrder="23" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Thumbs Layout</label>
+                <source_model>FME\Mediaappearance\Model\Config\Layout\Thumbslayout</source_model>
+            </field>
+           
+            
+
+        </group>
+         <group id="photogallerypopusetting" type="text" sortOrder="16" showInDefault="1" showInWebsite="1" showInStore="1">
+         <label>Gallery Page Pop Up Settings-(FME GALLERY)</label>
+           
+            <field id="enablepopupgallery" translate="label" type="select" sortOrder="0" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Enable Gallery On Pop Up</label>
+                
+                <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+            </field>
+            <field id="enablepopupgalleryclick" translate="label" type="select" sortOrder="0" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Enable Navigation On Click</label>
+                <depends>
+                     
+                    <field id="enablepopupgallery">1</field>
+                </depends>
+                <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+            </field>
+            <field id="popuptime" translate="label" type="text" sortOrder="0" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Pop Up Time</label>
+                
+                 <comment>Time is in millisecond</comment>
+            </field>
+
+
+
+
+
+
+
+
+
+
+            
+        </group>
+        
+        <!-- upgraded Nano gallery -->
+        <group id="nanogalllerySetting" type="text" sortOrder="199" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>Nano Gallery Settings</label>
+                <field id="enable_module" translate="label" type="select" sortOrder="0" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Gallery Type</label>
+                    <source_model>FME\Mediaappearance\Model\Config\Nanogallery\Galtype</source_model>
+                </field>
+                 <field id="inbulitlayouts" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Layouts</label>
+                    <source_model>FME\Mediaappearance\Model\Config\Nanogallery\Thumbslayoutype</source_model>
+                </field>
+            
+            <group id="gallerylayout" type="text" sortOrder="199" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Thumbnail Layout</label>
+                <depends>
+                        <field id="inbulitlayouts">cl</field>
+                </depends>
+                <field id="layouts" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Custom Layout</label>
+                    <source_model>FME\Mediaappearance\Model\Config\Nanogallery\Thumbslayout</source_model>
+                </field>
+                <field id="width" translate="label" type="text" sortOrder="19" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Width</label> 
+                    <depends>
+                        <field id="layouts">grid</field>
+                    </depends>
+                </field>
+
+                <field id="height" translate="label" type="text" sortOrder="19" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Height</label>
+                    <depends>
+                        <field id="layouts">grid</field>
+                    </depends>   
+                </field>
+                <field id="justheight" translate="label" type="text" sortOrder="19" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Height</label>
+                    <depends>
+                        <field id="layouts">justified</field>
+                    </depends>   
+                </field>
+                 <field id="cascadingwidth" translate="label" type="text" sortOrder="19" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Width</label> 
+                    <depends>
+                        <field id="layouts">cascading</field>
+                    </depends>
+                </field>
+                 <field id="mosaicwidth" translate="label" type="text" sortOrder="19" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Width</label> 
+                    <depends>
+                        <field id="layouts">mosaic</field>
+                    </depends>
+                </field>
+
+                <field id="mosaicheight" translate="label" type="text" sortOrder="19" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Height</label>
+                    <depends>
+                        <field id="layouts">mosaic</field>
+                    </depends>   
+                </field>
+                 <field id="mosaictextarea" translate="label" type="textarea" sortOrder="19" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Layout Definition</label>
+
+                 <comment>[
+                        { "c": 1, "r": 1, "w": 2, "h": 2 },
+                        { "c": 3, "r": 1, "w": 1, "h": 1 },
+                        { "c": 3, "r": 2, "w": 1, "h": 1 }
+                    ]
+                </comment>
+                    <depends>
+                        <field id="layouts">mosaic</field>
+                    </depends>   
+                </field>
+                <field id="thumbnailBorderHorizontal" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Border Horizontal</label>
+                </field>
+
+                <field id="thumbnailBorderVertical" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Border Vertical</label>
+                </field>
+
+                <field id="bg_color" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Thumb Background Color</label>
+                    <frontend_model>FME\Mediaappearance\Block\Color</frontend_model> <!-- Our block for attaching color picker to text box -->
+                </field>
+                   
+
+                <field id="thumbnailGutterWidth" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Gutter Width</label>
+                </field>
+
+                <field id="thumbnailGutterHeight" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Gutter Height</label>
+                </field>
+                <field id="thumnsallign" translate="label" type="select" sortOrder="21" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Thumbnail Alignment</label>
+                    <source_model>FME\Mediaappearance\Model\Config\Nanogallery\Thumbsalign</source_model>
+                </field>
+                <field id="thumbnailDisplayInterval" translate="label" type="text" sortOrder="22" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Thumbnail Display Interval</label>
+                </field>
+                <field id="thumbnailDisplayTransition" translate="label" type="select" sortOrder="22" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Thumbnail Display Transition</label>
+                    <source_model>FME\Mediaappearance\Model\Config\Nanogallery\Thumbstrans</source_model>
+                </field>
+                <field id="thumbnailDisplayTransitionDuration" translate="label" type="text" sortOrder="22" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Thumbnail Display Transition Duration</label>
+                </field>
+                 
+
+            </group> 
+            <group id="gallerysetting" type="text" sortOrder="199" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Gallery Settings</label>
+                <depends>
+                        <field id="inbulitlayouts">cl</field>
+                </depends>
+                <field id="enable_module" translate="label" type="select" sortOrder="0" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Gallery Type</label>
+                    <source_model>FME\Mediaappearance\Model\Config\Nanogallery\Galtype</source_model>
+                </field>
+            </group>
+             
+            <group id="paginitionsettings" type="text" sortOrder="199" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Paginition Types</label>
+                <depends>
+                        <field id="inbulitlayouts">cl</field>
+                </depends>
+                <field id="paginitionType" translate="label" type="select" sortOrder="0" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Gallery Type</label>
+                    <source_model>FME\Mediaappearance\Model\Config\Nanogallery\Paginitiontype</source_model>
+                </field>
+                <field id="galleryLastRowFull" translate="label" type="select" sortOrder="23" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Gallery Last Row Full</label>
+                    <comment>Wont work for mosaic Layout</comment>
+                    <depends>
+                        <field id="paginitionType">plr</field>
+                    </depends>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                 <field id="allowgalleryMaxRows" translate="label" type="select" sortOrder="23" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Allow Rows</label>
+                    <comment>Wont work for mosaic Layout</comment>
+                        <depends>
+                            <field id="paginitionType">plr</field>
+                        </depends>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="galleryMaxRows" translate="label" type="text" sortOrder="24" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <depends>
+                        <field id="allowgalleryMaxRows">1</field>
+                        <field id="paginitionType">plr</field>
+                    </depends>   
+                    <label>Gallery Max Rows</label>
+                </field>
+                 <field id="galleryDisplayMoreStep" translate="label" type="text" sortOrder="24" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <depends>
+                        <field id="paginitionType">pbtoon</field>
+                    </depends>   
+                    <label>Gallery Display More Step</label>
+                </field>
+                <field id="dotgalleryMaxRows" translate="label" type="text" sortOrder="24" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <depends>
+                        <field id="paginitionType">pdot</field>
+                    </depends>   
+                    <label>Gallery Max Rows</label>
+                </field>
+
+                <field id="numgalleryMaxRows" translate="label" type="text" sortOrder="24" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <depends>
+                        <field id="paginitionType">pnum</field>
+                    </depends>   
+                    <label>Gallery Max Rows</label>
+                </field>
+
+                <field id="rectgalleryMaxRows" translate="label" type="text" sortOrder="24" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <depends>
+                        <field id="paginitionType">prect</field>
+                    </depends>   
+                    <label>Gallery Max Rows</label>
+                </field>
+
+
+            </group>
+             <group id="labelSetting" type="text" sortOrder="199" showInDefault="1" showInWebsite="1" showInStore="1">
+                <depends>
+                        <field id="inbulitlayouts">cl</field>
+                </depends>
+                <label>Label Settings</label>
+                <field id="position" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Position</label>
+                    <source_model>FME\Mediaappearance\Model\Config\Nanogallery\Labelposition</source_model>
+                </field>
+                <field id="align" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Align</label>
+                    <source_model>FME\Mediaappearance\Model\Config\Nanogallery\Labelalign</source_model>
+                </field>
+                <field id="display" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Display</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+            </group> 
+            <group id="thumbnailtools" type="text" sortOrder="199" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Thumbnail Tools</label>
+                <depends>
+                        <field id="inbulitlayouts">cl</field>
+                </depends>
+                <comment>Possible tools: 'share', 'download', 'cart', 'info', 'display'. Use comma(,) for multiple icons</comment>
+                <field id="topLeft" translate="label" type="text" sortOrder="22" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Top Left</label>
+                </field>
+                <field id="topRight" translate="label" type="text" sortOrder="22" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Top Right</label>
+                </field>
+                <field id="bottomLeft" translate="label" type="text" sortOrder="22" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Bottom Left</label>
+                </field>
+                <field id="bottomRight" translate="label" type="text" sortOrder="22" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Bottom Right</label>
+                </field>
+            </group>
+            <group id="hovereffect" type="text" sortOrder="199" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Hover Effects</label>
+               <depends>
+                        <field id="inbulitlayouts">cl</field>
+                </depends>
+                <comment>Consult User guide for Catchy Hover Effects</comment>
+                <field id="thumbnailHoverEffect2" translate="label" type="textarea" sortOrder="19" showInDefault="1" showInWebsite="1" showInStore="1">
+                     <label>Thumbnail Hover Effect2</label>
+                </field>
+            </group>
+            <group id="lightBox" type="text" sortOrder="199" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>LightBox Settings</label>
+                <depends>
+                        <field id="inbulitlayouts">cl</field>
+                </depends>
+                <comment> Use these to avail 'previousButton', 'nextButton', 'rotateLeft', 'rotateRight', 'pageCounter', 'playPauseButton', 'fullscreenButton', 'infoButton', 'linkOriginalButton', 'closeButton', 'downloadButton', 'zoomButton', 'shareButton', 'label' (image title and description),</comment>
+                <field id="topLeft" translate="label" type="text" sortOrder="22" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Viewer Tools Left</label>
+                </field>
+                <field id="topRight" translate="label" type="text" sortOrder="22" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Viewer Tools Right</label>
+                </field>
+                <field id="viewerToolbarstandard" translate="label" type="text" sortOrder="22" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Viewer Toolbar Standard</label>
+                </field>
+                <field id="viewerToolbarminimize" translate="label" type="text" sortOrder="22" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Viewer Toolbar Minimized</label>
+                </field>
+            </group>
+        </group> 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   </section>
+</system>
+</config> 

@@ -1,0 +1,16 @@
+<?php /** @var \Splitit\PaymentGateway\Block\UpstreamMessaging\UpstreamMessagingProduct $block */ ?>
+
+<?php
+  $fullprice = $block->getCurrentProductPrice() * 100;
+?>
+<div class="finance-options">
+  <div class="finance-title"><strong>Flexible Finance Options</strong></div>
+  <p class="affirm-as-low-as" data-page-type="product" data-amount="<?= $fullprice; ?>"></p>
+  <div style="margin: 10px 0;">
+      <div class="finance-calc">estimate your payments</div>
+      <a class="affirm-site-modal" data-page-type="banner">
+        <img src="https://cdn-assets.affirm.com/images/banners/234x60.png" />
+      </a>
+  </div>
+</div>
+<div class="finance-breakpoint"><span>OR</span></div>

@@ -1,0 +1,118 @@
+<?php
+/**
+ * Plumrocket Inc.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End-user License Agreement
+ * that is available through the world-wide-web at this URL:
+ * http://wiki.plumrocket.net/wiki/EULA
+ * If you are unable to obtain it through the world-wide-web, please
+ * send an email to support@plumrocket.com so we can send you a copy immediately.
+ *
+ * @package     Plumrocket Ajaxcart v2.x.x
+ * @copyright   Copyright (c) 2018 Plumrocket Inc. (http://www.plumrocket.com)
+ * @license     http://wiki.plumrocket.net/wiki/EULA  End-user License Agreement
+ */
+?>
+
+<style>
+    /* popup */
+    <?php $minicart = $this->getStyles('minicart'); ?>
+
+    #pac-popup-content a {
+        color: <?php echo $minicart->link_color; ?>;
+    }
+
+    #pac-popup-content a:hover {
+        color: <?php echo $minicart->link_color_hover; ?>;
+    }
+
+    #pac-popup-content .pac-checkout-button {
+        background-color: <?php echo $minicart->button_bg_color; ?>!important;
+        color: <?php echo $minicart->button_text_color; ?>!important;
+    }
+
+    #pac-popup-content .pac-checkout-button:hover {
+        background-color: <?php echo $minicart->button_bg_color_hover; ?>!important;
+        color: <?php echo $minicart->button_text_color_hover; ?>!important;
+    }
+
+
+    .pac-cart-total .pac-continue-shop a:before {
+        border-color: transparent <?php echo $minicart->link_color; ?> transparent transparent;
+    }
+
+    .pac-cart-total .pac-continue-shop a:hover:before {
+        border-color: transparent <?php echo $minicart->link_color_hover; ?> transparent transparent;
+    }
+</style>
+
+<?php if ($this->styleEnable()): ?>
+    <style>
+        /* add to cart on product page */
+
+        <?php $productPageBtn = $this->getStyles('product_page_add_button'); ?>
+
+        .pac-btn-cart {
+            background-color: <?php echo $productPageBtn->button_bg_color; ?>!important;
+            color : <?php echo $productPageBtn->button_text_color; ?>!important;
+        }
+
+        .pac-btn-cart:hover {
+            background-color: <?php echo $productPageBtn->button_bg_color_hover; ?>!important;
+            color : <?php echo $productPageBtn->button_text_color_hover; ?>!important;
+        }
+
+        .pac-btn-cart .pac-label {
+            background-color: <?php echo $productPageBtn->button_icon_background_color; ?>!important;
+        }
+
+        .pac-btn-cart:hover .pac-label {
+            background-color: <?php echo $productPageBtn->button_icon_background_color_hover; ?>!important;
+        }
+
+        .pac-btn-cart.disabled span {
+            background-color: <?php echo $productPageBtn->button_icon_background_color; ?>!important;
+        }
+
+        .pac-btn-cart.disabled:hover span {
+            background-color: <?php echo $productPageBtn->button_icon_background_color_hover; ?>!important;
+        }
+
+        /* add to cart on product list */
+
+        <?php $productListBtn = $this->getStyles('product_list_add_button'); ?>
+        .products .pac-btn-cart,
+        .widget .pac-btn-cart,
+        #wishlist-sidebar .pac-btn-cart {
+            background-color: <?php echo $productListBtn->button_bg_color; ?>!important;
+            color : <?php echo $productListBtn->button_text_color; ?>!important;
+        }
+
+        .products .pac-btn-cart.disabled span,
+        .widget .pac-btn-cart.disabled span,
+        #wishlist-sidebar .pac-btn-cart.disabled span {
+            background-color: <?php echo $productListBtn->button_icon_background_color; ?>!important;
+        }
+
+        .products .pac-btn-cart:hover,
+        .widget .pac-btn-cart:hover,
+        #wishlist-sidebar .pac-btn-cart:hover {
+            background-color: <?php echo $productListBtn->button_bg_color_hover; ?>!important;
+            color : <?php echo $productListBtn->button_text_color_hover; ?>;
+        }
+
+        .products .pac-btn-cart .pac-label,
+        .widget .pac-btn-cart .pac-label,
+        #wishlist-sidebar .pac-btn-cart .pac-label {
+            background-color: <?php echo $productListBtn->button_icon_background_color; ?>!important;
+        }
+
+        .products  .pac-btn-cart:hover .pac-label,
+        .widget .pac-btn-cart:hover .pac-label,
+        #wishlist-sidebar .pac-btn-cart:hover .pac-label {
+            background-color: <?php echo $productListBtn->button_icon_background_color_hover; ?>!important;
+        }
+    </style>
+<?php endif; ?>

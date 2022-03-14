@@ -1,0 +1,61 @@
+<?xml version="1.0" ?>
+<!--
+
+ * Plumrocket Inc.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End-user License Agreement
+ * that is available through the world-wide-web at this URL:
+ * http://wiki.plumrocket.net/wiki/EULA
+ * If you are unable to obtain it through the world-wide-web, please
+ * send an email to support@plumrocket.com so we can send you a copy immediately.
+ *
+ * @package     Plumrocket Ajaxcart v2.x.x
+ * @copyright   Copyright (c) 2018 Plumrocket Inc. (http://www.plumrocket.com)
+ * @license     http://wiki.plumrocket.net/wiki/EULA  End-user License Agreement
+ -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <prajaxcart>
+            <general>
+                <enabled>0</enabled>
+                <serial></serial>
+                <related_on_edit>1</related_on_edit>
+                <qty_on_product_list>1</qty_on_product_list>
+                <product_qty_selector>product-image-wrapper</product_qty_selector>
+                <minicart_style>1</minicart_style>
+            </general>
+            <design>
+                <minicart>
+                    <link_color>#1979C3</link_color>
+                    <link_color_hover>#006BB4</link_color_hover>
+                    <button_bg_color>#1979C3</button_bg_color>
+                    <button_bg_color_hover>#006BB4</button_bg_color_hover>
+                    <button_text_color>#FFF</button_text_color>
+                    <button_text_color_hover>#FFF</button_text_color_hover>
+                </minicart>
+                <product_page_add_button>
+                    <button_text_color>#FFF</button_text_color>
+                    <button_text_color_hover>#FFF</button_text_color_hover>
+                    <button_bg_color>#1979C3</button_bg_color>
+                    <button_bg_color_hover>#006BB4</button_bg_color_hover>
+                    <button_icon_background_color>#1467A7</button_icon_background_color>
+                    <button_icon_background_color_hover>#035C98</button_icon_background_color_hover>
+                </product_page_add_button>
+                <product_list_add_button>
+                    <button_text_color>#FFF</button_text_color>
+                    <button_text_color_hover>#FFF</button_text_color_hover>
+                    <button_bg_color>#1979C3</button_bg_color>
+                    <button_bg_color_hover>#006BB4</button_bg_color_hover>
+                    <button_icon_background_color>#1467A7</button_icon_background_color>
+                    <button_icon_background_color_hover>#035C98</button_icon_background_color_hover>
+                </product_list_add_button>
+            </design>
+            <additional_configuration>
+                <mode>0</mode>
+                <button_selector>.action.primary.tocart</button_selector>
+            </additional_configuration>
+        </prajaxcart>
+    </default>
+</config>

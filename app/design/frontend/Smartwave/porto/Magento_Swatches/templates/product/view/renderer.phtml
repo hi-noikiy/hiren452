@@ -1,0 +1,95 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+?>
+<?php
+/** @var $block \Magento\Swatches\Block\Product\Renderer\Configurable */
+/** @var \Magento\Swatches\ViewModel\Product\Renderer\Configurable $configurableViewModel */
+$configurableViewModel = $block->getConfigurableViewModel()
+?>
+<div class="swatch-opt" data-role="swatch-options">
+    <!-- <div class="variations-labels variation-tab">
+        <div id="metal_type" class="variation-label metal_type active"><span>Metal Type</span></div>
+        <div id="carat_weight" class="variation-label carat_weight" style="display: none;"><span>Carat Weight</span></div>
+    </div> -->    
+</div>
+
+<script type="text/x-magento-init">
+    {
+        "[data-role=swatch-options]": {
+            "Magento_Swatches/js/swatch-renderer": {
+                "jsonConfig": <?= /* @noEscape */ $swatchOptions = $block->getJsonConfig() ?>,
+                "jsonSwatchConfig": <?= /* @noEscape */ $swatchOptions = $block->getJsonSwatchConfig() ?>,
+                "mediaCallback": "<?= $block->escapeJs($block->escapeUrl($block->getMediaCallback())) ?>",
+                "gallerySwitchStrategy": "<?= $block->escapeJs($block->getVar('gallery_switch_strategy', 'Magento_ConfigurableProduct')) ?: 'replace'; ?>",
+                "jsonSwatchImageSizeConfig": <?= /* @noEscape */ $block->getJsonSwatchSizeConfig() ?>,
+                "showTooltip": <?= $block->escapeJs($configurableViewModel->getShowSwatchTooltip()) ?>
+            }
+        },
+        "*" : {
+            "Magento_Swatches/js/catalog-add-to-cart": {}
+        }
+    }
+</script>
+
+<script type="text/javascript">
+
+require(["jquery"], function($) {
+
+	function tabFirstSet(){
+		if($('.variation-label.metal_type').hasClass('active')){
+            $('.swatch-attribute.metal_type').addClass('tabActivated');
+        }
+        else{
+            $('.swatch-attribute.metal_type.tabActivated').removeClass('tabActivated'); 
+        }
+
+	}
+	// jQuery(document).ready(function(){tabFirstSet();});
+	// jQuery(window).load(function() {tabFirstSet();});
+	// jQuery(window).resize(function() {tabFirstSet();});
+
+   	function tabAutoSet(){
+        var that = $('.variation-label'),
+            tabContent = $('.swatch-attributet[attribute-code="' + that.attr('id') + '"]');
+
+        if($('div.swatch-attribute').hasClass('carat_weight')){
+            $('.variation-label.carat_weight').show();
+        }
+        else{
+            $('.variation-label.carat_weight').hide();
+        }  
+            
+        $('.variations-labels').on('click', '.variation-label', function() {
+            var that = $(this),
+                attId = jQuery(".swatch-attributet");
+            if (!that.hasClass('active')) {
+                that.addClass('active').siblings('.active').removeClass('active');
+                //$('.swatch-attribute').toggleClass('activated');
+            }
+            
+            if($('.variation-label.metal_type').hasClass('active')){
+                $('.swatch-attribute.metal_type').addClass('tabActivated');
+            }
+            else{
+                $('.swatch-attribute.metal_type.tabActivated').removeClass('tabActivated'); 
+            }
+            if($('.variation-label.carat_weight').hasClass('active')){
+                $('.swatch-attribute.carat_weight').addClass('tabActivated');
+            }
+            else{
+                $('.swatch-attribute.carat_weight.tabActivated').removeClass('tabActivated'); 
+            }
+
+        });
+    	
+    }
+
+
+	// jQuery(document).ready(function(){tabAutoSet();});
+	// jQuery(window).resize(function() {tabAutoSet();});
+
+}); 
+</script>

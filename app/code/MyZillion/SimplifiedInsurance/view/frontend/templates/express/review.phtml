@@ -1,0 +1,186 @@
+<?php
+/**
+ * Copyright (c) 2020, Zillion Insurance Services, Inc.
+ * All rights reserved.
+ * Redistribution and use in source and binary forms, with or without modification,
+ * are permitted provided that the following conditions are met:
+ *   * Redistributions of source code must retain the above copyright notice,
+ *     this list of conditions and the following disclaimer.
+ *   * Redistributions in binary form must reproduce the above copyright notice,
+ *     this list of conditions and the following disclaimer in the documentation
+ *     and/or other materials provided with the distribution.
+ *   * Neither the name of Zend Technologies USA, Inc. nor the names of its
+ *     contributors may be used to endorse or promote products derived from this
+ *     software without specific prior written permission.
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+ * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+ * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR
+ * ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+ * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+ * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
+ * ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+ * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+ * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ */
+
+/**
+ * @var \Magento\Paypal\Block\Express\Review $block
+ */
+//@codingStandardsIgnoreFile
+// This file is cloned from Magento_Paypal::view/frontend/templates/express/review.phtml
+?>
+<div class="paypal-review view">
+    <div class="block block-order-details-view">
+        <div class="block-content">
+            <?php if ($block->getShippingAddress()) : ?>
+                <div class="box box-order-shipping-method">
+                    <strong class="box-title">
+                        <span><?= $block->escapeHtml(__('Shipping Method')) ?></span>
+                    </strong>
+                    <div class="box-content">
+                        <form method="post" id="shipping-method-form"
+                              action="<?= $block->escapeUrl($block->getShippingMethodSubmitUrl()) ?>"
+                              class="form">
+                            <?php if ($block->canEditShippingMethod()) : ?>
+                                <?php if ($groups = $block->getShippingRateGroups()) : ?>
+                                    <?php $currentRate = $block->getCurrentShippingRate(); ?>
+                                    <div class="field shipping required">
+                                        <select name="shipping_method" id="shipping-method" class="select">
+                                            <?php if (!$currentRate) : ?>
+                                                <option value=""><?= $block->escapeHtml(__('Please select a shipping method...')); ?></option>
+                                            <?php endif; ?>
+                                            <?php foreach ($groups as $code => $rates) : ?>
+                                                <optgroup label="<?= $block->escapeHtmlAttr($block->getCarrierName($code)); ?>">
+                                                    <?php foreach ($rates as $rate) : ?>
+                                                        <option value="<?=
+                                                                        $block->escapeHtml(
+                                                                            $block->renderShippingRateValue($rate)
+                                                                        );
+                                                                        ?>"
+                                                            <?= ($currentRate === $rate) ?
+                                                                ' selected="selected"' : '';
+                                                            ?>>
+                                                            <?= /* @noEscape */ $block->renderShippingRateOption($rate); ?>
+                                                        </option>
+                                                    <?php endforeach; ?>
+                                                </optgroup>
+                                            <?php endforeach; ?>
+                                        </select>
+                                    </div>
+                                    <div class="actions-toolbar">
+                                        <div class="primary">
+                                            <button id="update-shipping-method-submit" type="submit"
+                                                    class="action update primary">
+                                                <span>
+                                                    <?= $block->escapeHtml(__('Update Shipping Method')) ?>
+                                                </span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                <?php else : ?>
+                                    <p>
+                                        <?= $block->escapeHtml(__(
+                                                                'Sorry, no quotes are available for this order right now.'
+                                                            )); ?>
+                                    </p>
+                                <?php endif; ?>
+                            <?php else : ?>
+                                <p>
+                                    <?= /* @noEscape */ $block->renderShippingRateOption(
+                                                                $block->getCurrentShippingRate()
+                                                            ); ?>
+                                </p>
+                            <?php endif; ?>
+                        </form>
+                    </div>
+                </div>
+                <div class="box box-order-shipping-address">
+                    <strong class="box-title">
+                        <span><?= $block->escapeHtml(__('Shipping Address')) ?></span>
+                    </strong>
+                    <div class="box-content">
+                        <address>
+                            <?= $block->escapeHtml(
+                                                                $block->renderAddress($block->getShippingAddress()),
+                                                                ['br']
+                                                            );?>
+                        </address>
+                    </div>
+                    <?php if ($block->getCanEditShippingAddress()) : ?>
+                        <div class="box-actions">
+                            <a href="<?= $block->escapeUrl($block->getEditUrl()) ?>" class="action edit">
+                                <span><?= $block->escapeHtml(__('Edit')) ?></span>
+                            </a>
+                        </div>
+                    <?php endif; ?>
+                </div>
+            <?php endif; ?>
+            <div class="box box-order-billing-address">
+                <strong class="box-title"><span><?= $block->escapeHtml(__('Payment Method')) ?></span></strong>
+                <div class="box-content">
+                    <?= $block->escapeHtml($block->getPaymentMethodTitle()) ?><br>
+                    <?= $block->escapeHtml($block->getEmail()) ?> <br>
+                    <img src="https://www.paypalobjects.com/webstatic/en_US/i/buttons/pp-acceptance-medium.png"
+                         alt="<?= $block->escapeHtmlAttr(__('Buy now with PayPal')) ?>"/>
+                </div>
+            <?php if ($block->getEditUrl()) : ?>
+                <div class="box-actions">
+                    <a href="<?= $block->escapeUrl($block->getEditUrl()) ?>" class="action edit">
+                        <span><?= $block->escapeHtml(__('Edit Payment Information')) ?></span>
+                    </a>
+                </div>
+            <?php endif ?>
+            </div>
+        </div>
+    </div>
+    <div class="zillion-box-container">
+        <?= $block->getChildHtml('zillionbox') ?>
+    </div>
+
+    <div class="paypal-review-discount">
+        <?= $block->getChildHtml('paypal.additional.actions') ?>
+    </div>
+
+    <div class="paypal-review-items">
+        <div class="paypal-review-title">
+            <strong><?= $block->escapeHtml(__('Items in Your Shopping Cart')) ?></strong>
+            <a href="<?= $block->escapeUrl($block->getUrl('checkout/cart')) ?>" class="action edit">
+                <span><?= $block->escapeHtml(__('Edit Shopping Cart')) ?></span>
+            </a>
+        </div>
+
+        <?= $block->getChildHtml('details') ?>
+
+        <form method="post" id="order-review-form" action="<?= $block->escapeUrl($block->getPlaceOrderUrl()) ?>"
+              class="form order-review-form">
+            <?= $block->getChildHtml('agreements') ?>
+            <div class="actions-toolbar" id="review-buttons-container">
+                <div class="primary">
+                    <button type="button" id="review-button" class="action checkout primary"
+                            value="<?= $block->escapeHtmlAttr(__('Place Order')) ?>">
+                        <span><?= $block->escapeHtml(__('Place Order')) ?></span>
+                    </button>
+                </div>
+                <span class="please-wait load indicator" id="review-please-wait" style="display: none;"
+                      data-text="<?= $block->escapeHtmlAttr(__('Submitting order information...')) ?>">
+                   <span><?= $block->escapeHtml(__('Submitting order information...')) ?></span>
+                </span>
+            </div>
+        </form>
+    </div>
+</div>
+<script type="text/x-magento-init">
+    {
+        "#order-review-form": {
+            "validation": {},
+            "orderReview": {
+                "shippingSubmitFormSelector": "#shipping-method-form",
+                "shippingSelector": "#shipping-method",
+                "shippingMethodUpdateUrl": "<?= $block->escapeUrl($block->getUpdateShippingMethodsUrl()) ?>",
+                "isAjax": <?= /* @noEscape */ $block->getUseAjax() ? 'true' : 'false' ?>,
+                "canEditShippingMethod": <?= /* @noEscape */ $block->canEditShippingMethod() ? 'true' : 'false' ?>
+            }
+        }
+    }
+</script>

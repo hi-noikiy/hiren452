@@ -1,0 +1,37 @@
+<?php
+/**
+ * Plumrocket Inc.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End-user License Agreement
+ * that is available through the world-wide-web at this URL:
+ * http://wiki.plumrocket.net/wiki/EULA
+ * If you are unable to obtain it through the world-wide-web, please
+ * send an email to support@plumrocket.com so we can send you a copy immediately.
+ *
+ * @package     Plumrocket SMTP
+ * @copyright   Copyright (c) 2019 Plumrocket Inc. (http://www.plumrocket.com)
+ * @license     http://wiki.plumrocket.net/wiki/EULA  End-user License Agreement
+ */
+?>
+
+<div class="prsmtp-email-view">
+  <ul class="prsmtp-list-data">
+    <li class="item">
+        <strong><?= $block->escapeHtml(__('From:')); ?></strong>
+        <p><?= $block->escapeHtml($block->getFrom()); ?></p>
+    </li>
+    <li class="item">
+        <strong><?= $block->escapeHtml(__('To:')); ?></strong>
+        <p><?= $block->escapeHtml($block->getTo()); ?></p>
+    </li>
+    <li class="item">
+        <strong><?= $block->escapeHtml(__('Email Content:')); ?></strong>
+        <div class="prsmtp-email-content">
+            <?= /* @codingStandardsIgnoreLine */ htmlspecialchars_decode($block->getEmailHtml()); ?>
+        </div>
+    </li>
+  </ul>
+</div>
+

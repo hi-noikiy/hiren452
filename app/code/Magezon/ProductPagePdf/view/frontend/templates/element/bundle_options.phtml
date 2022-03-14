@@ -1,0 +1,67 @@
+<?php
+$dataHelper 		= $this->helper('\Magezon\ProductPagePdf\Helper\Data');
+$collection 		= $this->getSelectionsCollection();
+$element    		= $this->getElement();
+$breakPage  		= $element->getData('break_page');
+$enableTitle        = $element->getData('enable_title');
+$headTitle       	= $element->getData('head_title');
+$titleFontSize      = $element->getData('title_font_size');
+$titleColor         = $element->getData('title_color');
+$enableBorderBottom = $element->getData('enable_border_bottom');
+$borderTitleWidth   = $element->getData('border_title_width');
+$borderTitleColor   = $element->getData('border_title_color');
+$enableStriped      = $element->getData('enable_striped');
+$stripedColorDark   = $element->getData('striped_color_dark');
+$stripedColorLight  = $element->getData('striped_color_light');
+$textFontSize       = $element->getData('text_font_size');
+$textColor      	= $element->getData('text_color');
+?>
+<?= $breakPage ? "<pagebreak />" : "" ?>
+<div class="ppbd-product ppbd-bundle-product-options">
+	<?php if ($enableTitle) { ?>
+		<h2 class="head-title" style="font-size:<?= $titleFontSize ?: "initial" ?>; color: <?= $titleColor ?: "initial" ?>;" ><?= $headTitle ?></h2>
+	<?php } ?>
+	<table style="min-width: 350px; border: none;" class="table-style">
+		<?php $stt = 0 ?>
+		<?php foreach ($collection as $item) { ?>
+			<?php $data = $item->getData(); ?>
+				<tr class="<?= $stt % 2 == 0 ? "light" : "dark" ?>">
+					<td class="col thumbnail">
+						<img style="max-width: 100px;" src="<?= $dataHelper->getMediaPath() . 'catalog/product' . $data['thumbnail'] ?>" />
+					</td>
+					<td class="col"><?= $data['name'] ?></td>
+					<td class="col"><?= $data['price'] ?></td>
+				</tr>
+		<?php $stt++ ?>
+		<?php } ?>
+	</table>
+	<style>
+		.ppbd-product-attribute-options {
+			display: block;
+		}
+		.ppbd-product-attribute-options .head-title {
+			margin-bottom:10px;
+			padding-bottom: 5px;
+			<?php if ($enableBorderBottom) { ?>
+			border-bottom: <?= $borderTitleWidth ?: '0' ?>px solid;	
+			border-color: <?= $borderTitleColor ?: '#ffffff' ?>;
+			<?php } ?>
+		}
+		.ppbd-bundle-product-options .table-style .col {
+			padding: 5px 10px;
+			font-size: <?= $textFontSize ?: '14' ?>px;
+			color: <?= $textColor ?: '#444444' ?>;
+		}
+		.ppbd-bundle-product-options .table-style .col.label {
+			width: 45%;
+		}
+		<?php if ($enableStriped) { ?>
+		.ppbd-bundle-product-options .table-style .light {
+			background-color: <?= $stripedColorLight ?: '#f2f2f2' ?>;
+		}
+		.ppbd-bundle-product-options .table-style .dark {
+			background-color: <?= $stripedColorDark ?: '#d9d9d9' ?>;
+		}
+		<?php } ?>
+	</style>
+</div>

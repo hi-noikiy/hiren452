@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceBlock name="product.info.form.options">
+            <block class="Meetanshi\Partialpro\Block\Catalog\Product\View" name="catalog.product.view.partialpayment"
+                   as="partialpayment_options" after="product.info.options.wrapper" template="Meetanshi_Partialpro::catalog/product/view.phtml"/>
+        </referenceBlock>
+        <referenceBlock name="product.info.form.content">
+            <block class="Meetanshi\Partialpro\Block\Catalog\Product\View" name="catalog.product.view.partialpayments"
+                   as="partialpayment_options" before="product.info.addtocart" template="Meetanshi_Partialpro::catalog/product/view.phtml"/>
+        </referenceBlock>
+    </body>
+</page>

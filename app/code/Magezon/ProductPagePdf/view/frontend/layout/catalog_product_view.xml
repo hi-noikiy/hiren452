@@ -1,0 +1,89 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Magezon
+ *
+ * This source file is subject to the Magezon Software License, which is available at https://www.magezon.com/license
+ * Do not edit or add to this file if you wish to upgrade the to newer versions in the future.
+ * If you wish to customize this module for your needs.
+ * Please refer to https://www.magezon.com for more information.
+ *
+ * @category  Magezon
+ * @package   Magezon_ProductPagePdf
+ * @copyright Copyright (C) 2020 Magezon (https://www.magezon.com)
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+	<body>
+		<referenceBlock name="page.main.title">
+			<block
+					class="Magezon\ProductPagePdf\Block\Product\Profile"
+					name="product-pdf-download-position-under-title"
+					template="Magezon_ProductPagePdf::profile/print_button.phtml"
+					ifconfig="productpagepdf/general/enabled"
+					after="-"
+			>
+				<arguments>
+					<argument name="block_type" xsi:type="string">1</argument>
+				</arguments>
+			</block>
+		</referenceBlock>
+		<referenceBlock name="product.info.addtocart">
+			<block
+					class="Magezon\ProductPagePdf\Block\Product\Profile"
+					name="product-pdf-download-position-under-addtocart"
+					template="Magezon_ProductPagePdf::profile/print_button.phtml"
+					ifconfig="productpagepdf/general/enabled"
+					after="-"
+			>
+				<arguments>
+					<argument name="block_type" xsi:type="string">2</argument>
+				</arguments>
+			</block>
+		</referenceBlock>
+		<referenceBlock name="product.info.addtocart.additional">
+			<block
+					class="Magezon\ProductPagePdf\Block\Product\Profile"
+					name="product-pdf-download-position-under-addtocart-additional"
+					template="Magezon_ProductPagePdf::profile/print_button.phtml"
+					ifconfig="productpagepdf/general/enabled"
+					after="-"
+			>
+				<arguments>
+					<argument name="block_type" xsi:type="string">2</argument>
+				</arguments>
+			</block>
+		</referenceBlock>
+		<referenceBlock name="product.info.details">
+			<block
+					class="Magezon\ProductPagePdf\Block\Product\Profile"
+					name="product-pdf-download-position-after-tablist"
+					as="files"
+					template="Magezon_ProductPagePdf::profile/print_button.phtml"
+					ifconfig="productpagepdf/general/enabled"
+					group="detailed_info">
+				<arguments>
+					<argument translate="true" name="title" xsi:type="string">Profile PDF</argument>
+					<argument name="sort_order" xsi:type="string">100</argument>
+					<argument name="block_type" xsi:type="string">3</argument>
+				</arguments>
+			</block>
+		</referenceBlock>
+		<referenceBlock name="product.info.social">
+			<block
+					class="Magezon\ProductPagePdf\Block\Product\Profile"
+					name="product-pdf-download-position-append-social"
+					as="files"
+					template="Magezon_ProductPagePdf::profile/print_button.phtml"
+					ifconfig="productpagepdf/general/enabled"
+			>
+				<arguments>
+					<argument name="block_type" xsi:type="string">4</argument>
+				</arguments>
+			</block>
+		</referenceBlock>
+
+		<move element="product-pdf-download-position-under-addtocart" destination="jb.product.details" after="product.info.description"/>
+
+	</body>
+</page>

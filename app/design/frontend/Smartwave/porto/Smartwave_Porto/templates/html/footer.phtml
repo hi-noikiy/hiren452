@@ -1,0 +1,561 @@
+<?php
+    $footer = $this->getConfig('porto_settings/footer');
+?>
+<div class="footer">
+<?php
+    if( $footer['footer_top'] ){
+?>
+    <div class="footer-top">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                <?php
+                    $area = 'footer_top_block';
+                    $type = $footer[$area];
+                    if( $type == 'custom' && $footer['footer_top_custom'] ){
+                        $block = $this->getLayout()->createBlock('Magento\Cms\Block\Block');
+                        if($block) {
+                            $block->setBlockId($footer['footer_top_custom']);
+                        }
+                        if($block){
+                            echo '<div class="custom-block">'.$block->toHtml().'</div>';
+                        }
+                    }
+
+                ?>
+                </div>
+            </div>
+        </div>
+    </div>
+<?php
+    }
+    if( $footer['footer_middle'] ){
+?>
+    <div class="footer-middle">
+        <div class="container">
+        <?php
+            if( $footer['footer_ribbon'] ){
+        ?>
+            <div class="footer-ribbon">
+                <span><?php echo $footer['footer_ribbon_text'] ?></span>
+            </div>
+        <?php
+            }
+        ?>
+            <div class="row">
+            <?php
+                for( $i = 1; $i <= 4; $i++ ){
+                    $area = 'footer_middle_column_'.$i;
+                    $type = $footer[$area];
+                    if( $type ){
+                        echo '<div class="col-lg-'.$footer[$area.'_size'].'">';
+                    }
+                    if( $type == 'custom' && $footer[$area.'_custom'] ){
+                        $block = $this->getLayout()->createBlock('Magento\Cms\Block\Block');
+                        if($block) {
+                            $block->setBlockId($footer[$area.'_custom']);
+                        }
+                        if($block){
+                            echo $block->toHtml();
+                        }
+                    }
+                    if( $type == 'newsletter' ){
+                        echo $this->getChildHtml('footer.newsletter');
+                    }
+                    if( $type ){
+                        echo '</div>';
+                    }
+                }
+            ?>
+            </div>
+        </div>
+    </div>
+<?php
+    }
+    if( $footer['footer_middle_2'] ){
+?>
+    <div class="footer-middle footer-middle-2">
+        <div class="container">
+            <div class="row">
+            <?php
+                for( $i = 1; $i <= 4; $i++ ){
+                    $area = 'footer_middle_2_column_'.$i;
+                    $type = $footer[$area];
+                    if( $type ){
+                        echo '<div class="col-lg-'.$footer[$area.'_size'].'">';
+                    }
+                    if( $type == 'custom' && $footer[$area.'_custom'] ){
+                        $block = $this->getLayout()->createBlock('Magento\Cms\Block\Block');
+                        if($block) {
+                            $block->setBlockId($footer[$area.'_custom']);
+                        }
+                        if($block){
+                            echo $block->toHtml();
+                        }
+                    }
+                    if( $type == 'newsletter' ){
+                        echo $this->getChildHtml('footer.newsletter');
+                    }
+                    if( $type ){
+                        echo '</div>';
+                    }
+                }
+            ?>
+            </div>
+        </div>
+    </div>
+<?php
+    }
+    if( $footer['footer_bottom'] ){
+?>
+    <div class="footer-bottom">
+        <div class="container">
+            <?php
+            if($footer['footer_logo_src']){
+                
+                $url = $this->getFooterLogoSrc();
+            ?>
+            <?php if ($this->isHomePage()):?>
+                <strong class="logo">
+            <?php else: ?>
+                <a class="logo" href="<?php echo $this->getUrl(''); ?>" title="">
+            <?php endif; ?>
+                <img src="<?php echo $url ?>" alt=""/>
+            <?php if ($this->isHomePage()):?>
+                </strong>
+            <?php else:?>
+                </a>
+            <?php endif?>
+            <?php
+            }
+            if($footer['footer_bottom_custom_1']){
+                $block = $this->getLayout()->createBlock('Magento\Cms\Block\Block');
+                if($block) {
+                    $block->setBlockId($footer['footer_bottom_custom_1']);
+                }
+                if($block){
+                    echo '<div class="custom-block">'.$block->toHtml().'</div>';
+                }
+            }
+            ?>
+            <?php
+            if($footer['footer_bottom_custom_2']){
+                $block = $this->getLayout()->createBlock('Magento\Cms\Block\Block');
+                if($block) {
+                    $block->setBlockId($footer['footer_bottom_custom_2']);
+                }
+                if($block){
+                    echo '<div class="custom-block f-right">'.$block->toHtml().'</div>';
+                }
+            }
+            ?> 
+            <address><?php echo $footer['footer_bottom_copyrights'] ?></address>
+            <?php if($footer['footer_store_switcher']) echo $this->getChildHtml("footer.store_switcher"); ?>
+        </div>
+    </div>
+<?php
+    }
+?>
+  <!-- Jitesh Baagul -->
+  <div class="footer-bottom">
+    <div class="container">
+      <address style="font-size: 12px; line-height: normal !important;">AUMIKA is an intellectual property protected by United States Patent and Trademark Laws and is a trademark owned by ARUN GEMS INTERNATIONAL LLC.<br>Copyright © 2009 - <?= date('Y') ?> ARUN GEMS INTERNATIONAL LLC - USA. All rights reserved.</address>
+    </div>
+  </div>        
+</div>
+<a href="javascript:void(0)" id="totop"><em class="porto-icon-up-open"></em></a>
+
+<style type="text/css">
+@media only screen and (max-width: 769px) {
+	
+  ul.jbQuicklinks {
+    margin-bottom: 10px;
+  }
+  footer .footer-bottom{
+    position: relative;
+    z-index: 99999999999;
+    margin-top: -1px;
+  }
+	
+}
+</style>
+<script type="text/javascript">
+  require([
+    'jquery',
+    'owl.carousel/owl.carousel.min'
+  ], function ($) {
+    $("#latest_news .owl-carousel").owlCarousel({
+      loop: false,
+      margin: 20,
+      nav: true,
+      dots: false,
+      responsive: {
+        0: {
+          items:1
+        },
+        640: {
+          items:2
+        },
+        768: {
+          items:2
+        },
+        992: {
+          items:2
+        },
+        1200: {
+          items:2
+        }
+      }
+    });
+
+    $("#brands-slider-demo-1 .owl-carousel").owlCarousel({
+      autoplay: true,
+      autoplayTimeout: 5000,
+      autoplayHoverPause: true,
+      margin: 0,
+      nav: true,
+      navText: ["<em class='porto-icon-left-open-huge'></em>","<em class='porto-icon-right-open-huge'></em>"],
+      dots: false,
+      loop: true,
+      responsive: {
+        0: {
+          items:2
+        },
+        640: {
+          items:3
+        },
+        768: {
+          items:4
+        },
+        992: {
+          items:5
+        },
+        1200: {
+          items:5
+        }
+      }
+    });
+    $("#parallax-slider-demo-1").owlCarousel({
+      items: 1,
+      autoplay: true,
+      autoplayTimeout: 5000,
+      autoplayHoverPause: true,
+      dots: false,
+      nav: true,
+      navText: ["<em class='porto-icon-left-open-huge'></em>","<em class='porto-icon-right-open-huge'></em>"],
+      loop: true,
+      navRewind: true
+    });
+    $("#new_product .owl-carousel").owlCarousel({
+      autoplay: true,
+      autoplayTimeout: 5000,
+      autoplayHoverPause: true,
+      loop: true,
+      navRewind: true,
+      margin: 0,
+      nav: true,
+      navText: ["<em class='porto-icon-left-open-huge'></em>","<em class='porto-icon-right-open-huge'></em>"],
+      dots: false,
+      responsive: {
+        0: {
+          items:2
+        },
+        640: {
+          items:3
+        },
+        768: {
+          items:3
+        },
+        992: {
+          items:4
+        },
+        1200: {
+          items:4
+        }
+      }
+    });
+    $("#featured_product .owl-carousel").owlCarousel({
+      autoplay: true,
+      autoplayTimeout: 5000,
+      autoplayHoverPause: true,
+      loop: true,
+      navRewind: true,
+      margin: 0,
+      nav: true,
+      navText: ["<em class='porto-icon-left-open-huge'></em>","<em class='porto-icon-right-open-huge'></em>"],
+      dots: false,
+      responsive: {
+        0: {
+          items:2
+        },
+        768: {
+          items:3
+        },
+        992: {
+          items:4
+        },
+        1200: {
+          items:4
+        }
+      }
+    });
+
+    var banner_owl = $("#banner-slider-demo-1");
+    banner_owl.owlCarousel({
+      items: 1,
+      autoplay: true,
+      autoplayTimeout: 5000,
+      autoplayHoverPause: true,
+      dots: false,
+      nav: true,
+      navRewind: false,
+      animateIn: 'fadeIn',
+      animateOut: 'fadeOut',
+      loop: true,
+      lazyLoad: true,
+      navText: ["<em class='porto-icon-chevron-left'></em>","<em class='porto-icon-chevron-right'></em>"]
+    });
+    $("#homepage_category").owlCarousel({
+      loop: true,
+      margin: 0,
+      nav: true,
+      dots: false,
+      autoplay:true,
+      navText: ["<em class='porto-icon-left-open-huge'></em>","<em class='porto-icon-right-open-huge'></em>"],
+      responsive: {
+        0: {
+          items:2
+        },
+        640: {
+          items:3
+        },
+        768: {
+          items:4
+        },
+        992: {
+          items:5
+        },
+        1200: {
+          items:5
+        }
+      }
+    });
+    $("div#jb-block .owl-carousel").owlCarousel({
+      loop: true,
+      margin: 20,
+      nav: true,
+      dots: false,
+      autoplay:true,
+      navText: ["<em class='porto-icon-left-open-huge'></em>","<em class='porto-icon-right-open-huge'></em>"],
+      responsive: {
+        0: {
+          items:1
+        },
+        640: {
+          items:1
+        },
+        768: {
+          items:1
+        },
+        992: {
+          items:1
+        },
+        1200: {
+          items:1
+        }
+      }
+    });
+    
+    function serviceCarousal() {
+      if($(window).width()<768){
+        $("#homepage_service").owlCarousel({
+          loop: false,
+          margin: 20,
+          nav: true,
+          dots: false,
+          autoplay:true,
+          navText: ["<em class='porto-icon-left-open-huge'></em>","<em class='porto-icon-right-open-huge'></em>"],
+          responsive: {
+            0: {
+              items:1
+            },
+            640: {
+              items:1
+            }
+          }
+        });
+      }
+      else{
+        $('.single-images #homepage_service.owl-carousel').removeClass('owl-carousel');
+      }
+    }
+    // jQuery(document).ready(function(){serviceCarousal();});
+    // jQuery(window).resize(function(){serviceCarousal();});  
+
+    function headereCarousal() {
+      if($(window).width()<768){
+        $("div#headerNotice").owlCarousel({
+          loop: true,
+          margin: 0,
+          nav: false,
+          dots: false,
+          items: 1,
+          autoplay: true,
+          autoplayTimeout: 2000,
+          autoplayHoverPause: true
+        });
+      }
+      else{
+        $('body .top-block-header div#headerNotice.owl-carousel').removeClass('owl-carousel');
+      }
+    } 
+
+    jQuery(document).ready(function(){headereCarousal();});
+    jQuery(window).resize(function(){headereCarousal();});
+
+    function productTab() {
+        $("#tabs_product .owl-carousel").owlCarousel({
+          autoplay: true,
+          autoplayTimeout: 5000,
+          autoplayHoverPause: true,
+          loop: true,
+          navRewind: true,
+          margin: 0,
+          nav: true,
+          navText: ["<em class='porto-icon-left-open-huge'></em>","<em class='porto-icon-right-open-huge'></em>"],
+          dots: false,
+          responsive: {
+            0: {
+              items:2
+            },
+            768: {
+              items:3
+            },
+            992: {
+              items:4
+            },
+            1200: {
+              items:4
+            }
+          }
+        });
+        $('.tab-a').click(function(){  
+          $(".tab").removeClass('tab-active');
+          $(".tab[data-id='"+$(this).attr('data-id')+"']").addClass("tab-active");
+          $(".tab-a").removeClass('active-a');
+          $(this).parent().find(".tab-a").addClass('active-a');
+        });
+    }
+
+    jQuery(document).ready(function(){productTab();});
+    jQuery(window).resize(function(){productTab();});  
+
+    if($(window).width()<768){    
+        $('.jb-left').prependTo('.jb-search');
+    }   
+    
+
+    $(document).ready(function(){
+        // Show hide popover
+        $(".jbcust-icon").click(function(e){
+            $(this).find("ul.header.links").slideToggle("fast");
+            e.stopPropagation(); 
+        });
+
+    });
+    $(document).on("click", function(event){
+        var $trigger = $(".jbcust-icon");
+        if($trigger !== event.target && !$trigger.has(event.target).length){
+            $("ul.header.links").slideUp("fast");
+        }            
+    });
+
+    if($(window).width()<768){
+
+        $(document).ready(function(){
+          $(".header.content .pas-search-btn").click(function(e){
+            e.stopPropagation(); 
+          });  
+        });
+        $(document).on("click", function(event){
+            var $trigger1 = $("form#pas-mini-form");
+            if($trigger1 !== event.target && !$trigger1.has(event.target).length){
+                $("form#pas-mini-form").removeClass("show-form");
+            }
+            else{
+                $("form#pas-mini-form").addClass("show-form");
+            }            
+        });
+    }    
+    $('.cms-index-index main#maincontent .page.messages').prependTo('.cms-index-index .jb-msg .container');
+    $('.cms-index-index .jb-msg .container .page.messages').css("display","block");
+
+    $(document).ready(function(){
+      $(".jbshare-store .jb-share-button").click(function(){
+          $(this).parent().toggleClass('active').parent().find('.jb-share-option').slideToggle('slow');
+      });
+    });
+
+    function headerfix() {
+        if ($(window).width() < 768){
+            if ($(this).scrollTop() > 60) {
+                $(".header.content").addClass('fixed');
+                $(".page-header").addClass('page-fixed');
+            } 
+            else{
+              $(".header.content").removeClass('fixed');
+              $(".page-header").removeClass('page-fixed');
+            }
+        }
+        else{
+          $(".header-content").removeClass('fixed');
+        }
+    }
+    jQuery(document).ready(function() {headerfix();});
+    jQuery(window).resize(function() {headerfix();});
+    jQuery(window).scroll(function() {headerfix();});
+
+    function FooterToggle(){
+        if (jQuery(window).width() < 992)
+        {
+          jQuery("footer .footer-middle .block-title .toggleicon").remove();
+          jQuery("footer .footer-middle .block-title").append( "<a class='toggleicon'>&nbsp;</a>" );
+          jQuery("footer .footer-middle .block-title").addClass('toggle-active');
+          jQuery("footer .footer-middle .block-title .toggleicon").click(function(){
+            jQuery(this).parent().toggleClass('active').parent().find('.block-content').slideToggle('slow');
+          });
+      
+        }else{
+          jQuery("footer .footer-middle .block-title").parent().find('ul').removeAttr('style');
+          jQuery("footer .footer-middle .block-title").removeClass('active');
+          jQuery("footer .footer-middle .block-title").removeClass('toggle');
+          jQuery("footer .footer-middle .block-title .toggleicon").remove();
+        } 
+    }
+    jQuery(document).ready(function(){FooterToggle();});
+    jQuery(window).resize(function(){FooterToggle();});
+
+  });
+</script>    
+
+<!-- Affirm -->
+<script>
+ var _affirm_config = {
+   public_api_key:  "TTKJKHF13KZ61UWD",
+   script:          "https://cdn1.affirm.com/js/v2/affirm.js"
+ };
+ (function(l,g,m,e,a,f,b){var d,c=l[m]||{},h=document.createElement(f),n=document.getElementsByTagName(f)[0],k=function(a,b,c){return function(){a[b]._.push([c,arguments])}};c[e]=k(c,e,"set");d=c[e];c[a]={};c[a]._=[];d._=[];c[a][b]=k(c,a,b);a=0;for(b="set add save post open empty reset on off trigger ready setProduct".split(" ");a<b.length;a++)d[b[a]]=k(c,e,b[a]);a=0;for(b=["get","token","url","items"];a<b.length;a++)d[b[a]]=function(){};h.async=!0;h.src=g[f];n.parentNode.insertBefore(h,n);delete g[f];d(g);l[m]=c})(window,_affirm_config,"affirm","checkout","ui","script","ready");
+// Use your live public API Key and https://cdn1.affirm.com/js/v2/affirm.js script to point to Affirm production environment.
+</script>
+<!-- End Affirm --> 
+
+<style type="text/css">
+    
+    @media (min-width: 768px){
+        body .full-screen-slider,
+        body .full-screen-slider div#banner-slider-demo-3 .owl-item .item {
+            height: calc(100vh - 182px) !important;
+        }
+    }
+
+</style>  

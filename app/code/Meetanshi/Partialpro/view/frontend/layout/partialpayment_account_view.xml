@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../lib/internal/Magento/Framework/View/Layout/etc/page_configuration.xsd">
+	<update handle="customer_account"/>
+	<body>
+		<referenceBlock name="page.main.title">
+			<action method="setPageTitle">
+				<argument translate="true" name="title" xsi:type="string">Manage Installments</argument>
+			</action>
+		</referenceBlock>
+		<referenceContainer name="content">
+			<block class="Meetanshi\Partialpro\Block\View" name="partialpayment.customer.installments" template="Meetanshi_Partialpro::view.phtml" cacheable="false">
+				<block class="Meetanshi\Partialpro\Block\View\Method\Form" template="Meetanshi_Partialpro::view/form.phtml" name="partialpro.payment.methods">
+				</block>
+			</block>
+		</referenceContainer>
+	</body>
+</page>
