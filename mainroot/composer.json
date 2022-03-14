@@ -1,0 +1,136 @@
+{
+    "name": "magento/project-community-edition",
+    "description": "eCommerce Platform for Growth (Community Edition)",
+    "type": "project",
+    "license": [
+        "OSL-3.0",
+        "AFL-3.0"
+    ],
+    "config": {
+        "preferred-install": "dist",
+        "sort-packages": true
+    },
+    "require": {
+        "authorizenet/magento-module-authorizenet": "^1.0",
+        "avada/module-proofo": "^1.0",
+        "ebizmarts/mailchimp-lib": "^3.0",
+        "magento/product-community-edition": "2.3.5-p1",
+        "mageplaza/magento-2-social-login": "*",
+        "mageplaza/module-core": "^1.4",
+        "mirasvit/module-dynamic-category": "*",
+        "mirasvit/module-email": "*",
+        "mirasvit/module-feed": "*",
+        "mirasvit/module-helpdesk": "*",
+        "mirasvit/module-misspell": "*",
+        "mirasvit/module-optimize": "*",
+        "mirasvit/module-product-action": "*",
+        "mirasvit/module-product-kit": "*",
+        "mirasvit/module-rewards": "*",
+        "mirasvit/module-sales-rule": "*",
+        "mpdf/mpdf": "^8.0",
+        "paypal/module-braintree": "^4.2",
+        "splitit/sdk": "^1.6",
+        "stripe/stripe-php": "^7"
+    },
+    "require-dev": {
+        "allure-framework/allure-phpunit": "~1.2.0",
+        "dealerdirect/phpcodesniffer-composer-installer": "^0.5.0",
+        "friendsofphp/php-cs-fixer": "~2.14.0",
+        "lusitanian/oauth": "~0.8.10",
+        "magento/magento-coding-standard": "*",
+        "magento/magento2-functional-testing-framework": "~2.6.4",
+        "pdepend/pdepend": "2.5.2",
+        "phpcompatibility/php-compatibility": "^9.3",
+        "phpmd/phpmd": "@stable",
+        "phpstan/phpstan": "^0.12.2",
+        "phpunit/phpunit": "~6.5.0",
+        "sebastian/phpcpd": "~3.0.0",
+        "squizlabs/php_codesniffer": "~3.4.0"
+    },
+    "conflict": {
+        "gene/bluefoot": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "Magento\\Framework\\": "lib/internal/Magento/Framework/",
+            "Magento\\Setup\\": "setup/src/Magento/Setup/",
+            "Magento\\": "app/code/Magento/",
+            "Zend\\Mvc\\Controller\\": "setup/src/Zend/Mvc/Controller/"
+        },
+        "psr-0": {
+            "": [
+                "app/code/",
+                "generated/code/"
+            ]
+        },
+        "files": [
+            "app/etc/NonComposerComponentRegistration.php"
+        ],
+        "exclude-from-classmap": [
+            "**/dev/**",
+            "**/update/**",
+            "**/Test/**"
+        ]
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Magento\\Sniffs\\": "dev/tests/static/framework/Magento/Sniffs/",
+            "Magento\\Tools\\": "dev/tools/Magento/Tools/",
+            "Magento\\Tools\\Sanity\\": "dev/build/publication/sanity/Magento/Tools/Sanity/",
+            "Magento\\TestFramework\\Inspection\\": "dev/tests/static/framework/Magento/TestFramework/Inspection/",
+            "Magento\\TestFramework\\Utility\\": "dev/tests/static/framework/Magento/TestFramework/Utility/",
+            "Magento\\PhpStan\\": "dev/tests/static/framework/Magento/PhpStan/"
+        }
+    },
+    "version": "2.3.5-p1",
+    "minimum-stability": "stable",
+    "repositories": {
+        "0": {
+            "type": "composer",
+            "url": "https://repo.magento.com/"
+        },
+        "mirasvit-pfe2": {
+            "type": "composer",
+            "url": "https://48039:DS7VHZTL19@packages.mirasvit.com/48039:DS7VHZTL19/"
+        },
+        "mirasvit-hdmx2": {
+            "type": "composer",
+            "url": "https://48040:WF2L3P8CB5@packages.mirasvit.com/48040:WF2L3P8CB5/"
+        },
+        "mirasvit-ecr2": {
+            "type": "composer",
+            "url": "https://48041:RCHLAQ0JZD@packages.mirasvit.com/48041:RCHLAQ0JZD/"
+        },
+        "mirasvit-pkt2": {
+            "type": "composer",
+            "url": "https://48042:U3NSYJ140R@packages.mirasvit.com/48042:U3NSYJ140R/"
+        },
+        "mirasvit-rwp2": {
+            "type": "composer",
+            "url": "https://48570:W86VIGSQ3F@packages.mirasvit.com/48570:W86VIGSQ3F/"
+        },
+        "mirasvit-gpo2": {
+            "type": "composer",
+            "url": "https://48571:3BQMTJDZPS@packages.mirasvit.com/48571:3BQMTJDZPS/"
+        },
+        "mirasvit-tes2": {
+            "type": "composer",
+            "url": "https://48572:FY41XECRQJ@packages.mirasvit.com/48572:FY41XECRQJ/"
+        },
+        "mirasvit-ssc2": {
+            "type": "composer",
+            "url": "https://48573:CJDW2AF0GK@packages.mirasvit.com/48573:CJDW2AF0GK/"
+        },
+        "mirasvit-mpa2": {
+            "type": "composer",
+            "url": "https://51911:9DTOBWH01L@packages.mirasvit.com/51911:9DTOBWH01L/"
+        },
+        "mirasvit-dyc2": {
+            "type": "composer",
+            "url": "https://51912:MKXT6WDRUB@packages.mirasvit.com/51912:MKXT6WDRUB/"
+        }
+    },
+    "extra": {
+        "magento-force": "override"
+    }
+}
